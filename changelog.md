@@ -1,9 +1,9 @@
-2.0.0 - ETERNAL IRON SHELL Prerelease
+2.0.0: ETERNAL IRON SHELL Prerelease
 
 New ship - Dauntless (XIV)
 New ship - Illustrious (XIV)
 
-\-Various edits to character writing, dialog, and interactions.
+-Various edits to character writing, dialog, and interactions.
 -Contact rewards adjusted:
 -Ava now grants a second round of training, granting a reworked elite upgrade to the Iron Heritage skill, as well as a ship reward.
 -Charlotte is now finally recruitable, with the new Decisive Strike skill, a hybrid energy weapon mastery, on top of Iron Heritage.
@@ -14,9 +14,9 @@ New ship - Illustrious (XIV)
 -Iron shell comission now has identical functionality for vanilla hegemony comission checks.
 -Iron shell now piggybacks nanoforge quality off of the hegemony.
 
-\-Slightly reworked raid response fleets. Can now story point flee all besides Chico response fleet.
+-Slightly reworked raid response fleets. Can now story point flee all besides Chico response fleet.
 -Added new special non-sp and sp flee options to Ava's previously un-sp-able Chico raid response fleet.
--Barracuda Balance Container: weight 100000 -> 1000000 (but also removed mission\_item tag, so it's removable from your cargo hold now)
+-Barracuda Balance Container: weight 100000 -> 1000000 (but also removed mission_item tag, so it's removable from your cargo hold now)
 -Greater Hegemony (perma alliance) toggle, and noEISplayer (portraits) to lunalib settings rather than in settings.json
 
 
@@ -87,7 +87,7 @@ FIGHTERS:
 WEAPONS:
 
 Azalean Lance
--added USE\_LESS\_VS\_SHIELDS hint
+-added USE_LESS_VS_SHIELDS hint
 -adjuststed damage/flux, now has 276 dps @ 1.0 flux eff
 -Adjusted coolup/cooldown, now should be more effective at breaking armor
 
@@ -167,117 +167,117 @@ MISC:
 -Updated main menu mission descriptions to make it more clear what the custom starts they grant are.
 
 
-1.183.5b Patch Notes (discord)
+1.183.5b: Patch Notes (discord)
 
-\-Fixed version checker files. Maybe. idkkkk
+-Fixed version checker files. Maybe. idkkkk
 
-\-\[Buff] Switched Rampage Drive system to Burn Drive AI; decision-making \& survivability is improved
+-[Buff] Switched Rampage Drive system to Burn Drive AI; decision-making & survivability is improved
 
-&#x20;  - Affects: Vanguard (XIV), Relentless, Indomitable
+  - Affects: Vanguard (XIV), Relentless, Indomitable
 
 
 
 Indomitable
 
-\-\[Buff] Adjusted AI to encourage missile use
+-[Buff] Adjusted AI to encourage missile use
 
 
 
 Champion (XIV)
 
-\-\[Buff] Ordnance points increased from 170 to 190
+-[Buff] Ordnance points increased from 170 to 190
 
-\-\[Buff] Flux dissipation increased from 550 to 650
+-[Buff] Flux dissipation increased from 550 to 650
 
-&#x20;  -now matches upcoming vanilla Champ buffs
+  -now matches upcoming vanilla Champ buffs
 
 
 
 Renown
 
-\-\[Buff] Top speed increased from 65 to 75
+-[Buff] Top speed increased from 65 to 75
 
-\-\[Buff] Ordnance points increased from 155 to 165
+-[Buff] Ordnance points increased from 155 to 165
 
-\-\[Buff] Flux dissipation increased from 450 to 550
+-[Buff] Flux dissipation increased from 450 to 550
 
-&#x20;  -this ship is heavily based off of Champion, so she gets some buffs as well. Speed increased to (partially..) compensate for the loss of built-in Aquila.
+  -this ship is heavily based off of Champion, so she gets some buffs as well. Speed increased to (partially..) compensate for the loss of built-in Aquila.
 
 
 
-1.183.5a Patch Notes (discord)
+1.183.5a: Patch Notes (discord)
 
 Flagellator
 
-\-replaced with Relentless-class heavy destroyer
+-replaced with Relentless-class heavy destroyer
 
-&#x20;  -The updated ship is too far removed from the original Flagellator to really be considered a reskin
+  -The updated ship is too far removed from the original Flagellator to really be considered a reskin
 
-&#x20;  -Old flagellator (XIV) sprites may be freely used by anyone for any starsector project
+  -Old flagellator (XIV) sprites may be freely used by anyone for any starsector project
 
-&#x20;  
+  
 
 Relentless
 
-\-\[Buff] mounts \& layout drastically improved
+-[Buff] mounts & layout drastically improved
 
-\-\[Buff] Shield arc raised from 90 to 120
+-[Buff] Shield arc raised from 90 to 120
 
-\-\[Buff] flux dissipation increased from 300 to 350
+-[Buff] flux dissipation increased from 300 to 350
 
-\-\[Nerf] DP raised from 10 to 12
+-[Nerf] DP raised from 10 to 12
 
-\-\[Nerf] Removed modular fighter bay
+-[Nerf] Removed modular fighter bay
 
-\-\[Nerf] Removed built-in PD drones
+-[Nerf] Removed built-in PD drones
 
-\-Adjusted variants
+-Adjusted variants
 
 
 
 Vanguard
 
-\-\[Buff] Added built-in Armored Weapon Mounts
+-[Buff] Added built-in Armored Weapon Mounts
 
-\-\[Note] As the baseline Vanguard is being reduced to 4 DP in the upcoming 0.98.5 update, the Iron Shell variant is being treated as a more premium option with drastically improved survivability
+-[Note] As the baseline Vanguard is being reduced to 4 DP in the upcoming 0.98.5 update, the Iron Shell variant is being treated as a more premium option with drastically improved survivability
 
 
 
 Tyrant
 
-\-Adjusted variants
+-Adjusted variants
 
-\-\[Buff] Ordnance Points increased from 310 to 325
+-[Buff] Ordnance Points increased from 310 to 325
 
-\-Removed built-in Aquila Reactor Protocol hullmod
+-Removed built-in Aquila Reactor Protocol hullmod
 
-&#x20;  -should be more flexible re: fleet composition
+  -should be more flexible re: fleet composition
 
 
 
 Renown
 
-\-Adjusted variants
+-Adjusted variants
 
-\-\[Buff] Ordnance Points increased from 145 to 155
+-[Buff] Ordnance Points increased from 145 to 155
 
-\-Removed built-in Aquila Reactor Protocol hullmod
+-Removed built-in Aquila Reactor Protocol hullmod
 
 
 
-\-\[Nerf] Cooldown added to Rampage drive
+-[Nerf] Cooldown added to Rampage drive
 
-\-\[Nerf] Rampage Drive charge count reduced from 2 to 1
+-[Nerf] Rampage Drive charge count reduced from 2 to 1
 
-\-\[Buff] Rampage Drive can now be cancelled
+-[Buff] Rampage Drive can now be cancelled
 
-\-Added Rugged Construction to Indomitable-class cruiser
+-Added Rugged Construction to Indomitable-class cruiser
 
-&#x20;  -god's most suicidal soldier
+  -god's most suicidal soldier
 
-\-Gunblade-class PD replacement time reduced from 18 to 10 seconds to match 0.98 terminator drone changes
+-Gunblade-class PD replacement time reduced from 18 to 10 seconds to match 0.98 terminator drone changes
 
-\-Updated Celestial's Aster weapon sprite
+-Updated Celestial's Aster weapon sprite
 
-\-Fixed Amity fighter engine \& weapon visuals
+-Fixed Amity fighter engine & weapon visuals
 
