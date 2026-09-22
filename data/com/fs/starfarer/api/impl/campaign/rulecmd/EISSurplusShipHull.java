@@ -34,11 +34,11 @@ public class EISSurplusShipHull extends HubMissionWithSearch {
 	
 	protected FleetMemberAPI member;
 	protected int price;
-        private boolean holybased = false;
+        private boolean grantedAquila = false;
 	
 	@Override
 	protected boolean create(MarketAPI createdAt, boolean barEvent) {
-                holybased = false;
+                grantedAquila = false;
 		PersonAPI person = getPerson();
 		if (person == null) return false;
 		MarketAPI market = person.getMarket();
@@ -79,7 +79,7 @@ public class EISSurplusShipHull extends HubMissionWithSearch {
 		//assignShipName(member, Factions.INDEPENDENT);
                 if (person.getTags().contains("eis_celeste") || genRandom.nextFloat() >= 0.25f) {
                     assignShipName(member, "ironshell");
-                    if (!member.getVariant().hasHullMod(HullMods.SAFETYOVERRIDES) && !member.getVariant().hasHullMod("eis_aquila")) {holybased=true;member.getVariant().addPermaMod("eis_aquila", true);member.getVariant().setSource(VariantSource.REFIT);member.getVariant().addTag(Tags.VARIANT_ALWAYS_RETAIN_SMODS_ON_SALVAGE);}
+                    if (!member.getVariant().hasHullMod(HullMods.SAFETYOVERRIDES) && !member.getVariant().hasHullMod("eis_aquila")) {grantedAquila=true;member.getVariant().addPermaMod("eis_aquila", true);member.getVariant().setSource(VariantSource.REFIT);member.getVariant().addTag(Tags.VARIANT_ALWAYS_RETAIN_SMODS_ON_SALVAGE);}
                 } else {
                     assignShipName(member, Factions.HEGEMONY);BASE_PRICE_MULT = 0.4f;
                 }
@@ -112,7 +112,7 @@ public class EISSurplusShipHull extends HubMissionWithSearch {
 		// $sShip_ref. So: we use $sShip_ref2 in the ContactPostAccept rule
 		// and $sShip_ref2 has an expiration of 0, so it'll get unset on its own later.
 		set("$sShip_ref2", this);
-                set("$sShip_aquila", holybased);
+                set("$sShip_aquila", grantedAquila);
 		set("$sShip_hullSize", member.getHullSpec().getDesignation().toLowerCase());
 		set("$sShip_hullClass", member.getHullSpec().getHullNameWithDashClass());
 		set("$sShip_price", Misc.getWithDGS(price));

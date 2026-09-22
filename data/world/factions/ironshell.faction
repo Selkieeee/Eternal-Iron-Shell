@@ -29,121 +29,79 @@
 	
 	# variantOverrides restricts hulls to listed variants and adjusts their probability
 	"variantOverrides":{
-		"eis_enforcer_xiv_Elite":5,
-		"eis_falcon_xiv_Elite":5,
-		"eis_eagle_xiv_Elite":5,
-		"eis_dominator_xiv_Elite":5,
-		"eis_onslaught_xiv_Elite":5,
+		"eis_enforcer_xiv_Elite":10,
+		"eis_falcon_xiv_Elite":10,
+		"eis_eagle_xiv_Elite":10,
+		"eis_dominator_xiv_Elite":10,
+		"eis_onslaught_xiv_Elite":10,
 	},
 	
 	# multiplier for how often hulls show up in the faction's fleets
 	"hullFrequency":{
 		"tags":{
-			"heg_aux_bp":1.25,
-			#"XIV_bp":0.25,
-			"eis_bp":1.5,
+			"eis_bp":4,
 		},
 		"hulls":{
-			#"buffalo2":0, # just say no, don't need to say cuz they don't have it anymore
-			"buffalo_hegemony":1.5,
-			#"dominator":0.5,
-			#"onslaught":0.75,
-			#"mora":0.1, # I HATE MORAASS NOOOOOO
-			#"condor":0.1,
-			"dominator_xiv": 1.3,
-			"eagle_xiv": 1.3,
-			"enforcer_xiv": 1.3,
-			"falcon_xiv": 1.3,
-			"onslaught_xiv": 1.0,
+			"eis_skyrend": 0.5, 
+			"eis_valorous": 0.25,
+			"eis_mora": 0.5,
+			"eis_illustrious": 0.1,
+			"eis_dauntless": 0.1,
 			
-			"eis_audacious": 1.75,
-			"eis_champion": 0.75, #Hegemony doesn't really have access to this...
-			"eis_courageous": 1.5,
-			"eis_endeavor": 1.3, #making room for XIV Legion 
-			"eis_flagellator": 1.75,
-			"eis_indomitable": 1.75,
-			"eis_renown":1.75,
-			"eis_skyrend": 1.0, #As per Nia's request
-			"eis_tyrant": 1.75,
-			"eis_valorous": 1.0, #It is actually capable now.. but really annoying if it was frigate-spammed.
-			"eis_vengeance": 1.5,
-			"eis_mora": 1.5,
-			"eis_eradicator": 0.75, #Hegemony doesn't really have access to this...
-			"eis_vanguard_xiv": 1.5,
+			"TADA_tinnitus_xiv": 0.5,
+			"TADA_gunwall_XIV": 0.5,
 			
-			"TADA_tinnitus_xiv": 1.3,
-			"TADA_gunwall_XIV": 1.3,
+			"tahlan_nelson_xiv": 0.5,
+			"tahlan_tower_xiv":0.5,
 			
-			"tahlan_nelson_xiv": 1.0,
-			"tahlan_tower_xiv":1.0,
+			"swp_alastor_xiv": 0.5,
+			"swp_conquest_xiv": 0.1,
+			"swp_gryphon_xiv": 0.5,
+			"swp_hammerhead_xiv": 0.5,
+			"swp_lasher_xiv": 0.5,
+			"swp_sunder_xiv": 0.5,
 			
-			"swp_alastor_xiv": 1.3,
-			"swp_conquest_xiv": 0.1, #Due to.. reasons.
-			"swp_gryphon_xiv": 1.3,
-			"swp_hammerhead_xiv": 1.3,
-			"swp_lasher_xiv": 1.3,
-			"swp_sunder_xiv": 1.3,
+			"wolf_hegemony": 0.25,
+			
+			"armaa_garegga_xiv_carrier": 2.0,
+			"armaa_corsair_xiv": 1.0,
+    		"armaa_monitor_xiv": 1.0,
+			"armaa_valkyrie": 0.5,
+			"armaa_panther_frig_xiv": 0.5,
+			"armaa_musha_frig_sniper": 0.5,
 		},
 	},
 	
 	"shipsWhenImporting":{
-		"tags":["ironshell"],
+		"tags":["ironshell", "eis_bp"],
 		"hulls":[
 			#base_bp
-			"hound",
 			"mercury",
 			"hermes",
 			"dram",
 			"ox",
 			"cerberus",
 			"shepherd",
-			"kite",
 			"mudskipper",
 			"wayfarer",
 			"gremlin",
-			"condor",
 			"buffalo",
-			#"buffalo2", no lol
 			"mule",
 			"phaeton",
 			"crig",
-			"nebula",
-			"venture",
 			"colossus",
-			#"swp_nautilus"
+
 			#heg_aux_bp
 			"wolf_hegemony",
-			"kite_hegemony",
-			"hound_hegemony",
-			"buffalo_hegemony",
+
 			#lowtech_bp
-			"lasher",
-			"enforcer",
-			"tarsus",
-			"dominator",
-			"mora",
+
 			#midline_bp
-			"brawler",
-			"vigilance",
-			"centurion",
-			"hammerhead",
-			"sunder",
-			"gemini",
-			"drover",
-			"falcon",
-			"heron",
-			"starliner",
-			#more goodies given
+
+
 			"atlas",
-			"monitor",
 			"prometheus",
-			"legion",
-			"onslaught",
-			"gryphon",
-			"eagle",
 			"valkyrie",
-			#"vanguard",
-			"manticore",
 			"eagle_xiv",
 			"dominator_xiv",
 			"enforcer_xiv",
@@ -166,66 +124,40 @@
 		"tags":["ironshell", "eis_bp", "eisceleste_bp"], #no longer uses XIV_bp
 		"hulls":[
 			#base_bp
-			"hound",
 			"mercury",
 			"hermes",
 			"dram",
 			"ox",
 			"cerberus",
 			"shepherd",
-			"kite",
 			"mudskipper",
 			"wayfarer",
 			"gremlin",
-			"condor",
 			"buffalo",
-			#"buffalo2", no lol
 			"mule",
 			"phaeton",
 			"crig",
 			"nebula",
-			"venture",
 			"colossus",
-			#"swp_nautilus",
+
 			#heg_aux_bp
 			"wolf_hegemony",
-			"kite_hegemony",
-			"hound_hegemony",
-			"buffalo_hegemony",
+
 			#lowtech_bp
-			"lasher",
-			"enforcer",
-			"tarsus",
-			"dominator",
-			"mora",
+
 			#midline_bp
-			"brawler",
-			"vigilance",
-			"centurion",
-			"hammerhead",
-			"sunder",
-			"gemini",
-			"drover",
-			"falcon",
-			"heron",
-			"starliner",
+
 			#"tahlan_Phoca",
 			#"TADA_scalper",
 			#"swp_alastor",
 			#"swp_archer",
 			#"swp_albatross",
 			#"swp_vulture",
-			#more stuff goodies given to them
+			
+
 			"atlas",
-			"monitor",
 			"prometheus",
-			"legion",
-			"onslaught",
-			"gryphon",
-			"eagle",
 			"valkyrie",
-			#"vanguard",
-			"manticore",
 			"eagle_xiv",
 			"dominator_xiv",
 			"enforcer_xiv",
@@ -240,19 +172,6 @@
 	"priorityShips":{
 		"tags":[],
 		"hulls":[
-			"onslaught_xiv", #combatCapital
-			#"legion_xiv", #you wish, finish that quest first.
-			
-			"eis_audacious", #carrierSmall
-			"eis_vengeance", #carrierMedium
-			"eis_mora", #carrierMedium
-			"eis_endeavor", #carrierLarge
-			"eis_skyrend", #combatCapital
-			"eis_tyrant", #combatCapital
-			
-			"TADA_gunwall_XIV", #combatCapital
-			
-			"swp_conquest_xiv", #combatCapital
 		],
 	},
 	"knownFighters":{
@@ -360,12 +279,6 @@
 	"priorityWeapons":{
 		"tags":[],
 		"weapons":[
-			#"eis_superheavy_needler",
-			#"eis_infernal_star", Autofit can't be trusted...
-			#"eis_celestials_aster",
-			#"eis_celestials_blossom",
-			#"eis_lunarrose",
-			#"eis_barretta",
 		],
 	},
 	"knownHullMods":{
@@ -482,7 +395,7 @@
 			"CommissionerIS":{"name":"Chief Commissioner"},
 			"ResearcherIS":{"name":"Head Researcher"},
 			"HeadWardenIS":{"name":"Chief Administrator"},
-			"WardenIS":{"name":"Apprentice"},
+			"WardenIS":{"name":"Lieutenant"},
 			
 			"patrolCommander":{"name":"Patrol Commander"},
 			"fleetCommander":{"name":"Fleet Commander"},
@@ -494,7 +407,7 @@
 			"CommissionerIS":{"name":"Chief Commissioner"},
 			"ResearcherIS":{"name":"Head Researcher"},
 			"HeadWardenIS":{"name":"Chief Administrator"},
-			"WardenIS":{"name":"Apprentice"},
+			"WardenIS":{"name":"Lieutenant"},
 		},
 	},
 	"voices":{

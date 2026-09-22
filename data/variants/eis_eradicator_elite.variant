@@ -12,7 +12,7 @@
         {
             "autofire": true,
             "mode": "LINKED",
-            "weapons": {"WS 005": "eis_dualrailgun"}
+            "weapons": {"WS 005": "hveldriver"}
         },
         {
             "autofire": false,

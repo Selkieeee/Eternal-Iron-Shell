@@ -45,7 +45,7 @@
         }
     ],
     "wings": [
-        "eis_warthog_wing",
-        "eis_khopesh_wing"
+        "warthog_wing",
+        "hoplon_wing"
     ]
 }

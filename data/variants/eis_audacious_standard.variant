@@ -35,7 +35,7 @@
         }
     ],
     "wings": [
-        "eis_warthog_wing",
-        "eis_thunder_wing"
+        "warthog_wing",
+        "eis_thunder_mk2_wing"
     ]
 }

@@ -47,6 +47,7 @@ public class eis_aquila_1time extends BaseHullMod {
     }
     
     private static String aquilaIcon = "graphics/icons/hullsys/infernium_injector.png";
+    private static final String BULLET = "\u2022";
     private static String aquilaTitle = Global.getSettings().getString("eis_ironshell", "eis_aquilaTitle");
     private static String aquilaText1 = Global.getSettings().getString("eis_ironshell", "eis_aquilaText1");
     private static String aquilaText1b = Global.getSettings().getString("eis_ironshell", "eis_aquilaText1b");
@@ -310,33 +311,37 @@ public class eis_aquila_1time extends BaseHullMod {
             }
         }*/
         aquila.addPara(aquilaText1, 0f, Misc.getPositiveHighlightColor(),
+                BULLET,
                 "" + Math.round((Float) speed.get(HullSize.CRUISER)),
                 "" + Math.round((Float) speed.get(HullSize.CAPITAL_SHIP)),
                 Math.round((SPEED_BOOST_PERCENT)) + "%");
         if (ship != null) {
             aquila.addPara(aquilaText1b, 0f, Misc.getPositiveHighlightColor(),
+                    BULLET,
                     ship.getHullSpec().getHullNameWithDashClass(),
                     "" + Math.round(Math.min((Float) speed.get(hullSize), ship.getMutableStats().getMaxSpeed().base * 0.75f)));
             if (ship.getVariant().getHullSpec().getShieldType() != ShieldType.PHASE) {
-                Color[] colors = new Color[3];
-                colors[0] = Misc.getBallisticMountColor();
-                colors[1] = Misc.getEnergyMountColor();
-                colors[2] = Misc.getPositiveHighlightColor();
-                aquila.addPara(aquilaText4b, 0f, colors, ballistic, energy, Math.round(DAMAGE_BONUS) + "%");
+                Color[] colors = new Color[4];
+                colors[0] = Misc.getPositiveHighlightColor();
+                colors[1] = Misc.getBallisticMountColor();
+                colors[2] = Misc.getEnergyMountColor();
+                colors[3] = Misc.getPositiveHighlightColor();
+                aquila.addPara(aquilaText4b, 0f, colors, BULLET, ballistic, energy, Math.round(DAMAGE_BONUS) + "%");
             }
         }
-        aquila.addPara(aquilaText2, 0f, Misc.getPositiveHighlightColor(), Math.round(VENT_RATE_BONUS) + "%");
-        aquila.addPara(aquilaText3, 0f, Misc.getPositiveHighlightColor(), Math.round(ZERO_FLUX_LEVEL) + "%");
+        aquila.addPara(aquilaText2, 0f, Misc.getPositiveHighlightColor(), BULLET, Math.round(VENT_RATE_BONUS) + "%");
+        aquila.addPara(aquilaText3, 0f, Misc.getPositiveHighlightColor(), BULLET, Math.round(ZERO_FLUX_LEVEL) + "%");
         if (ship != null) {
             aquila.addPara(aquilaText4, 0f, Misc.getNegativeHighlightColor(),
+                    BULLET,
                     //Math.round(100f - (Float) peak_mult.get(HullSize.CRUISER)) + "%",
                     Math.round(100f - (Float) peak_mult.get(hullSize)) + "%");
             for (WeaponAPI weapon : ship.getAllWeapons()) {
-                if (weapon.getType() == WeaponAPI.WeaponType.MISSILE && weapon.getRange() > BONUS_MAX_CAP)  aquila.addPara(aquilaText4d, 0f, Misc.getNegativeHighlightColor(), Misc.getRoundedValue(BONUS_MAX_CAP));
+                if (weapon.getType() == WeaponAPI.WeaponType.MISSILE && weapon.getRange() > BONUS_MAX_CAP)  aquila.addPara(aquilaText4d, 0f, Misc.getNegativeHighlightColor(), BULLET, Misc.getRoundedValue(BONUS_MAX_CAP));
                 break;
             }
         }
-        aquila.addPara(aquilaText4c, 0f, Misc.getNegativeHighlightColor(), Math.round(ENGAGEMENT_REDUCTION_PERCENT) + "%");
+        aquila.addPara(aquilaText4c, 0f, Misc.getNegativeHighlightColor(), BULLET, Math.round(ENGAGEMENT_REDUCTION_PERCENT) + "%");
         tooltip.addImageWithText(PAD);
         if (getreal) {
             tooltip.addPara(aquilaText5b, 10f, Misc.getNegativeHighlightColor(), aquilaText5);

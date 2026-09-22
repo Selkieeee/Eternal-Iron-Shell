@@ -1,7 +1,7 @@
 {
     "displayName": "Celestial",
     "fluxCapacitors": 16,
-    "fluxVents": 20,
+    "fluxVents": 12,
     "hullId": "eis_audacious",
 	"goalVariant": false,
     "hullMods": ["eis_aquila", "fluxbreakers"],
@@ -12,7 +12,7 @@
         {
             "autofire": false,
             "mode": "LINKED",
-            "weapons": {"WS 002": "eis_dualrailgun"}
+            "weapons": {"WS 002": "hveldriver"}
         },
         {
             "autofire": false,

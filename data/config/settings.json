@@ -1,9 +1,7 @@
 {
-	"VengeanceSFX":true, #Prevents the SFX from showing up when piloting the Vengeance or Valorous.
-	"GreaterHegemony": true, #creates the Greater Hegemony from the beginning of the game.
-	"NoEISPlayer":false, #Prevents player faction from generating Iron Shell Portraits but remain pickable in start screen
-	"VanagloriaNoMagicUI": false, #When set to true, this causes the Vanagloria UI to always appear in the left and fixes some issues with ships that uses the same MagicUI as Vanagloria's.
-
+  "plugins": {
+    "eis_ProjectileTracker": "data.scripts.combat.eis_ProjectileTracker"
+  },
   "designTypeColors":{
       "Iron Shell":[252,173,60,255],
       "XlV Battlegroup":[200,0,0,255],
@@ -19,8 +17,11 @@
 			"eis_ava":"graphics/portraits/eis_ava.png",
 		},
 		"illustrations":{
-			"is_station_illustration":"graphics/illustrations/is_station_illustration.jpg",
-			"is_yami_illustration":"graphics/illustrations/is_yami_illustration.jpg",
+			"is_station_illustration":"graphics/illustrations/is_station_illustration.png",
+			"is_yami_illustration":"graphics/illustrations/is_yami_illustration.png",
+		},
+		"planets":{
+			"eis_pinkplanet1":"graphics/planets/eis_pinkplanet1.png",
 		},
 		"blueprint_packages":{
 			"eis_package":"graphics/icons/cargo/package_ironshell.png",

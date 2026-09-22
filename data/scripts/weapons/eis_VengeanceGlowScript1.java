@@ -26,7 +26,6 @@ public class eis_VengeanceGlowScript1 implements EveryFrameWeaponEffectPlugin {
     public static final float ROTATION_SPEED = 10f;
     public static final Color COLOR = new Color(215, 21, 16, 166);
     
-    private final boolean basedonwhat = Global.getSettings().getBoolean("VengeanceSFX");
     //private boolean loaded = false;
     private float rotation = 0f;
     private float opacity = 0f;
@@ -36,7 +35,7 @@ public class eis_VengeanceGlowScript1 implements EveryFrameWeaponEffectPlugin {
 
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
-        if (!basedonwhat || engine == null || !engine.isUIShowingHUD() || engine.isUIShowingDialog() || engine.getCombatUI().isShowingCommandUI()) {
+        if (engine == null || !engine.isUIShowingHUD() || engine.isUIShowingDialog() || engine.getCombatUI().isShowingCommandUI()) {
             return;
         }
         

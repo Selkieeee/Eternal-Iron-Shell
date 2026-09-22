@@ -18,6 +18,11 @@ import com.fs.starfarer.api.util.Misc.Token;
 public class EISCheck extends BaseCommandPlugin {
 	public boolean execute(String ruleId, InteractionDialogAPI dialog, List<Token> params, Map<String, MemoryAPI> memoryMap) {
             if (dialog == null) return false;
+            // Light Aranitia fleets (see Amongus.UhohStinky) don't force engagement - leave the base
+            // Story Point "Clean Disengage" option untouched and skip the custom tooltip entirely.
+            if (dialog.getInteractionTarget() != null && dialog.getInteractionTarget().getMemoryWithoutUpdate().getBoolean("$EIS_YKWYD_light")) {
+                return true;
+            }
             dialog.getOptionPanel().setEnabled(OptionId.CLEAN_DISENGAGE, false);
             dialog.getOptionPanel().setTooltip(OptionId.CLEAN_DISENGAGE, Global.getSettings().getString("eis_ironshell", "EISStoryPointForceEngage"));
             dialog.getOptionPanel().setTooltipHighlightColors(OptionId.CLEAN_DISENGAGE, Misc.getStoryOptionColor());

@@ -11,7 +11,7 @@
 
     "flameoutOnImpactChance":0,
 
-	"useSound":"system_burn_drive_deactivate",
+	"useSound":"eis_system_nova_burst_explosion",
     "outOfUsesSound":"engine_disabled",
 
     "aiHints":{

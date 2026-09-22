@@ -33,7 +33,7 @@ public class eis_lib {
         return damageTypeMult;
     }
     
-    public static float getDamageTypeMult(ShipAPI source, CombatEntityAPI target, WeaponType sneed, Boolean feed) {
+    public static float getDamageTypeMult(ShipAPI source, CombatEntityAPI target, WeaponType weaponType, Boolean isBeam) {
         if (source == null || target == null) return 1f;
         float damageTypeMult = 1f;
         if (target instanceof ShipAPI) {
@@ -55,7 +55,7 @@ public class eis_lib {
                     break;
             }
         }
-        switch(sneed) {
+        switch(weaponType) {
             case ENERGY:
                 damageTypeMult *= source.getMutableStats().getEnergyWeaponDamageMult().getModifiedValue();
                 break;
@@ -66,7 +66,7 @@ public class eis_lib {
                 damageTypeMult *= source.getMutableStats().getMissileDamageTakenMult().getModifiedValue();
                 break;
         }
-        if (feed) {damageTypeMult *= source.getMutableStats().getBeamWeaponDamageMult().getModifiedValue();}
+        if (isBeam) {damageTypeMult *= source.getMutableStats().getBeamWeaponDamageMult().getModifiedValue();}
 
         return damageTypeMult;
     }

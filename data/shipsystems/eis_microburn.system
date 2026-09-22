@@ -11,8 +11,6 @@
 	"engineGlowWidthMult":1.25,
 	"engineGlowGlowMult":1.5,
 	
-	"flameoutOnImpactChance":0.5,
-
 	"clampTurnRateAfter":true,
 	"clampMaxSpeedAfter":true,
 	"alwaysAccelerate":true,

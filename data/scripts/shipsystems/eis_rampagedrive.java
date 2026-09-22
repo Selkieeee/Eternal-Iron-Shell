@@ -66,9 +66,9 @@ public class eis_rampagedrive extends BaseShipSystemScript {
     //public static final float RANGE = 600f;
     public static final float ROF_MULT = 0.5f;
 
-    private static String poopystinky = Global.getSettings().getString("eis_ironshell", "eis_rampagedrive1");
-    private static String poopystinky2 = Global.getSettings().getString("eis_ironshell", "eis_rampagedrive2");
-    private static String poopystinky3 = Global.getSettings().getString("eis_ironshell", "eis_rampagedrive3");
+    private static String activeStatusText = Global.getSettings().getString("eis_ironshell", "eis_rampagedrive1");
+    private static String debuffStatusText = Global.getSettings().getString("eis_ironshell", "eis_rampagedrive2");
+    private static String idleInfoText = Global.getSettings().getString("eis_ironshell", "eis_rampagedrive3");
     
     private boolean reset = true;
     //private float activeTime = 0f;
@@ -207,9 +207,9 @@ public class eis_rampagedrive extends BaseShipSystemScript {
 
     public StatusData getStatusData(int index, State state, float effectLevel) {
         if (index == 0) {
-            return new StatusData(poopystinky, false);
+            return new StatusData(activeStatusText, false);
         } else if (index == 1) {
-            return new StatusData(poopystinky2, true);
+            return new StatusData(debuffStatusText, true);
         }
         return null;
     }
@@ -227,7 +227,7 @@ public class eis_rampagedrive extends BaseShipSystemScript {
         if ((target == null || target == ship) && ship.getShipTarget() != null) {
             return "OUT OF RANGE";
         }*/
-        return poopystinky3;
+        return idleInfoText;
     }
 
     

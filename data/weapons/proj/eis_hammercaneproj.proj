@@ -13,7 +13,7 @@
 				  "turnRate":150,
 				  "acc":250,
 				  "dec":200,
-				  "maxSpeed":250},
+				  "maxSpeed":500},
 	"engineSlots":[{"id":"ES1",
 					"loc":[-14, 0],
 				    #"style":"MISSILE_MIDLINE",
@@ -44,12 +44,12 @@
 					"damage":100,
 					"impact":5,
 					#"emp":0,
-					"damageType":HIGH_EXPLOSIVE,
+					"damageType":FRAGMENTATION,
 					"hitpoints":50,
-					"arc":75, #120
+					"arc":30, #120
 					#"arcOffset":180, so it doesn't go backward
 					"evenSpread":true,
-					"spreadSpeed":75, #200
+					"spreadSpeed":250, #200
 					"spreadSpeedRange":50, #25 #10
 					"debrisSmall":1,
 					"debrisMedium":0,

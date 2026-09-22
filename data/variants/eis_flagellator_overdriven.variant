@@ -37,6 +37,6 @@
   ],
   "modules": [],
   "wings": [
-    "eis_mining_drone_wing"
+    "mining_drone_wing"
   ]
 }

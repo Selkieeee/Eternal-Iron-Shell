@@ -16,9 +16,9 @@
 	"fadeTime":0.5, # fadeout duration	
 	"engineSpec":{"turnAcc":1500,
 				  "turnRate":750,
-				  "maxSpeed":400,
-				  "acc":800,
-				  "dec":0},
+				  "maxSpeed":800,
+				  "acc":250,
+				  "dec":200},
 	"engineSlots":[{"id":"ES1",
 					"loc":[-11, 0],
 				    #"style":"ROCKET_LOW_TECH",

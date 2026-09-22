@@ -28,7 +28,23 @@
 	"system_vengeance_loop":[
 		{"file":"sounds/sfx_systems/eis_vengeance_loop.ogg","pitch":1.0,"volume":1.0},
 	],
-	
+
+	"eis_system_nova_burst_explosion":{
+		"sounds":[
+			{"file":"sounds/sfx_systems/nova_burst_detonate_1.ogg","pitch":1.15,"volume":1.1},
+			{"file":"sounds/sfx_systems/nova_burst_detonate_2.ogg","pitch":1.15,"volume":1.1},
+			{"file":"sounds/sfx_systems/nova_burst_detonate_3.ogg","pitch":1.15,"volume":1.1},
+		],
+	},
+
+	"eis_system_nova_burst_explosion_small":{
+		"sounds":[
+			{"file":"sounds/sfx_systems/nova_burst_detonate_1.ogg","pitch":1.2,"volume":0.85},
+			{"file":"sounds/sfx_systems/nova_burst_detonate_2.ogg","pitch":1.2,"volume":0.85},
+			{"file":"sounds/sfx_systems/nova_burst_detonate_3.ogg","pitch":1.2,"volume":0.85},
+		],
+	},
+
 	"eis_zandatsu_use":[
 		{"file":"sounds/sfx_systems/eis_zandatsu_1.ogg","pitch":1.05,"volume":1},
         {"file":"sounds/sfx_systems/eis_zandatsu_1.ogg","pitch":1.0,"volume":1},

@@ -19,7 +19,7 @@
       "mount": "HIDDEN",
       "arc": 5,
       "angle": 0,
-      "locations": [9, 1]
+      "locations": [8, 0]
     },
     {
       "id": "WS0002",
@@ -28,7 +28,7 @@
       "mount": "HIDDEN",
       "arc": 5,
       "angle": 0,
-      "locations": [9, -1]
+      "locations": [8, 0]
     },
     {
       "id": "WS0001",
@@ -37,7 +37,7 @@
       "mount": "HIDDEN",
       "arc": 5,
       "angle": 0,
-      "locations": [9, -1]
+      "locations": [8, -0]
     }
   ],
   "engineSlots": [
@@ -55,8 +55,8 @@
     20, 0,
     8, -10,
     0, -5,
-    -10, -6,
-    -9, 4,
+    -11, -6,
+    -11, 6,
     0, 5
   ]
 }

@@ -28,11 +28,11 @@ import com.fs.starfarer.api.util.WeightedRandomPicker;
 
 public class EISAICores extends BaseCommandPlugin {
     
-        public boolean penis;
+        public boolean coresSelected;
     
-        protected String yesamongus;
-        protected String yesamongus2;
-        protected String yesamongus3;
+        protected String coreIcon1;
+        protected String coreIcon2;
+        protected String coreIcon3;
         
 	protected CampaignFleetAPI playerFleet;
 	protected SectorEntityToken entity;
@@ -75,18 +75,18 @@ public class EISAICores extends BaseCommandPlugin {
 		faction = person.getFaction();
 		
 		//buysAICores = faction.getCustomBoolean("buysAICores");
-		valueMult = 0.5f; //faction.getCustomFloat("AICoreValueMult");
-		repMult = faction.getCustomFloat("AICoreRepMult");
+		valueMult = 3f; //faction.getCustomFloat("AICoreValueMult");
+		repMult = 0.5f; //faction.getCustomFloat("AICoreRepMult");
                 switch (command) {
                     case "selectCores":
-                        WeightedRandomPicker<String> AmongUs = new WeightedRandomPicker<String>();
-                        AmongUs.add("graphics/icons/cargo/ai_core_gamma.png", 3);
-                        AmongUs.add("graphics/icons/cargo/ai_core_beta.png", 2);
-                        AmongUs.add("graphics/icons/cargo/ai_core_alpha.png", 1);
-                        yesamongus = AmongUs.pick();
-                        yesamongus2 = AmongUs.pick();
-                        yesamongus3 = AmongUs.pick();
-                        penis = true;
+                        WeightedRandomPicker<String> iconPicker = new WeightedRandomPicker<String>();
+                        iconPicker.add("graphics/icons/cargo/ai_core_gamma.png", 3);
+                        iconPicker.add("graphics/icons/cargo/ai_core_beta.png", 2);
+                        iconPicker.add("graphics/icons/cargo/ai_core_alpha.png", 1);
+                        coreIcon1 = iconPicker.pick();
+                        coreIcon2 = iconPicker.pick();
+                        coreIcon3 = iconPicker.pick();
+                        coresSelected = true;
 			selectCores();
                         break;
                     default:
@@ -163,7 +163,7 @@ public class EISAICores extends BaseCommandPlugin {
 				panel.addPara(Misc.ucFirst(Global.getSettings().getString("eis_ironshell", "EISAICores4")), faction.getBaseUIColor(), 1f);
 				panel.setParaFontDefault();
 				panel.addImage("graphics/icons/cargo/package_celeste_enlarged.png", width * 1f, 3f);
-                                panel.addImages(width, 80, 3f, 0f, yesamongus, yesamongus2, yesamongus3);
+                                panel.addImages(width, 80, 3f, 0f, coreIcon1, coreIcon2, coreIcon3);
                                 panel.addPara(Global.getSettings().getString("eis_ironshell", "EISAICores5"), opad);
 				panel.beginGridFlipped(width, 1, 40f, 10f);
 				panel.addToGrid(0, 0, Global.getSettings().getString("eis_ironshell", "EISAICores6"), "" + (int)(valueMult * 100f) + "%");
@@ -203,16 +203,16 @@ public class EISAICores extends BaseCommandPlugin {
 	
 	public static float getBaseRepValue(String coreType) {
 		if (Commodities.OMEGA_CORE.equals(coreType)) {
-			return 0f; //Lol.
+			return 0f;
 		}
 		if (Commodities.ALPHA_CORE.equals(coreType)) {
-			return 7.5f;
+			return 5f;
 		}
 		if (Commodities.BETA_CORE.equals(coreType)) {
 			return 3f;
 		}
 		if (Commodities.GAMMA_CORE.equals(coreType)) {
-			return 1.5f;
+			return 1f;
 		}
 		return 1f;
 	}

@@ -31,10 +31,10 @@ public class EISLearnSpecial extends BaseCommandPlugin {
                     Global.getSector().getFaction("ironsentinel").getKnownShips().add(params.get(1).getString(memoryMap));
                     Global.getSector().getFaction("ironsentinel").getHullFrequency().put(params.get(1).getString(memoryMap), 1f);
                     Global.getSector().getFaction("ironsentinel").getPriorityShips().add(params.get(1).getString(memoryMap));
-                    if (Global.getSettings().getBoolean("GreaterHegemony")) {Global.getSector().getFaction("hegemony").getKnownShips().add(params.get(1).getString(memoryMap));Global.getSector().getFaction("hegemony").getHullFrequency().put(params.get(1).getString(memoryMap), 0.25f);}
+                    if (data.scripts.eis_modPlugin.getEISBooleanSetting("GreaterHegemony", true)) {Global.getSector().getFaction("hegemony").getKnownShips().add(params.get(1).getString(memoryMap));Global.getSector().getFaction("hegemony").getHullFrequency().put(params.get(1).getString(memoryMap), 0.25f);}
                     if (params.get(2).getBoolean(memoryMap)) {
                         Global.getSector().getFaction("ironshell").getPriorityShips().add(params.get(1).getString(memoryMap));
-                        if (Global.getSettings().getBoolean("GreaterHegemony")) {Global.getSector().getFaction("hegemony").getPriorityShips().add(params.get(1).getString(memoryMap));}
+                        if (data.scripts.eis_modPlugin.getEISBooleanSetting("GreaterHegemony", true)) {Global.getSector().getFaction("hegemony").getPriorityShips().add(params.get(1).getString(memoryMap));}
                     }
                     Global.getSector().getFaction("ironshell").clearShipRoleCache();
                     Global.getSector().getFaction("ironsentinel").clearShipRoleCache();

@@ -19,12 +19,12 @@ import exerelin.campaign.intel.missions.ConquestMissionIntel;
 public class EISAmongUs extends BaseCommandPlugin {
 	public boolean execute(String ruleId, InteractionDialogAPI dialog, List<Token> params, Map<String, MemoryAPI> memoryMap) {
             if (dialog == null) return false;
-            String sus = params.get(0).getString(memoryMap);
+            String marketId = params.get(0).getString(memoryMap);
             List<IntelInfoPlugin> intels =  Global.getSector().getIntelManager().getIntel(ConquestMissionIntel.class);
             for (IntelInfoPlugin intel : intels) {
               ConquestMissionIntel conquestIntel = (ConquestMissionIntel) intel;
               if (conquestIntel.getPostingLocation() != null && conquestIntel.getFactionForUIColors() != null) {
-                if (sus.equals(conquestIntel.getPostingLocation().getId()) && 
+                if (marketId.equals(conquestIntel.getPostingLocation().getId()) &&
                 "ironshell".equals(conquestIntel.getFactionForUIColors().getId()) && 
                 conquestIntel.isCompleted())
                     return true;

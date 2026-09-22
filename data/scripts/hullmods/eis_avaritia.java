@@ -45,26 +45,29 @@ public class eis_avaritia extends BaseHullMod {
 	speed.put(HullSize.CRUISER, 25f); //20f 50f
 	speed.put(HullSize.CAPITAL_SHIP, 20f); //10f 40f
         speed.put(HullSize.DEFAULT, 20f);
-        DAMAGE_BUFF_DURATION.put(HullSize.FIGHTER, 2f);
-	DAMAGE_BUFF_DURATION.put(HullSize.FRIGATE, 2f); //50f
-	DAMAGE_BUFF_DURATION.put(HullSize.DESTROYER, 2.25f); //30f
-	DAMAGE_BUFF_DURATION.put(HullSize.CRUISER, 2.5f); //20f
-	DAMAGE_BUFF_DURATION.put(HullSize.CAPITAL_SHIP, 3f); //10f
-        DAMAGE_BUFF_DURATION.put(HullSize.DEFAULT, 2f);
+        DAMAGE_BUFF_DURATION.put(HullSize.FIGHTER, 3f);
+	DAMAGE_BUFF_DURATION.put(HullSize.FRIGATE, 3f);
+	DAMAGE_BUFF_DURATION.put(HullSize.DESTROYER, 3f);
+	DAMAGE_BUFF_DURATION.put(HullSize.CRUISER, 3f);
+	DAMAGE_BUFF_DURATION.put(HullSize.CAPITAL_SHIP, 3f);
+        DAMAGE_BUFF_DURATION.put(HullSize.DEFAULT, 3f);
         BLOCKED_HULLMODS.add(HullMods.SAFETYOVERRIDES);
     }
     private static final float PERCENT_PER_VENT = 50f;
     private static final float MIN_VENT_PERCENT = 50f;
     //public static final float VENT_RATE_BONUS = 15f;
     //public static final float CAPACITOR_MULT = 2f;
-    private static final float DAMAGE_SBUFF_PERCENT = 50f;
-    private static final float ROF_SBUFF_MULT = 1.5f;
+    //private static final float DAMAGE_SBUFF_PERCENT = 50f; // removed - s-mod bonus replaced with flux dissipation while venting
+    //private static final float ROF_SBUFF_MULT = 1.5f; // removed - s-mod bonus replaced with flux dissipation while venting
+    private static final float DISSIPATION_SBUFF_PERCENT = 10f;
     private static final float DAMAGE_BUFF_PERCENT = 30f;
 
     private static final String DATA_KEY = "eis_avaritia_data_key";
 
     private static String Icon = Global.getSettings().getSpriteName("ui", "icon_tactical_venting");
+    private static String BuffIcon = "graphics/icons/hullsys/high_energy_focus.png";
     private static String Title = Global.getSettings().getString("eis_ironshell", "eis_avaritiaTitle");
+    private static String VentingTitle = Global.getSettings().getString("eis_ironshell", "eis_avaritiaVentingTitle");
     private static String Text1 = Global.getSettings().getString("eis_ironshell", "eis_avaritiaText1");
     private static String Text4 = Global.getSettings().getString("eis_ironshell", "eis_avaritiaText4");
     private static String Text2 = Global.getSettings().getString("eis_ironshell", "eis_avaritiaText2");
@@ -74,7 +77,8 @@ public class eis_avaritia extends BaseHullMod {
     private static String Text5b = Global.getSettings().getString("eis_ironshell", "eis_avaritiaText5b");
     private static String Text6 = Global.getSettings().getString("eis_ironshell", "eis_avaritiaText6");
     private static String Text7 = Global.getSettings().getString("eis_ironshell", "eis_avaritiaText7");
-    private static String Text8 = Global.getSettings().getString("eis_ironshell", "eis_avaritiaText8");
+    // Text8 (old s-mod bullet line) removed - the s-mod bonus now lives in hull_mods.csv's sModDesc column,
+    // rendered via the vanilla "S-mod bonus" section (addSModEffectSection() below).
     private static String ApplicableText = Global.getSettings().getString("eis_ironshell", "eis_avaritiaApplicableText");
     private static String StatusTitle = Global.getSettings().getString("eis_ironshell", "eis_avaritiaStatusTitle");
     private static String StatusText = Global.getSettings().getString("eis_ironshell", "eis_avaritiaStatusText");
@@ -82,8 +86,9 @@ public class eis_avaritia extends BaseHullMod {
     private static String StatusTitle2 = Global.getSettings().getString("eis_ironshell", "eis_avaritiaStatusTitle2");
     private static String StatusText2a = Global.getSettings().getString("eis_ironshell", "eis_avaritiaStatusText2a");
     private static String StatusText2b = Global.getSettings().getString("eis_ironshell", "eis_avaritiaStatusText2b");
-    private static Color Amongus = Global.getSettings().getColor("textFriendColor");
-    private static Color SUS = new Color(255, 0, 191);
+    private static Color hudBarColor = Global.getSettings().getColor("textFriendColor");
+    private static Color weaponGlowColor = new Color(255, 0, 191);
+    private static final String BULLET = "\u2022";
     private static final float MAX_GLOW_PERCENT = 0.8f;
     private static final float FADE_IN_OUT_TIME = 0.2f;
 
@@ -139,7 +144,13 @@ public class eis_avaritia extends BaseHullMod {
 
         if (fluxTracker.isVenting() && !data.startedVenting) {
             data.startedVenting = true;
-            
+
+            if (ship.getHullSpec().isBuiltInMod("eis_avaritia") || ship.getVariant().getSMods().contains("eis_avaritia")) {
+                // S-mod bonus: +10% flux dissipation while venting, applied before ventDuration is computed
+                // below so the faster vent is reflected in the burst's predicted duration/drain rate too.
+                ship.getMutableStats().getFluxDissipation().modifyPercent("eis_avaritia", DISSIPATION_SBUFF_PERCENT);
+            }
+
             data.fluxLevelWhenStartedVenting = fluxTracker.getFluxLevel();
             data.ventDuration = (ship.getMaxFlux()*0.5f/(2*ship.getMutableStats().getFluxDissipation().getModifiedValue() * ship.getMutableStats().getVentRateMult().getModifiedValue()));
             if (data.fluxLevelWhenStartedVenting <= MIN_VENT_PERCENT * 0.01f) {
@@ -181,14 +192,14 @@ public class eis_avaritia extends BaseHullMod {
             if (ship.getHullSpec().isBuiltInMod("eis_avaritia") || ship.getVariant().getSMods().contains("eis_avaritia")) {
                 engine.maintainStatusForPlayerShip("eis_avaritia", Icon, StatusTitle, StatusText, false);
             }
-            MagicUI.drawHUDStatusBar(ship, fluxTracker.getFluxLevel(), Amongus, Amongus, data.fluxLevelToVentTo, Misc.getRoundedValueMaxOneAfterDecimal(ship.getMaxFlux() * (fluxTracker.getFluxLevel() - data.fluxLevelToVentTo)/(2*ship.getMutableStats().getFluxDissipation().getModifiedValue() * ship.getMutableStats().getVentRateMult().getModifiedValue())) + StatusText2b, ".", true);
+            MagicUI.drawHUDStatusBar(ship, fluxTracker.getFluxLevel(), hudBarColor, hudBarColor, data.fluxLevelToVentTo, Misc.getRoundedValueMaxOneAfterDecimal(ship.getMaxFlux() * (fluxTracker.getFluxLevel() - data.fluxLevelToVentTo)/(2*ship.getMutableStats().getFluxDissipation().getModifiedValue() * ship.getMutableStats().getVentRateMult().getModifiedValue())) + StatusText2b, ".", true);
         }
 
         if (data.startedVenting && (fluxTracker.getFluxLevel() <= Math.max(0.01f,data.fluxLevelToVentTo))) {
             fluxTracker.stopVenting();
             data.startedVenting = false;
             data.fluxLevelToVentTo = 0f;
-            data.buffDurationRemaining = data.ventDuration > (Float) DAMAGE_BUFF_DURATION.get(ship.getHullSize()) ? (Float) DAMAGE_BUFF_DURATION.get(ship.getHullSize()) : data.ventDuration ;
+            data.buffDurationRemaining = (Float) DAMAGE_BUFF_DURATION.get(ship.getHullSize());
             Global.getSoundPlayer().playSound("ai_core_pickup", 1f, 0.4f, ship.getLocation(), ship.getVelocity());
         }
 
@@ -200,6 +211,7 @@ public class eis_avaritia extends BaseHullMod {
             data.startedVenting = false;
             data.fluxLevelToVentTo = 0f;
             MutableShipStatsAPI stats = ship.getMutableStats();
+            stats.getFluxDissipation().unmodifyPercent("eis_avaritia");
             stats.getMaxSpeed().unmodifyFlat("eis_avaritia");
             stats.getAcceleration().unmodifyFlat("eis_avaritia");
             stats.getDeceleration().unmodifyFlat("eis_avaritia");
@@ -212,22 +224,13 @@ public class eis_avaritia extends BaseHullMod {
         // < Stuff from Nia, adapted >
         //Apply our buff, if our duration is not yet up
         if (data.buffDurationRemaining > 0f) {
-            if (ship.getHullSpec().isBuiltInMod("eis_avaritia") || ship.getVariant().getSMods().contains("eis_avaritia")) {
-                ship.getMutableStats().getEnergyWeaponDamageMult().modifyPercent(data.buffId, DAMAGE_SBUFF_PERCENT);
-                ship.getMutableStats().getBallisticWeaponDamageMult().modifyPercent(data.buffId, DAMAGE_SBUFF_PERCENT);
-                ship.getMutableStats().getEnergyRoFMult().modifyMult(data.buffId, ROF_SBUFF_MULT);
-                ship.getMutableStats().getBallisticRoFMult().modifyMult(data.buffId, ROF_SBUFF_MULT);
-                ship.getMutableStats().getVentRateMult().modifyMult(data.buffId, 0f);
-                if (ship == Global.getCombatEngine().getPlayerShip()) {
-                    Global.getCombatEngine().maintainStatusForPlayerShip(data.buffId,"graphics/icons/hullsys/high_energy_focus.png", StatusTitle,"+" + Math.round(DAMAGE_SBUFF_PERCENT) + StatusText2 + Misc.getRoundedValueMaxOneAfterDecimal(data.buffDurationRemaining), false);
-                }
-            } else {
-                ship.getMutableStats().getEnergyWeaponDamageMult().modifyPercent(data.buffId, DAMAGE_BUFF_PERCENT);
-                ship.getMutableStats().getBallisticWeaponDamageMult().modifyPercent(data.buffId, DAMAGE_BUFF_PERCENT);
-                ship.getMutableStats().getVentRateMult().modifyMult(data.buffId, 0f);
-                if (ship == Global.getCombatEngine().getPlayerShip()) {
-                    Global.getCombatEngine().maintainStatusForPlayerShip(data.buffId,"graphics/icons/hullsys/high_energy_focus.png", StatusTitle,"+" + Math.round(DAMAGE_BUFF_PERCENT) + StatusText2 + Misc.getRoundedValueMaxOneAfterDecimal(data.buffDurationRemaining), false);
-                }
+            // Post-vent damage buff no longer differs when built-in/s-modded - the s-mod bonus is now the
+            // +10% flux dissipation while venting applied above instead of a bigger/extra post-vent buff.
+            ship.getMutableStats().getEnergyWeaponDamageMult().modifyPercent(data.buffId, DAMAGE_BUFF_PERCENT);
+            ship.getMutableStats().getBallisticWeaponDamageMult().modifyPercent(data.buffId, DAMAGE_BUFF_PERCENT);
+            ship.getMutableStats().getVentRateMult().modifyMult(data.buffId, 0f);
+            if (ship == Global.getCombatEngine().getPlayerShip()) {
+                Global.getCombatEngine().maintainStatusForPlayerShip(data.buffId,"graphics/icons/hullsys/high_energy_focus.png", StatusTitle,"+" + Math.round(DAMAGE_BUFF_PERCENT) + StatusText2 + Misc.getRoundedValueMaxOneAfterDecimal(data.buffDurationRemaining), false);
             }
             data.buffDurationRemaining -= amount;
             
@@ -243,21 +246,19 @@ public class eis_avaritia extends BaseHullMod {
             // don't swap the max and mins, they're there to clamp glow between 0 and 1 in case of float errors or something
             // i'll kill you.
             if (data.buffDurationRemaining > (Float) DAMAGE_BUFF_DURATION.get(ship.getHullSize()) - FADE_IN_OUT_TIME) {
-                ship.setWeaponGlow(Math.min(MAX_GLOW_PERCENT,-MAX_GLOW_PERCENT/FADE_IN_OUT_TIME*data.buffDurationRemaining + (Float) DAMAGE_BUFF_DURATION.get(ship.getHullSize())*MAX_GLOW_PERCENT/FADE_IN_OUT_TIME), SUS, WEAPON_TYPES);
+                ship.setWeaponGlow(Math.min(MAX_GLOW_PERCENT,-MAX_GLOW_PERCENT/FADE_IN_OUT_TIME*data.buffDurationRemaining + (Float) DAMAGE_BUFF_DURATION.get(ship.getHullSize())*MAX_GLOW_PERCENT/FADE_IN_OUT_TIME), weaponGlowColor, WEAPON_TYPES);
             } else if (data.buffDurationRemaining < FADE_IN_OUT_TIME) {
-                ship.setWeaponGlow(Math.max(0f,MAX_GLOW_PERCENT/FADE_IN_OUT_TIME*data.buffDurationRemaining), SUS, WEAPON_TYPES);
+                ship.setWeaponGlow(Math.max(0f,MAX_GLOW_PERCENT/FADE_IN_OUT_TIME*data.buffDurationRemaining), weaponGlowColor, WEAPON_TYPES);
             } else {
-                ship.setWeaponGlow(MAX_GLOW_PERCENT, SUS, WEAPON_TYPES);
+                ship.setWeaponGlow(MAX_GLOW_PERCENT, weaponGlowColor, WEAPON_TYPES);
             }
         } //If our duration IS up, remove the bonus
         else {
             ship.getMutableStats().getEnergyWeaponDamageMult().unmodify(data.buffId);
             ship.getMutableStats().getBallisticWeaponDamageMult().unmodify(data.buffId);
-            ship.getMutableStats().getEnergyRoFMult().unmodifyMult(data.buffId);
-            ship.getMutableStats().getBallisticRoFMult().unmodifyMult(data.buffId);
             ship.getMutableStats().getVentRateMult().unmodifyMult(data.buffId);
             EnumSet<WeaponType> WEAPON_TYPES = EnumSet.of(WeaponType.BALLISTIC, WeaponType.ENERGY);
-            ship.setWeaponGlow(0f, SUS, WEAPON_TYPES);
+            ship.setWeaponGlow(0f, weaponGlowColor, WEAPON_TYPES);
         }
 
         // Venting AI stuff that I borrowed from Tart
@@ -280,7 +281,7 @@ public class eis_avaritia extends BaseHullMod {
             }
             
             if (ship.getFluxTracker().getFluxLevel() >= 0.7f && ship.getFluxTracker().getHardFlux()<ship.getFluxTracker().getCurrFlux()*0.7f && ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.MANEUVER_TARGET)) {
-                //engine.addFloatingText(ship.getLocation(), "Over-fluxed, staying on target", 20f, SUS, ship, 1f, 1f);
+                //engine.addFloatingText(ship.getLocation(), "Over-fluxed, staying on target", 20f, weaponGlowColor, ship, 1f, 1f);
                 ship.giveCommand(ShipCommand.VENT_FLUX, null, 0);
                 ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF, 2f);
                 ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF_EVEN_WHILE_VENTING, 2f);
@@ -290,7 +291,7 @@ public class eis_avaritia extends BaseHullMod {
             }
             
             if (ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.DO_NOT_USE_SHIELDS) && !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.DO_NOT_VENT) && !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE)) {
-                //engine.addFloatingText(ship.getLocation(), "Fluxing shields down", 20f, SUS, ship, 1f, 1f);
+                //engine.addFloatingText(ship.getLocation(), "Fluxing shields down", 20f, weaponGlowColor, ship, 1f, 1f);
                 ship.giveCommand(ShipCommand.VENT_FLUX, null, 0);
                 ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF, 2f);
                 ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF_EVEN_WHILE_VENTING, 2f);
@@ -376,9 +377,9 @@ public class eis_avaritia extends BaseHullMod {
             }
             
             float decisionLevel = (ventingNeed * hullFactor + 1) / (dangerFactor + 1);
-            //engine.addFloatingText(ship.getLocation(), "Yamete! "+decisionLevel, 20f, Amongus, ship, 1f, 1f);
+            //engine.addFloatingText(ship.getLocation(), "Yamete! "+decisionLevel, 20f, hudBarColor, ship, 1f, 1f);
             if (decisionLevel >= 1.5f || (ship.getFluxTracker().getFluxLevel() >= 0.55f && dangerFactor == 0)) {
-                //engine.addFloatingText(ship.getLocation(), "Flux NOW "+decisionLevel, 20f, SUS, ship, 1f, 1f);
+                //engine.addFloatingText(ship.getLocation(), "Flux NOW "+decisionLevel, 20f, weaponGlowColor, ship, 1f, 1f);
                 ship.giveCommand(ShipCommand.VENT_FLUX, null, 0);
                 ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF, 2f);
                 ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF_EVEN_WHILE_VENTING, 2f);
@@ -391,7 +392,7 @@ public class eis_avaritia extends BaseHullMod {
 
     @Override
     public boolean isApplicableToShip(ShipAPI ship) {
-        return ship.isFrigate() || ship.isDestroyer() || ship.isCruiser();
+        return ship.isFrigate() || ship.isDestroyer() || ship.isCruiser() || ship.isCapital();
     }
 
     /*@Override
@@ -408,33 +409,60 @@ public class eis_avaritia extends BaseHullMod {
         float PAD = 10f;
         Color YELLOW = new Color(241, 199, 0);
 
-        TooltipMakerAPI avaritia = tooltip.beginImageWithText(Icon, HEIGHT);
+        TooltipMakerAPI avaritia = tooltip.beginImageWithText(BuffIcon, HEIGHT);
         avaritia.addPara(Title, 0f, YELLOW, Title);
-        avaritia.addPara(Text1, 0f, YELLOW, Math.round(PERCENT_PER_VENT) + "%");
-        avaritia.addPara(Text4, 0f);
-        avaritia.addPara(Text2, 0f, YELLOW, Math.round(MIN_VENT_PERCENT) + "%", Math.round(MIN_VENT_PERCENT) + "%");
-        //avaritia.addPara(Text3, 0f, Misc.getPositiveHighlightColor(), Math.round(VENT_RATE_BONUS) + "%");
-        //avaritia.addPara(Text4, 0f, Misc.getPositiveHighlightColor(), "doubled");
         if (isForModSpec) {
-            avaritia.addPara(Text5, 0f, Misc.getPositiveHighlightColor(), Math.round(DAMAGE_BUFF_PERCENT) + "%", "2");
-            avaritia.addPara(Text7, 0f, Misc.getPositiveHighlightColor(), "80", Math.round(DAMAGE_SBUFF_PERCENT) + "%");
-            avaritia.addPara(Text6, 0f, Misc.getGrayColor(), Misc.getHighlightColor(), Math.round(DAMAGE_SBUFF_PERCENT) + "%");
-            avaritia.addPara(Text8, 0f, Misc.getGrayColor(), Misc.getHighlightColor(), "+"+Math.round(DAMAGE_SBUFF_PERCENT) + "%");
-	} else if (ship.getHullSpec().isBuiltInMod("eis_avaritia") || ship.getVariant().getSMods().contains("eis_avaritia")) {
-            avaritia.addPara(Text5, 0f, Misc.getPositiveHighlightColor(), Math.round(DAMAGE_BUFF_PERCENT) + "%", Misc.getRoundedValueMaxOneAfterDecimal((Float) DAMAGE_BUFF_DURATION.get(ship.getHullSize())) + "");
-            avaritia.addPara(Text7, 0f, Misc.getPositiveHighlightColor(), String.valueOf(Math.round((float)speed.get(hullSize))));
-            avaritia.addPara(Text6, 0f, Misc.getPositiveHighlightColor(), Misc.getHighlightColor(), Math.round(DAMAGE_SBUFF_PERCENT) + "%");
-            avaritia.addPara(Text8, 0f, Misc.getPositiveHighlightColor(), Misc.getHighlightColor(), "+"+Math.round(DAMAGE_SBUFF_PERCENT) + "%");
-        } else if (!isForModSpec) {
-            avaritia.addPara(Text5, 0f, Misc.getPositiveHighlightColor(), Math.round(DAMAGE_BUFF_PERCENT) + "%", Misc.getRoundedValueMaxOneAfterDecimal((Float) DAMAGE_BUFF_DURATION.get(ship.getHullSize())) + "");
-            avaritia.addPara(Text7, 0f, Misc.getPositiveHighlightColor(), String.valueOf(Math.round((float)speed.get(hullSize))));
-            avaritia.addPara(Text6, 0f, Misc.getGrayColor(), Misc.getHighlightColor(), Math.round(DAMAGE_SBUFF_PERCENT) + "%");
-            avaritia.addPara(Text8, 0f, Misc.getGrayColor(), Misc.getHighlightColor(), "+"+Math.round(DAMAGE_SBUFF_PERCENT) + "%");
-	}
+            avaritia.addPara(Text5, 0f, Misc.getPositiveHighlightColor(), BULLET, Math.round(DAMAGE_BUFF_PERCENT) + "%", "2");
+            avaritia.addPara(Text7, 0f, Misc.getPositiveHighlightColor(), BULLET, "80");
+        } else {
+            avaritia.addPara(Text5, 0f, Misc.getPositiveHighlightColor(), BULLET, Math.round(DAMAGE_BUFF_PERCENT) + "%", Misc.getRoundedValueMaxOneAfterDecimal((Float) DAMAGE_BUFF_DURATION.get(ship.getHullSize())) + "");
+            avaritia.addPara(Text7, 0f, Misc.getPositiveHighlightColor(), BULLET, String.valueOf(Math.round((float)speed.get(hullSize))));
+        }
+        tooltip.addImageWithText(PAD);
+
+        TooltipMakerAPI avaritiaVenting = tooltip.beginImageWithText(Icon, HEIGHT);
+        avaritiaVenting.addPara(VentingTitle, 0f, YELLOW, VentingTitle);
+        avaritiaVenting.addPara(Text4, 0f, YELLOW, BULLET, Math.round(PERCENT_PER_VENT) + "%");
+        avaritiaVenting.addPara(Text2, 0f, YELLOW, BULLET, Math.round(MIN_VENT_PERCENT) + "%", Math.round(MIN_VENT_PERCENT) + "%");
+        //avaritiaVenting.addPara(Text3, 0f, Misc.getPositiveHighlightColor(), Math.round(VENT_RATE_BONUS) + "%");
         tooltip.addImageWithText(PAD);
 	tooltip.addPara(Text5b, PAD, Misc.getNegativeHighlightColor(), Text5b);
         tooltip.addPara(ApplicableText, PAD, Misc.getNegativeHighlightColor(), ApplicableText);
 
+    }
+
+    // hull_mods.csv's sModDesc column ("Increases the flux dissipation rate while venting by %s.") is filled
+    // in from this.
+    @Override
+    public String getSModDescriptionParam(int index, HullSize hullSize) {
+        if (index == 0) {
+            return "+" + Misc.getRoundedValue(DISSIPATION_SBUFF_PERCENT) + "%";
+        }
+        return null;
+    }
+
+    // Same vanilla "S-mod bonus" section body as BaseHullMod.addSModEffectSection(), just with the
+    // gray-until-smodded / positive-highlight-once-smodded color toggle we use everywhere else in this mod,
+    // instead of vanilla's fixed Misc.getHighlightColor().
+    @Override
+    public void addSModEffectSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
+        float opad = 10f;
+        boolean smod = !isForModSpec && ship != null
+                && (ship.getHullSpec().isBuiltInMod("eis_avaritia") || ship.getVariant().getSMods().contains("eis_avaritia"));
+        Color h = smod ? Misc.getPositiveHighlightColor() : Misc.getGrayColor();
+        String[] params = new String[]{
+                getSModDescriptionParam(0, hullSize, ship),
+                getSModDescriptionParam(1, hullSize, ship),
+                getSModDescriptionParam(2, hullSize, ship),
+                getSModDescriptionParam(3, hullSize, ship),
+                getSModDescriptionParam(4, hullSize, ship),
+                getSModDescriptionParam(5, hullSize, ship),
+                getSModDescriptionParam(6, hullSize, ship),
+                getSModDescriptionParam(7, hullSize, ship),
+                getSModDescriptionParam(8, hullSize, ship),
+                getSModDescriptionParam(9, hullSize, ship)
+        };
+        tooltip.addPara(spec.getSModDescription(hullSize).replaceAll("%", "%%"), opad, h, Misc.getHighlightColor(), params);
     }
 
     public static class AvaritiaData {

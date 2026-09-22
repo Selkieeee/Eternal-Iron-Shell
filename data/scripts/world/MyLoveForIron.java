@@ -45,9 +45,9 @@ public class MyLoveForIron implements EveryFrameScript {
             if (market.getIndustry("militarybase") != null) {market.getIndustry("militarybase").startUpgrading();
             ((BaseIndustry) market.getIndustry("militarybase")).setBuildProgress(-213);}
             //depreciated
-            //mommy.getStats().setSkillLevel(Skills.SPACE_OPERATIONS, 3);
-            //mommy.getStats().setSkillLevel(Skills.PLANETARY_OPERATIONS, 3);
-            //mommy.getStats().setSkillLevel(Skills.RELIABILITY_ENGINEERING, 3);
+            //factionLeader.getStats().setSkillLevel(Skills.SPACE_OPERATIONS, 3);
+            //factionLeader.getStats().setSkillLevel(Skills.PLANETARY_OPERATIONS, 3);
+            //factionLeader.getStats().setSkillLevel(Skills.RELIABILITY_ENGINEERING, 3);
             //heartless.getStats().setSkillLevel(Skills.RELIABILITY_ENGINEERING, 3);
             //heartless.getStats().setSkillLevel(Skills.RANGED_SPECIALIZATION, 1);
             //sweetperson.getStats().setSkillLevel(Skills.RANGED_SPECIALIZATION, 1);
@@ -55,49 +55,49 @@ public class MyLoveForIron implements EveryFrameScript {
             //sweetperson.getStats().setSkillLevel(Skills.WOLFPACK_TACTICS, 1); no selkie u cant even use this...
             //sweetperson.getStats().setSkillLevel(Skills.FLUX_REGULATION, 1);
             //coffeemom.getStats().setSkillLevel(Skills.RELIABILITY_ENGINEERING, 3);
-            PersonAPI mommy = Global.getFactory().createPerson();
-            mommy.setId("eiskimquy");
-            mommy.setFaction("ironshell");
-            mommy.setGender(FullName.Gender.FEMALE);
-            mommy.setPostId(Ranks.POST_FACTION_LEADER);
-            mommy.setRankId(Ranks.FACTION_LEADER);
-            mommy.setImportance(PersonImportance.VERY_HIGH);
-            mommy.getName().setFirst("Kim");
-            mommy.getName().setLast("Quy");
-            mommy.setPortraitSprite("graphics/portraits/eis_hegemomy.png");
-            mommy.addTag("VNSector");
+            PersonAPI factionLeader = Global.getFactory().createPerson();
+            factionLeader.setId("eiskimquy");
+            factionLeader.setFaction("ironshell");
+            factionLeader.setGender(FullName.Gender.FEMALE);
+            factionLeader.setPostId(Ranks.POST_FACTION_LEADER);
+            factionLeader.setRankId(Ranks.FACTION_LEADER);
+            factionLeader.setImportance(PersonImportance.VERY_HIGH);
+            factionLeader.getName().setFirst("Kim");
+            factionLeader.getName().setLast("Quy");
+            factionLeader.setPortraitSprite("graphics/portraits/eis_hegemomy.png");
+            factionLeader.addTag("VNSector");
             //Administrator
-            mommy.getStats().setSkillLevel(Skills.INDUSTRIAL_PLANNING, 1);
+            factionLeader.getStats().setSkillLevel(Skills.INDUSTRIAL_PLANNING, 1);
             //Admiral (6)
-            mommy.getStats().setSkillLevel(Skills.COORDINATED_MANEUVERS, 1);
-            mommy.getStats().setSkillLevel(Skills.CREW_TRAINING, 1);
-            mommy.getStats().setSkillLevel(Skills.OFFICER_TRAINING, 1);
-            mommy.getStats().setSkillLevel(Skills.SUPPORT_DOCTRINE, 1);
-            mommy.getStats().setSkillLevel(Skills.TACTICAL_DRILLS, 1);
-            mommy.getStats().setSkillLevel(Skills.OFFICER_MANAGEMENT, 1);
+            factionLeader.getStats().setSkillLevel(Skills.COORDINATED_MANEUVERS, 1);
+            factionLeader.getStats().setSkillLevel(Skills.CREW_TRAINING, 1);
+            factionLeader.getStats().setSkillLevel(Skills.OFFICER_TRAINING, 1);
+            factionLeader.getStats().setSkillLevel(Skills.SUPPORT_DOCTRINE, 1);
+            factionLeader.getStats().setSkillLevel(Skills.TACTICAL_DRILLS, 1);
+            factionLeader.getStats().setSkillLevel(Skills.OFFICER_MANAGEMENT, 1);
             //Distinguished Combatant during the Second AI War (8 + 8)
-            mommy.getStats().setSkillLevel(Skills.COMBAT_ENDURANCE, 2);
-            mommy.getStats().setSkillLevel(Skills.MISSILE_SPECIALIZATION, 2);
-            mommy.getStats().setSkillLevel(Skills.TARGET_ANALYSIS, 2);
-            mommy.getStats().setSkillLevel(Skills.FIELD_MODULATION, 2);
-            mommy.getStats().setSkillLevel(Skills.IMPACT_MITIGATION, 2);
-            mommy.getStats().setSkillLevel(Skills.HELMSMANSHIP, 2);
-            mommy.getStats().setSkillLevel(Skills.DAMAGE_CONTROL, 2);
-            mommy.getStats().setSkillLevel(Skills.POINT_DEFENSE, 2);
+            factionLeader.getStats().setSkillLevel(Skills.COMBAT_ENDURANCE, 2);
+            factionLeader.getStats().setSkillLevel(Skills.MISSILE_SPECIALIZATION, 2);
+            factionLeader.getStats().setSkillLevel(Skills.TARGET_ANALYSIS, 2);
+            factionLeader.getStats().setSkillLevel(Skills.FIELD_MODULATION, 2);
+            factionLeader.getStats().setSkillLevel(Skills.IMPACT_MITIGATION, 2);
+            factionLeader.getStats().setSkillLevel(Skills.HELMSMANSHIP, 2);
+            factionLeader.getStats().setSkillLevel(Skills.DAMAGE_CONTROL, 2);
+            factionLeader.getStats().setSkillLevel(Skills.POINT_DEFENSE, 2);
             if (Global.getSettings().getSkillSpec("eis_xiv") == null) {throw new RuntimeException(Global.getSettings().getString("eis_ironshell", "EISLoveForIron"));}
             //Amongus + Sad
-            mommy.getStats().setSkillLevel("eis_xiv", 2);
-            mommy.getStats().setSkillLevel(Skills.HULL_RESTORATION, 1);
-            mommy.getStats().setSkillLevel(Skills.NAVIGATION, 1);
-            mommy.getStats().setSkillLevel(Skills.SENSORS, 1);
-            mommy.getStats().setSkillLevel(Skills.CONTAINMENT_PROCEDURES, 1);
-            mommy.getStats().setLevel(9);
-            mommy.getMemoryWithoutUpdate().set("$nex_preferredAdmin", true);
-            mommy.getMemoryWithoutUpdate().set("$nex_preferredAdmin_factionId", "ironshell");
-            //mommy.addTag(Tags.CONTACT_MILITARY);
-            mommy.addTag("eis_military");
-            mommy.setVoice(Voices.OFFICIAL);
-            ip.addPerson(mommy);
+            factionLeader.getStats().setSkillLevel("eis_xiv", 2);
+            factionLeader.getStats().setSkillLevel(Skills.HULL_RESTORATION, 1);
+            factionLeader.getStats().setSkillLevel(Skills.NAVIGATION, 1);
+            factionLeader.getStats().setSkillLevel(Skills.SENSORS, 1);
+            factionLeader.getStats().setSkillLevel(Skills.CONTAINMENT_PROCEDURES, 1);
+            factionLeader.getStats().setLevel(9);
+            factionLeader.getMemoryWithoutUpdate().set("$nex_preferredAdmin", true);
+            factionLeader.getMemoryWithoutUpdate().set("$nex_preferredAdmin_factionId", "ironshell");
+            //factionLeader.addTag(Tags.CONTACT_MILITARY);
+            factionLeader.addTag("eis_military");
+            factionLeader.setVoice(Voices.OFFICIAL);
+            ip.addPerson(factionLeader);
             
             PersonAPI heartless = Global.getFactory().createPerson();
             heartless.setId("eisdarren");
@@ -173,33 +173,33 @@ public class MyLoveForIron implements EveryFrameScript {
             sweetperson.setVoice(Voices.SCIENTIST);
             ip.addPerson(sweetperson);
 
-            PersonAPI mommy2 = Global.getSector().getFaction("ironshell").createRandomPerson(FullName.Gender.FEMALE);
-            mommy2.setId("eissneed");
-            mommy2.setPostId("WardenIS");
-            mommy2.setRankId("WardenIS");
-            mommy2.getName().setFirst("Charlotte");
-            mommy2.getName().setLast("Hex");
-            mommy2.setPortraitSprite("graphics/portraits/eis_charlotte.png");
-            mommy2.addTag("VNSector");
-            //Forgive her she's still new... (7 + 1)
-            mommy2.getStats().setSkillLevel(Skills.HELMSMANSHIP, 1); //3
-            mommy2.getStats().setSkillLevel(Skills.COMBAT_ENDURANCE, 1); //3
-            mommy2.getStats().setSkillLevel(Skills.ORDNANCE_EXPERTISE, 2);
-            mommy2.getStats().setSkillLevel(Skills.BALLISTIC_MASTERY, 1);
-            mommy2.getStats().setSkillLevel(Skills.FIELD_MODULATION, 1); //3
-            mommy2.getStats().setSkillLevel(Skills.IMPACT_MITIGATION, 1); //3
-            mommy2.getStats().setSkillLevel(Skills.TARGET_ANALYSIS, 1);
+            PersonAPI warden = Global.getSector().getFaction("ironshell").createRandomPerson(FullName.Gender.FEMALE);
+            warden.setId("eissneed");
+            warden.setPostId("WardenIS");
+            warden.setRankId("WardenIS");
+            warden.getName().setFirst("Charlotte");
+            warden.getName().setLast("Hex");
+            warden.setPortraitSprite("graphics/portraits/eis_charlotte.png");
+            warden.addTag("VNSector");
+            //Forgive her she's still new... (7 vanilla skill points + 2 npc-only skills)
+            warden.getStats().setSkillLevel(Skills.COMBAT_ENDURANCE, 1);
+            warden.getStats().setSkillLevel(Skills.SYSTEMS_EXPERTISE, 2);
+            warden.getStats().setSkillLevel(Skills.FIELD_MODULATION, 1);
+            warden.getStats().setSkillLevel(Skills.TARGET_ANALYSIS, 1);
+            warden.getStats().setSkillLevel(Skills.MISSILE_SPECIALIZATION, 1);
+            warden.getStats().setSkillLevel(Skills.HELMSMANSHIP, 1);
             
             //AMONG US (0)
-            mommy2.getStats().setSkillLevel("eis_xiv", 1);
-            mommy2.getStats().setLevel(7);
-            mommy2.setPersonality(Personalities.RECKLESS); //Takes after her mother too much...
-            mommy2.addTag(Tags.CONTACT_UNDERWORLD);
-            mommy2.addTag("eis_military");
-            mommy2.setImportance(PersonImportance.MEDIUM);
-            mommy2.setVoice(Voices.SOLDIER);
+            warden.getStats().setSkillLevel("eis_xiv", 2);
+            warden.getStats().setSkillLevel("eis_weaponmastery", 2);
+            warden.getStats().setLevel(8);
+            warden.setPersonality(Personalities.RECKLESS); //Takes after her mother too much...
+            warden.addTag(Tags.CONTACT_UNDERWORLD);
+            warden.addTag("eis_military");
+            warden.setImportance(PersonImportance.MEDIUM);
+            warden.setVoice(Voices.SOLDIER);
             
-            ip.addPerson(mommy2);
+            ip.addPerson(warden);
             
             PersonAPI coffeemom = Global.getSector().getFaction("ironshell").createRandomPerson(FullName.Gender.FEMALE);
             coffeemom.setId("eisava");
@@ -240,9 +240,9 @@ public class MyLoveForIron implements EveryFrameScript {
             coffeemom.setVoice(Voices.OFFICIAL);
             ip.addPerson(coffeemom);
             
-            market.setAdmin(mommy);
-            market.getCommDirectory().addPerson(mommy, 0);
-            market.addPerson(mommy);
+            market.setAdmin(factionLeader);
+            market.getCommDirectory().addPerson(factionLeader, 0);
+            market.addPerson(factionLeader);
             market.getCommDirectory().addPerson(sweetperson, 2);
             market.addPerson(sweetperson);
             market.getCommDirectory().addPerson(heartless, 1);
@@ -253,8 +253,8 @@ public class MyLoveForIron implements EveryFrameScript {
             market2.getCommDirectory().addPerson(coffeemom, 0);
             market2.setAdmin(coffeemom);
             market2.addPerson(coffeemom);
-            market2.getCommDirectory().addPerson(mommy2, 1);
-            market2.addPerson(mommy2);
+            market2.getCommDirectory().addPerson(warden, 1);
+            market2.addPerson(warden);
             market2.getMemoryWithoutUpdate().set("$nex_colony_growth_limit", 5);
             market2.setImmigrationIncentivesOn(true);
             //market2.getMemoryWithoutUpdate().set("$BarCMD_shownEvents", new ArrayList<>());

@@ -27,10 +27,6 @@
 	},
 	# variantOverrides restricts hulls to listed variants and adjusts their probability
 	"variantOverrides":{
-		#"eis_audacious_special":25,
-		#"eis_courageous_elite":25,
-		"eis_champion_elite":10,
-		#"eis_flagellator_elite":25,
         "eis_indomitable_elite":10,
 		"eis_vengeance_elite":10,
 		"eis_endeavor_elite":10,
@@ -48,49 +44,36 @@
 	# multiplier for how often hulls show up in the faction's fleets
 	"hullFrequency":{
 		"tags":{
-			#"heg_aux_bp":1.5,
-			#"XIV_bp":2.0,
-			"eis_bp":2.0,
+			"eis_bp":6,
 		},
 		"hulls":{
-			"buffalo2":0, # just say no
-			"buffalo_hegemony":0,
-			"dominator":0,
-			"onslaught":0,
-			"mora":0, # I HATE MORAASS NOOOOOO
-			"condor":0,
+			"eis_skyrend": 0.5, 
+			"eis_valorous": 0.25,
+			"eis_mora": 0.5,
+			"eis_illustrious": 0.4,
+			"eis_dauntless": 0.4,
 			
-			"dominator_xiv": 1.1,
-			"eagle_xiv": 1.1,
-			"enforcer_xiv": 1.1,
-			"falcon_xiv": 1.1,
-			"onslaught_xiv": 1.0, #We kinda want to avoid using Onslaughts
+			"TADA_tinnitus_xiv": 0.5,
+			"TADA_gunwall_XIV": 0.5,
 			
-			"eis_audacious": 1.5,
-			"eis_champion": 1.25,
-			"eis_courageous": 1.5,
-			"eis_endeavor": 1.25, #making room for XIV Legion
-			"eis_flagellator": 1.5,
-			"eis_indomitable": 1.5,
-			"eis_skyrend": 1.5, #As per Nia's request
-			"eis_tyrant": 1.25,
-			"eis_valorous": 1.5,
-			"eis_vengeance": 1.5, 
-			"eis_mora": 1.25, #I would like to see more Vengeanceas than moras ofc...
-			"eis_eradicator": 1.25,
+			"tahlan_nelson_xiv": 0.5,
+			"tahlan_tower_xiv":0.5,
 			
-			"TADA_tinnitus_xiv": 1.1,
-			"TADA_gunwall_XIV": 1.1,
+			"swp_alastor_xiv": 0.5,
+			"swp_conquest_xiv": 0.1,
+			"swp_gryphon_xiv": 0.5,
+			"swp_hammerhead_xiv": 0.5,
+			"swp_lasher_xiv": 0.5,
+			"swp_sunder_xiv": 0.5,
 			
-			"tahlan_nelson_xiv": 1.5,
-			"tahlan_tower_xiv": 1.1,
+			"wolf_hegemony": 0.25,
 			
-			"swp_alastor_xiv": 1.1,
-			"swp_conquest_xiv": 0.6, #Due to.. reasons.
-			"swp_gryphon_xiv": 1.1,
-			"swp_hammerhead_xiv": 1.1,
-			"swp_lasher_xiv": 1.1,
-			"swp_sunder_xiv": 1.1,
+			"armaa_garegga_xiv_carrier": 3.0,
+			"armaa_corsair_xiv": 1.5,
+    		"armaa_monitor_xiv": 1.5,
+			"armaa_valkyrie": 0.5,
+			"armaa_panther_frig_xiv": 1.0,
+			"armaa_musha_frig_sniper": 0.5,
 		},
 	},
 
@@ -98,38 +81,26 @@
 		"tags":["ironshell", "eis_bp", "eisceleste_bp"],
 		"hulls":[
 			#base_bp
-			"hound",
 			"mercury",
 			"hermes",
 			"dram",
 			"ox",
 			"cerberus",
 			"shepherd",
-			"kite",
 			"mudskipper",
 			"wayfarer",
 			"gremlin",
-			"condor",
 			"buffalo",
-			#"buffalo2", no lol
 			"mule",
 			"phaeton",
 			"crig",
-			"nebula",
-			"venture",
 			"colossus",
-			#"swp_nautilus"
+			
 			#heg_aux_bp
 			"wolf_hegemony",
-			"kite_hegemony",
-			"hound_hegemony",
-			"buffalo_hegemony",
+			
 			#lowtech_bp
-			"lasher",
-			"enforcer",
-			"tarsus",
-			"dominator",
-			"mora",
+
 			"eis_vanguard_xiv",
 			"eis_courageous",
 			#"tahlan_Bungalow",
@@ -149,66 +120,40 @@
 		"tags":["ironshell", "eis_bp", "eisceleste_bp"], #no longer uses XIV_bp
 		"hulls":[
 			#base_bp
-			"hound",
 			"mercury",
 			"hermes",
 			"dram",
 			"ox",
 			"cerberus",
 			"shepherd",
-			"kite",
 			"mudskipper",
 			"wayfarer",
 			"gremlin",
-			"condor",
 			"buffalo",
-			#"buffalo2", no lol
 			"mule",
 			"phaeton",
 			"crig",
 			"nebula",
-			"venture",
 			"colossus",
-			#"swp_nautilus",
+			
 			#heg_aux_bp
 			"wolf_hegemony",
-			"kite_hegemony",
-			"hound_hegemony",
-			"buffalo_hegemony",
+			
 			#lowtech_bp
-			"lasher",
-			"enforcer",
-			"tarsus",
-			"dominator",
-			"mora",
+
 			#midline_bp
-			"brawler",
-			"vigilance",
-			"centurion",
-			"hammerhead",
-			"sunder",
-			"gemini",
-			"drover",
-			"falcon",
-			"heron",
-			"starliner",
+			
 			#"tahlan_Phoca",
 			#"TADA_scalper",
 			#"swp_alastor",
 			#"swp_archer",
 			#"swp_albatross",
 			#"swp_vulture",
-			#more stuff goodies given to them
+
+
 			"atlas",
-			"monitor",
 			"prometheus",
-			"legion",
-			"onslaught",
-			"gryphon",
-			"eagle",
 			"valkyrie",
-			"vanguard",
-			"manticore",
 			"eagle_xiv",
 			"dominator_xiv",
 			"enforcer_xiv",
@@ -222,36 +167,8 @@
 	
 	# listing ships here will make the faction mostly use them even if other hulls become available
 	"priorityShips":{
-		"tags":["eis_bp"],
-		"hulls":[
-			"eis_courageous",
-			"eis_vanguard_xiv",
-			"eis_valorous",
-			
-			"eis_flagellator",
-			"enforcer_xiv",
-			"swp_sunder_xiv",
-			"swp_hammerhead_xiv",
-			
-			"eis_indomitable",
-			"dominator_xiv",
-			"eagle_xiv",
-			"falcon_xiv",
-			"eis_vengeance",
-			"eis_mora",
-			
-			"onslaught_xiv", #combatCapital
-			#"legion_xiv", #you wish, finish that quest first.
-			
-			"eis_audacious", #carrierSmall
-			"eis_endeavor", #carrierLarge
-			"eis_skyrend", #combatCapital
-			"eis_tyrant", #combatCapital
-			
-			"TADA_gunwall_XIV", #combatCapital
-			
-			"swp_conquest_xiv", #combatCapital
-		],
+		"tags":[],
+		"hulls":[],
 	},
 	"knownFighters":{
 		"tags":["ironshell", "eis_bp", "heg_aux_bp", "eisceleste_bp"],
@@ -356,14 +273,7 @@
 	},
 	"priorityWeapons":{
 		"tags":[],
-		"weapons":[
-			#"eis_superheavy_needler", Autofit can't be trusted...
-			#"eis_infernal_star", Autofit can't be trusted...
-			#"eis_celestials_aster", Autofit can't be trusted...
-			#"eis_celestials_blossom", Autofit can't be trusted...
-			#"eis_lunarrose",
-			#"eis_barretta",
-		],
+		"weapons":[],
 	},
 	
 	"knownHullMods":{

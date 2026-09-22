@@ -30,12 +30,12 @@ public class eis_damned_vengeance extends BaseShipSystemScript {
     public static final float SHIELD_ARC_BONUS = 40f;
     public static final float SHIELD_BONUS = .25f;
     public static float PIERCE_MULT = 0.5f;
-    private float ORIGINALCOOMSAUCE;
-    
-    private static String poopystinky = Global.getSettings().getString("eis_ironshell", "eis_taste_vengeance1");
-    private static String poopystinky2 = Global.getSettings().getString("eis_ironshell", "eis_taste_vengeance2");
-    private static String poopystinky3 = Global.getSettings().getString("eis_ironshell", "eis_taste_vengeance3");
-    private static String poopystinky4 = Global.getSettings().getString("eis_ironshell", "eis_taste_vengeance4");
+    private float originalShieldArc;
+
+    private static String buffActiveText = Global.getSettings().getString("eis_ironshell", "eis_taste_vengeance1");
+    private static String buffTimeRemainingText = Global.getSettings().getString("eis_ironshell", "eis_taste_vengeance2");
+    private static String debuffActiveText = Global.getSettings().getString("eis_ironshell", "eis_taste_vengeance3");
+    private static String debuffTimeRemainingText = Global.getSettings().getString("eis_ironshell", "eis_taste_vengeance4");
     
     private static final Color PARRY_FAIL_CORE_COLOR = new Color (255, 10, 0, 70); // shield colors if debuffed
     private static final Color PARRY_FAIL_RING_COLOR = new Color (255,100,77,175);
@@ -73,7 +73,7 @@ public class eis_damned_vengeance extends BaseShipSystemScript {
             doEffects = 0;
             activeTime = 0f;
             ship = (ShipAPI)stats.getEntity();
-            ORIGINALCOOMSAUCE = ship.getShield().getArc();
+            originalShieldArc = ship.getShield().getArc();
             initialShieldCoreColor = ship.getShield().getInnerColor();
             initialShieldRingColor = ship.getShield().getRingColor();
         }
@@ -169,8 +169,8 @@ public class eis_damned_vengeance extends BaseShipSystemScript {
                 ship.getShield().setRingColor(PARRY_FAIL_RING_COLOR);
                 ship.getShield().setInnerColor(PARRY_FAIL_CORE_COLOR);
                 ship.getShield().setActiveArc(SpaghettiSauce+1.4f);
-                if (SpaghettiSauce >= ORIGINALCOOMSAUCE+SHIELD_ARC_BONUS*3) {
-                    ship.getShield().setActiveArc(ORIGINALCOOMSAUCE+(SHIELD_ARC_BONUS*3));
+                if (SpaghettiSauce >= originalShieldArc+SHIELD_ARC_BONUS*3) {
+                    ship.getShield().setActiveArc(originalShieldArc+(SHIELD_ARC_BONUS*3));
                 }
                 stats.getShieldDamageTakenMult().modifyMult(id, 1f + SHIELD_BONUS);
             }
@@ -181,9 +181,9 @@ public class eis_damned_vengeance extends BaseShipSystemScript {
             } else if (!reflectSuccess && activeTime > DEBUFF_DURATION) { // blend from debuff color -> normal
                 ship.getShield().setRingColor(initialShieldRingColor);
                 ship.getShield().setInnerColor(initialShieldCoreColor);
-                if (ship.getShield().getActiveArc() >= ORIGINALCOOMSAUCE) { 
+                if (ship.getShield().getActiveArc() >= originalShieldArc) { 
                     ship.getShield().setActiveArc(SpaghettiSauce-1f);
-                } //else {ship.getShield().setActiveArc(ORIGINALCOOMSAUCE);}
+                } //else {ship.getShield().setActiveArc(originalShieldArc);}
                 stats.getShieldDamageTakenMult().unmodifyMult(id);
                 stats.getMaxSpeed().unmodifyMult(id);
             }
@@ -198,13 +198,13 @@ public class eis_damned_vengeance extends BaseShipSystemScript {
     @Override
     public StatusData getStatusData(int index, State state, float effectLevel) {
         if (index == 0 && state == State.OUT && reflectSuccess && activeTime < BUFF_DURATION)
-            return new StatusData(poopystinky, false);
+            return new StatusData(buffActiveText, false);
         if (index == 1 && state == State.OUT && reflectSuccess && activeTime < BUFF_DURATION)
-            return new StatusData(poopystinky2 + Misc.getRoundedValueMaxOneAfterDecimal(BUFF_DURATION - activeTime) + "", false);
+            return new StatusData(buffTimeRemainingText + Misc.getRoundedValueMaxOneAfterDecimal(BUFF_DURATION - activeTime) + "", false);
         if (index == 0 && state == State.OUT && !reflectSuccess && activeTime < DEBUFF_DURATION)
-            return new StatusData(poopystinky3, true);
+            return new StatusData(debuffActiveText, true);
         if (index == 1 && state == State.OUT && !reflectSuccess && activeTime < DEBUFF_DURATION)
-            return new StatusData(poopystinky4 + Misc.getRoundedValueMaxOneAfterDecimal(DEBUFF_DURATION - activeTime) + "", true);
+            return new StatusData(debuffTimeRemainingText + Misc.getRoundedValueMaxOneAfterDecimal(DEBUFF_DURATION - activeTime) + "", true);
         return null;
     }
 

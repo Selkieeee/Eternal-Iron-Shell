@@ -1,1 +1,1 @@
-src is literally in data of the main folder.
+src is in the main folder.

@@ -3,14 +3,11 @@
   "hullId": "eis_flagellator",
   "displayName": "Elite",
   "goalVariant": false,
-  "fluxCapacitors": 9,
-  "fluxVents": 16,
-  "quality": 1,
-  "permaMods": [
-    "eis_aquila"
-  ],
+  "fluxCapacitors": 20,
+  "fluxVents": 18,
+  "permaMods": [],
   "hullMods": [
-    "eis_aquila"
+    "hardenedshieldemitter"
   ],
   "weaponGroups": [
     {
@@ -37,7 +34,5 @@
     }
   ],
   "modules": [],
-  "wings": [
-    "eis_kopis_wing"
-  ]
+  "wings": []
 }

@@ -7,15 +7,15 @@ import com.fs.starfarer.api.combat.WeaponAPI.WeaponType;
 import com.fs.starfarer.api.impl.hullmods.BaseLogisticsHullMod;
 
 public class eis_ballisticcomp extends BaseLogisticsHullMod {
-    private static float weeeeee = 50f;
+    private static float fluxDissipationPerWeapon = 50f;
     @Override
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        int holybased = 0;
+        int compositeBallisticCount = 0;
 	for (String slot : stats.getVariant().getNonBuiltInWeaponSlots() ) {
-            if (stats.getVariant().getSlot(slot).getWeaponType() == WeaponType.COMPOSITE && stats.getVariant().getWeaponSpec(slot).getType() == WeaponType.BALLISTIC) {holybased++;}
-        } 
+            if (stats.getVariant().getSlot(slot).getWeaponType() == WeaponType.COMPOSITE && stats.getVariant().getWeaponSpec(slot).getType() == WeaponType.BALLISTIC) {compositeBallisticCount++;}
+        }
         stats.getVariant().getNonBuiltInWeaponSlots().size();
-        stats.getFluxDissipation().modifyFlat(id, weeeeee*(holybased));
+        stats.getFluxDissipation().modifyFlat(id, fluxDissipationPerWeapon*(compositeBallisticCount));
     }
         
     @Override

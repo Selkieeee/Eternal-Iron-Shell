@@ -116,7 +116,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
                     private boolean started = false;
                     private boolean finished = false;
                     private IntervalUtil tracker = new IntervalUtil(1f, 1f);
-                    WeightedRandomPicker<String> AmongUs = new WeightedRandomPicker<String>();
+                    WeightedRandomPicker<String> loyalistLinesPicker = new WeightedRandomPicker<String>();
 			public void init(CombatEngineAPI engine) {
 				engine.getContext().aiRetreatAllowed = true;
                                 engine.getContext().enemyDeployAll = true;
@@ -124,9 +124,9 @@ public class MissionDefinition implements MissionDefinitionPlugin {
                                 engine.getContext().setNormalDeploymentBurnDuration(1f);
                                 engine.getContext().setInitialEscapeRange(1000f);
                                 engine.getContext().setFlankDeploymentDistance(500f);
-                                AmongUs.add("My life for the Hegemony. Go!", 1);
-                                AmongUs.add("There is still loyalty in the Hegemony.", 1);
-                                AmongUs.add("We still serve with honor. We will show these traitors our hand.", 1);
+                                loyalistLinesPicker.add("My life for the Hegemony. Go!", 1);
+                                loyalistLinesPicker.add("There is still loyalty in the Hegemony.", 1);
+                                loyalistLinesPicker.add("We still serve with honor. We will show these traitors our hand.", 1);
 				
 			}
 			public void advance(float amount, List events) {
@@ -170,9 +170,9 @@ public class MissionDefinition implements MissionDefinitionPlugin {
 								
                                 for (ShipAPI ship : AIUtils.getNearbyEnemies(Global.getCombatEngine().getPlayerShip(), 2000f)) {
                                     if (ship.getHullSpec().getHullId().startsWith("eis_vanguard_xiv")) {
-                                        String AmongUsYes = (String) AmongUs.pick();
-                                        Global.getCombatEngine().getCombatUI().addMessage(1, ship.getFleetMember(), Misc.getHighlightColor(), ship.getName(), Misc.getTextColor(), ": ", Global.getSettings().getColor("standardTextColor"), AmongUsYes);
-                                        Global.getCombatEngine().addFloatingText(ship.getLocation(), AmongUsYes, Global.getSettings().getModManager().isModEnabled("chatter") ? Global.getSettings().getInt("chatter_floaterFontSize") : 32, Global.getSettings().getColor("standardTextColor"), ship, 0, 0);
+                                        String chosenLoyalistLine = (String) loyalistLinesPicker.pick();
+                                        Global.getCombatEngine().getCombatUI().addMessage(1, ship.getFleetMember(), Misc.getHighlightColor(), ship.getName(), Misc.getTextColor(), ": ", Global.getSettings().getColor("standardTextColor"), chosenLoyalistLine);
+                                        Global.getCombatEngine().addFloatingText(ship.getLocation(), chosenLoyalistLine, Global.getSettings().getModManager().isModEnabled("chatter") ? Global.getSettings().getInt("chatter_floaterFontSize") : 32, Global.getSettings().getColor("standardTextColor"), ship, 0, 0);
                                         ship.setOwner(0);
                                         ship.setAlly(true);
                                         if (ship.getShipAI() != null) {

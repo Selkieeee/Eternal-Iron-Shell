@@ -4,12 +4,12 @@
   "hullSize": "FIGHTER",
   "spriteName": "graphics/ships/eis_gladius.png",
   "style": "MIDLINE",
-  "height": 42,
-  "width": 52,
-  "center": [26, 20],
-  "collisionRadius": 25,
-  "shieldCenter": [-5, 7],
-  "shieldRadius": 25,
+  "height": 46,
+  "width": 64,
+  "center": [32, 23],
+  "collisionRadius": 36,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 33.5,
   "viewOffset": 0,
   "weaponSlots": [
     {
@@ -19,7 +19,7 @@
       "mount": "HIDDEN",
       "arc": 14,
       "angle": 0,
-      "locations": [5, 12]
+      "locations": [9, 12]
     },
     {
       "id": "WS 002",
@@ -28,7 +28,7 @@
       "mount": "HIDDEN",
       "arc": 15,
       "angle": 0,
-      "locations": [5, -12]
+      "locations": [9, -12]
     },
     {
       "id": "WS 003",
@@ -37,12 +37,12 @@
       "mount": "HIDDEN",
       "arc": 50,
       "angle": 0,
-      "locations": [13, 4]
+      "locations": [10, -0]
     }
   ],
   "engineSlots": [
     {
-      "location": [-14, 8.5],
+      "location": [-16, 9],
       "length": 32,
       "width": 8,
       "angle": 180,
@@ -50,7 +50,7 @@
       "style": "MIDLINE"
     },
     {
-      "location": [-14, -9],
+      "location": [-16, -9],
       "length": 32,
       "width": 8,
       "angle": 180,
@@ -59,9 +59,9 @@
     }
   ],
   "bounds": [
-    15.5, 0,
-    2, 22,
-    -19, 0,
-    2, -23
+    15, 0,
+    -1, 30,
+    -17.5, 0,
+    -1, -30
   ]
 }

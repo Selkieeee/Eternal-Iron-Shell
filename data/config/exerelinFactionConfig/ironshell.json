@@ -24,7 +24,7 @@
 	"specialForcesPointMult":1.75,
 	"specialForcesSizeMult":1.75,
 	"stabilizeCommodities":["food", "hand_weapons", "supplies"],
-	"factionConditionSubplugin":"data.scripts.campaign.econ.eis_ironshell",
+	#"factionConditionSubplugin":"data.scripts.campaign.econ.eis_ironshell", # class was never written - caused a NexUtils ClassNotFoundException -> NPE in FactionConditionPlugin.loadPlugin whenever Nexerelin tried to instantiate it (e.g. during a Hegemony colony expedition to Hanan Pacha in Operation World Above)
 	#For Random Sector apparently. (friendly relations with hegemony are reduced in iron shell to prevent uhh alliance stacking)
     "startRelationships":{
 		"apex_design": 0.1, #from 0.15

@@ -12,12 +12,12 @@
         {
             "autofire": false,
             "mode": "LINKED",
-            "weapons": {"WS 002": "eis_dualrailgun"}
+            "weapons": {"WS 002": "hveldriver"}
         },
         {
             "autofire": false,
             "mode": "LINKED",
-            "weapons": {"WS 001": "eis_ironhammer"}
+            "weapons": {"WS 001": "typhoon"}
         },
         {
             "autofire": false,
@@ -34,7 +34,7 @@
         }
     ],
     "wings": [
-        "eis_khopesh_wing",
-        "eis_khopesh_wing"
+        "hoplon_wing",
+        "hoplon_wing"
     ]
 }

@@ -12,8 +12,8 @@
   "shieldRadius": 30,
   "viewOffset": 0,
   "builtInMods": [
-    "no_weapon_flux", 
-	"eis_prototypetu"
+    "no_weapon_flux",
+    "eis_prototypetu"
   ],
   "weaponSlots": [
     {
@@ -54,7 +54,7 @@
       "style": "MIDLINE"
     },
     {
-      "location": [-16, -7],
+      "location": [-16, -8],
       "length": 32,
       "width": 12,
       "angle": 180,

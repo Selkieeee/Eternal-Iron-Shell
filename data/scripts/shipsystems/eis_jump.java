@@ -3,7 +3,6 @@ package data.scripts.shipsystems;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
-import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.combat.ShipCommand;
 import com.fs.starfarer.api.combat.ShipEngineControllerAPI.ShipEngineAPI;
 import com.fs.starfarer.api.combat.ShipSystemAPI;
@@ -24,34 +23,20 @@ public class eis_jump extends BaseShipSystemScript {
     public static final float TURN_ACCEL_BONUS = 50f;
     public static final float INSTANT_BOOST_FLAT = 250f;
     public static final float INSTANT_BOOST_MULT = 4.5f;
-    public static final Map<HullSize, Integer> IMGONNACHARGE = new HashMap<>();
-    public static final Map<HullSize, Float> OHGODIMRECHARGING = new HashMap<>();
     private static final Color ENGINE_COLOR = new Color(255, 10, 10);
     //private static final Color CONTRAIL_COLOR = new Color(255, 100, 100, 75);
     private static final Color BOOST_COLOR = new Color(255, 175, 175, 200);
     private static final Vector2f ZERO = new Vector2f();
-    private static final String poopystinky = Global.getSettings().getString("eis_ironshell", "eis_jump_failed");
+    private static final String jumpFailedText = Global.getSettings().getString("eis_ironshell", "eis_jump_failed");
     //private final Object ENGINEKEY1 = new Object();
     private final Object ENGINEKEY2 = new Object();
     private final Map<Integer, Float> engState = new HashMap<>();
     private boolean ended = false;
-    private float boostScale = 0.75f;
+    // private float boostScale = 0.75f;
+    // private float boostScale = 1.0f;
+    private float boostScale = 1.5f;
     private float boostVisualDir = 0f;
     private boolean boostForward = false;
-    static {
-        
-        IMGONNACHARGE.put(HullSize.FIGHTER, 2);
-        IMGONNACHARGE.put(HullSize.FRIGATE, 2);
-        IMGONNACHARGE.put(HullSize.DESTROYER, 2);
-        IMGONNACHARGE.put(HullSize.CRUISER, 2);
-        IMGONNACHARGE.put(HullSize.CAPITAL_SHIP, 2);
-        
-        OHGODIMRECHARGING.put(HullSize.FIGHTER, 0.18f);
-        OHGODIMRECHARGING.put(HullSize.FRIGATE, 0.18f);
-        OHGODIMRECHARGING.put(HullSize.DESTROYER, 0.18f);
-        OHGODIMRECHARGING.put(HullSize.CRUISER, 0.15f);
-        OHGODIMRECHARGING.put(HullSize.CAPITAL_SHIP, 0.15f);
-    }
 
     @Override
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
@@ -111,9 +96,9 @@ public class eis_jump extends BaseShipSystemScript {
             float adjFalloffPerSec = 0.25f * (float) Math.pow(decelMult, 0.5);
             float maxDecelPenalty = 1f / decelMult;
 
-            stats.getMaxTurnRate().unmodify(id);
+            // stats.getMaxTurnRate().unmodify(id);
             stats.getDeceleration().modifyMult(id, (1f - effectLevel) * 1f * maxDecelPenalty);
-            stats.getTurnAcceleration().modifyPercent(id, TURN_ACCEL_BONUS * effectLevel);
+            // stats.getTurnAcceleration().modifyPercent(id, TURN_ACCEL_BONUS * effectLevel);
 
             if (boostForward) {
                 ship.giveCommand(ShipCommand.ACCELERATE, null, 0);
@@ -142,8 +127,8 @@ public class eis_jump extends BaseShipSystemScript {
                 }
             }
         } else if (state == State.ACTIVE) {
-            stats.getMaxTurnRate().modifyPercent(id, MAX_TURN_BONUS);
-            stats.getTurnAcceleration().modifyPercent(id, TURN_ACCEL_BONUS * effectLevel);
+            // stats.getMaxTurnRate().modifyPercent(id, MAX_TURN_BONUS);
+            // stats.getTurnAcceleration().modifyPercent(id, TURN_ACCEL_BONUS * effectLevel);
             ship.getEngineController().getExtendLengthFraction().advance(amount * 2f);
             ship.getEngineController().getExtendWidthFraction().advance(amount * 2f);
             ship.getEngineController().getExtendGlowFraction().advance(amount * 2f);
@@ -171,27 +156,37 @@ public class eis_jump extends BaseShipSystemScript {
             if (!ended) {
                 Vector2f direction = new Vector2f();
                 boostForward = false;
-                boostScale = 0.75f;
+                // boostScale = 0.75f;
+                // boostScale = 1.0f; // default
+                boostScale = 1.5f; // default
                 if (ship.getEngineController().isAccelerating()) {
                     direction.y += 0.55f; //0.75f - 0.2f
-                    boostScale -= 0.1f;
+                    // boostScale -= 0.1f;
+                    // boostScale = 1.0f; // forward
+                    boostScale = 1.5f; // forward
                     boostForward = true;
                 } else if (ship.getEngineController().isAcceleratingBackwards() || ship.getEngineController().isDecelerating()) {
                     direction.y -= 0.4f; //0.75f - 0.35f ?
-                    boostScale -= 0.35f;
+                    // boostScale -= 0.35f;
+                    // boostScale = 0.4f; // reverse
+                    boostScale = 0.6f; // reverse
                 }
                 if (ship.getEngineController().isStrafingLeft()) {
                     direction.x -= 1f;
-                    boostScale += 0.3f; //from 0.25f an increase
+                    // boostScale += 0.3f; //from 0.25f an increase
+                    boostScale = 1.5f; // strafing
                     boostForward = false;
                 } else if (ship.getEngineController().isStrafingRight()) {
                     direction.x += 1f;
-                    boostScale += 0.3f;
+                    // boostScale += 0.3f;
+                    boostScale = 1.5f; // strafing
                     boostForward = false;
                 }
                 if (direction.length() <= 0f) {
                     direction.y = 0.55f; //0.75f - 0.2f ?
-                    boostScale -= 0.2f;
+                    // boostScale -= 0.2f;
+                    // boostScale = 1.0f; // default
+                    boostScale = 1.5f; // default
                 }
                 Misc.normalise(direction);
                 VectorUtils.rotate(direction, ship.getFacing() - 90f, direction);
@@ -216,10 +211,16 @@ public class eis_jump extends BaseShipSystemScript {
                                 Math.round(0.3f * ENGINE_COLOR.getAlpha() * level));
                         Color boostColor = new Color(BOOST_COLOR.getRed(), BOOST_COLOR.getGreen(), BOOST_COLOR.getBlue(),
                                 Math.round(BOOST_COLOR.getAlpha() * level));
+                        /*
                         Global.getCombatEngine().spawnExplosion(eng.getLocation(), ZERO, bigBoostColor,
                                 2.5f * 4f * boostScale * eng.getEngineSlot().getWidth(), duration);
                         Global.getCombatEngine().spawnExplosion(eng.getLocation(), ZERO, boostColor,
                                 2.5f * 2f * boostScale * eng.getEngineSlot().getWidth(), 0.15f);
+                        */
+                        Global.getCombatEngine().spawnExplosion(eng.getLocation(), ZERO, bigBoostColor,
+                                4f * boostScale * eng.getEngineSlot().getWidth(), duration);
+                        Global.getCombatEngine().spawnExplosion(eng.getLocation(), ZERO, boostColor,
+                                2f * boostScale * eng.getEngineSlot().getWidth(), 0.15f);
                     }
                 }
             }
@@ -233,42 +234,28 @@ public class eis_jump extends BaseShipSystemScript {
             return;
         }
         ended = false;
-        boostScale = 0.75f;
+        // boostScale = 0.75f;
+        // boostScale = 1.0f;
+        boostScale = 1.5f;
         boostVisualDir = 0f;
         boostForward = false;
         engState.clear();
 
-        stats.getMaxTurnRate().unmodify(id);
+        // stats.getMaxTurnRate().unmodify(id);
         stats.getDeceleration().unmodify(id);
-        stats.getTurnAcceleration().unmodify(id);
+        // stats.getTurnAcceleration().unmodify(id);
     }
 
     @Override
     public String getInfoText(ShipSystemAPI system, ShipAPI ship) {
         if (ship != null) {
             if (ship.getEngineController().isFlamedOut()) {
-                return poopystinky;
+                return jumpFailedText;
             }
         }
         return null;
     }
     
-    @Override
-    public float getRegenOverride(ShipAPI ship) {
-        if (ship != null) {
-            return OHGODIMRECHARGING.get(ship.getHullSize());
-        }
-        return -1;
-    }
-    
-    @Override
-    public int getUsesOverride(ShipAPI ship) {
-        if (ship != null) {
-            return IMGONNACHARGE.get(ship.getHullSize());
-        }
-        return -1;
-    }
-
     private static float getSystemEngineScale(ShipEngineAPI engine, float direction) {
         float engAngle = engine.getEngineSlot().getAngle();
         if (Math.abs(MathUtils.getShortestRotation(engAngle, direction)) > 100f) {

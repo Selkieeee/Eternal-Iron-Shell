@@ -43,16 +43,16 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0003": "eis_dualrailgun",
-                "WS0004": "eis_dualrailgun"
+                "WS0003": "hveldriver",
+                "WS0004": "hveldriver"
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0012": "eis_ironhammer",
-                "WS0011": "eis_ironhammer"
+                "WS0012": "typhoon",
+                "WS0011": "typhoon"
             }
         },
         {

@@ -25,7 +25,7 @@
         {
             "autofire": false,
             "mode": "LINKED",
-            "weapons": {"WS 004": "eis_ironhammer"}
+            "weapons": {"WS 004": "typhoon"}
         },
         {
             "autofire": true,

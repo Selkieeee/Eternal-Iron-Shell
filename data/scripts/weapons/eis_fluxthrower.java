@@ -44,14 +44,14 @@ public class eis_fluxthrower extends BaseCombatLayeredRenderingPlugin implements
 		if (weapon.getShip() != null) {
 			float maxRange = weapon.getRange();
 			ShipAPI ship = weapon.getShip();
-                        float VibeCheck = ship.getFluxLevel();
+                        float fluxLevel = ship.getFluxLevel();
                         //if (weapon.getMaxAmmo() >= 80) {weapon.setMaxAmmo(80);}
                             if (weapon.isFiring() && weapon.getAmmo() > 0) {
-                                if (ship.getHardFluxLevel()+0.01f > VibeCheck) {}//do nothing pretty much.
-                                else {if (VibeCheck > 0.75f)
+                                if (ship.getHardFluxLevel()+0.01f > fluxLevel) {}//do nothing pretty much.
+                                else {if (fluxLevel > 0.75f)
                                     { 
                                         ship.getFluxTracker().decreaseFlux(45f);
-                                    } else {ship.getFluxTracker().decreaseFlux(45f*VibeCheck);}
+                                    } else {ship.getFluxTracker().decreaseFlux(45f*fluxLevel);}
                                 }
                             }
                             Vector2f com = new Vector2f();

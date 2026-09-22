@@ -25,6 +25,8 @@ public class eis_microforge extends BaseHullMod {
     private static String mfTitle = Global.getSettings().getString("eis_ironshell", "eis_microforge_title");
     private static String mfText = Global.getSettings().getString("eis_ironshell", "eis_microforge_text");
     private static String mfStatusText = Global.getSettings().getString("eis_ironshell", "eis_microforge_status_text");
+    private static String mfStatusCountdownText = Global.getSettings().getString("eis_ironshell", "eis_microforge_status_countdown");
+    private static final String BULLET = "\u2022";
     
     private static Map missiletimer = new HashMap();
     private static Map hardfluxlvl = new HashMap();
@@ -47,8 +49,10 @@ public class eis_microforge extends BaseHullMod {
         
         TooltipMakerAPI rapidAmmoFeeder = tooltip.beginImageWithText(mfIcon, HEIGHT);
         rapidAmmoFeeder.addPara(mfTitle, 0f, YELLOW, mfTitle);
-        if ("eis_eradicator".equals(ship.getHullSpec().getBaseHullId())) {rapidAmmoFeeder.addPara(mfText, 0f, Misc.getPositiveHighlightColor(), "70", Integer.toString(Math.round(FLAT_RELOAD)), Math.round(TIME_PER_RELOAD)+"%", Integer.toString(Math.round((Float) hardfluxlvl.get(hullSize)*100f))+"%");
-        } else {rapidAmmoFeeder.addPara(mfText, 0f, Misc.getPositiveHighlightColor(), Integer.toString(Math.round((Float) missiletimer.get(hullSize))), Integer.toString(Math.round(FLAT_RELOAD)), Math.round(TIME_PER_RELOAD)+"%", Integer.toString(Math.round((Float) hardfluxlvl.get(hullSize)*100f))+"%");}
+        //the eradicator isnt even good wtf..
+        //if ("eis_eradicator".equals(ship.getHullSpec().getBaseHullId())) {rapidAmmoFeeder.addPara(mfText, 0f, Misc.getPositiveHighlightColor(), "70", Integer.toString(Math.round(FLAT_RELOAD)), Math.round(TIME_PER_RELOAD)+"%");
+        //} else
+        {rapidAmmoFeeder.addPara(mfText, 0f, Misc.getPositiveHighlightColor(), BULLET, Integer.toString(Math.round((Float) missiletimer.get(hullSize))), Integer.toString(Math.round(FLAT_RELOAD)), Math.round(TIME_PER_RELOAD)+"%");}
         tooltip.addImageWithText(PAD);        
     }    
     
@@ -76,8 +80,11 @@ public class eis_microforge extends BaseHullMod {
         String key = "eis_microforge" + "_" + ship.getId();
         PeriodicMissileReloadData2 data = (PeriodicMissileReloadData2) engine.getCustomData().get(key);
         if (data == null) {
-            if ("eis_eradicator".equals(ship.getHullSpec().getBaseHullId())) {data = new PeriodicMissileReloadData2(70f);} else {
-            data = new PeriodicMissileReloadData2((float) missiletimer.get(ship.getHullSize()));}
+            float interval = "eis_eradicator".equals(ship.getHullSpec().getBaseHullId()) ? 70f : (float) missiletimer.get(ship.getHullSize());
+            if (eis_gula.isGulaSMod(ship)) { // eis_gula (Gula Tandem Warheads) s-mod bonus: microforge works 25% faster
+                interval /= 1.25f;
+            }
+            data = new PeriodicMissileReloadData2(interval);
             engine.getCustomData().put(key, data);
         }
         boolean advance = false;
@@ -92,8 +99,14 @@ public class eis_microforge extends BaseHullMod {
         
         if (advance) {
             MagicUI.drawSystemBar(ship, MagicUI.REDCOLOR, data.interval.getElapsed()/data.interval.getMaxInterval(), 0);
-            if (!ship.getFluxTracker().isOverloadedOrVenting() && ship.getHardFluxLevel() <= (float) hardfluxlvl.get(ship.getHullSize())) {
-                data.interval.advance(amount);
+            if (ship == engine.getPlayerShip()) {
+                float remaining = data.interval.getMaxInterval() - data.interval.getElapsed();
+                engine.maintainStatusForPlayerShip(key, mfIcon, mfTitle,
+                        Misc.getRoundedValueMaxOneAfterDecimal(remaining) + mfStatusCountdownText, false);
+            }
+            // eis_microforge no longer pauses reload progress based on hard flux / overload / venting state; always advance.
+            // if (!ship.getFluxTracker().isOverloadedOrVenting() && ship.getHardFluxLevel() <= (float) hardfluxlvl.get(ship.getHullSize())) {
+                  data.interval.advance(amount);
                 if (data.interval.intervalElapsed()) {
                     for (WeaponAPI w : ship.getAllWeapons()) {
                         if (w.getType() != WeaponType.MISSILE) {
@@ -115,12 +128,12 @@ public class eis_microforge extends BaseHullMod {
                     }
                     Global.getSoundPlayer().playSound("system_forgevats", 1f, 1f, ship.getLocation(), ship.getVelocity());
                 }
-            } else {
+            /* else {
                 if (ship == Global.getCombatEngine().getPlayerShip()) {
                     Global.getCombatEngine().maintainStatusForPlayerShip(key, mfIcon,
                             mfTitle, mfStatusText, true);
                 }
-            }
+            } */
         } else {
             data.interval.setElapsed(0f);
         }

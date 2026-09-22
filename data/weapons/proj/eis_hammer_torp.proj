@@ -22,11 +22,11 @@
 	"flameoutTime":3, # total time from flameout to full fadeout
 	"noEngineGlowTime":0.5, # time spent without the engine glow being rendered
 	"fadeTime":0.5, # fadeout duration					 
-	"engineSpec":{"turnAcc":1200, #120
-				  "turnRate":150, #30
-				  "acc":20,
-				  "dec":0,
-				  "maxSpeed":250},
+	"engineSpec":{"turnAcc":1200,
+				  "turnRate":150,
+				  "acc":250,
+				  "dec":200,
+				  "maxSpeed":500},
 	"engineSlots":[{"id":"ES1",
 					"loc":[-10, 0],
 				    "style":"CUSTOM",
@@ -53,10 +53,10 @@
 					"canSplitEarly":true, # DO NOT USE
 					#"splitSound":"hurricane_mirv_fire",
 					"numShots":1,
-					"damage":1800,
+					"damage":1500,
 					"impact":55,
 					"damageType":HIGH_EXPLOSIVE,
-					"hitpoints":400,
+					"hitpoints":450,
 					"arc":75, #120
 					"arcOffset":1,
 					"evenSpread":true,

@@ -1,96 +1,69 @@
 {
-    "bounds": [
-        15,
-        6,
-        -15,
-        10,
-        -6,
-        -1,
-        -15,
-        -10,
-        12,
-        -11,
-        5,
-        0
-    ],
-    "center": [
-        15,
-        17
-    ],
-    "collisionRadius": 22,
-    "engineSlots": [
-        {
-            "angle": 180,
-            "contrailSize": 32,
-            "length": 10,
-            "location": [
-                -16,
-                7
-            ],
-            "style": "COBRA_BOMBER",
-            "width": 6
-        },
-        {
-            "angle": 180,
-            "contrailSize": 32,
-            "length": 10,
-            "location": [
-                -16,
-                -7
-            ],
-            "style": "COBRA_BOMBER",
-            "width": 6
-        }
-    ],
-    "height": 34,
-    "hullId": "eis_piranha",
-    "hullName": "Piranha (XlV)",
-    "hullSize": "FIGHTER",
-    "shieldCenter": [
-        0,
-        0
-    ],
-    "shieldRadius": 22,
-    "spriteName": "graphics/ships/eis_piranha.png",
-    "style": "LOW_TECH",
-    "viewOffset": 0,
-    "weaponSlots": [
-        {
-            "angle": 0,
-            "arc": 10,
-            "id": "WS 001",
-            "locations": [
-                4,
-                0
-            ],
-            "mount": "TURRET", #"HIDDEN",
-            "size": "SMALL",
-            "type": "MISSILE"
-        },
-        {
-            "angle": 0,
-            "arc": 360,
-            "id": "WS 002",
-            "locations": [
-                1,
-                10
-            ],
-            "mount": "HIDDEN",
-            "size": "SMALL",
-            "type": "BALLISTIC"
-        },
-        {
-            "angle": 225,
-            "arc": 5,
-            "id": "WS 003",
-            "locations": [
-                -2,
-                -10
-            ],
-            "mount": "HIDDEN",
-            "size": "SMALL",
-            "type": "SYSTEM"
-        }
-    ],
-    "width": 30
+  "hullName": "Piranha (XlV)",
+  "hullId": "eis_piranha",
+  "hullSize": "FIGHTER",
+  "spriteName": "graphics/ships/eis_piranha.png",
+  "style": "LOW_TECH",
+  "height": 34,
+  "width": 30,
+  "center": [15, 17],
+  "collisionRadius": 22,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 22,
+  "viewOffset": 0,
+  "weaponSlots": [
+    {
+      "id": "WS 001",
+      "size": "SMALL",
+      "type": "MISSILE",
+      "mount": "TURRET",
+      "arc": 10,
+      "angle": 0,
+      "locations": [4, 0]
+    },
+    {
+      "id": "WS 002",
+      "size": "SMALL",
+      "type": "BALLISTIC",
+      "mount": "HIDDEN",
+      "arc": 360,
+      "angle": 0,
+      "locations": [1, 10]
+    },
+    {
+      "id": "WS 003",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 5,
+      "angle": 225,
+      "locations": [-2, -10]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-16, 7],
+      "length": 10,
+      "width": 6,
+      "angle": 180,
+      "contrailSize": 32,
+      "style": "COBRA_BOMBER"
+    },
+    {
+      "location": [-16, -7],
+      "length": 10,
+      "width": 6,
+      "angle": 180,
+      "contrailSize": 32,
+      "style": "COBRA_BOMBER"
+    }
+  ],
+  "bounds": [
+    15, 6,
+    -15, 10,
+    -6, -0,
+    -15, -10,
+    15, -6,
+    5, 0
+  ]
 }

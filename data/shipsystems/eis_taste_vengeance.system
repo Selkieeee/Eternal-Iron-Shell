@@ -6,9 +6,13 @@
 	
 	"statsScript":"data.scripts.shipsystems.eis_taste_vengeance",
 
+	# apply() is only called by the engine while effectLevel > 0 (IN/ACTIVE/OUT), which is never true during
+	# COOLDOWN - runScriptWhileIdle keeps it firing through COOLDOWN/IDLE too, at the cost of unapply() never
+	# getting called (see eis_taste_vengeance.java, which now detects the return to IDLE itself instead).
+	"runScriptWhileIdle":true,
+
 	"fadeActivationSoundOnChargedown":true,
 	"useSound":"system_vengeance",
-	"loopSound":"system_vengeance_loop",
 	"deactivateSound":"system_temporalshell_off",
 	"outOfUsesSound":"gun_out_of_ammo",
 }

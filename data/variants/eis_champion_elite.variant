@@ -25,8 +25,8 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS 006": "eis_dualrailgun",
-                "WS 007": "eis_dualrailgun"
+                "WS 006": "hveldriver",
+                "WS 007": "hveldriver"
             }
         },
         {

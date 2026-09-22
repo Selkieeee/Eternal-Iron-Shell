@@ -13,26 +13,26 @@ import java.util.Map;
 
 public class CHM_ironshell extends BaseHullMod {
     //for some reason, some fighters are existing in fleet.. and not in their carrier weird null ugh..
-    private static final Map coom = new HashMap();
+    private static final Map beamDamageTakenMultByHullSize = new HashMap();
     static {
-        coom.put(HullSize.FIGHTER, 0.88f);
-        coom.put(HullSize.FRIGATE, 0.88f);
-        coom.put(HullSize.DESTROYER, 0.90f);
-        coom.put(HullSize.CRUISER, 0.92f);
-        coom.put(HullSize.CAPITAL_SHIP, 0.94f);
-        coom.put(HullSize.DEFAULT, 0.94f);
+        beamDamageTakenMultByHullSize.put(HullSize.FIGHTER, 0.88f);
+        beamDamageTakenMultByHullSize.put(HullSize.FRIGATE, 0.88f);
+        beamDamageTakenMultByHullSize.put(HullSize.DESTROYER, 0.90f);
+        beamDamageTakenMultByHullSize.put(HullSize.CRUISER, 0.92f);
+        beamDamageTakenMultByHullSize.put(HullSize.CAPITAL_SHIP, 0.94f);
+        beamDamageTakenMultByHullSize.put(HullSize.DEFAULT, 0.94f);
     }
     @Override
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getBeamDamageTakenMult().modifyMult(id, (Float) coom.get(hullSize));
-        stats.getBeamShieldDamageTakenMult().modifyMult(id, (Float) coom.get(hullSize));
+        stats.getBeamDamageTakenMult().modifyMult(id, (Float) beamDamageTakenMultByHullSize.get(hullSize));
+        stats.getBeamShieldDamageTakenMult().modifyMult(id, (Float) beamDamageTakenMultByHullSize.get(hullSize));
     }
     @Override
     public String getDescriptionParam(int index, HullSize hullSize, ShipAPI ship) {
-        if (index == 0) return "" + (int) ((1.01f - (Float) coom.get(HullSize.FRIGATE)) * 100f) + "%";
-        if (index == 1) return "" + (int) ((1f - (Float) coom.get(HullSize.DESTROYER)) * 100f) + "%";
-        if (index == 2) return "" + (int) ((1f - (Float) coom.get(HullSize.CRUISER)) * 100f) + "%";
-        if (index == 3) return "" + (int) ((1f - (Float) coom.get(HullSize.CAPITAL_SHIP)) * 100f) + "%";
+        if (index == 0) return "" + (int) ((1.01f - (Float) beamDamageTakenMultByHullSize.get(HullSize.FRIGATE)) * 100f) + "%";
+        if (index == 1) return "" + (int) ((1f - (Float) beamDamageTakenMultByHullSize.get(HullSize.DESTROYER)) * 100f) + "%";
+        if (index == 2) return "" + (int) ((1f - (Float) beamDamageTakenMultByHullSize.get(HullSize.CRUISER)) * 100f) + "%";
+        if (index == 3) return "" + (int) ((1f - (Float) beamDamageTakenMultByHullSize.get(HullSize.CAPITAL_SHIP)) * 100f) + "%";
         return null;
     }
     

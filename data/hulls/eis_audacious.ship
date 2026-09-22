@@ -3,7 +3,7 @@
   "hullId": "eis_audacious",
   "hullSize": "DESTROYER",
   "spriteName": "graphics/ships/eis_audacious.png",
-  "style": "LOW_TECH",
+  "style": "EIS_VENGEANCE",
   "coversColor": "255,255,255,255",
   "height": 221,
   "width": 160,
@@ -42,7 +42,7 @@
     {
       "id": "WS0003",
       "size": "SMALL",
-      "type": "BALLISTIC",
+      "type": "HYBRID",
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": -0,
@@ -51,7 +51,7 @@
     {
       "id": "WS0004",
       "size": "SMALL",
-      "type": "BALLISTIC",
+      "type": "HYBRID",
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
@@ -78,7 +78,7 @@
     {
       "id": "WS0005",
       "size": "SMALL",
-      "type": "BALLISTIC",
+      "type": "HYBRID",
       "mount": "TURRET",
       "arc": 250,
       "angle": -180,
@@ -89,34 +89,66 @@
     {
       "location": [-80, 28],
       "length": 47,
-      "width": 11,
+      "width": 13,
       "angle": 169.5,
       "contrailSize": 11,
-      "style": "LOW_TECH"
+      "style": "EIS_BOOST"
     },
     {
       "location": [-80, -28],
       "length": 47,
-      "width": 11,
+      "width": 13,
       "angle": -169.5,
       "contrailSize": 11,
-      "style": "LOW_TECH"
+      "style": "EIS_BOOST"
     },
     {
-      "location": [-85, 17.5],
+      "location": [-94, 18],
       "length": 74.5,
-      "width": 25,
+      "width": 15,
       "angle": 180,
       "contrailSize": 25,
-      "style": "LOW_TECH"
+      "style": "EIS_LTBOOST"
     },
     {
-      "location": [-85, -17.5],
+      "location": [-94, -18],
       "length": 74.5,
-      "width": 25,
+      "width": 15,
       "angle": -180,
       "contrailSize": 25,
-      "style": "LOW_TECH"
+      "style": "EIS_LTBOOST"
+    },
+    {
+      "location": [-87, 18],
+      "length": 60,
+      "width": 30,
+      "angle": 180,
+      "contrailSize": 25,
+      "style": "EIS_BOOST"
+    },
+    {
+      "location": [-87, -18],
+      "length": 60,
+      "width": 30,
+      "angle": -180,
+      "contrailSize": 25,
+      "style": "EIS_BOOST"
+    },
+    {
+      "location": [-85, 29],
+      "length": 47,
+      "width": 7,
+      "angle": 169.5,
+      "contrailSize": 11,
+      "style": "EIS_LTBOOST"
+    },
+    {
+      "location": [-85, -29],
+      "length": 47,
+      "width": 7,
+      "angle": -169.5,
+      "contrailSize": 11,
+      "style": "EIS_LTBOOST"
     }
   ],
   "bounds": [

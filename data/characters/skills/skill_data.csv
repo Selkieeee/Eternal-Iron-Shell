@@ -1,2 +1,3 @@
 id,name,order,tier,description,author,combat officer,admiral,admin,tags,icon
-eis_xiv,Iron Heritage,10014,0,Never forget who we once were.,Charlotte Hex,TRUE,,,"npc_only, deprecated",graphics/icons/skills/eis_xiv.png
+eis_xiv,Iron Heritage,10014,0,Never forget who we once were.,Ava Nitia,TRUE,,,"npc_only, deprecated",graphics/icons/skills/eis_xiv.png
+eis_weaponmastery,Decisive Strike,10015,0,"5 minutes in a broadsword will teach you more about the domain's ""decisive battle"" doctorine than 4 years at the Eventide officer academy.","Lieutenant Charlotte Hex, former Hegemony fighter pilot",TRUE,,,"npc_only, ballistic_weapons, energy_weapons",graphics/icons/skills/eis_combat_skill.png

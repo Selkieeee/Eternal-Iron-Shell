@@ -31,7 +31,7 @@ public class EISSierraMadre extends BaseCommandPlugin {
                         if (member.getVariant().getFittedWeaponSlots() != null) for (String id : member.getVariant().getFittedWeaponSlots()) {WeaponSlotAPI slot = member.getVariant().getSlot(id);if (slot.isDecorative() || slot.isBuiltIn() || slot.isHidden() ||slot.isSystemSlot() || slot.isStationModule()) continue;Global.getSector().getPlayerFleet().getCargo().addWeapons(member.getVariant().getWeaponId(id), 1);WeaponReturned.addWeapons(member.getVariant().getWeaponId(id), 1);}
                         if (member.getVariant().getFittedWings() != null) for (String wing : member.getVariant().getFittedWings()) {Global.getSector().getPlayerFleet().getCargo().addFighters(wing, 1);WeaponReturned.addFighters(wing, 1);}
                         WeaponReturned.sort();
-                        for (CargoStackAPI lol : WeaponReturned.getStacksCopy()) {addStackGainText(lol, dialog.getTextPanel());}
+                        for (CargoStackAPI stack : WeaponReturned.getStacksCopy()) {addStackGainText(stack, dialog.getTextPanel());}
                         Global.getSector().getPlayerFleet().getFleetData().removeFleetMember(member);
                         addShipLossText(member, dialog.getTextPanel());
                         return true;

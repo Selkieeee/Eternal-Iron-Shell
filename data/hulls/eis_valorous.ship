@@ -3,7 +3,7 @@
   "hullId": "eis_valorous",
   "hullSize": "FRIGATE",
   "spriteName": "graphics/ships/eis_valorous.png",
-  "style": "LOW_TECH",
+  "style": "EIS_VENGEANCE",
   "coversColor": "200,200,200,255",
   "height": 140,
   "width": 118,
@@ -83,51 +83,67 @@
   ],
   "engineSlots": [
     {
-      "location": [-49, 40],
-      "length": 32.901768,
-      "width": 8.178926,
+      "location": [-48.5, 41],
+      "length": 22.317482,
+      "width": 7.597373,
       "angle": 164,
-      "contrailSize": 8.178926,
+      "contrailSize": 7.597373,
       "style": "MIDLINE"
     },
     {
-      "location": [-49, -40],
-      "length": 32.901768,
-      "width": 8.178926,
+      "location": [-48.5, -41],
+      "length": 22.317482,
+      "width": 7.597373,
       "angle": -164,
-      "contrailSize": 8.178926,
+      "contrailSize": 7.597373,
       "style": "MIDLINE"
     },
     {
       "location": [-55, 12],
       "length": 62,
-      "width": 18,
+      "width": 28,
       "angle": 180,
-      "contrailSize": 18,
-      "style": "MIDLINE"
+      "contrailSize": 28,
+      "style": "EIS_BOOST"
     },
     {
       "location": [-55, -12],
       "length": 62,
-      "width": 18,
+      "width": 28,
       "angle": -180,
-      "contrailSize": 18,
+      "contrailSize": 28,
+      "style": "EIS_BOOST"
+    },
+    {
+      "location": [-51.5, 36],
+      "length": 31.775229,
+      "width": 9.661227,
+      "angle": 166,
+      "contrailSize": 9.661227,
       "style": "MIDLINE"
     },
     {
-      "location": [-50, 35],
-      "length": 45.907562,
-      "width": 10.769542,
-      "angle": 171,
-      "contrailSize": 10.769542,
+      "location": [-51.5, -36],
+      "length": 31.775229,
+      "width": 9.661227,
+      "angle": -166,
+      "contrailSize": 9.661227,
       "style": "MIDLINE"
     },
     {
-      "location": [-50, -35],
-      "length": 45.907562,
-      "width": 10.769542,
-      "angle": -171,
-      "contrailSize": 10.769542,
+      "location": [-61, 12],
+      "length": 61,
+      "width": 17,
+      "angle": 180,
+      "contrailSize": 17,
+      "style": "MIDLINE"
+    },
+    {
+      "location": [-61, -12],
+      "length": 61,
+      "width": 17,
+      "angle": -180,
+      "contrailSize": 17,
       "style": "MIDLINE"
     }
   ],

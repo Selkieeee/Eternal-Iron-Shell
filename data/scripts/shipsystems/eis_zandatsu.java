@@ -34,7 +34,7 @@ public class eis_zandatsu extends BaseShipSystemScript {
     private static final Color ENGINE_COLOR = new Color(255, 10, 10);
     // SNEED private static final Color CONTRAIL_COLOR = new Color(255, 100, 100, 75);
     private static final Color BOOST_COLOR = new Color(255, 175, 175, 200);
-    private static final Color Sneed = new Color (255,200,0,155);
+    private static final Color weaponGlowColor = new Color (255,200,0,155);
     private static final Vector2f ZERO = new Vector2f();
     //private final Object ENGINEKEY1 = new Object();
     private final Object ENGINEKEY2 = new Object();
@@ -43,13 +43,13 @@ public class eis_zandatsu extends BaseShipSystemScript {
     private float boostScale = 0.75f;
     private float boostVisualDir = 0f;
     private boolean boostForward = false;
-    private static String poopystinky = Global.getSettings().getString("eis_ironshell", "eis_zandatsu");
-    private static String poopystinky2 = Global.getSettings().getString("eis_ironshell", "eis_zandatsu2");
-    private static String poopystinky3 = Global.getSettings().getString("eis_ironshell", "eis_zandatsu3");
+    private static String activeStatusText = Global.getSettings().getString("eis_ironshell", "eis_zandatsu");
+    private static String shieldActiveStatusText = Global.getSettings().getString("eis_ironshell", "eis_zandatsu2");
+    private static String cooldownStatusText = Global.getSettings().getString("eis_ironshell", "eis_zandatsu3");
     private static final float BUFF_DURATION = 12.0f;
     private static final float REFLECT_RANGE = 300f; // added onto ship collision radius
     private static final float ROTATION_SPEED = 420f; // 420f how fast missiles get rotated in degrees per second
-    private static final float SHIELD_BONUS = .20f;
+    private static final float SHIELD_EFF_CHANGE = 30f;
     private static final float ROF_BONUS = 1.34f;
     private static final float FLUX_REDUCTION = 25f;
     private boolean formerlychuck = false;
@@ -288,7 +288,7 @@ public class eis_zandatsu extends BaseShipSystemScript {
                 if (missile.isMine()) {
                     toRemove.add(missile);missile.fadeOutThenIn(amount);continue;
                 }
-                try {if (missile.getBehaviorSpecParams().get("behavior").equals("PROXIMITY_FUSE")) {toRemove.add(missile);continue;}} catch (Exception sex) {}
+                try {if (missile.getBehaviorSpecParams().get("behavior").equals("PROXIMITY_FUSE")) {toRemove.add(missile);continue;}} catch (Exception e) {}
                 MissileTracker tracker = missileMap.get(missile);
                 if (!tracker.isFacingOrigin()) {
                     if (tracker.shouldTurnLeft()) {
@@ -345,16 +345,22 @@ public class eis_zandatsu extends BaseShipSystemScript {
                 if (reflectSuccess && activeTime <= BUFF_DURATION) {
                     stats.getBallisticRoFMult().modifyMult(id, ROF_BONUS);
                     stats.getBallisticWeaponFluxCostMod().modifyMult(id, 1f - (FLUX_REDUCTION * 0.01f));
-                    stats.getShieldDamageTakenMult().modifyMult(id, SHIELD_BONUS);
-                    if (stats.getVariant().hasHullMod("converted_fighterbay")) {stats.getBallisticAmmoRegenMult().modifyMult(id, ROF_BONUS);}
-                    ship.setWeaponGlow(1f, Sneed, EnumSet.of(WeaponType.BALLISTIC));
+                    stats.getShieldDamageTakenMult().modifyMult(id, 1f - (SHIELD_EFF_CHANGE * 0.01f));
+                    stats.getBallisticAmmoRegenMult().modifyMult(id, ROF_BONUS);
+                    stats.getEnergyRoFMult().modifyMult(id, ROF_BONUS);
+                    stats.getEnergyWeaponFluxCostMod().modifyMult(id, 1f - (FLUX_REDUCTION * 0.01f));
+                    stats.getEnergyAmmoRegenMult().modifyMult(id, ROF_BONUS);
+                    ship.setWeaponGlow(1f, weaponGlowColor, EnumSet.of(WeaponType.BALLISTIC, WeaponType.ENERGY));
                 }
                 if (reflectSuccess && activeTime <= 0) {
                     stats.getBallisticRoFMult().unmodify(id);
                     stats.getBallisticWeaponFluxCostMod().unmodify(id);
                     stats.getShieldDamageTakenMult().unmodify(id);
                     stats.getBallisticAmmoRegenMult().unmodify(id);
-                    ship.setWeaponGlow(0f, Sneed, EnumSet.of(WeaponType.BALLISTIC));
+                    stats.getEnergyRoFMult().unmodify(id);
+                    stats.getEnergyWeaponFluxCostMod().unmodify(id);
+                    stats.getEnergyAmmoRegenMult().unmodify(id);
+                    ship.setWeaponGlow(0f, weaponGlowColor, EnumSet.of(WeaponType.BALLISTIC, WeaponType.ENERGY));
                     reflectSuccess = false;
                 }
                 /*formerly (WeaponAPI w : ship.getAllWeapons()) {
@@ -374,7 +380,7 @@ public class eis_zandatsu extends BaseShipSystemScript {
         if (ship == null) {
             return;
         }
-        Global.getCombatEngine().addFloatingText(stats.getEntity().getLocation(), "PENIS!", boostScale, Sneed, ship, 1f, 1f);
+        Global.getCombatEngine().addFloatingText(stats.getEntity().getLocation(), "PENIS!", boostScale, weaponGlowColor, ship, 1f, 1f);
         stats.getMaxTurnRate().unmodify(id);
         stats.getDeceleration().unmodify(id);
         stats.getTurnAcceleration().unmodify(id);
@@ -394,19 +400,19 @@ public class eis_zandatsu extends BaseShipSystemScript {
         reset = true;
     }*/
     
-    @Override
+    /*@Override
     public float getRegenOverride(ShipAPI ship) {
         if (ship != null) {
             return (0.18f*(ship.getMutableStats().getSystemRegenBonus().getBonusMult() > 1 ? (ship.getMutableStats().getSystemRegenBonus().getBonusMult()+1f)/(2f*ship.getMutableStats().getSystemRegenBonus().getBonusMult()) : 1f));// why would someone... do a modifyFlat? wtf? -ship.getMutableStats().getSystemRegenBonus().flatBonus;
         } //0.164f ?? It is 0.18f instead of 0.2 because this thing overrides everything including the one it's not supposed to...
         return -1f;
-    }
+    }*/
     
     /*@Override
     public String getInfoText(ShipSystemAPI system, ShipAPI ship) {
         if (ship != null) {
             if (ship.getEngineController().isFlamedOut()) {
-                return poopystinky;
+                return activeStatusText;
             }
         }
         return null;
@@ -429,11 +435,11 @@ public class eis_zandatsu extends BaseShipSystemScript {
     @Override
     public StatusData getStatusData(int index, State state, float effectLevel) {
         if (index == 0 && reflectSuccess && activeTime > 0f)
-            return new StatusData(poopystinky + Misc.getRoundedValueMaxOneAfterDecimal(activeTime), false);
+            return new StatusData(activeStatusText + Misc.getRoundedValueMaxOneAfterDecimal(activeTime), false);
         if (index == 1 && reflectSuccess && activeTime > 0f && ShieldOn)
-            return new StatusData(poopystinky2 + Misc.getRoundedValueMaxOneAfterDecimal(activeTime), false);
+            return new StatusData(shieldActiveStatusText + Misc.getRoundedValueMaxOneAfterDecimal(activeTime), false);
         if (index == 2 && activeTime2 > 0f && state == State.IDLE)
-            return new StatusData(poopystinky3 + Misc.getRoundedValueMaxOneAfterDecimal(activeTime2), false);
+            return new StatusData(cooldownStatusText + Misc.getRoundedValueMaxOneAfterDecimal(activeTime2), false);
         return null;
     }
 

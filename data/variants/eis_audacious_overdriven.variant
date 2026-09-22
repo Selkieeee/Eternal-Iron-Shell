@@ -36,6 +36,6 @@
   "modules": [],
   "wings": [
         "eis_xyphos_wing",
-        "eis_talon_wing"
+        "talon_wing"
   ]
 }

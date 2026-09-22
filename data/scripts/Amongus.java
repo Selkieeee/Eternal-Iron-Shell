@@ -58,6 +58,9 @@ public class Amongus implements ColonyPlayerHostileActListener {
                 if ("hegemony".equals(market.getFactionId()) || "ironshell".equals(market.getFactionId())) {
                     if (cargo.getQuantity(CargoAPI.CargoItemType.SPECIAL, new SpecialItemData(Items.PRISTINE_NANOFORGE, null)) > 0 || cargo.getQuantity(CargoAPI.CargoItemType.SPECIAL, new SpecialItemData(Items.CORRUPTED_NANOFORGE, null)) > 0 || cargo.getQuantity(CargoAPI.CargoItemType.SPECIAL, new SpecialItemData(Items.FULLERENE_SPOOL, null)) > 0 || cargo.getQuantity(CargoAPI.CargoItemType.SPECIAL, new SpecialItemData(Items.SYNCHROTRON, null)) > 0) {
                         List<CampaignFleetAPI> fleetSystem = new ArrayList<>(market.getContainingLocation().getFleets());
+                        // Hardspawn (chicomoztoc) and light (everywhere else) are now two independent fleet
+                        // entities with their own memory flags, so an already-active fleet of one kind never
+                        // blocks the other kind from spawning - each gets its own duplicated check below.
                         boolean yay = false;
                         for (CampaignFleetAPI fleet : fleetSystem){
                             if (fleet.getMemoryWithoutUpdate().getBoolean("$EIS_YKWYD")) {
@@ -65,11 +68,15 @@ public class Amongus implements ColonyPlayerHostileActListener {
                                 break;
                             }
                         }
-                        if (!yay && "chicomoztoc".equals(market.getId())) {UhohStinky(market, true);} else if (!yay) {UhohStinky(market, false);}
+                        boolean yayLight = false;
+                        for (CampaignFleetAPI fleet : fleetSystem){
+                            if (fleet.getMemoryWithoutUpdate().getBoolean("$EIS_YKWYD_light")) {
+                                yayLight = true;
+                                break;
+                            }
+                        }
+                        if (!yay && "chicomoztoc".equals(market.getId())) {UhohStinky(market, true);} else if (!yayLight) {UhohStinky(market, false);}
                         if (!Global.getSector().hasTransientScript(MarketCheckTariffs3.class)) {Global.getSector().addTransientListener(new MarketCheckTariffs3());}
-                        Global.getSector().getFaction(Factions.HEGEMONY).setRelationship("player", -1f);
-                        Global.getSector().getFaction("ironshell").setRelationship("player", -1f);
-                        if (Global.getSector().getImportantPeople().getPerson("eisava") != null) {Global.getSector().getImportantPeople().getPerson("eisava").getRelToPlayer().setRel(-1f);}
                         if (Global.getSector().getPlayerFleet().getAbility("emergency_burn") != null) {Global.getSector().getPlayerFleet().getAbility("emergency_burn").activate();Global.getSector().getPlayerFleet().getAbility("emergency_burn").deactivate();Global.getSector().getPlayerFleet().getAbility("emergency_burn").setCooldownLeft(1f);}
                         if (Global.getSector().getPlayerFleet().getAbility("fracture_jump") != null) {Global.getSector().getPlayerFleet().getAbility("fracture_jump").activate();Global.getSector().getPlayerFleet().getAbility("fracture_jump").deactivate();Global.getSector().getPlayerFleet().getAbility("fracture_jump").setCooldownLeft(1f);}
                     }
@@ -98,18 +105,25 @@ public class Amongus implements ColonyPlayerHostileActListener {
                 params.officerLevelLimit = Global.getSettings().getInt("officerMaxLevel") + (int) OfficerTraining.MAX_LEVEL_BONUS;
 		params.modeOverride = FactionAPI.ShipPickMode.PRIORITY_THEN_ALL;
                 params.averageSMods = Hardspawn ? PlayerHasHowManySmods(3) : PlayerHasHowManySmods(1);
-                params.commander = Global.getSector().getImportantPeople().getPerson("eisava") != null ? Global.getSector().getImportantPeople().getPerson("eisava") : generateava();
+                // Hardspawn is captained by Ava specifically; the light fleet gets a generic, randomly
+                // generated Iron Shell officer instead (random name/portrait, no fixed identity).
+                PersonAPI commander = Hardspawn
+                        ? (Global.getSector().getImportantPeople().getPerson("eisava") != null ? Global.getSector().getImportantPeople().getPerson("eisava") : generateava())
+                        : Global.getSector().getFaction("ironshell").createRandomPerson(Math.random() < 0.5f ? FullName.Gender.FEMALE : FullName.Gender.MALE);
+                params.commander = commander;
                 if (Global.getSector().getPlayerFleet().getNumCapitals()*5f+Global.getSector().getPlayerFleet().getNumCruisers()<Global.getSector().getPlayerFleet().getNumCruisers()*2f+Global.getSector().getPlayerFleet().getNumDestroyers()+Global.getSector().getPlayerFleet().getNumFrigates()) {
                     params.maxShipSize = 3;
                 }
             CampaignFleetAPI fleet = FleetFactoryV3.createFleet(params);
             if (fleet == null || fleet.isEmpty()) return;
             fleet.setFaction("ironshell", true);
-            fleet.getFlagship().setCaptain(Global.getSector().getImportantPeople().getPerson("eisava"));
+            fleet.getFlagship().setCaptain(commander);
             fleet.setNoFactionInName(true);
             fleet.setName("Aranitia");
             //fleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_PIRATE, true);
-            fleet.getMemoryWithoutUpdate().set("$EIS_YKWYD", true);
+            // Hardspawn and light Aranitia fleets are separate entities, tracked by separate memory flags,
+            // so rules.csv can gate their dialogue (AranitiaGreeting* vs AranitiaGreetingLight*) independently.
+            fleet.getMemoryWithoutUpdate().set(Hardspawn ? "$EIS_YKWYD" : "$EIS_YKWYD_light", true);
             market.getContainingLocation().addEntity(fleet);
             //fleet.setLocation(market.getPrimaryEntity().getLocation().x+1000f, market.getPrimaryEntity().getLocation().y+1000f);
             makeFleetInterceptPlayer(fleet, true, true, true, 90f);
@@ -118,7 +132,6 @@ public class Amongus implements ColonyPlayerHostileActListener {
             Global.getSector().doHyperspaceTransition(fleet, fleet, new JumpDestination(token, null));
             Misc.giveStandardReturnToSourceAssignments(fleet, false);
     }
-    
     public static PersonAPI generateava() {
             PersonAPI coffeemom = Global.getSector().getFaction("ironshell").createRandomPerson(FullName.Gender.FEMALE);
             coffeemom.setId("eisava");

@@ -25,11 +25,11 @@ public class Seriouslywhatisthewholepointofthisisweartoluddiwillmakethispersonea
         FactionAPI iron = sector.getFaction(IRONSTANDSETERNAL);
         //sector.getFaction(Factions.PLAYER).setRelationship(iron.getId(), RepLevel.COOPERATIVE);
         iron.setRelationship(Factions.HEGEMONY, 1.00f); //Tax-exempted.
-        if (Global.getSettings().getBoolean("GreaterHegemony")) {
-            Alliance lol = AllianceManager.createAlliance(IRONSTANDSETERNAL, Factions.HEGEMONY, AllianceManager.getBestAlignment(IRONSTANDSETERNAL, Factions.HEGEMONY));
-            lol.setName(Global.getSettings().getString("eis_ironshell", "eis_greaterhegemony"));
-            lol.addPermaMember(IRONSTANDSETERNAL);
-            lol.addPermaMember("hegemony");
+        if (data.scripts.eis_modPlugin.getEISBooleanSetting("GreaterHegemony", true)) {
+            Alliance hegemonyAlliance = AllianceManager.createAlliance(IRONSTANDSETERNAL, Factions.HEGEMONY, AllianceManager.getBestAlignment(IRONSTANDSETERNAL, Factions.HEGEMONY));
+            hegemonyAlliance.setName(Global.getSettings().getString("eis_ironshell", "eis_greaterhegemony"));
+            hegemonyAlliance.addPermaMember(IRONSTANDSETERNAL);
+            hegemonyAlliance.addPermaMember("hegemony");
         }
         iron.setRelationship(Factions.PLAYER, Global.getSector().getPlayerFaction().getRelationship(Factions.HEGEMONY)); //Be a good little taxpayer.
         if (Global.getSettings().getModManager().isModEnabled("nexerelin")) {

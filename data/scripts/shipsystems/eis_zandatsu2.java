@@ -35,7 +35,7 @@ public class eis_zandatsu2 extends BaseShipSystemScript {
     private static final Color ENGINE_COLOR = new Color(255, 10, 10);
     // SNEED private static final Color CONTRAIL_COLOR = new Color(255, 100, 100, 75);
     private static final Color BOOST_COLOR = new Color(255, 175, 175, 200);
-    private static final Color Sneed = new Color (255,200,0,155);
+    private static final Color weaponGlowColor = new Color (255,200,0,155);
     private static final Vector2f ZERO = new Vector2f();
     //private final Object ENGINEKEY1 = new Object();
     private final Object ENGINEKEY2 = new Object();
@@ -44,7 +44,7 @@ public class eis_zandatsu2 extends BaseShipSystemScript {
     private float boostScale = 0.75f;
     private float boostVisualDir = 0f;
     private boolean boostForward = false;
-    private static String poopystinky = Global.getSettings().getString("eis_ironshell", "eis_zandatsu");
+    private static String activeStatusText = Global.getSettings().getString("eis_ironshell", "eis_zandatsu");
     private static final float BUFF_DURATION = 12.0f;
     private static final float REFLECT_RANGE = 300f; // added onto ship collision radius
     private static final float ROTATION_SPEED = 420f; // 420f how fast missiles get rotated in degrees per second
@@ -58,7 +58,7 @@ public class eis_zandatsu2 extends BaseShipSystemScript {
     private CombatEngineAPI engine =  Global.getCombatEngine();
     private ShipAPI ship;
     private Map<MissileAPI,MissileTracker> missileMap = new HashMap<>();
-    private float sneedreloadtime = 1.5f;
+    private float reloadTimeMult = 1.5f;
 
     @Override
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
@@ -312,19 +312,19 @@ public class eis_zandatsu2 extends BaseShipSystemScript {
                 if (reflectSuccess && activeTime <= BUFF_DURATION) {
                     stats.getBallisticRoFMult().modifyMult(id, ROF_BONUS);
                     stats.getBallisticWeaponFluxCostMod().modifyMult(id, 1f - (FLUX_REDUCTION * 0.01f));
-                    ship.setWeaponGlow(1f, Sneed, EnumSet.of(WeaponAPI.WeaponType.BALLISTIC));
-                    sneedreloadtime = 2f;
+                    ship.setWeaponGlow(1f, weaponGlowColor, EnumSet.of(WeaponAPI.WeaponType.BALLISTIC));
+                    reloadTimeMult = 2f;
                 }
                 if (reflectSuccess && activeTime <= 0) {
                     stats.getBallisticRoFMult().unmodify(id);
                     stats.getBallisticWeaponFluxCostMod().unmodify(id);
-                    ship.setWeaponGlow(0f, Sneed, EnumSet.of(WeaponAPI.WeaponType.BALLISTIC));
+                    ship.setWeaponGlow(0f, weaponGlowColor, EnumSet.of(WeaponAPI.WeaponType.BALLISTIC));
                     reflectSuccess = false;
-                    sneedreloadtime = 1.5f;
+                    reloadTimeMult = 1.5f;
                 }
                 for (WeaponAPI w : ship.getAllWeapons()) {
                     float reloadRate = w.getSpec().getAmmoPerSecond() * 1.5f;
-                    float nuCharge = reloadRate * sneedreloadtime;
+                    float nuCharge = reloadRate * reloadTimeMult;
                     if (w.getType() == WeaponAPI.WeaponType.BALLISTIC && w.usesAmmo() && reloadRate > 0) {
                         w.getAmmoTracker().setAmmoPerSecond(nuCharge);
                     }
@@ -371,7 +371,7 @@ public class eis_zandatsu2 extends BaseShipSystemScript {
     @Override
     public StatusData getStatusData(int index, State state, float effectLevel) {
         if (index == 0 && reflectSuccess && activeTime > 0f)
-            return new StatusData(poopystinky + Misc.getRoundedValueMaxOneAfterDecimal(activeTime), false);
+            return new StatusData(activeStatusText + Misc.getRoundedValueMaxOneAfterDecimal(activeTime), false);
         return null;
     }
 

@@ -23,8 +23,8 @@ public class eis_irsmommies implements BaseCommand {
         }
         /*if (Global.getSector().getStarSystem("Naraka") != null) {
             StarSystemAPI system = Global.getSector().getStarSystem("Naraka");
-            SectorEntityToken lollmao2 = system.addCustomEntity(null, null, "sensor_array", "hegemony"); 
-            lollmao2.setCircularOrbitPointingDown(system.getEntityById("naraka"), 90 + 60, 3000, 100);
+            SectorEntityToken sensorArray = system.addCustomEntity(null, null, "sensor_array", "hegemony"); 
+            sensorArray.setCircularOrbitPointingDown(system.getEntityById("naraka"), 90 + 60, 3000, 100);
             system.removeEntity(Global.getSector().getEntityById("yami"));
             system.removeEntity(Global.getSector().getEntityById("chitagupta"));
             PlanetAPI naraka_b = system.addPlanet("yami", Global.getSector().getEntityById("yama"), "Yami", "cryovolcanic", 0, 60, 600, 40); //formerly 450
@@ -40,15 +40,15 @@ public class eis_irsmommies implements BaseCommand {
             hyper.addEntity(well);
             well.autoUpdateHyperLocationBasedOnInSystemEntityAtRadius(planet, 470f);
             naraka_c.setCustomDescriptionId("planet_chitagupta_ironshell");
-            PlanetSpecAPI sex = naraka_c.getSpec();
-            sex.setAtmosphereColor(new Color(30, 90, 140, 130));
-            sex.setAtmosphereThickness(0.4f);
-            sex.setAtmosphereThicknessMin(62f);
-            sex.setCloudTexture("graphics/planets/clouds_white.png");
-            sex.setCloudColor(new Color (255,255,255,200));
-            sex.setCloudRotation(-3f);
-            sex.setIconColor(new Color (45,98,174,255));
-            sex.setPlanetColor(new Color (255,255,255,255));
+            PlanetSpecAPI planetSpec = naraka_c.getSpec();
+            planetSpec.setAtmosphereColor(new Color(30, 90, 140, 130));
+            planetSpec.setAtmosphereThickness(0.4f);
+            planetSpec.setAtmosphereThicknessMin(62f);
+            planetSpec.setCloudTexture("graphics/planets/clouds_white.png");
+            planetSpec.setCloudColor(new Color (255,255,255,200));
+            planetSpec.setCloudRotation(-3f);
+            planetSpec.setIconColor(new Color (45,98,174,255));
+            planetSpec.setPlanetColor(new Color (255,255,255,255));
             naraka_c.applySpecChanges();
             SharedData.getData().getPersonBountyEventData().addParticipatingFaction("ironshell");
             new Seriouslywhatisthewholepointofthisisweartoluddiwillmakethispersoneattheirshoe().generate(Global.getSector());

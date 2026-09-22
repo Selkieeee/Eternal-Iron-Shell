@@ -31,7 +31,6 @@ public class eis_VengeanceGlowScript implements EveryFrameWeaponEffectPlugin {
     public static final float ROTATION_SPEED = 10f;
     public static final Color COLOR = new Color(215, 21, 16, 166);
     
-    private final boolean basedonwhat = Global.getSettings().getBoolean("VengeanceSFX");
     //private boolean loaded = false;
     private float rotation = 0f;
     private float opacity = 0f;
@@ -49,7 +48,7 @@ public class eis_VengeanceGlowScript implements EveryFrameWeaponEffectPlugin {
 
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
-        if (!basedonwhat || engine == null || !engine.isUIShowingHUD() || engine.isUIShowingDialog() || engine.getCombatUI().isShowingCommandUI()) {
+        if (engine == null || !engine.isUIShowingHUD() || engine.isUIShowingDialog() || engine.getCombatUI().isShowingCommandUI()) {
             return;
         }
         
@@ -124,7 +123,11 @@ public class eis_VengeanceGlowScript implements EveryFrameWeaponEffectPlugin {
         }
         
 
-        if (!player || ship.getSystem().isActive()  || ship.isHulk() || ship.isPiece() || !ship.isAlive()) {
+        // Fade in only once fully off cooldown, not merely "not mid-burst" - matches
+        // eis_vengeance_dauntless_subsystem.updateVengeanceGlow()'s isReady() check. isActive() alone
+        // (IN/ACTIVE/OUT) used to work because "down" covered the whole wait; now that down=0 it excludes
+        // COOLDOWN, so without isCoolingDown() this would fade back in the instant ACTIVE ends.
+        if (!player || ship.getSystem().isActive() || ship.getSystem().isCoolingDown() || ship.isHulk() || ship.isPiece() || !ship.isAlive()) {
             opacity = Math.max(0f,opacity-2f*amount);
         } else {
             opacity = Math.min(1f,opacity+4f*amount);
@@ -168,7 +171,17 @@ public class eis_VengeanceGlowScript implements EveryFrameWeaponEffectPlugin {
         // HEAT GLOW SECTION
         //----------------------
 
-        float currentBrightness = ship.getSystem().getEffectLevel();
+        // "down" no longer represents the wait-until-ready (down=0 now, see ship_systems.csv) - cooldown does,
+        // and it's stat-scaled via getSystemCooldownBonus(). effectLevel is always 0 during State.COOLDOWN, so
+        // drive the same 1->0 linear fade off cooldown progress instead - a shorter (buffed) cooldown scales
+        // the fade to match, same as the ready-click timing in eis_taste_vengeance.java.
+        float currentBrightness;
+        if (ship.getSystem().isCoolingDown()) {
+            float totalCooldown = ship.getSystem().getCooldown();
+            currentBrightness = totalCooldown > 0f ? ship.getSystem().getCooldownRemaining() / totalCooldown : 0f;
+        } else {
+            currentBrightness = ship.getSystem().getEffectLevel();
+        }
 
         //No glows on wrecks or in refit screen
         if ( ship.isHulk() || ship.isPiece() || !ship.isAlive() || ship.getOriginalOwner() == -1 || ship.getFluxTracker().isOverloadedOrVenting()) {
@@ -185,7 +198,10 @@ public class eis_VengeanceGlowScript implements EveryFrameWeaponEffectPlugin {
         }
 
         //Spawn some smoke
-        if (ship.getSystem().isActive()) {
+        // Was gated on isActive() alone, which used to span the whole ~9.5s "down" window (IN/ACTIVE/OUT).
+        // Now that down=0, isActive() only covers the brief 0.5s ACTIVE burst - also allow isCoolingDown()
+        // so smoke keeps emitting through the fade, same window as the heat glow above.
+        if (ship.getSystem().isActive() || ship.getSystem().isCoolingDown()) {
             interval.advance(amount);
             if (interval.intervalElapsed()) {
                 for (int i = 0; i < 3; i++) {

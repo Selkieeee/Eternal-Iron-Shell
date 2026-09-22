@@ -100,7 +100,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
                     private boolean started = false;
                     private boolean finished = false;
                     private IntervalUtil tracker = new IntervalUtil(1f, 1f);
-                    WeightedRandomPicker<String> AmongUs = new WeightedRandomPicker<String>();
+                    WeightedRandomPicker<String> loyalistLinesPicker = new WeightedRandomPicker<String>();
 			public void init(CombatEngineAPI engine) {
 				engine.getContext().aiRetreatAllowed = false;
                                 engine.getContext().enemyDeployAll = true;

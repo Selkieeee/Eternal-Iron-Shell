@@ -18,7 +18,7 @@ public class eis_peacekeepercore extends BaseHullMod {
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getDamageToMissiles().modifyPercent(id, HAVE_SEX_BONUS);
         stats.getDamageToFighters().modifyPercent(id, HAVE_SEX_BONUS);
-        stats.getBallisticRoFMult().modifyMult(id, HAVE_SEX_BONUS2);
+        //stats.getBallisticRoFMult().modifyMult(id, HAVE_SEX_BONUS2);
         stats.getEngineDamageTakenMult().modifyMult(id, 0f);
         //stats.getDamageToFrigates().modifyMult(id, HAVE_SEX_BONUS2);
         //stats.getDamageToDestroyers().modifyMult(id, HAVE_SEX_BONUS2);

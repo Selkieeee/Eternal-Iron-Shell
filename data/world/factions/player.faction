@@ -24,5 +24,17 @@
 			"graphics/portraits/eis_velma.png",
 			"graphics/portraits/eis_xuan.png",
         ]
-    }
+    },
+    "ranks":{
+        "ranks":{
+            "CommissionerIS":{"name":"Chief Commissioner"},
+            "HeadWardenIS":{"name":"Chief Administrator"},
+            "WardenIS":{"name":"Lieutenant"},
+        },
+        "posts":{
+            "CommissionerIS":{"name":"Chief Commissioner"},
+            "HeadWardenIS":{"name":"Chief Administrator"},
+            "WardenIS":{"name":"Lieutenant"},
+        },
+    },
 }

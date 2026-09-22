@@ -43,8 +43,8 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0012": "eis_ironhammer",
-                "WS0011": "eis_ironhammer"
+                "WS0012": "typhoon",
+                "WS0011": "typhoon"
             }
         },
         {
@@ -58,6 +58,6 @@
     ],
     "wings": [
         "eis_peacekeeper_wing",
-        "eis_talon_wing"
+        "talon_wing"
     ]	  
 }

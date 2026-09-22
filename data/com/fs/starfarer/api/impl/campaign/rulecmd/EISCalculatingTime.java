@@ -10,8 +10,8 @@ import java.util.Map;
 public class EISCalculatingTime extends BaseCommandPlugin {
 	public boolean execute(String ruleId, InteractionDialogAPI dialog, List<Misc.Token> params, Map<String, MemoryAPI> memoryMap) {
 		if (dialog == null) return false;
-                float based = memoryMap.get(MemKeys.GLOBAL).getExpire("$EIS_taxespaid");
-		String days = Misc.getAtLeastStringForDays((int) based);
+                float expireTime = memoryMap.get(MemKeys.GLOBAL).getExpire("$EIS_taxespaid");
+		String days = Misc.getAtLeastStringForDays((int) expireTime);
                 memoryMap.get(MemKeys.LOCAL).set("$EIS_taxespaidDGS", days.toLowerCase(), 0);
 		return true;
 	}

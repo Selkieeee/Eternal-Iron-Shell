@@ -17,12 +17,12 @@
 		},
 		{"mode":"LINKED",
 		 "weapons":{
-		 			"WS 002":"ioncannon_fighter",
+		 			"WS 002":"lightdualmg",
 		 		   },
 		},
 		{"mode":"LINKED",
 		 "weapons":{
-		 			"WS 003":"lightmg",
+		 			"WS 003":"swarmer_fighter",
 		 		   },
 		},
 	],

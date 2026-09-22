@@ -13,7 +13,8 @@
   "viewOffset": 0,
   "builtInMods": [
     "fourteenth",
-    "eis_vengeance"
+    "eis_vengeance",
+    "eis_microforge"
   ],
   "builtInWings": [
     "eis_gunshield_wing"
@@ -37,7 +38,7 @@
   "weaponSlots": [
     {
       "id": "WS0001",
-      "size": "SMALL",
+      "size": "MEDIUM",
       "type": "BALLISTIC",
       "mount": "TURRET",
       "arc": 130,
@@ -47,12 +48,12 @@
     },
     {
       "id": "WS0002",
-      "size": "SMALL",
+      "size": "MEDIUM",
       "type": "BALLISTIC",
       "mount": "TURRET",
       "arc": 130,
       "angle": 30,
-      "locations": [31, 42],
+      "locations": [31, 41],
       "renderOrderMod": 400
     },
     {
@@ -85,21 +86,21 @@
     {
       "id": "WS0005",
       "size": "MEDIUM",
-      "type": "BALLISTIC",
+      "type": "ENERGY",
       "mount": "TURRET",
       "arc": 145,
       "angle": 45,
-      "locations": [59, 29],
+      "locations": [60, 29],
       "renderOrderMod": 300
     },
     {
       "id": "WS0006",
       "size": "MEDIUM",
-      "type": "BALLISTIC",
+      "type": "ENERGY",
       "mount": "TURRET",
       "arc": 145,
       "angle": -45,
-      "locations": [59, -29],
+      "locations": [60, -29],
       "renderOrderMod": 300
     },
     {
@@ -138,7 +139,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [-51, 16.5]
+      "locations": [-51.5, 16.5]
     },
     {
       "id": "WS0011",
@@ -147,7 +148,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [-50.5, -16.5]
+      "locations": [-51.5, -16.5]
     },
     {
       "id": "WS0013",
@@ -156,7 +157,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [-12.5, 56.5]
+      "locations": [-1, 57]
     },
     {
       "id": "WS0014",
@@ -165,7 +166,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": -0,
-      "locations": [-12.5, -56.5]
+      "locations": [-1, -57]
     },
     {
       "id": "WS0015",
@@ -174,7 +175,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [85, 48.5],
+      "locations": [85, 46.5],
       "renderOrderMod": 100
     },
     {
@@ -184,7 +185,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": -0,
-      "locations": [85, -44.5],
+      "locations": [85, -46.5],
       "renderOrderMod": 200
     },
     {
@@ -212,7 +213,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": -0,
-      "locations": [-0.5, -48.5]
+      "locations": [-0.5, -51.5]
     },
     {
       "id": "WS0020",
@@ -235,46 +236,14 @@
     {
       "id": "WS0022",
       "size": "MEDIUM",
-      "type": "BALLISTIC",
+      "type": "HYBRID",
       "mount": "TURRET",
       "arc": 235,
       "angle": 180,
-      "locations": [-34, -0]
+      "locations": [-35, -0]
     }
   ],
   "engineSlots": [
-    {
-      "location": [-112.5, 20],
-      "length": 100,
-      "width": 32,
-      "angle": -180,
-      "contrailSize": 32,
-      "style": "LOW_TECH"
-    },
-    {
-      "location": [-112.5, -20],
-      "length": 100,
-      "width": 32,
-      "angle": 180,
-      "contrailSize": 32,
-      "style": "LOW_TECH"
-    },
-    {
-      "location": [-108.5, 32.5],
-      "length": 78.5,
-      "width": 25,
-      "angle": 170.5,
-      "contrailSize": 25,
-      "style": "LOW_TECH"
-    },
-    {
-      "location": [-108.5, -32.5],
-      "length": 78.5,
-      "width": 25,
-      "angle": -170.5,
-      "contrailSize": 25,
-      "style": "LOW_TECH"
-    },
     {
       "location": [-22, 63],
       "length": 43.314045,
@@ -290,6 +259,70 @@
       "angle": -165.5,
       "contrailSize": 15.510474,
       "style": "LOW_TECH"
+    },
+    {
+      "location": [-113.5, 34],
+      "length": 70,
+      "width": 20,
+      "angle": 170.5,
+      "contrailSize": 25,
+      "style": "EIS_LTBOOST"
+    },
+    {
+      "location": [-113.5, -34],
+      "length": 70,
+      "width": 20,
+      "angle": -170.5,
+      "contrailSize": 25,
+      "style": "EIS_LTBOOST"
+    },
+    {
+      "location": [-122, 20],
+      "length": 80,
+      "width": 20,
+      "angle": -180,
+      "contrailSize": 32,
+      "style": "EIS_LTBOOST"
+    },
+    {
+      "location": [-122, -20],
+      "length": 80,
+      "width": 20,
+      "angle": 180,
+      "contrailSize": 32,
+      "style": "EIS_LTBOOST"
+    },
+    {
+      "location": [-115, 20],
+      "length": 70,
+      "width": 35,
+      "angle": -180,
+      "contrailSize": 32,
+      "style": "EIS_BOOST"
+    },
+    {
+      "location": [-115, -20],
+      "length": 70,
+      "width": 35,
+      "angle": 180,
+      "contrailSize": 32,
+      "style": "EIS_BOOST"
+    },
+    {
+      "location": [-108, -33],
+      "length": 60,
+      "width": 35,
+      "angle": -170.5,
+      "contrailSize": 25,
+      "style": "EIS_BOOST"
+    },
+    {
+      "location": [-108, 33],
+      "length": 60,
+      "width": 35,
+      "angle": 170.5,
+      "contrailSize": 25,
+      "style": "EIS_BOOST"
     }
   ],
   "bounds": [

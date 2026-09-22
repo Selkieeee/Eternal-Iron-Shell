@@ -38,6 +38,7 @@ public class eis_justatip extends BaseHullMod {
     private static String Text5 = Global.getSettings().getString("eis_ironshell", "eis_justatip_text5");
     
     private static String each = Global.getSettings().getString("eis_ironshell", "eis_each");
+    private static final String BULLET = "\u2022";
     private static float sdamagenumber = 150f;
     private static float damagenumber = 100f;
     private static float halfdamagenumber = 50f;
@@ -70,26 +71,26 @@ public class eis_justatip extends BaseHullMod {
             Gula.addPara(Title, 0f, YELLOW, Title);
             if (isForModSpec) {
                 Gula.addPara(Text0, 0f, Misc.getHighlightColor(), Misc.getRoundedValue(damagenumber));
-                Gula.addPara(Text, 0f, Misc.getPositiveHighlightColor(), Misc.getRoundedValue(damagenumber));
-                Gula.addPara(Text2, 0f, Misc.getNegativeHighlightColor(), "-"+Misc.getRoundedValue(halfdamagenumber)+"%");
-                Gula.addPara(Text3, 0f, Misc.getNegativeHighlightColor(), "-"+Misc.getRoundedValue(halfdamagenumber)+"%");
-                Gula.addPara(Text7, 0f, Misc.getNegativeHighlightColor(), "-"+Misc.getRoundedValue(halfdamagenumber)+"%");
-                Gula.addPara(Text8, 0f, Misc.getPositiveHighlightColor(), Misc.getRoundedValue(damagenumber)+"%");
-                Gula.addPara(Text4, 0f, Misc.getHighlightColor(), Misc.getRoundedValue(halfdamagenumber/2));
-                Gula.addPara(Text6, Misc.getNegativeHighlightColor(), 0f);
-                Gula.addPara(Text5, 0f, Misc.getGrayColor(), Misc.getHighlightColor(), Misc.getRoundedValue(halfdamagenumber), Misc.getRoundedValue(sdamagenumber));
+                Gula.addPara(Text, 0f, Misc.getPositiveHighlightColor(), BULLET, Misc.getRoundedValue(damagenumber));
+                Gula.addPara(Text2, 0f, Misc.getNegativeHighlightColor(), BULLET, "-"+Misc.getRoundedValue(halfdamagenumber)+"%");
+                Gula.addPara(Text3, 0f, Misc.getNegativeHighlightColor(), BULLET, "-"+Misc.getRoundedValue(halfdamagenumber)+"%");
+                Gula.addPara(Text7, 0f, Misc.getNegativeHighlightColor(), BULLET, "-"+Misc.getRoundedValue(halfdamagenumber)+"%");
+                Gula.addPara(Text8, 0f, Misc.getPositiveHighlightColor(), BULLET, Misc.getRoundedValue(damagenumber)+"%");
+                Gula.addPara(Text4, 0f, Misc.getHighlightColor(), BULLET, Misc.getRoundedValue(halfdamagenumber/2));
+                Gula.addPara(Text6, 0f, Misc.getNegativeHighlightColor(), BULLET);
+                Gula.addPara(Text5, 0f, Misc.getGrayColor(), Misc.getHighlightColor(), BULLET, Misc.getRoundedValue(halfdamagenumber), Misc.getRoundedValue(sdamagenumber));
                 tooltip.addImageWithText(PAD);
             } else if (ship.getHullSpec().isBuiltInMod("eis_justatip") || ship.getVariant().getSMods().contains("eis_justatip")) {
                 Gula.addPara(Text0, 0f, Misc.getPositiveHighlightColor(), Misc.getRoundedValue(halfdamagenumber));
-                Gula.addPara(Text, 0f, Misc.getPositiveHighlightColor(), Misc.getRoundedValue(sdamagenumber));
-                if (ship.getVariant().hasHullMod("eis_vengeancecore") || ship.getVariant().hasHullMod("eis_zandatsu")) {Gula.addPara(Text9, 0f);}
-                Gula.addPara(Text2, 0f, Misc.getNegativeHighlightColor(), "-"+Misc.getRoundedValue(halfdamagenumber)+"%");
-                Gula.addPara(Text3, 0f, Misc.getNegativeHighlightColor(), "-"+Misc.getRoundedValue(halfdamagenumber)+"%");
-                Gula.addPara(Text7, 0f, Misc.getNegativeHighlightColor(), "-"+Misc.getRoundedValue(halfdamagenumber)+"%");
-                if (!ship.getVariant().getFittedWings().isEmpty()) {Gula.addPara(Text8, 0f, Misc.getPositiveHighlightColor(), Misc.getRoundedValue(ship.getVariant().getFittedWings().size() > 1 ? sdamagenumber/ship.getVariant().getFittedWings().size() : sdamagenumber));}
-                Gula.addPara(Text4, 0f, Misc.getHighlightColor(), Misc.getRoundedValue(halfdamagenumber/2));
-                Gula.addPara(Text6, Misc.getNegativeHighlightColor(), 0f);
-                Gula.addPara(Text5, 0f, Misc.getPositiveHighlightColor(), Misc.getHighlightColor(), Misc.getRoundedValue(halfdamagenumber), Misc.getRoundedValue(sdamagenumber));
+                Gula.addPara(Text, 0f, Misc.getPositiveHighlightColor(), BULLET, Misc.getRoundedValue(sdamagenumber));
+                if (ship.getVariant().hasHullMod("eis_vengeancecore") || ship.getVariant().hasHullMod("eis_zandatsu")) {Gula.addPara(Text9, 0f, Misc.getHighlightColor(), BULLET);}
+                Gula.addPara(Text2, 0f, Misc.getNegativeHighlightColor(), BULLET, "-"+Misc.getRoundedValue(halfdamagenumber)+"%");
+                Gula.addPara(Text3, 0f, Misc.getNegativeHighlightColor(), BULLET, "-"+Misc.getRoundedValue(halfdamagenumber)+"%");
+                Gula.addPara(Text7, 0f, Misc.getNegativeHighlightColor(), BULLET, "-"+Misc.getRoundedValue(halfdamagenumber)+"%");
+                if (!ship.getVariant().getFittedWings().isEmpty()) {Gula.addPara(Text8, 0f, Misc.getPositiveHighlightColor(), BULLET, Misc.getRoundedValue(ship.getVariant().getFittedWings().size() > 1 ? sdamagenumber/ship.getVariant().getFittedWings().size() : sdamagenumber));}
+                Gula.addPara(Text4, 0f, Misc.getHighlightColor(), BULLET, Misc.getRoundedValue(halfdamagenumber/2));
+                Gula.addPara(Text6, 0f, Misc.getNegativeHighlightColor(), BULLET);
+                Gula.addPara(Text5, 0f, Misc.getPositiveHighlightColor(), Misc.getHighlightColor(), BULLET, Misc.getRoundedValue(halfdamagenumber), Misc.getRoundedValue(sdamagenumber));
                 tooltip.addImageWithText(PAD);
                 boolean diditonce = false;
                 Map<String, Boolean> weaponlist = new HashMap<>(); //The hullmods has to be cleared everytime ig.
@@ -102,10 +103,10 @@ public class eis_justatip extends BaseHullMod {
                             if (((MissileSpecAPI)weapon.getSpec().getProjectileSpec()).getBehaviorJSON() != null) {
                                 try {if ("MIRV".equals(((MissileSpecAPI)weapon.getSpec().getProjectileSpec()).getBehaviorJSON().getString("behavior"))) {
                                     water /= 2;
-                                }} catch (JSONException sex) {}
+                                }} catch (JSONException e) {}
                                 try {if ("PROXIMITY_FUSE".equals(((MissileSpecAPI)weapon.getSpec().getProjectileSpec()).getBehaviorJSON().getString("behavior"))) {
                                     isokaytoadd = false;
-                                }} catch (JSONException sex) {}
+                                }} catch (JSONException e) {}
                             }
                             if (!weapon.usesAmmo() || weapon.getSpec().getAmmoPerSecond() > 0) {
                                     water /= 2;
@@ -116,7 +117,7 @@ public class eis_justatip extends BaseHullMod {
                             }
                             if (water < 25f) {water = 25f;}
                         }
-                        if (isokaytoadd) {if (!diditonce){tooltip.addSectionHeading(ship.getHullSpec().getHullName(), Alignment.MID, 3f);diditonce = true;tooltip.addPara("• %s: %s "+each, 5f, new Color[]{Misc.getMissileMountColor(),Misc.getPositiveHighlightColor()}, weapon.getDisplayName(),"+"+Misc.getRoundedValue(water));} else {tooltip.addPara("• %s: %s "+each, 1f, new Color[]{Misc.getMissileMountColor(),Misc.getPositiveHighlightColor()}, weapon.getDisplayName(),"+"+Misc.getRoundedValue(water));}}
+                        if (isokaytoadd) {if (!diditonce){tooltip.addSectionHeading(ship.getHullSpec().getHullName(), Alignment.MID, 3f);diditonce = true;tooltip.addPara(BULLET+" %s: %s "+each, 5f, new Color[]{Misc.getMissileMountColor(),Misc.getPositiveHighlightColor()}, weapon.getDisplayName(),"+"+Misc.getRoundedValue(water));} else {tooltip.addPara(BULLET+" %s: %s "+each, 1f, new Color[]{Misc.getMissileMountColor(),Misc.getPositiveHighlightColor()}, weapon.getDisplayName(),"+"+Misc.getRoundedValue(water));}}
                         }
                 }
                 if (ship.getVariant().getFittedWings() != null) {boolean diditonce2 = false;Map<String, Boolean> weaponlist2 = new HashMap<>();
@@ -129,10 +130,10 @@ public class eis_justatip extends BaseHullMod {
                                 if (((MissileSpecAPI)weaponspec.getProjectileSpec()).getBehaviorJSON() != null) {
                                     try {if ("MIRV".equals(((MissileSpecAPI)weaponspec.getProjectileSpec()).getBehaviorJSON().getString("behavior"))) {
                                         water /= 2;
-                                    }} catch (JSONException sex) {}
+                                    }} catch (JSONException e) {}
                                     try {if ("PROXIMITY_FUSE".equals(((MissileSpecAPI)weaponspec.getProjectileSpec()).getBehaviorJSON().getString("behavior"))) {
                                         isokaytoadd = false;
-                                    }} catch (JSONException sex) {}
+                                    }} catch (JSONException e) {}
                                 }
                                 if (!weaponspec.usesAmmo() || weaponspec.getAmmoPerSecond() > 0) {
                                         water /= 2;
@@ -143,20 +144,20 @@ public class eis_justatip extends BaseHullMod {
                                 }
                                 if (water < 25f) {water = 25f;}
                             }
-                            if (isokaytoadd) {if (!diditonce2){tooltip.addSectionHeading(Global.getSettings().getFighterWingSpec(wing).getWingName(), Alignment.MID, 3f);diditonce2 = true;tooltip.addPara("• %s: %s "+each, 5f, new Color[]{Misc.getMissileMountColor(),Misc.getPositiveHighlightColor()}, weaponspec.getWeaponName(),"+"+Misc.getRoundedValue(water));} else {tooltip.addPara("• %s: %s "+each, 1f, new Color[]{Misc.getMissileMountColor(),Misc.getPositiveHighlightColor()}, weaponspec.getWeaponName(),"+"+Misc.getRoundedValue(water));}}  
+                            if (isokaytoadd) {if (!diditonce2){tooltip.addSectionHeading(Global.getSettings().getFighterWingSpec(wing).getWingName(), Alignment.MID, 3f);diditonce2 = true;tooltip.addPara(BULLET+" %s: %s "+each, 5f, new Color[]{Misc.getMissileMountColor(),Misc.getPositiveHighlightColor()}, weaponspec.getWeaponName(),"+"+Misc.getRoundedValue(water));} else {tooltip.addPara(BULLET+" %s: %s "+each, 1f, new Color[]{Misc.getMissileMountColor(),Misc.getPositiveHighlightColor()}, weaponspec.getWeaponName(),"+"+Misc.getRoundedValue(water));}}  
                         }}}} //shhh don't worry about this
                     }
             } else if (!isForModSpec) {
                 Gula.addPara(Text0, 0f, Misc.getHighlightColor(), Misc.getRoundedValue(damagenumber));
-                Gula.addPara(Text, 0f, Misc.getPositiveHighlightColor(), Misc.getRoundedValue(damagenumber));
-                if (ship.getVariant().hasHullMod("eis_vengeancecore") || ship.getVariant().hasHullMod("eis_zandatsu")) {Gula.addPara(Text9, 0f);}
-                Gula.addPara(Text2, 0f, Misc.getNegativeHighlightColor(), "-"+Misc.getRoundedValue(halfdamagenumber)+"%");
-                Gula.addPara(Text3, 0f, Misc.getNegativeHighlightColor(), "-"+Misc.getRoundedValue(halfdamagenumber)+"%");
-                Gula.addPara(Text7, 0f, Misc.getNegativeHighlightColor(), "-"+Misc.getRoundedValue(halfdamagenumber)+"%");
-                if (!ship.getVariant().getFittedWings().isEmpty()) {Gula.addPara(Text8, 0f, Misc.getPositiveHighlightColor(), Misc.getRoundedValue(ship.getVariant().getFittedWings().size() > 1 ? damagenumber/ship.getVariant().getFittedWings().size() : damagenumber));}
-                Gula.addPara(Text4, 0f, Misc.getHighlightColor(), Misc.getRoundedValue(halfdamagenumber/2));
-                Gula.addPara(Text6, Misc.getNegativeHighlightColor(), 0f);
-                Gula.addPara(Text5, 0f, Misc.getGrayColor(), Misc.getHighlightColor(), Misc.getRoundedValue(halfdamagenumber), Misc.getRoundedValue(sdamagenumber));
+                Gula.addPara(Text, 0f, Misc.getPositiveHighlightColor(), BULLET, Misc.getRoundedValue(damagenumber));
+                if (ship.getVariant().hasHullMod("eis_vengeancecore") || ship.getVariant().hasHullMod("eis_zandatsu")) {Gula.addPara(Text9, 0f, Misc.getHighlightColor(), BULLET);}
+                Gula.addPara(Text2, 0f, Misc.getNegativeHighlightColor(), BULLET, "-"+Misc.getRoundedValue(halfdamagenumber)+"%");
+                Gula.addPara(Text3, 0f, Misc.getNegativeHighlightColor(), BULLET, "-"+Misc.getRoundedValue(halfdamagenumber)+"%");
+                Gula.addPara(Text7, 0f, Misc.getNegativeHighlightColor(), BULLET, "-"+Misc.getRoundedValue(halfdamagenumber)+"%");
+                if (!ship.getVariant().getFittedWings().isEmpty()) {Gula.addPara(Text8, 0f, Misc.getPositiveHighlightColor(), BULLET, Misc.getRoundedValue(ship.getVariant().getFittedWings().size() > 1 ? damagenumber/ship.getVariant().getFittedWings().size() : damagenumber));}
+                Gula.addPara(Text4, 0f, Misc.getHighlightColor(), BULLET, Misc.getRoundedValue(halfdamagenumber/2));
+                Gula.addPara(Text6, 0f, Misc.getNegativeHighlightColor(), BULLET);
+                Gula.addPara(Text5, 0f, Misc.getGrayColor(), Misc.getHighlightColor(), BULLET, Misc.getRoundedValue(halfdamagenumber), Misc.getRoundedValue(sdamagenumber));
                 tooltip.addImageWithText(PAD);
                 boolean diditonce = false;
                 if (ship != null) {
@@ -170,10 +171,10 @@ public class eis_justatip extends BaseHullMod {
                                 if (((MissileSpecAPI)weapon.getSpec().getProjectileSpec()).getBehaviorJSON() != null) {
                                     try {if ("MIRV".equals(((MissileSpecAPI)weapon.getSpec().getProjectileSpec()).getBehaviorJSON().getString("behavior"))) {
                                         water /= 2;
-                                    }} catch (JSONException sex) {}
+                                    }} catch (JSONException e) {}
                                     try {if ("PROXIMITY_FUSE".equals(((MissileSpecAPI)weapon.getSpec().getProjectileSpec()).getBehaviorJSON().getString("behavior"))) {
                                         isokaytoadd = false;
-                                    }} catch (JSONException sex) {}
+                                    }} catch (JSONException e) {}
                                 }
                                 if (!weapon.usesAmmo() || weapon.getAmmoPerSecond() > 0) {
                                     water /= 2;
@@ -184,7 +185,7 @@ public class eis_justatip extends BaseHullMod {
                                 }
                                 if (water < 25f) {water = 25f;}
                             }
-                            if (isokaytoadd) {if (!diditonce){tooltip.addSectionHeading(ship.getHullSpec().getHullName(), Alignment.MID, 3f);diditonce = true;tooltip.addPara("• %s: %s "+each, 5f, new Color[]{Misc.getMissileMountColor(),Misc.getPositiveHighlightColor()}, weapon.getDisplayName(),"+"+Misc.getRoundedValue(water));} else {tooltip.addPara("• %s: %s "+each, 1f, new Color[]{Misc.getMissileMountColor(),Misc.getPositiveHighlightColor()}, weapon.getDisplayName(),"+"+Misc.getRoundedValue(water));}}
+                            if (isokaytoadd) {if (!diditonce){tooltip.addSectionHeading(ship.getHullSpec().getHullName(), Alignment.MID, 3f);diditonce = true;tooltip.addPara(BULLET+" %s: %s "+each, 5f, new Color[]{Misc.getMissileMountColor(),Misc.getPositiveHighlightColor()}, weapon.getDisplayName(),"+"+Misc.getRoundedValue(water));} else {tooltip.addPara(BULLET+" %s: %s "+each, 1f, new Color[]{Misc.getMissileMountColor(),Misc.getPositiveHighlightColor()}, weapon.getDisplayName(),"+"+Misc.getRoundedValue(water));}}
                         }
                     }
                     if (ship.getVariant().getFittedWings() != null) {boolean diditonce2 = false;Map<String, Boolean> weaponlist2 = new HashMap<>();
@@ -197,10 +198,10 @@ public class eis_justatip extends BaseHullMod {
                                 if (((MissileSpecAPI)weaponspec.getProjectileSpec()).getBehaviorJSON() != null) {
                                     try {if ("MIRV".equals(((MissileSpecAPI)weaponspec.getProjectileSpec()).getBehaviorJSON().getString("behavior"))) {
                                         water /= 2;
-                                    }} catch (JSONException sex) {}
+                                    }} catch (JSONException e) {}
                                     try {if ("PROXIMITY_FUSE".equals(((MissileSpecAPI)weaponspec.getProjectileSpec()).getBehaviorJSON().getString("behavior"))) {
                                         isokaytoadd = false;
-                                    }} catch (JSONException sex) {}
+                                    }} catch (JSONException e) {}
                                 }
                                 if (!weaponspec.usesAmmo() || weaponspec.getAmmoPerSecond() > 0) {
                                         water /= 2;
@@ -211,7 +212,7 @@ public class eis_justatip extends BaseHullMod {
                                 }
                                 if (water < 25f) {water = 25f;}
                             }
-                            if (isokaytoadd) {if (!diditonce2){tooltip.addSectionHeading(Global.getSettings().getFighterWingSpec(wing).getWingName(), Alignment.MID, 3f);diditonce2 = true;tooltip.addPara("• %s: %s "+each, 5f, new Color[]{Misc.getMissileMountColor(),Misc.getPositiveHighlightColor()}, weaponspec.getWeaponName(),"+"+Misc.getRoundedValue(water));} else {tooltip.addPara("• %s: %s "+each, 1f, new Color[]{Misc.getMissileMountColor(),Misc.getPositiveHighlightColor()}, weaponspec.getWeaponName(),"+"+Misc.getRoundedValue(water));}}  
+                            if (isokaytoadd) {if (!diditonce2){tooltip.addSectionHeading(Global.getSettings().getFighterWingSpec(wing).getWingName(), Alignment.MID, 3f);diditonce2 = true;tooltip.addPara(BULLET+" %s: %s "+each, 5f, new Color[]{Misc.getMissileMountColor(),Misc.getPositiveHighlightColor()}, weaponspec.getWeaponName(),"+"+Misc.getRoundedValue(water));} else {tooltip.addPara(BULLET+" %s: %s "+each, 1f, new Color[]{Misc.getMissileMountColor(),Misc.getPositiveHighlightColor()}, weaponspec.getWeaponName(),"+"+Misc.getRoundedValue(water));}}  
                         }}}} //shhh don't worry about this
                     }
                 }

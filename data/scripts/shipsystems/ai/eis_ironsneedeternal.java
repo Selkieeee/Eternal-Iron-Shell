@@ -80,7 +80,7 @@ public class eis_ironsneedeternal implements ShipSystemAIScript {
             int missileThreatAmount = 0;
             List<MissileAPI> allMissiles = CombatUtils.getMissilesWithinRange(ship.getLocation(), ship.getCollisionRadius()+ship.getMutableStats().getSystemRangeBonus().computeEffective(EFFECT_RANGE) * MathUtils.getRandomNumberInRange(0.5f,1f));
             for (MissileAPI missile : allMissiles) {
-            try {if (missile.getBehaviorSpecParams().get("behavior").equals("PROXIMITY_FUSE")) {continue;}} catch (Exception sex) {}   
+            try {if (missile.getBehaviorSpecParams().get("behavior").equals("PROXIMITY_FUSE")) {continue;}} catch (Exception e) {}   
                 if (missile.getOwner() != ship.getOwner() && !missile.isMine()) {
                     float scale = 1f;
                     switch (missile.getDamageType()) {

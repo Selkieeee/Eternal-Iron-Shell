@@ -11,11 +11,11 @@ import java.awt.Color;
 
 public class eis_blinker2 implements EveryFrameWeaponEffectPlugin {
     private Color base = null;
-    private FaderUtil Sussy = new FaderUtil(1f, 1f, 1f);
+    private FaderUtil ventingFader = new FaderUtil(1f, 1f, 1f);
     private FaderUtil Pulsating = new FaderUtil(1f, 2f, 2f, true, true);
     
     public eis_blinker2() {
-        Sussy.fadeIn();
+        ventingFader.fadeIn();
         Pulsating.fadeIn();
     }
     
@@ -24,7 +24,7 @@ public class eis_blinker2 implements EveryFrameWeaponEffectPlugin {
         if (engine.isPaused()) return;
         ShipAPI ship = weapon.getShip();
         weapon.getSprite().setAdditiveBlend();
-        Sussy.advance(amount);
+        ventingFader.advance(amount);
         Pulsating.advance(amount);
         SpriteAPI sprite = weapon.getSprite();
         
@@ -33,14 +33,14 @@ public class eis_blinker2 implements EveryFrameWeaponEffectPlugin {
         if (ship.getOriginalOwner() == -1) {sprite.setColor(new Color(92, 92, 92, 255));return;} //blinker off ig
         if (ship.isAlive() && !ship.getFluxTracker().isOverloaded()) {
             if (ship.getFluxTracker().isVenting()) {
-                Sussy.fadeOut();
+                ventingFader.fadeOut();
             } else {
-                Sussy.fadeIn();
+                ventingFader.fadeIn();
             }
         }
-        float alphaMult = Sussy.getBrightness() * (0.75f + Pulsating.getBrightness() * 0.25f);
+        float alphaMult = ventingFader.getBrightness() * (0.75f + Pulsating.getBrightness() * 0.25f);
         if (ship.getFluxTracker().isOverloaded()) {
-            alphaMult = (float) Math.random() * Sussy.getBrightness();
+            alphaMult = (float) Math.random() * ventingFader.getBrightness();
         }
         Color color = Misc.scaleAlpha(base, alphaMult);
         sprite.setColor(color);

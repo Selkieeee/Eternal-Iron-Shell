@@ -7,6 +7,7 @@ import com.fs.starfarer.api.combat.GuidedMissileAI;
 import com.fs.starfarer.api.combat.MissileAPI;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
+import com.fs.starfarer.api.combat.WeaponAPI.WeaponType;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.util.Misc;
 
@@ -19,86 +20,98 @@ import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class eis_taste_vengeance extends BaseShipSystemScript {
-    private static final float BUFF_DURATION = 9.0f;
-    private static final float DEBUFF_DURATION = 3.0f; 
+    private static final float BUFF_DURATION = 4.0f;
     private static final float REFLECT_RANGE = 400f; // added onto ship collision radius
     private static final float ROTATION_SPEED = 420f; // how fast missiles get rotated in degrees per second
-    public static final float SHIELD_ARC_BONUS = 40f;
-    public static final float SHIELD_BONUS = .3f;
     public static float PIERCE_MULT = 0.5f;
-    private float ORIGINALCOOMSAUCE;
-    
-    private static String poopystinky = Global.getSettings().getString("eis_ironshell", "eis_taste_vengeance1");
-    private static String poopystinky2 = Global.getSettings().getString("eis_ironshell", "eis_taste_vengeance2");
-    private static String poopystinky3 = Global.getSettings().getString("eis_ironshell", "eis_taste_vengeance3");
-    private static String poopystinky4 = Global.getSettings().getString("eis_ironshell", "eis_taste_vengeance4");
-    
-    private static final Color PARRY_FAIL_CORE_COLOR = new Color (255, 10, 0, 70); // shield colors if debuffed
-    private static final Color PARRY_FAIL_RING_COLOR = new Color (255,100,77,175);
-    private static final Color PARRY_SUCCESS_CORE_COLOR = new Color (79,187,255,70); // shield colors if buffed
-    private static final Color PARRY_SUCCESS_RING_COLOR = new Color (205,235,255,175);
+
+    // Parry buff - was a shield-efficiency buff with a shield color change; now a ballistic/energy
+    // rate-of-fire/reload/flux buff instead, matching eis_zandatsu's own parry-buff pattern (including its
+    // weapon glow visual).
+    private static final float ROF_BONUS = 1.5f; // +50%
+    private static final float FLUX_REDUCTION = 0.33f; // -33%
+    private static final float GLOW_FADE_DURATION = 0.5f; // linear 100->0 ramp on the weapon glow after the buff ends
+    private static final Color weaponGlowColor = new Color(255, 200, 0, 155); // matches eis_zandatsu's weaponGlowColor
+
+    private static String buffActiveText = Global.getSettings().getString("eis_ironshell", "eis_vengeanceCoreBuffActiveText");
+    private static String buffTimeRemainingText = Global.getSettings().getString("eis_ironshell", "eis_vengeanceCoreBuffRemainingText");
+
     private static final Color PARRY_JITTER_RING_COLOR = new Color (255,255,255,80);
-    
+
     private boolean reset = true;
     private boolean reflectSuccess = false;
-    private boolean hasShield = false;
     private boolean soundOnce = false;
-    
+
     private int doEffects = 0;
-    
+
     private float activeTime = 0f;
-    private float SpaghettiSauce;
-    
+
     private CombatEngineAPI engine =  Global.getCombatEngine();
-    
+
     private ShipAPI ship;
-    
-    private Color initialShieldRingColor;
-    private Color initialShieldCoreColor;
-    
+
     private Map<MissileAPI,MissileTracker> missileMap = new HashMap<>();
 
     @Override
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
         if (engine.isPaused() || stats.getEntity() == null) return;
+
+        // eis_taste_vengeance.system now sets runScriptWhileIdle, so apply() keeps getting called through
+        // COOLDOWN/IDLE (needed for the jitter/click and shield buff below, which now live in COOLDOWN) -
+        // but that means unapply() never fires anymore. Detect the return to IDLE here instead and do the
+        // same cleanup unapply() used to, then arm reset for the next activation cycle.
+        if (state == State.IDLE) {
+            if (!reset) {
+                if (reflectSuccess) {
+                    stats.getBallisticRoFMult().unmodify(id);
+                    stats.getBallisticWeaponFluxCostMod().unmodify(id);
+                    stats.getBallisticAmmoRegenMult().unmodify(id);
+                    stats.getEnergyRoFMult().unmodify(id);
+                    stats.getEnergyWeaponFluxCostMod().unmodify(id);
+                    stats.getEnergyAmmoRegenMult().unmodify(id);
+                    ship.setWeaponGlow(0f, weaponGlowColor, EnumSet.of(WeaponType.BALLISTIC, WeaponType.ENERGY));
+                }
+                reset = true;
+            }
+            return;
+        }
+
         if (reset) {
             reset = false;
             reflectSuccess = false;
-            hasShield = false;
             doEffects = 0;
             activeTime = 0f;
             ship = (ShipAPI)stats.getEntity();
-            if (ship.getShield() != null) {
-                hasShield = true;
-                ORIGINALCOOMSAUCE = ship.getShield().getArc();
-                initialShieldCoreColor = ship.getShield().getInnerColor();
-                initialShieldRingColor = ship.getShield().getRingColor();
-            }
         }
-	float jitterLevel = effectLevel;
-	float jitterRangeBonus = 0;
-	float maxRangeBonus = 10f;
+
+        // Loop sound - was handled automatically by the engine via the .system spec's "loopSound" field, but
+        // that's driven by ShipSystemAPI.isActive() (IN/ACTIVE/OUT only) with no way to extend it into COOLDOWN,
+        // so it always cut off the instant OUT ended regardless of down's duration. Played manually here instead,
+        // same pattern as eis_vengeance_dauntless_subsystem.advance()'s isOn() check.
+        if (ship.getSystem().isActive() || ship.getSystem().isCoolingDown()) {
+            Global.getSoundPlayer().playLoop("system_vengeance_loop", ship, 1f, 1f, ship.getLocation(), ship.getVelocity());
+        }
+
         Color jitterColor = PARRY_JITTER_RING_COLOR;
         Color jitterUnderColor = PARRY_JITTER_RING_COLOR;
         if (state == State.ACTIVE) {
-            jitterLevel = 0f;
-            jitterRangeBonus = maxRangeBonus;
             soundOnce = false;
-        } else if (state == State.OUT) {
-            jitterRangeBonus = jitterLevel * maxRangeBonus;
-            if (activeTime > (BUFF_DURATION-0.5f)) {
-                jitterLevel = Math.max(1 - activeTime / BUFF_DURATION, 1.0f);
-                ship.setJitter(this, jitterColor, jitterLevel, 1, 0, 0 + jitterRangeBonus);
-		ship.setJitterUnder(this, jitterUnderColor, jitterLevel, 10, 0f, 7f + jitterRangeBonus);
+        } else if (state == State.COOLDOWN) {
+            // Ready-click + jitter pulse in the last 0.5s of cooldown - mirrors
+            // eis_vengeance_dauntless_subsystem's isCooldown() branch. "down" no longer represents the
+            // wait-until-ready (down=0 now, see ship_systems.csv) - cooldown does, and it's stat-scaled via
+            // getSystemCooldownBonus(), so this naturally re-times itself against a shortened/lengthened cooldown.
+            if (ship.getSystem().getCooldownRemaining() <= 0.5f) {
+                ship.setJitter(this, jitterColor, 1f, 1, 0, 0f);
+                ship.setJitterUnder(this, jitterUnderColor, 1f, 10, 0f, 7f);
                 if (!soundOnce) {Global.getSoundPlayer().playSound("gun_out_of_ammo", 1f, 0.6f, ship.getLocation(), ship.getVelocity());soundOnce = true;}
             }
-        } else {
-            jitterLevel = 0f;
         }
         float ADJUSTED_RANGE = ship.getMutableStats().getSystemRangeBonus().computeEffective(REFLECT_RANGE);
         float amount = engine.getElapsedInLastFrame();
@@ -138,7 +151,7 @@ public class eis_taste_vengeance extends BaseShipSystemScript {
                     missile.fadeOutThenIn(amount);
                     continue;
                 }
-                try {if (missile.getBehaviorSpecParams().get("behavior").equals("PROXIMITY_FUSE")) {toRemove.add(missile);continue;}} catch (Exception sex) {}
+                try {if (missile.getBehaviorSpecParams().get("behavior").equals("PROXIMITY_FUSE")) {toRemove.add(missile);continue;}} catch (Exception e) {}
                 MissileTracker tracker = missileMap.get(missile);
                 if (!tracker.isFacingOrigin()) {
                     if (tracker.shouldTurnLeft()) {
@@ -162,54 +175,46 @@ public class eis_taste_vengeance extends BaseShipSystemScript {
                 missileMap.remove(missile);
             }
         }
-        if (state == State.OUT) {
+        // Was State.OUT - moved here since "down" is now 0 (see ship_systems.csv) and no longer where this
+        // buff's window lives; State.COOLDOWN now holds the real, stat-scaled wait time.
+        if (state == State.COOLDOWN) {
             activeTime += amount;
-            if (ship.getShield() != null) {
-                if (ship.getShield().isOff()) {SpaghettiSauce = 0;} else {SpaghettiSauce = ship.getShield().getActiveArc();}
-                if (reflectSuccess && activeTime <= BUFF_DURATION) { // blend from normal -> buff color
-                    ship.getShield().setRingColor(PARRY_SUCCESS_RING_COLOR);
-                    ship.getShield().setInnerColor(PARRY_SUCCESS_CORE_COLOR);
-                    stats.getShieldDamageTakenMult().modifyMult(id, 1f - SHIELD_BONUS);
-                } else if (!reflectSuccess && activeTime <= DEBUFF_DURATION) { // blend from normal -> debuff color
-                    ship.getShield().setRingColor(PARRY_FAIL_RING_COLOR);
-                    ship.getShield().setInnerColor(PARRY_FAIL_CORE_COLOR);
-                    ship.getShield().setActiveArc(SpaghettiSauce+1.4f);
-                    if (SpaghettiSauce >= ORIGINALCOOMSAUCE+SHIELD_ARC_BONUS*3) {
-                        ship.getShield().setActiveArc(ORIGINALCOOMSAUCE+(SHIELD_ARC_BONUS*3));
-                    }
-                    stats.getShieldDamageTakenMult().modifyMult(id, 1f + SHIELD_BONUS);
-                }
-                if (reflectSuccess && activeTime > BUFF_DURATION) { // blend from buff color -> normal
-                    ship.getShield().setRingColor(initialShieldCoreColor);
-                    ship.getShield().setInnerColor(initialShieldCoreColor);
-                    stats.getShieldDamageTakenMult().unmodifyMult(id);
-                } else if (!reflectSuccess && activeTime > DEBUFF_DURATION) { // blend from debuff color -> normal
-                    ship.getShield().setRingColor(initialShieldRingColor);
-                    ship.getShield().setInnerColor(initialShieldCoreColor);
-                    if (ship.getShield().getActiveArc() >= ORIGINALCOOMSAUCE) { 
-                        ship.getShield().setActiveArc(SpaghettiSauce-1f);
-                    } //else {ship.getShield().setActiveArc(ORIGINALCOOMSAUCE);}
-                    stats.getShieldDamageTakenMult().unmodifyMult(id);
-                }
+            if (reflectSuccess && activeTime <= BUFF_DURATION) {
+                stats.getBallisticRoFMult().modifyMult(id, ROF_BONUS);
+                stats.getBallisticWeaponFluxCostMod().modifyMult(id, 1f - FLUX_REDUCTION);
+                stats.getBallisticAmmoRegenMult().modifyMult(id, ROF_BONUS);
+                stats.getEnergyRoFMult().modifyMult(id, ROF_BONUS);
+                stats.getEnergyWeaponFluxCostMod().modifyMult(id, 1f - FLUX_REDUCTION);
+                stats.getEnergyAmmoRegenMult().modifyMult(id, ROF_BONUS);
+                ship.setWeaponGlow(1f, weaponGlowColor, EnumSet.of(WeaponType.BALLISTIC, WeaponType.ENERGY));
+            }
+            if (reflectSuccess && activeTime > BUFF_DURATION) {
+                stats.getBallisticRoFMult().unmodify(id);
+                stats.getBallisticWeaponFluxCostMod().unmodify(id);
+                stats.getBallisticAmmoRegenMult().unmodify(id);
+                stats.getEnergyRoFMult().unmodify(id);
+                stats.getEnergyWeaponFluxCostMod().unmodify(id);
+                stats.getEnergyAmmoRegenMult().unmodify(id);
+                // Stat buff ends immediately, but ramp the weapon glow down linearly over GLOW_FADE_DURATION
+                // instead of cutting it instantly.
+                float fadeElapsed = activeTime - BUFF_DURATION;
+                float glowLevel = Math.max(0f, 1f - fadeElapsed / GLOW_FADE_DURATION);
+                ship.setWeaponGlow(glowLevel, weaponGlowColor, EnumSet.of(WeaponType.BALLISTIC, WeaponType.ENERGY));
             }
         }
     }
 
-    @Override
-    public void unapply(MutableShipStatsAPI stats, String id) {
-        reset = true;
-    }
+    // No unapply() override - eis_taste_vengeance.system now sets runScriptWhileIdle so apply() keeps running
+    // through COOLDOWN/IDLE, and unapply() never gets called as a result (confirmed vanilla behavior for that
+    // flag). The equivalent cleanup (unmodify the buff if still active, arm reset) now happens in
+    // apply()'s State.IDLE branch instead.
 
     @Override
     public StatusData getStatusData(int index, State state, float effectLevel) {
-        if (index == 0 && state == State.OUT && reflectSuccess && activeTime < BUFF_DURATION && hasShield)
-            return new StatusData(poopystinky, false);
-        if (index == 1 && state == State.OUT && reflectSuccess && activeTime < BUFF_DURATION && hasShield)
-            return new StatusData(poopystinky2 + Misc.getRoundedValueMaxOneAfterDecimal(BUFF_DURATION - activeTime) + "", false);
-        if (index == 0 && state == State.OUT && !reflectSuccess && activeTime < DEBUFF_DURATION && hasShield)
-            return new StatusData(poopystinky3, true);
-        if (index == 1 && state == State.OUT && !reflectSuccess && activeTime < DEBUFF_DURATION && hasShield)
-            return new StatusData(poopystinky4 + Misc.getRoundedValueMaxOneAfterDecimal(DEBUFF_DURATION - activeTime) + "", true);
+        if (index == 0 && state == State.COOLDOWN && reflectSuccess && activeTime < BUFF_DURATION)
+            return new StatusData(buffActiveText, false);
+        if (index == 1 && state == State.COOLDOWN && reflectSuccess && activeTime < BUFF_DURATION)
+            return new StatusData(buffTimeRemainingText + Misc.getRoundedValueMaxOneAfterDecimal(BUFF_DURATION - activeTime) + "", false);
         return null;
     }
 

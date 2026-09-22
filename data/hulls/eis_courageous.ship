@@ -91,14 +91,6 @@
   ],
   "engineSlots": [
     {
-      "location": [-48, -0],
-      "length": 57,
-      "width": 21,
-      "angle": 180,
-      "contrailSize": 21,
-      "style": "LOW_TECH"
-    },
-    {
       "location": [-29.5, 65.5],
       "length": 40.336689,
       "width": 11.567452,
@@ -131,36 +123,84 @@
       "style": "LOW_TECH"
     },
     {
-      "location": [-41.5, 18.5],
-      "length": 46.6898,
-      "width": 18.172785,
-      "angle": 172,
-      "contrailSize": 18.172785,
-      "style": "LOW_TECH"
-    },
-    {
-      "location": [-41.5, -18.5],
-      "length": 46.6898,
-      "width": 18.172785,
+      "location": [-42, -18.5],
+      "length": 46.689999,
+      "width": 18.17,
       "angle": -172,
-      "contrailSize": 18.172785,
-      "style": "LOW_TECH"
+      "contrailSize": 18.17,
+      "style": "EIS_BOOST"
     },
     {
-      "location": [-26.5, 32],
-      "length": 40.336689,
-      "width": 11.567452,
+      "location": [-42, 18.5],
+      "length": 46.689999,
+      "width": 18.17,
+      "angle": 172,
+      "contrailSize": 18.17,
+      "style": "EIS_BOOST"
+    },
+    {
+      "location": [-49, -0],
+      "length": 57,
+      "width": 29,
+      "angle": 180,
+      "contrailSize": 29,
+      "style": "EIS_BOOST"
+    },
+    {
+      "location": [-47, -19.5],
+      "length": 53.798325,
+      "width": 11.133793,
+      "angle": -172,
+      "contrailSize": 11.133793,
+      "style": "EIS_LTBOOST"
+    },
+    {
+      "location": [-47, 19.5],
+      "length": 53.798325,
+      "width": 11.133793,
+      "angle": 172,
+      "contrailSize": 11.133793,
+      "style": "EIS_LTBOOST"
+    },
+    {
+      "location": [-55, -0],
+      "length": 75.5,
+      "width": 16,
+      "angle": 180,
+      "contrailSize": 16,
+      "style": "EIS_LTBOOST"
+    },
+    {
+      "location": [-24.5, 30.5],
+      "length": 43.441567,
+      "width": 17.587507,
       "angle": 157.5,
-      "contrailSize": 11.567452,
-      "style": "LOW_TECH"
+      "contrailSize": 17.587507,
+      "style": "EIS_BOOST"
     },
     {
-      "location": [-26.5, -32],
-      "length": 40.336689,
-      "width": 11.567452,
+      "location": [-24.5, -30.5],
+      "length": 43.441567,
+      "width": 17.587507,
       "angle": -157.5,
-      "contrailSize": 11.567452,
-      "style": "LOW_TECH"
+      "contrailSize": 17.587507,
+      "style": "EIS_BOOST"
+    },
+    {
+      "location": [-29.5, 32.5],
+      "length": 54.428986,
+      "width": 7.412345,
+      "angle": 158.5,
+      "contrailSize": 7.412345,
+      "style": "EIS_LTBOOST"
+    },
+    {
+      "location": [-29.5, -32.5],
+      "length": 54.428986,
+      "width": 7.412345,
+      "angle": -158.5,
+      "contrailSize": 7.412345,
+      "style": "EIS_LTBOOST"
     }
   ],
   "bounds": [

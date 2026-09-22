@@ -19,6 +19,7 @@
 			"effectBasedOnLevel":false,
 			"effects":[
 				{"type":"SHIP", "script":"data.scripts.eis_xiv$Level3"},
+				{"type":"SHIP", "script":"data.scripts.eis_xiv$Level4"},
 			]
 		},
 	],
