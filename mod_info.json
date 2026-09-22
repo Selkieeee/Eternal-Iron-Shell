@@ -1,7 +1,7 @@
 {
     "id": "timid_xiv",
     "name": "Eternal Iron Shell",
-    "author": "Selkie",
+    "author": "Selkie (art), Bass (code, new), Timid (code, old)",
     "utility": "false",
 	"version": { "major": '2', "minor": '0', "patch": '0' },
     "description": "Adds a faction dedicated to the XIV Battlegroup and its legacy.",
