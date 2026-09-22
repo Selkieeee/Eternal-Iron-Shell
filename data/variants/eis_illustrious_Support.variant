@@ -1,0 +1,80 @@
+{
+    "displayName": "Support",
+    "fluxCapacitors": 14,
+    "fluxVents": 50,
+    "goalVariant": false,
+    "hullId": "eis_illustrious",
+    "hullMods": [
+        "hardenedshieldemitter",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "eis_illustrious_Support",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0003": "hellbore",
+                "WS0006": "hellbore",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0016": "swarmer",
+                "WS0015": "swarmer",
+                "WS0018": "swarmer",
+                "WS0017": "swarmer",
+                "WS0014": "swarmer",
+                "WS0013": "swarmer",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0010": "hveldriver",
+                "WS0009": "hveldriver",
+                "WS0008": "hveldriver",
+                "WS0007": "hveldriver",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0005": "irautolance",
+                "WS0004": "irautolance",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "guardian",
+                "WS0002": "guardian",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0022": "pdlaser",
+                "WS0021": "pdlaser",
+                "WS0020": "pdlaser",
+                "WS0019": "pdlaser",
+            }
+        },
+    ],
+    "wings": [
+        "eis_amity_wing",
+        "eis_amity_wing",
+        "eis_amity_wing",
+        "eis_broadsword_wing",
+        "eis_broadsword_wing",
+    ],
+    "modules": [],
+}

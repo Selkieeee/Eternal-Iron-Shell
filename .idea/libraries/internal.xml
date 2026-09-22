@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="internal">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../../../../Program Files (x86)/Fractal Softworks/Starsector/mods/LazyLib-3.0.0/jars" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../../../Program Files (x86)/Fractal Softworks/Starsector/mods/LazyLib-3.0.0/javadoc.zip!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../../../../../Program Files (x86)/Fractal Softworks/Starsector/mods/LazyLib-3.0.0/jars" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/../../../../../Program Files (x86)/Fractal Softworks/Starsector/mods/LazyLib-3.0.0/jars" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/../../../../../Program Files (x86)/Fractal Softworks/Starsector/mods/LazyLib-3.0.0/jars" recursive="false" type="SOURCES" />
+  </library>
+</component>

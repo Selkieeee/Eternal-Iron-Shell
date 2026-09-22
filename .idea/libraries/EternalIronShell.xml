@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="EternalIronShell">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jars/EternalIronShell.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

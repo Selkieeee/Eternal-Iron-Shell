@@ -1,0 +1,86 @@
+{
+    "displayName": "Siege",
+    "fluxCapacitors": 7,
+    "fluxVents": 50,
+    "goalVariant": false,
+    "hullId": "eis_illustrious",
+    "hullMods": [
+        "hardenedshieldemitter",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "eis_illustrious_Siege",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "hil",
+                "WS0002": "hil",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0016": "harpoon_single",
+                "WS0015": "harpoon_single",
+                "WS0018": "harpoon_single",
+                "WS0017": "harpoon_single",
+                "WS0014": "harpoon_single",
+                "WS0013": "harpoon_single",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0003": "mark9",
+                "WS0006": "mark9",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0010": "hveldriver",
+                "WS0009": "hveldriver",
+                "WS0008": "hveldriver",
+                "WS0007": "hveldriver",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0005": "ionbeam",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0004": "ionbeam",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0022": "pdlaser",
+                "WS0021": "pdlaser",
+                "WS0020": "pdlaser",
+                "WS0019": "pdlaser",
+            }
+        },
+    ],
+    "wings": [
+        "eis_dagger_wing",
+        "eis_dagger_wing",
+        "eis_dagger_wing",
+        "eis_broadsword_wing",
+        "eis_broadsword_wing",
+    ],
+    "modules": [],
+}

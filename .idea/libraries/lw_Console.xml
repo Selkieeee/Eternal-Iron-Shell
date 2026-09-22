@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="lw_Console">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../../../Program Files (x86)/Fractal Softworks/Starsector/mods/Console Commands-4.0.9/jars/lw_Console.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../../../Program Files (x86)/Fractal Softworks/Starsector/mods/Console Commands-4.0.9/jars/lw_Console.jar!/" />
+    </SOURCES>
+  </library>
+</component>

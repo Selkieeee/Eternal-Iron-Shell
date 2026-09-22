@@ -1,0 +1,8 @@
+# Build output
+/out/
+
+# Scratch backups made while editing (superseded by git history)
+*.prefix.bak
+
+# Shell crash dumps
+*.stackdump

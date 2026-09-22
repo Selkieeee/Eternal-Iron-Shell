@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Kotlin-Runtime">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../../../Program Files (x86)/Fractal Softworks/Starsector/mods/LazyLib-3.0.0/jars/internal/Kotlin-Runtime.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../Program Files (x86)/Fractal Softworks/Starsector/mods/LazyLib-3.0.0/jars/LazyLib-Kotlin.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../../../Program Files (x86)/Fractal Softworks/Starsector/mods/LazyLib-3.0.0/jars/LazyLib-Kotlin.jar!/" />
+    </SOURCES>
+  </library>
+</component>
