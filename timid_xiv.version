@@ -1,0 +1,12 @@
+{
+    "masterVersionFile":"https://raw.githubusercontent.com/Selkieeee/Eternal-Iron-Shell/timid_xiv.version",
+    "modName":"Eternal Iron Shell",
+    "directDownloadURL":"https://github.com/Selkieeee/Eternal-Iron-Shell/releases/latest/download/Eternal Iron Shell.zip",
+    "changelogURL":"https://raw.githubusercontent.com/Selkieeee/Eternal-Iron-Shell/Changelog.md",
+    "modVersion":
+    {
+        "major":2,
+        "minor":0,
+        "patch":0
+    }
+}
