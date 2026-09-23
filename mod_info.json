@@ -3,7 +3,7 @@
     "name": "Eternal Iron Shell",
     "author": "Selkie (art), Bass (code, new), Timid (code, old)",
     "utility": "false",
-	"version":"2.0.0",
+	"version":"2.0.1",
     "description": "Adds a faction dedicated to the XIV Battlegroup and her legacy. Adds multiple XIV ships!",
     "gameVersion": "0.98",
 	"jars":["jars/EternalIronShell.jar"],

@@ -155,37 +155,52 @@ public class EISPirateSystemBounty extends HubMissionWithSearch implements Fleet
 			
 			String locStr = Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty16") + market.getStarSystem().getNameWithLowercaseType();
 			
-			info.addPara(Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty0") + locStr + Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty1") + market.getName() + Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty2"),
-					opad, enemy.getBaseUIColor(), enemy.getPersonNamePrefix());
+			// Plain fragment concatenation, no %s left in any of the pieces - previously passed enemy.getBaseUIColor()/
+			// getPersonNamePrefix() as if for highlight substitution, but EISPirateSystemBounty1 had its own unrelated
+			// %s placeholders with no matching args, throwing MissingFormatArgumentException. EISPirateSystemBounty3
+			// is the sentence closer here (", a pirate base.") - it previously held unrelated isEnding()/DONE text
+			// that has moved to EISPirateSystemBounty2, where it actually belongs.
+			info.addPara(Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty0") + locStr + Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty1") + market.getName() + Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty3"),
+					opad);
 
 			if (isEnding()) {
-				info.addPara(Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty3"), opad);
+				info.addPara(Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty2"), opad);
 				return;
 			}
-			
+
 			bullet(info);
-			info.addPara(Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty4"), opad, tc, h, Misc.getDGSCredits(baseBounty));
-			addDays(info, Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty5"), d, tc);
+			// EISPirateSystemBounty17 ("%s base reward") replaces EISPirateSystemBounty4 here - 4 is "remaining" (no
+			// %s of its own), which belongs in the addDays() text below instead, not this credit-amount line.
+			info.addPara(Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty17"), opad, tc, h, Misc.getDGSCredits(baseBounty));
+			// EISPirateSystemBounty5 has its own 2 %s placeholders (for faction/person); addDays() only ever fills one
+			// %s of its own (the day count), so those 2 must be pre-filled here or String.format throws
+			// MissingFormatArgumentException once addDays() builds its combined string internally.
+			// EISPirateSystemBounty4 ("remaining") is prepended per its own comment ("function addDays para") -
+			// previously misused on the credit-amount line above instead, where its lack of a %s silently dropped
+			// the credit value.
+			String bountyRepText = Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty4") + ". " +
+					String.format(Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty5"), faction.getDisplayNameWithArticle(), person.getNameString());
+			addDays(info, bountyRepText, d, tc);
 			unindent(info);
-			
-			info.addPara(Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty6") + faction.getDisplayNameWithArticle() + 
-                                                Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty7")
-						+ person.getNameString() + Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty8"),
-						opad);
-			
+
 		} else if (currentStage == Stage.DONE) {
-			info.addPara(Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty3"), opad);
+			info.addPara(Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty2"), opad);
 		}
-		
+
 		if (latestResult != null) {
 			//Color color = faction.getBaseUIColor();
 			//Color dark = faction.getDarkUIColor();
 			//info.addSectionHeading("Most Recent Reward", color, dark, Alignment.MID, opad);
-			info.addPara(Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty9"), opad);
+			// EISPirateSystemBounty6 ("Most recent bounty payment:") is this section's actual header text per its
+			// own value - previously misused inside the (now-removed) reputation-recap paragraph above instead.
+			info.addPara(Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty6"), opad);
 			bullet(info);
-			info.addPara(Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty10"), pad, tc, h, Misc.getDGSCredits(latestResult.payment));
+			// EISPirateSystemBounty7 ("%s received") and 8 ("%s share based on damage dealt") restored to their
+			// original %s-templated form - they're used here via the highlight-substituting addPara overload, unlike
+			// their previous (fixed-for-a-different-bug) use in the plain-concatenation reputation paragraph.
+			info.addPara(Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty7"), pad, tc, h, Misc.getDGSCredits(latestResult.payment));
 			if (Math.round(latestResult.fraction * 100f) < 100f) {
-				info.addPara(Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty11"), 0f, tc, h, 
+				info.addPara(Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty8"), 0f, tc, h,
 						"" + (int) Math.round(latestResult.fraction * 100f) + "%");
 			}
 			if (latestResult.repPerson != null) {
@@ -206,9 +221,10 @@ public class EISPirateSystemBounty extends HubMissionWithSearch implements Fleet
 		
 		boolean isUpdate = getListInfoParam() != null;
 		if (isUpdate && latestResult == getListInfoParam()) {
-			info.addPara(Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty10"), pad, tc, h, Misc.getDGSCredits(latestResult.payment));
+			// Same reassignment as addDescriptionForCurrentStage: 7/8 (not 10/11) are the %s-templated result lines.
+			info.addPara(Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty7"), pad, tc, h, Misc.getDGSCredits(latestResult.payment));
 			if (Math.round(latestResult.fraction * 100f) < 100f) {
-				info.addPara(Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty11"), 0f, tc, h, 
+				info.addPara(Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty8"), 0f, tc, h,
 						"" + (int) Math.round(latestResult.fraction * 100f) + "%");
 			}
 			if (latestResult.repPerson != null) {
@@ -226,8 +242,15 @@ public class EISPirateSystemBounty extends HubMissionWithSearch implements Fleet
 			float elapsed = getElapsedInCurrentStage();
 			int d = (int) Math.round(BOUNTY_DAYS - elapsed);
 			
-			info.addPara(Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty4"), pad, tc, h, Misc.getDGSCredits(baseBounty));
-			addDays(info, Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty5"), d, tc);
+			// Same reassignment as addDescriptionForCurrentStage: 17 (not 4) is the %s-templated credit-amount line.
+			info.addPara(Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty17"), pad, tc, h, Misc.getDGSCredits(baseBounty));
+			// Same fix as addDescriptionForCurrentStage: EISPirateSystemBounty5's 2 %s need filling before addDays()
+			// appends its own day-count %s, or String.format throws MissingFormatArgumentException. Entry4
+			// ("remaining") is prepended here too, matching the fix above.
+			PersonAPI person = getPerson();
+			String bountyRepText = Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty4") + ". " +
+					String.format(Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty5"), faction.getDisplayNameWithArticle(), person.getNameString());
+			addDays(info, bountyRepText, d, tc);
 			return true;
 		} else if (currentStage == Stage.DONE) {
 			return false;
@@ -236,17 +259,26 @@ public class EISPirateSystemBounty extends HubMissionWithSearch implements Fleet
 	}
 	
 	public String getPostfixForState() {
-		if (currentStage == Stage.DONE) return Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty12");
+		// EISPirateSystemBounty9 (" - Over", commented "[Pirate System Bounty] - Over") - previously misused as a
+		// bare label inside the Most Recent Reward section instead; this method itself called the never-created
+		// EISPirateSystemBounty12.
+		if (currentStage == Stage.DONE) return Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty9");
 		return super.getPostfixForState();
 	}
 
 	@Override
 	public String getBaseName() {
-		return Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty13");
+		// EISPirateSystemBounty10 ("Pirate Fleet Bounty", commented "getBaseName") - previously misused as the
+		// %s-less credit-amount line in the Most Recent Reward section; this method itself called the
+		// never-created EISPirateSystemBounty13.
+		return Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty10");
 	}
-	
+
 	protected String getMissionTypeNoun() {
-		return Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty14");
+		// EISPirateSystemBounty11 ("bounty", commented "getMissionTypeNoun") - previously misused as the %s-less
+		// damage-share line in the Most Recent Reward section; this method itself called the never-created
+		// EISPirateSystemBounty14.
+		return Global.getSettings().getString("eis_ironshell", "EISPirateSystemBounty11");
 	}
 	
 

@@ -210,9 +210,11 @@ public class EISExtractionMission extends HubMissionWithSearch {
 		float opad = 10f;
 		Color h = Misc.getHighlightColor();
 		if (currentStage == Stage.EXTRACT) {
-			info.addPara(Global.getSettings().getString("eis_ironshell", "EISExtractionMission1") +
-					 market.getOnOrAt() + Global.getSettings().getString("eis_ironshell", "EISExtractionMission2") + market.getName() + 
-					 Global.getSettings().getString("eis_ironshell", "EISExtractionMission3") + market.getStarSystem().getNameWithLowercaseTypeShort() + Global.getSettings().getString("eis_ironshell", "EISExtractionMission4"), opad);
+			// EISExtractionMission1 is already the complete "Extract operative located [on/at] %s in the %s."
+			// template (matches its own comment) - previously concatenated with 2/3/4, which belong to the
+			// paragraph below, addNextStepText, and getBaseName respectively and don't belong in this sentence.
+			info.addPara(String.format(Global.getSettings().getString("eis_ironshell", "EISExtractionMission1"),
+					market.getOnOrAt(), market.getName(), market.getStarSystem().getNameWithLowercaseTypeShort()), opad);
 			/*if (variation == Variation.PIRATE_BASE || variation == Variation.LUDDIC_PATH_BASE) {
 				FactionAPI f = market.getFaction();
 				info.addPara("The target location is " + f.getPersonNamePrefixAOrAn() + " %s base.",
@@ -223,7 +225,10 @@ public class EISExtractionMission extends HubMissionWithSearch {
 //						"required to determine the forces necessary.", opad);
 			} else*/ {
 				FactionAPI f = market.getFaction();
-				LabelAPI label = info.addPara(Global.getSettings().getString("eis_ironshell", "EISExtractionMission5") + f.getDisplayNameWithArticle() + Global.getSettings().getString("eis_ironshell", "EISExtractionMission6"),
+				// EISExtractionMission2 is already the complete "The target location is a size %s colony
+				// controlled by %s." template for this exact paragraph - was previously wired to the
+				// never-created EISExtractionMission5/6 plus a mid-sentence faction-name fragment.
+				LabelAPI label = info.addPara(Global.getSettings().getString("eis_ironshell", "EISExtractionMission2"),
 							 opad, f.getBaseUIColor(),
 							 "" + market.getSize(), f.getDisplayNameWithArticleWithoutArticle());
 				label.setHighlight("" + market.getSize(), f.getDisplayNameWithArticleWithoutArticle());
@@ -244,10 +249,10 @@ public class EISExtractionMission extends HubMissionWithSearch {
 	public boolean addNextStepText(TooltipMakerAPI info, Color tc, float pad) {
 		Color h = Misc.getHighlightColor();
 		if (currentStage == Stage.EXTRACT) {
-				info.addPara(Global.getSettings().getString("eis_ironshell", "EISExtractionMission7") +
-							 market.getName() + 
-							 Global.getSettings().getString("eis_ironshell", "EISExtractionMission8") + market.getStarSystem().getNameWithLowercaseTypeShort() + Global.getSettings().getString("eis_ironshell", "EISExtractionMission9"), pad, tc,
-							 market.getFaction().getBaseUIColor(), market.getName());
+				// EISExtractionMission3 is already the complete "Extract operative from %s in the %s." template
+				// for this exact method - was previously wired to the never-created EISExtractionMission7/8/9.
+				info.addPara(Global.getSettings().getString("eis_ironshell", "EISExtractionMission3"), pad, tc,
+							 market.getFaction().getBaseUIColor(), market.getName(), market.getStarSystem().getNameWithLowercaseTypeShort());
 				return true;
 		} else if (currentStage == Stage.RETURN) {
 			info.addPara(getReturnTextShort(getPerson().getMarket().getName()), tc, pad);
@@ -258,7 +263,10 @@ public class EISExtractionMission extends HubMissionWithSearch {
 	
 	@Override
 	public String getBaseName() {
-		return Global.getSettings().getString("eis_ironshell", "EISExtractionMission10");
+		// EISExtractionMission4 ("Combat Extraction", commented "getBaseName") - previously misused as the
+		// trailing fragment inside addDescriptionForNonEndStage; getBaseName itself called the never-created
+		// EISExtractionMission10.
+		return Global.getSettings().getString("eis_ironshell", "EISExtractionMission4");
 	}
 }
 

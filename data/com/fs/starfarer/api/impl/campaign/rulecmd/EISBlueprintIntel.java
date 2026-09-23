@@ -328,8 +328,10 @@ public class EISBlueprintIntel extends HubMissionWithSearch implements ShowLootL
 		float opad = 10f;
 		Color h = Misc.getHighlightColor();
 		if (currentStage == Stage.GET_ITEM) {
-			info.addPara(Global.getSettings().getString("eis_ironshell", "EISBlueprintIntel6") + getItemNameLowercaseItem() + 
-					Global.getSettings().getString("eis_ironshell", "EISBlueprintIntel7") + system.getNameWithLowercaseTypeShort() + Global.getSettings().getString("eis_ironshell", "EISBlueprintIntel8"), opad);
+			// EISBlueprintIntel6 is already a complete "There is %s to be found somewhere in the %s." template
+			// (matches its own comment) - previously concatenated with EISBlueprintIntel7/8, which belong to
+			// addNextStepText and getBaseName respectively and don't belong in this sentence at all.
+			info.addPara(String.format(Global.getSettings().getString("eis_ironshell", "EISBlueprintIntel6"), getItemNameLowercaseItem(), system.getNameWithLowercaseTypeShort()), opad);
 		}
 	}
 
@@ -337,24 +339,32 @@ public class EISBlueprintIntel extends HubMissionWithSearch implements ShowLootL
 	public boolean addNextStepText(TooltipMakerAPI info, Color tc, float pad) {
 		Color h = Misc.getHighlightColor();
 		if (currentStage == Stage.GET_ITEM) {
-			info.addPara(Global.getSettings().getString("eis_ironshell", "EISBlueprintIntel9") + getItemNameLowercaseItem() + Global.getSettings().getString("eis_ironshell", "EISBlueprintIntel10") +  
-					system.getNameWithLowercaseTypeShort(), tc, pad);
+			// Same fix as above: EISBlueprintIntel7 is already the complete "There is %s in the %s" template for
+			// this exact method (per its own comment) - was previously wired to EISBlueprintIntel9/10 instead,
+			// which belong to getMissionTypeNoun/getMissionCompletionVerb.
+			info.addPara(String.format(Global.getSettings().getString("eis_ironshell", "EISBlueprintIntel7"), getItemNameLowercaseItem(), system.getNameWithLowercaseTypeShort()), tc, pad);
 			return true;
 		}
 		return false;
-	}	
-	
+	}
+
 	@Override
 	public String getBaseName() {
-		return Misc.ucFirst(getWithoutArticle(getItemName())) + Global.getSettings().getString("eis_ironshell", "EISBlueprintIntel11");
+		// EISBlueprintIntel8 ("Intel", commented "getBaseName") - previously misused inside
+		// addDescriptionForNonEndStage; getBaseName itself called the never-created EISBlueprintIntel11.
+		return Misc.ucFirst(getWithoutArticle(getItemName())) + Global.getSettings().getString("eis_ironshell", "EISBlueprintIntel8");
 	}
-	
+
 	protected String getMissionTypeNoun() {
-		return Global.getSettings().getString("eis_ironshell", "EISBlueprintIntel12");
+		// EISBlueprintIntel9 ("intel", commented "getMissionTypeNoun") - previously misused inside
+		// addNextStepText; this method itself called the never-created EISBlueprintIntel12.
+		return Global.getSettings().getString("eis_ironshell", "EISBlueprintIntel9");
 	}
-	
+
 	protected String getMissionCompletionVerb() {
-		return Global.getSettings().getString("eis_ironshell", "EISBlueprintIntel13");
+		// EISBlueprintIntel10 ("acted on", commented "getMissionCompletionVerb") - previously misused inside
+		// addNextStepText; this method itself called the never-created EISBlueprintIntel13.
+		return Global.getSettings().getString("eis_ironshell", "EISBlueprintIntel10");
 	}
 	
 	@Override

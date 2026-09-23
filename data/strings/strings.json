@@ -264,17 +264,20 @@
 		"EISExtractionMission3":"Extract operative from %s in the %s.", # Extract operative from [Market/Colony Name] in the [star system name].
 		"EISExtractionMission4":"Combat Extraction", # getBaseName from EISExtractionMission(HubMissionWithSearch)
 		
-		"EISPirateSystemBounty1":"Applies to all %s fleets in or near the %s, which is home to %s, a pirate base.", # Applies to all %s fleets in or near the [star system name], which is home to [Pirate Base Name], a pirate base.
-		"EISPirateSystemBounty2":"This bounty is no longer on offer.",
-		"EISPirateSystemBounty3":"%s base reward per frigate",
-		"EISPirateSystemBounty4":"remaining", # function addDays para
-		"EISPirateSystemBounty5":"Payment depends on the number and size of ships destroyed. Standing with %s, as well as with %s, will improve.", # Payment depends on the number and size of ships destroyed. Standing with [Faction Name], as well as with [Person's Name], will improve.
-		"EISPirateSystemBounty6":"Most recent bounty payment:",
-		"EISPirateSystemBounty7":"%s received", #[credits] received
-		"EISPirateSystemBounty8":"%s share based on damage dealt",
-		"EISPirateSystemBounty9":" - Over", # [Pirate System Bounty] - Over
-		"EISPirateSystemBounty10":"Pirate Fleet Bounty", # getBaseName from EISPirateSystemBounty(HubMissionWithSearch,FleetEventListener)
-		"EISPirateSystemBounty11":"bounty", # getMissionTypeNoun from EISPirateSystemBounty(HubMissionWithSearch,FleetEventListener)
+		"EISPirateSystemBounty0":"Applies to all pirate fleets ", # new: was missing entirely (shown in-game as "Missing string: [EISPirateSystemBounty0]"); opening fragment, concatenated with EISPirateSystemBounty16 + system name
+		"EISPirateSystemBounty1":", which is home to ", # fixed: was a %s-laden sentence concatenated alongside literal values (locStr/market.getName()) with no matching format args, throwing MissingFormatArgumentException; now a plain connector fragment like its siblings
+		"EISPirateSystemBounty2":"This bounty is no longer on offer.", # now used for isEnding()/Stage.DONE (its actual meaning) - previously misused as the always-shown closer of the opening description, incorrectly claiming an active bounty was no longer on offer
+		"EISPirateSystemBounty3":", a pirate base.", # repurposed as the opening description's closer (matches its own original documented ending); previously held unrelated "%s base reward per frigate" text that belonged nowhere in this file
+		"EISPirateSystemBounty4":"remaining", # function addDays para - now actually used there (prepended before the reputation sentence), previously misused on the credit-amount line where its lack of a %s silently dropped the value
+		"EISPirateSystemBounty5":"Payment depends on the number and size of ships destroyed. Standing with %s, as well as with %s, will improve.", # Payment depends on the number and size of ships destroyed. Standing with [Faction Name], as well as with [Person's Name], will improve. NOTE: the two %s here are now filled via String.format() in EISPirateSystemBounty.java before being handed to addDays() - do not remove them without also updating that code.
+		"EISPirateSystemBounty6":"Most recent bounty payment:", # now used as the Most Recent Reward section header (its actual meaning) - previously misused inside the reputation-recap paragraph
+		"EISPirateSystemBounty7":"%s received", # restored %s - used via the highlight-substituting addPara overload in the Most Recent Reward section; previously (incorrectly) stripped of its %s when it was misused via plain concatenation elsewhere
+		"EISPirateSystemBounty8":"%s share based on damage dealt", # restored %s - same situation as EISPirateSystemBounty7
+		"EISPirateSystemBounty9":" - Over", # [Pirate System Bounty] - Over - now used by getPostfixForState() (its actual purpose) - previously misused as a bare label in the Most Recent Reward section
+		"EISPirateSystemBounty10":"Pirate Fleet Bounty", # getBaseName from EISPirateSystemBounty(HubMissionWithSearch,FleetEventListener) - now actually used there - previously misused as the %s-less credit-amount line in the Most Recent Reward section
+		"EISPirateSystemBounty11":"bounty", # getMissionTypeNoun from EISPirateSystemBounty(HubMissionWithSearch,FleetEventListener) - now actually used there - previously misused as the %s-less damage-share line in the Most Recent Reward section
+		"EISPirateSystemBounty16":"in or near the ", # new: was missing entirely; concatenated after EISPirateSystemBounty0 and before the system name (locStr)
+		"EISPirateSystemBounty17":"%s base reward", # new: was missing entirely; the actual credit-amount line (replaces the old, %s-less EISPirateSystemBounty4 use here)
 		
 		"EISDeadDropMission1":"an apparently inert data chip",
 		"EISDeadDropMission2":"a rad-shielded salvors' TriPad",
@@ -304,10 +307,12 @@
 		"EISDeadDropMission26":"the dead drop coordinates", # function setFleetWantsThing para
 		"EISDeadDropMission27":"they", # function setFleetWantsThing para
 		"EISDeadDropMission28":"the dead drop coordinates given to you by ", # function setFleetWantsThing para - thingDesc - the dead drop coordinates given to you by [Person's Name]
-		"EISDeadDropMission29":"Deliver %s to the dead drop location at the specified coordinates in the %s", # Deliver [EISDeadDropMission Task Item] to the dead drop location at the specified coordinates in the [star system name].
-		"EISDeadDropMission30":"Deliver %s to specified location in the %s",# Deliver [EISDeadDropMission Task Item] to specified location in the [star system name].
-		"EISDeadDropMission31":"Dead Drop", # getBaseName from EISDeadDropMission(HubMissionWithSearch)
-		
+		"EISDeadDropMission29":"Deliver ", # addDescriptionForNonEndStage/addNextStepText para - Deliver [EISDeadDropMission Task Item]...
+		"EISDeadDropMission30":" to the dead drop location at the specified coordinates in the ", # addDescriptionForNonEndStage para - ...to the dead drop location at the specified coordinates in the [star system name]
+		"EISDeadDropMission31":".", # addDescriptionForNonEndStage para - closes the sentence after [star system name]
+		"EISDeadDropMission32":" to the dead drop location in the ", # addNextStepText para - ...to the dead drop location in the [star system name]
+		"EISDeadDropMission33":"Dead Drop", # getBaseName from EISDeadDropMission(HubMissionWithSearch)
+
 		"EISAICores1":"Select AI cores to turn in",
 		"EISAICores2":"Confirm",
 		"EISAICores3":"Cancel",

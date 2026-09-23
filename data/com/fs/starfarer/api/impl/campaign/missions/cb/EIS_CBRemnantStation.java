@@ -63,7 +63,7 @@ public class EIS_CBRemnantStation extends BaseCustomBountyCreator {
 		if (!list.isEmpty()) {
 			TooltipMakerAPI info = text.beginTooltip();
 			info.setParaSmallInsignia();
-			info.addPara(Misc.ucFirst(mission.getPerson().getHeOrShe()) + Global.getSettings().getString("eis_ironshell", "EIS_CBRemnantStation1"), 0f);
+			info.addPara(String.format(Global.getSettings().getString("eis_ironshell", "EIS_CBRemnantStation1"), Misc.ucFirst(mission.getPerson().getHeOrShe())), 0f);
 			info.addShipList(cols, 1, iconSize, data.fleet.getFaction().getBaseUIColor(), list, opad);
 			
 			if (data.difficulty >= 9) {

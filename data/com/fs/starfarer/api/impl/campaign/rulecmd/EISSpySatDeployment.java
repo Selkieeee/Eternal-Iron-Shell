@@ -95,8 +95,10 @@ public class EISSpySatDeployment extends HubMissionWithSearch {
 		float opad = 10f;
 		Color h = Misc.getHighlightColor();
 		if (currentStage == Stage.DEPLOY) {
-			info.addPara(Global.getSettings().getString("eis_ironshell", "EISSpySatDeployment1") + market.getName() + 
-					Global.getSettings().getString("eis_ironshell", "EISSpySatDeployment2") + market.getStarSystem().getNameWithLowercaseTypeShort() + Global.getSettings().getString("eis_ironshell", "EISSpySatDeployment3"), opad);
+			// EISSpySatDeployment1 is already a complete "Deploy a spysat in orbit of %s in the %s." template
+			// (matches its own comment) - previously concatenated with EISSpySatDeployment2/3, which belong to
+			// addNextStepText and getBaseName respectively and don't belong in this sentence at all.
+			info.addPara(String.format(Global.getSettings().getString("eis_ironshell", "EISSpySatDeployment1"), market.getName(), market.getStarSystem().getNameWithLowercaseTypeShort()), opad);
 		}
 	}
 
@@ -104,17 +106,21 @@ public class EISSpySatDeployment extends HubMissionWithSearch {
 	public boolean addNextStepText(TooltipMakerAPI info, Color tc, float pad) {
 		Color h = Misc.getHighlightColor();
 		if (currentStage == Stage.DEPLOY) {
-			info.addPara(Global.getSettings().getString("eis_ironshell", "EISSpySatDeployment4") +
-					market.getName() + Global.getSettings().getString("eis_ironshell", "EISSpySatDeployment2") + 
-					market.getStarSystem().getNameWithLowercaseTypeShort(), tc, pad);
+			// EISSpySatDeployment2 is already the complete "Deploy spysat near %s in the %s." template for this
+			// exact method - was previously wired to the never-created EISSpySatDeployment4 plus itself as a
+			// mid-sentence connector fragment.
+			info.addPara(String.format(Global.getSettings().getString("eis_ironshell", "EISSpySatDeployment2"), market.getName(), market.getStarSystem().getNameWithLowercaseTypeShort()), tc, pad);
 			return true;
 		}
 		return false;
-	}	
-	
+	}
+
 	@Override
 	public String getBaseName() {
-		return Global.getSettings().getString("eis_ironshell", "EISSpySatDeployment5");
+		// EISSpySatDeployment3 ("SpySat Deployment", commented "getBaseName") - previously misused as the
+		// trailing fragment inside addDescriptionForNonEndStage; getBaseName itself called the never-created
+		// EISSpySatDeployment5.
+		return Global.getSettings().getString("eis_ironshell", "EISSpySatDeployment3");
 	}
 	
 }
