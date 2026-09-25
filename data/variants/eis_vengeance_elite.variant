@@ -1,51 +1,65 @@
 {
     "displayName": "Elite",
-    "fluxCapacitors": 6, #30
+    "fluxCapacitors": 11,
     "fluxVents": 30,
+    "goalVariant": true,
     "hullId": "eis_vengeance",
-	"goalVariant": true,
     "hullMods": [
         "eis_aquila",
-        "hardenedshieldemitter"
+        "hardenedshieldemitter",
     ],
-    #"permaMods": ["eis_aquila"],
-    #"sMods": ["eis_aquila"],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
     "variantId": "eis_vengeance_elite",
-   "weaponGroups": [
+    "weaponGroups": [
         {
             "autofire": false,
             "mode": "LINKED",
-            "weapons": {"WS0012": "mjolnir"}
+            "weapons": {
+                "WS0012": "eis_lunarrose",
+            }
         },
         {
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "WS0003": "sabot",
-                "WS0004": "sabot"
+                "WS0003": "reaper",
+                "WS0004": "reaper",
             }
         },
         {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {"WS0006": "heavymauler"}
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {"WS0005": "hveldriver"}
-        },
-        {
-            "autofire": true,
+            "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "vulcan",
-                "WS0002": "vulcan"
+                "WS0005": "eis_milf",
             }
-        }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "eis_milf",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0002": "heavyneedler",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "heavyneedler",
+            }
+        },
     ],
     "wings": [
-        "warthog_wing",
-        "hoplon_wing"
-    ]
+        "eis_broadsword_wing",
+        "eis_broadsword_wing",
+    ],
+    "modules": [],
 }

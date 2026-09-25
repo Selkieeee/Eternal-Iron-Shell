@@ -1,41 +1,31 @@
 {
-  "variantId": "eis_flagellator_standard",
-  "hullId": "eis_flagellator",
-  "displayName": "Standard",
-  "goalVariant": false,
-  "fluxCapacitors": 14,
-  "fluxVents": 15,
-  "quality": 1,
-  "permaMods": [],
-  "hullMods": [
-    "reinforcedhull"
-  ],
-  "weaponGroups": [
-    {
-      "autofire": true,
-      "mode": "LINKED",
-      "weapons": {
-        "WS0001": "heavymauler",
-        "WS0002": "heavymauler",
-        "WS0003": "heavyac",
-        "WS0004": "heavyac",
-        "WS0008": "vulcan",
-        "WS0009": "sabotpod"
-      }
-    },
-    {
-      "autofire": false,
-      "mode": "ALTERNATING",
-      "weapons": {}
-    },
-    {
-      "autofire": true,
-      "mode": "LINKED",
-      "weapons": {}
-    }
-  ],
-  "modules": [],
-  "wings": [
-    "eis_kopis_wing"
-  ]
+    "displayName": "Standard",
+    "fluxCapacitors": 14,
+    "fluxVents": 15,
+    "goalVariant": false,
+    "hullId": "eis_flagellator",
+    "hullMods": [
+        "hardenedshieldemitter",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "eis_flagellator_standard",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "heavymauler",
+                "WS0003": "heavyac",
+                "WS0002": "heavymauler",
+                "WS0009": "sabotpod",
+                "WS0008": "vulcan",
+                "WS0004": "heavyac",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
 }

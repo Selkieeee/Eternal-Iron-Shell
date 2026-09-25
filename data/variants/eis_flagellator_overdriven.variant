@@ -1,42 +1,48 @@
 {
-  "variantId": "eis_flagellator_overdriven",
-  "hullId": "eis_flagellator",
-  "displayName": "Overdriven",
-  "goalVariant": true,
-  "fluxCapacitors": 4,
-  "fluxVents": 15,
-  "quality": 1,
-  "permaMods": [],
-  "hullMods": [
-    "safetyoverrides",
-    "reinforcedhull"
-  ],
-  "weaponGroups": [
-    {
-      "autofire": false,
-      "mode": "LINKED",
-      "weapons": {
-        "WS0001": "chaingun",
-        "WS0002": "chaingun",
-        "WS0003": "heavymg",
-        "WS0004": "heavymg"
-      }
-    },
-    {
-      "autofire": true,
-      "mode": "LINKED",
-      "weapons": {}
-    },
-    {
-      "autofire": true,
-      "mode": "LINKED",
-      "weapons": {
-        "WS0008": "lightdualmg"
-      }
-    }
-  ],
-  "modules": [],
-  "wings": [
-    "mining_drone_wing"
-  ]
+    "displayName": "Overdriven",
+    "fluxCapacitors": 10,
+    "fluxVents": 10,
+    "goalVariant": true,
+    "hullId": "eis_flagellator",
+    "hullMods": [
+        "safetyoverrides",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "eis_flagellator_overdriven",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "chaingun",
+                "WS0002": "chaingun",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0003": "heavymg",
+                "WS0004": "heavymg",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0009": "sabotpod",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "lightdualmg",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
 }

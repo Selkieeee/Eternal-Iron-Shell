@@ -1,48 +1,49 @@
 {
-  "variantId": "eis_renown_azalean",
-  "hullId": "eis_renown",
-  "displayName": "Azalean",
-  "goalVariant": true,
-  "fluxCapacitors": 14,
-  "fluxVents": 23,
-  "quality": 1,
-  "permaMods": [],
-  "hullMods": [
-    "autorepair",
-    "targetingunit"
-  ],
-  "weaponGroups": [
-    {
-      "autofire": false,
-      "mode": "LINKED",
-      "weapons": {
-        "WS0001": "autopulse"
-      }
-    },
-    {
-      "autofire": true,
-      "mode": "LINKED",
-      "weapons": {
-        "WS0002": "hveldriver",
-        "WS0003": "hveldriver"
-      }
-    },
-    {
-      "autofire": true,
-      "mode": "LINKED",
-      "weapons": {
-        "WS 008": "devastator"
-      }
-    },
-    {
-      "autofire": true,
-      "mode": "LINKED",
-      "weapons": {
-        "WS 006": "eis_milf",
-        "WS 007": "eis_milf"
-      }
-    }
-  ],
-  "modules": [],
-  "wings": []
+    "displayName": "Azalean",
+    "fluxCapacitors": 1,
+    "fluxVents": 30,
+    "goalVariant": true,
+    "hullId": "eis_renown",
+    "hullMods": [
+        "hardenedshieldemitter",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "eis_renown_azalean",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "eis_lunarrose",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0003": "hveldriver",
+                "WS0002": "hveldriver",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 008": "eis_superheavy_needler",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 006": "eis_milf",
+                "WS 007": "eis_milf",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
 }

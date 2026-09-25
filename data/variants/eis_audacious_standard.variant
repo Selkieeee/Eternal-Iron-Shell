@@ -1,41 +1,51 @@
 {
     "displayName": "Standard",
-    "fluxCapacitors": 10,
-    "fluxVents": 20,
+    "fluxCapacitors": 20,
+    "fluxVents": 11,
+    "goalVariant": true,
     "hullId": "eis_audacious",
-	"goalVariant": true,
     "hullMods": [
-        "missleracks",
-        "unstable_injector"
+        "escort_package",
+        "hardenedshieldemitter",
     ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
     "variantId": "eis_audacious_standard",
     "weaponGroups": [
         {
             "autofire": false,
             "mode": "LINKED",
-            "weapons": {"WS 002": "heavymortar"}
+            "weapons": {
+                "WS 002": "heavymortar",
+            }
         },
         {
             "autofire": false,
             "mode": "LINKED",
-            "weapons": {"WS 001": "sabotpod"}
+            "weapons": {
+                "WS 001": "sabotpod",
+            }
         },
         {
             "autofire": false,
             "mode": "LINKED",
             "weapons": {
                 "WS0003": "lightdualac",
-                "WS0004": "lightdualac"
+                "WS0004": "lightdualac",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
-            "weapons": {"WS0005": "vulcan"}
-        }
+            "weapons": {
+                "WS0005": "vulcan",
+            }
+        },
     ],
     "wings": [
-        "warthog_wing",
-        "eis_thunder_mk2_wing"
-    ]
+        "eis_broadsword_wing",
+        "eis_thunder_mk2_wing",
+    ],
+    "modules": [],
 }

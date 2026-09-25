@@ -1,35 +1,40 @@
 {
-  "variantId": "eis_champion_attack",
-  "hullId": "eis_champion",
-  "displayName": "Attack",
-  "goalVariant": true,
-  "fluxCapacitors": 3,
-  "fluxVents": 30,
-  "permaMods": [],
+    "displayName": "Attack",
+    "fluxCapacitors": 16,
+    "fluxVents": 30,
+    "goalVariant": true,
+    "hullId": "eis_champion",
     "hullMods": [
+        "hardenedshieldemitter",
+        "missleracks",
         "targetingunit",
-        "missleracks"
     ],
-  "weaponGroups": [
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "eis_champion_attack",
+    "weaponGroups": [
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
                 "WS 000": "lightac",
-                "WS 001": "lightac"
+                "WS 001": "lightac",
             }
         },
         {
             "autofire": false,
             "mode": "LINKED",
-            "weapons": {"WS 009": "hammerrack"}
+            "weapons": {
+                "WS 009": "hammerrack",
+            }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
+                "WS 011": "ioncannon",
                 "WS 010": "ioncannon",
-                "WS 011": "ioncannon"
             }
         },
         {
@@ -37,25 +42,27 @@
             "mode": "LINKED",
             "weapons": {
                 "WS 006": "eis_milf",
-                "WS 007": "eis_milf"
+                "WS 007": "eis_milf",
             }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {"WS 008": "guardian"}
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
+                "WS 008": "guardian",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 004": "pdlaser",
+                "WS 005": "pdlaser",
                 "WS 002": "pdlaser",
                 "WS 003": "pdlaser",
-                "WS 004": "pdlaser",
-                "WS 005": "pdlaser"
             }
-        }
+        },
     ],
-  "modules": [],
-  "wings": []
+    "wings": [],
+    "modules": [],
 }

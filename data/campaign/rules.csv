@@ -769,18 +769,6 @@ $option == QuyDisagreeQuest",FireAll PopulateOptions,"Quy gives off a sigh. ""Ve
 ,,,,,,,,,
 QuyYmaQuest,PopulateQuyOptions,"$id == eiskimquy
 !$EISQuyYma",,,1:QuyYmaQuest1:Operation World Above,,,,
-QuyYmaQuestInvasionBounty,DialogOptionSelected,"$id == eiskimquy score:100
-$option == QuyYmaQuest1
-EIS_HasModId shadow_ships score:100
-EISKillaOwned udana_stations",SetTextHighlights 250 Valkyrie 40,"""Recent evidence has come to light that suggests Udana Station is harboring dangerous political fugitives. We cannot condone this. The Hegemony executive council has given us the privilege of handling the issue at our discretion."" Quy hands over the intel report. ""We will provide you with a company of 250 marines and a Valkyrie to assist you in this matter. Whatever preparations you need to make, I suggest you make them before we issue you the materiel. It is your responsibility to conclude the operation within 40 days. If you take longer than that, reinforcements will arrive and our window of opportunity will close. Do you accept?""","0:QuyYmaQuest1AgreeInvade:Agree
-1:QuyDisagreeQuest:Disagree
-",,,,
-QuyYmaQuestTransferBounty,DialogOptionSelected,"$id == eiskimquy score:100
-$option == QuyYmaQuest1
-EIS_HasModId shadow_ships score:100
-EISKillaOwned udana_stations player","SetTextHighlights 450,000 150,000","""So, it seems you have a foothold inside the Yma System. Iron Shell is authorized to offer you 450,000 credits for ownership of Udana Station. We'll even throw in a 150,000 credit tax rebate in your next quarterly tax filing. Interested?""","0:QuyYmaQuest1AgreeTransfer:Agree
-1:QuyDisagreeQuest:Disagree
-",,,,
 QuyYmaQuestColonize,DialogOptionSelected,"$id == eiskimquy score:100
 $option == QuyYmaQuest1
 !EISKillaOwned hanan_pacha player",,"""Consistent with the terms of the Treaty of the Second AI War, the Yma System's demilitarized status is expiring and our first priority is to investigate what happened on Hanan Pacha. We have responsibility over the investigation, so I am putting together a task force to establish an outpost there on Hanan Pacha."" 
@@ -793,20 +781,6 @@ $option == QuyYmaQuest1
 EISKillaOwned hanan_pacha player","SetTextHighlights 150,000 50,000","""So, it seems you have a foothold inside the Yma System. Iron Shell is authorized to offer you 150,000 credits for ownership of Hanan Pacha. We'll even throw in a 50,000 credit tax rebate in your next quarterly tax filing. Interested?""","0:QuyYmaQuest1AgreeTransfer:Agree
 1:QuyDisagreeQuest:Disagree
 ",,,,
-QuyYmaQuestInvade1,DialogOptionSelected,"$id == eiskimquy score:100
-$option == QuyYmaQuest1AgreeInvade
-","$EISQuyYma = true
-$EISQuyYmaBusy = true 40
-SetTextHighlights Return back to me when you have invaded the station.
-EISNexIssueInvasion udana_stations 40
-EISAddIntel udana_stations ""Liberate Udana Station for the Hegemony and Iron Shell!"" ""A report should be given back to Councilor Quy."" eiskimquy ""$EISQuyYmaBusy"" ""$EISDoneQuest1"" ""Operation World Above""
-EISAddShip valkyrie_Elite
-AddCommodity marines 250
-AddCommodity fuel 80
-AddCommodity supplies 50
-FireAll PopulateOptions
-ShowDefaultVisual
-EndConversation","""Return back to me when you have invaded the station. Do not fail me, $firstName. Good luck.""",,,,,
 QuyYmaQuest1,DialogOptionSelected,"$id == eiskimquy score:100
 $option == QuyYmaQuest1Agree
 ","$EISQuyYma = true
@@ -817,15 +791,6 @@ SetTextHighlights Return back to me when the colonization effort is a success.
 FireAll PopulateOptions
 ShowDefaultVisual
 EndConversation","""Return back to me when the colonization effort is a success. I have it marked down in your intel log. Be on your way. With haste, please.""",,,,,
-QuyYmaQuestTransfer2,DialogOptionSelected,"$id == eiskimquy score:100
-$option == QuyYmaQuest1AgreeTransfer
-EIS_HasModId shadow_ships score:100
-EISTransferFast udana_stations ironshell","SetTextHighlights 450,000
-$EISQuyYma = true
-$EISDoneQuest1 = true
-$EISDoneQuest1Success = true
-AddRemoveCommodity credits 450000 true
-EISTaxesFiled 150000 true","""Done. The 450,000 credits will be transferred to your account immediately, and one third of that will be added as a tax credit in your next quarterly tax report.""",1:QuyYmaQuest2:Continue,,,,
 QuyYmaQuestTransfer1,DialogOptionSelected,"$id == eiskimquy score:100
 $option == QuyYmaQuest1AgreeTransfer
 EISTransferFast hanan_pacha ironshell","SetTextHighlights 150,000
@@ -857,7 +822,7 @@ AddRemoveCommodity credits 100000 true
 EISTaxesFiled 500000 true
 FireAll PopulateOptions
 EndConversation","""Very good, I am entrusting its governance and protection to you. I also looked over your tax records and crunched some numbers. It looks like there are some line items that could be considered deductible on your next tax return. That should help mitigate the operating costs of the outpost before Hanan Pacha is up and running. Burn bright.""",,,,,
-QuyYmaQuest1SuccessInvadeReply,DialogOptionSelected,"$option == QuyYmaQuest2
+#QuyYmaQuest1SuccessInvadeReply,DialogOptionSelected,"$option == QuyYmaQuest2
 EISKillaOwned udana_stations ironshell
 #EISAmongUs udana_stations","AddXP 5000
 $EISDoneQuest1 = true
@@ -866,7 +831,7 @@ AdjustRep $personFaction.id COMBAT_HELP_CRITICAL
 ","The $PersonRank reads the report. ""I am quite pleased with this outcome. Udana Station will no longer be used as a fugitive base. If you need some ships, you have my authorization to Mr. Hartley's and Ms. Celeste's experimental designs. Can I entrust you with the governorship of Udana Station?""","0:QuyYmaQuest2Agree:""You can entrust me with the governorship.""
 1:QuyDisagreeQuest:""You may not.""
 2:QuyGovernorshipQuestion:""Governorship?""","Grammar: ""entrust me governorship"" -> ""entrust me with the governorship"".",,,
-QuyYmaQuest1SuccessInvadeReplyb,DialogOptionSelected,"$option == QuyYmaQuest2Agree
+#QuyYmaQuest1SuccessInvadeReplyb,DialogOptionSelected,"$option == QuyYmaQuest2Agree
 EISKillaOwned udana_stations ironshell","AdjustRepActivePerson COOPERATIVE 25
 EISBuyColony udana_stations
 AddRemoveCommodity credits 100000 true
@@ -874,8 +839,7 @@ EISTaxesFiled 500000 true
 FireAll PopulateOptions
 EndConversation","""Very good, I am entrusting its governance and protection to you. I also looked over your tax records and crunched some numbers. It looks like there are some line items that could be considered deductible on your next tax return to assist with the operating costs of managing Udana Station. I suppose there are rebels still present there as well. I have added additional funds to help you deal with any potential insurrections. If you need some ships, you have my authorization to Mr. Hartley's and Ms. Celeste's experimental designs. Burn bright.""",,,,,
 QuyYmaQuest1FailureReply,DialogOptionSelected,"$option == QuyYmaQuest2
-!EISKillaOwned hanan_pacha ironshell
-!EISKillaOwned udana_stations ironshell","$EISDoneQuest1 = true
+!EISKillaOwned hanan_pacha ironshell","$EISDoneQuest1 = true
 AdjustRepActivePerson HOSTILE -10
 FireAll PopulateOptions
 EndConversation","The $PersonRank reads the report. ""I am displeased with the outcome of this mission. This is what I get for trusting layabouts to do the work of professionals.""",,,,,
@@ -1068,6 +1032,7 @@ EISHartleyChallengeThatsIt,Nex_FencingDuelFinished,"$nex_duelContext == HartleyD
 $nex_playerWonDuel","AddXP 500
 AdjustRepActivePerson 10
 $DuelScore++
+$EISBeatHartleyOnce = true
 FireAll PopulateOptions","""Well fought I would say.""
 OR
 ""Now that's a good duel.""",,,,,
@@ -1091,7 +1056,12 @@ defaultHartleyGreetingUrgent,VNSectorGreetingOptions,"$id == eisdarren score:100
 EISVibeCheck 50 100","AddText ""\""I have good news about the Vanguard enhancements, if you're interested at all.\""""",,,,,,
 EISHartleyVanguardPrint,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisdarren score:1000
-!$EISQuickiesRewardOnce","Nex_DynamicPaginatedOptions addOption EISHartleyVanguardReward ""\""The Councilor said you may have some work for me.\""""",,,,B,,
+!$EISQuickiesRewardOnce
+!EISMegamind eiskimquy ""$EISDoneQuest1""","Nex_DynamicPaginatedOptions addOption EISHartleyVanguardReward ""\""The Councilor said you may have some work for me.\""""",,,,B,,
+EISHartleyVanguardPrintSuccess,eis_VNSectorDiscussionOptions,"$isPerson
+$id == eisdarren score:1000
+!$EISQuickiesRewardOnce
+EISMegamind eiskimquy ""$EISDoneQuest1Success""","Nex_DynamicPaginatedOptions addOption EISHartleyVanguardReward ""\""The Councilor said you may have some work for me.\""""",,,"Split from EISHartleyVanguardPrint into a not-yet-attempted / succeeded pair (equivalent to !$EISDoneQuest1 OR $EISDoneQuest1Success) so the option no longer shows greyed-out after a failed Operation World Above - conditions column doesn't support OR directly, same reason EISCelesteCourageousPrintDisable/c are two rows. Uses EISMegamind (not bare $ flags) because $EISDoneQuest1/$EISDoneQuest1Success live on eiskimquy's own memory, not the current interaction target's - bare $ checks were silently always-false/always-true here since Hartley/Celeste never have these flags set on their own memory.",B,,
 EISHartleyVanguardReward,DialogOptionSelected,"$option == EISHartleyVanguardReward
 !$EISQuickiesRewardOnce","$EISQuickiesReward = true 30
 $EISQuickiesRewardOnce = true
@@ -1216,6 +1186,24 @@ $id == eisdarren","SetTooltip EISHartleyReward ""You need to be on Welcoming ter
 SetTooltipHighlightColors hGood
 SetTooltipHighlights EISHartleyReward Welcoming
 SetEnabled EISHartleyReward false",,,,b,,
+,,,,,,,,,
+EISHartleyVanguardPrintFallback,eis_VNSectorDiscussionOptions,"$isPerson
+$id == eisdarren score:1000
+!$EISQuickiesRewardOnce
+$EISBeatHartleyOnce
+EISMegamind eiskimquy ""$EISDoneQuest1""
+!EISMegamind eiskimquy ""$EISDoneQuest1Success""","Nex_DynamicPaginatedOptions addOption EISHartleyVanguardRewardFallback ""\""Is that enough proof for you?.\""""",,,"Fallback recruitment path if Operation World Above was failed, available if the player has also beaten Hartley in a duel at least once ($EISBeatHartleyOnce). Exact copy of EISHartleyVanguardReward's offer/reward for now, gated on failure+duel instead of success. No disable row per request - either both conditions are met and it's fully available, or it's hidden.",B,,
+EISHartleyVanguardRewardFallback,DialogOptionSelected,"$option == EISHartleyVanguardRewardFallback
+!$EISQuickiesRewardOnce","$EISQuickiesReward = true 30
+$EISQuickiesRewardOnce = true
+EISAddContact
+$EISHartleyContact = true
+FireAll PopulateOptions","$personLastName appears conflicted. ""Perhaps the Councilor exaggerated your ineptitude. I can arrange some work for you if you need any.""",,,B,,
+EISHartleyVanguardHighlightFallback,eis_VNSectorDiscussionOptionsCheck,"$id == eisdarren
+$EISBeatHartleyOnce
+EISMegamind eiskimquy ""$EISDoneQuest1""
+!EISMegamind eiskimquy ""$EISDoneQuest1Success""
+!$EISQuickiesRewardOnce",SetOptionColor EISHartleyVanguardRewardFallback highlight,,,,b,,
 #END Hartley Dialogue,,,,,,,N,,
 ,,,,,,,N,,
 # Celeste Dialogue,,,,,,,N,,
@@ -1355,7 +1343,13 @@ FireAll eis_VNSectorDiscussionOptionsCheck",,,,b,,
 EISCelesteCourageousPrint,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisceleste score:1000
 !$EISQuickiesRewardOnce
-$EISCelesteContact","Nex_DynamicPaginatedOptions addOption EISCelesteCourageousReward ""\""The Councilor told me you've been trialing a new prototype.\""""",,,,b,,
+$EISCelesteContact
+!EISMegamind eiskimquy ""$EISDoneQuest1""","Nex_DynamicPaginatedOptions addOption EISCelesteCourageousReward ""\""The Councilor told me you've been trialing a new prototype.\""""",,,,b,,
+EISCelesteCourageousPrintSuccess,eis_VNSectorDiscussionOptions,"$isPerson
+$id == eisceleste score:1000
+!$EISQuickiesRewardOnce
+$EISCelesteContact
+EISMegamind eiskimquy ""$EISDoneQuest1Success""","Nex_DynamicPaginatedOptions addOption EISCelesteCourageousReward ""\""The Councilor told me you've been trialing a new prototype.\""""",,,"Split from EISCelesteCourageousPrint into a not-yet-attempted / succeeded pair (equivalent to !$EISDoneQuest1 OR $EISDoneQuest1Success) so the option no longer shows greyed-out after a failed Operation World Above. Uses EISMegamind (not bare $ flags) since these flags live on eiskimquy's own memory, not Celeste's.",b,,
 EISCelesteCourageousReward,DialogOptionSelected,"$option == EISCelesteCourageousReward
 !$EISQuickiesRewardOnce","$EISQuickiesReward = true 30
 $EISQuickiesRewardOnce = true

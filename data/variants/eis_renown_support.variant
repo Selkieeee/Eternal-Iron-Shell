@@ -1,51 +1,55 @@
 {
-  "variantId": "eis_renown_support",
-  "hullId": "eis_renown",
-  "displayName": "Support",
-  "goalVariant": false,
-  "fluxCapacitors": 17,
-  "fluxVents": 28,
-  "quality": 1,
-  "permaMods": [],
-  "hullMods": [
-    "converted_hangar",
-    "autorepair",
-    "targetingunit"
-  ],
-  "weaponGroups": [
-    {
-      "autofire": false,
-      "mode": "LINKED",
-      "weapons": {
-        "WS0001": "hil"
-      }
-    },
-    {
-      "autofire": true,
-      "mode": "LINKED",
-      "weapons": {
-        "WS 008": "mark9"
-      }
-    },
-    {
-      "autofire": true,
-      "mode": "LINKED",
-      "weapons": {
-        "WS 006": "gravitonbeam",
-        "WS 007": "ionbeam"
-      }
-    },
-    {
-      "autofire": true,
-      "mode": "LINKED",
-      "weapons": {
-        "WS0002": "flak",
-        "WS0003": "flak"
-      }
-    }
-  ],
-  "modules": [],
-  "wings": [
-    "mining_drone_wing"
-  ]
+    "displayName": "Support",
+    "fluxCapacitors": 23,
+    "fluxVents": 30,
+    "goalVariant": false,
+    "hullId": "eis_renown",
+    "hullMods": [
+        "hardenedshieldemitter",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "eis_renown_support",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "hil",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 008": "mark9",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0003": "gorgonpod",
+                "WS0002": "gorgonpod",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 006": "ionbeam",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 007": "ionbeam",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
 }

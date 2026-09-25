@@ -4,6 +4,7 @@ import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.PersonImportance;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
+import com.fs.starfarer.api.campaign.econ.Industry;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.ImportantPeopleAPI;
@@ -18,6 +19,13 @@ import com.fs.starfarer.api.impl.campaign.ids.Voices;
 public class MyLoveForIron implements EveryFrameScript {
 
     private boolean done = false;
+
+    // Guards against startUpgrading() NPEs (BaseIndustry.startUpgrading() crashes if the industry's
+    // upgrade id is unset or a mod has removed/renamed the spec it points to).
+    private static boolean canUpgrade(Industry industry) {
+        String upgradeId = industry.getSpec().getUpgrade();
+        return upgradeId != null && Global.getSettings().getIndustrySpec(upgradeId) != null;
+    }
 
     @Override
     public void advance(float amount) {
@@ -36,14 +44,18 @@ public class MyLoveForIron implements EveryFrameScript {
             }
             //I did this math of upgrade time in my head, have 59 + IndustryRegularUpgradeTime
             market2.getPlanetEntity().setInteractionImage("illustrations", "is_yami_illustration");
-            if (market.getIndustry("spaceport") != null) {market.getIndustry("spaceport").startUpgrading();
-            ((BaseIndustry) market.getIndustry("spaceport")).setBuildProgress(-274f);}
-            if (market.getIndustry("heavyindustry") != null) {market.getIndustry("heavyindustry").startUpgrading();
-            ((BaseIndustry) market.getIndustry("heavyindustry")).setBuildProgress(-274f);}
-            if (market.getIndustry("battlestation") != null) {market.getIndustry("battlestation").startUpgrading();
-            ((BaseIndustry) market.getIndustry("battlestation")).setBuildProgress(-609);}
-            if (market.getIndustry("militarybase") != null) {market.getIndustry("militarybase").startUpgrading();
-            ((BaseIndustry) market.getIndustry("militarybase")).setBuildProgress(-213);}
+            Industry spaceport = market.getIndustry("spaceport");
+            if (spaceport != null && canUpgrade(spaceport)) {spaceport.startUpgrading();
+            ((BaseIndustry) spaceport).setBuildProgress(-274f);}
+            Industry heavyindustry = market.getIndustry("heavyindustry");
+            if (heavyindustry != null && canUpgrade(heavyindustry)) {heavyindustry.startUpgrading();
+            ((BaseIndustry) heavyindustry).setBuildProgress(-274f);}
+            Industry battlestation = market.getIndustry("battlestation");
+            if (battlestation != null && canUpgrade(battlestation)) {battlestation.startUpgrading();
+            ((BaseIndustry) battlestation).setBuildProgress(-609);}
+            Industry militarybase = market.getIndustry("militarybase");
+            if (militarybase != null && canUpgrade(militarybase)) {militarybase.startUpgrading();
+            ((BaseIndustry) militarybase).setBuildProgress(-213);}
             //depreciated
             //factionLeader.getStats().setSkillLevel(Skills.SPACE_OPERATIONS, 3);
             //factionLeader.getStats().setSkillLevel(Skills.PLANETARY_OPERATIONS, 3);

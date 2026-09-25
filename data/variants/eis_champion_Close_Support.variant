@@ -1,9 +1,9 @@
 {
-    "displayName": "Standard",
-    "fluxCapacitors": 6,
+    "displayName": "Close Support",
+    "fluxCapacitors": 14,
     "fluxVents": 30,
     "goalVariant": true,
-    "hullId": "eis_vengeance",
+    "hullId": "eis_champion",
     "hullMods": [
         "hardenedshieldemitter",
         "targetingunit",
@@ -11,55 +11,57 @@
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "eis_vengeance_standard",
+    "variantId": "eis_champion_cs",
     "weaponGroups": [
         {
             "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS0012": "hellbore",
-            }
-        },
-        {
-            "autofire": false,
-            "mode": "ALTERNATING",
-            "weapons": {
-                "WS0003": "sabot",
-                "WS0004": "sabot",
+                "WS 008": "eis_barretta",
             }
         },
         {
             "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS0002": "hveldriver",
+                "WS 009": "hurricane",
             }
         },
         {
-            "autofire": false,
+            "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "hveldriver",
+                "WS 007": "hveldriver",
             }
         },
         {
-            "autofire": false,
+            "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0005": "ionbeam",
+                "WS 006": "hveldriver",
             }
         },
         {
-            "autofire": false,
+            "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0006": "ionbeam",
+                "WS 000": "lightneedler",
+                "WS 001": "lightneedler",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 004": "pdlaser",
+                "WS 005": "pdlaser",
+                "WS 002": "pdlaser",
+                "WS 003": "pdlaser",
+                "WS 011": "pdburst",
+                "WS 010": "pdburst",
             }
         },
     ],
-    "wings": [
-        "eis_dagger_wing",
-        "eis_dagger_wing",
-    ],
+    "wings": [],
     "modules": [],
 }

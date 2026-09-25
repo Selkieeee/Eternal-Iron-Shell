@@ -1,40 +1,46 @@
 {
-  "variantId": "eis_indomitable_missile",
-  "hullId": "eis_indomitable",
-  "displayName": "Missile",
-  "goalVariant": true,
-  "fluxCapacitors": 20,
-  "fluxVents": 30,
-  "permaMods": [],
-  "hullMods": [
-    "missleracks",
-    "hardenedshieldemitter"
-   ],
+    "displayName": "Missile",
+    "fluxCapacitors": 23,
+    "fluxVents": 30,
+    "goalVariant": true,
+    "hullId": "eis_indomitable",
+    "hullMods": [
+        "hardenedshieldemitter",
+        "missleracks",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "eis_indomitable_missile",
     "weaponGroups": [
         {
             "autofire": false,
             "mode": "LINKED",
-            "weapons": {"WS0004": "hellbore"}
+            "weapons": {
+                "WS0004": "hellbore",
+            }
         },
         {
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
+                "WS 016": "sabotpod",
                 "WS 014": "sabotpod",
-                "WS 016": "sabotpod"
             }
         },
         {
             "autofire": false,
             "mode": "LINKED",
-            "weapons": {"WS0003": "eis_superheavy_needler"}
+            "weapons": {
+                "WS0003": "eis_superheavy_needler",
+            }
         },
         {
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
+                "WS0008": "atropos",
                 "WS0007": "atropos",
-                "WS0008": "atropos"
             }
         },
         {
@@ -42,7 +48,7 @@
             "mode": "ALTERNATING",
             "weapons": {
                 "WS0005": "annihilator",
-                "WS0006": "annihilator"
+                "WS0006": "annihilator",
             }
         },
         {
@@ -50,14 +56,14 @@
             "mode": "LINKED",
             "weapons": {
                 "WS0001": "flak",
-                "WS0002": "flak",
-                "WS0009": "vulcan",
                 "WS0012": "vulcan",
+                "WS0014": "vulcan",
+                "WS0002": "flak",
                 "WS0013": "vulcan",
-                "WS0014": "vulcan"
+                "WS0009": "vulcan",
             }
-        }
+        },
     ],
-  "modules": [],
-  "wings": []
+    "wings": [],
+    "modules": [],
 }

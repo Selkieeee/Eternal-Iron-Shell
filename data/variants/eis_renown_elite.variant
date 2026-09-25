@@ -1,48 +1,49 @@
 {
-  "variantId": "eis_renown_elite",
-  "hullId": "eis_renown",
-  "displayName": "Elite",
-  "goalVariant": true,
-  "fluxCapacitors": 23,
-  "fluxVents": 30,
-  "quality": 1,
-  "permaMods": [],
-  "hullMods": [
-    "autorepair",
-    "targetingunit"
-  ],
-  "weaponGroups": [
-    {
-      "autofire": false,
-      "mode": "LINKED",
-      "weapons": {
-        "WS0001": "autopulse"
-      }
-    },
-    {
-      "autofire": true,
-      "mode": "LINKED",
-      "weapons": {
-        "WS0002": "dualflak",
-        "WS0003": "dualflak"
-      }
-    },
-    {
-      "autofire": true,
-      "mode": "LINKED",
-      "weapons": {
-        "WS 008": "hellbore"
-      }
-    },
-    {
-      "autofire": true,
-      "mode": "LINKED",
-      "weapons": {
-        "WS 006": "gravitonbeam",
-        "WS 007": "gravitonbeam"
-      }
-    }
-  ],
-  "modules": [],
-  "wings": []
+    "displayName": "Elite",
+    "fluxCapacitors": 27,
+    "fluxVents": 30,
+    "goalVariant": true,
+    "hullId": "eis_renown",
+    "hullMods": [
+        "hardenedshieldemitter",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "eis_renown_elite",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "autopulse",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0003": "dualflak",
+                "WS0002": "dualflak",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 008": "hellbore",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 006": "gravitonbeam",
+                "WS 007": "gravitonbeam",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
 }

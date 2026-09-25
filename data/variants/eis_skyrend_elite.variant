@@ -1,42 +1,37 @@
 {
-  "variantId": "eis_skyrend_elite",
-  "hullId": "eis_skyrend",
-  "displayName": "Elite",
-  "goalVariant": true,
-  "fluxCapacitors": 6, #49
-  "fluxVents": 50,
-  "hullMods": [
+    "displayName": "Elite",
+    "fluxCapacitors": 0,
+    "fluxVents": 49,
+    "goalVariant": true,
+    "hullId": "eis_skyrend",
+    "hullMods": [
         "eis_aquila",
         "hardenedshieldemitter",
         "stabilizedshieldemitter",
     ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "eis_skyrend_elite",
     "weaponGroups": [
-        {
-            "autofire": false,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0001": "plasma",
-                "WS0002": "plasma"
-            }
-        },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
                 "WS0005": "hveldriver",
-                "WS0006": "hveldriver"
+                "WS0006": "hveldriver",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0003": "dualflak",
+                "WS0003": "hveldriver",
                 "WS0014": "vulcan",
                 "WS0013": "vulcan",
                 "WS0008": "vulcan",
-                "WS0004": "dualflak",
-                "WS0007": "vulcan"
+                "WS0004": "hveldriver",
+                "WS0007": "vulcan",
             }
         },
         {
@@ -44,7 +39,7 @@
             "mode": "LINKED",
             "weapons": {
                 "WS0012": "typhoon",
-                "WS0011": "typhoon"
+                "WS0011": "typhoon",
             }
         },
         {
@@ -52,12 +47,27 @@
             "mode": "LINKED",
             "weapons": {
                 "WS0016": "pdlaser",
-                "WS0015": "pdlaser"
+                "WS0015": "pdlaser",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "tachyonlance",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0002": "tachyonlance",
             }
         },
     ],
     "wings": [
-        "eis_peacekeeper_wing",
-        "talon_wing"
-    ]	  
+        "eis_broadsword_wing",
+        "eis_broadsword_wing",
+    ],
+    "modules": [],
 }

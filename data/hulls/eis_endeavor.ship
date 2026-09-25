@@ -441,7 +441,7 @@
       "id": "WS0046",
       "size": "SMALL",
       "type": "MISSILE",
-      "mount": "TURRET",
+      "mount": "HARDPOINT",
       "arc": 7,
       "angle": 0,
       "locations": [-62, 117]
@@ -450,7 +450,7 @@
       "id": "WS0047",
       "size": "SMALL",
       "type": "MISSILE",
-      "mount": "TURRET",
+      "mount": "HARDPOINT",
       "arc": 7,
       "angle": -0,
       "locations": [-62, -117]

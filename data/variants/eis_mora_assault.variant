@@ -1,55 +1,65 @@
 {
     "displayName": "Assault",
-    "fluxCapacitors": 0,
-    "fluxVents": 30,
+    "fluxCapacitors": 30,
+    "fluxVents": 1,
+    "goalVariant": true,
     "hullId": "eis_mora",
-	"goalVariant": true,
-    "hullMods": ["eis_damperhull"],
+    "hullMods": [],
     "permaMods": [],
     "sMods": [],
+    "suppressedMods": [],
     "variantId": "eis_mora_assault",
     "weaponGroups": [
         {
             "autofire": false,
             "mode": "LINKED",
-            "weapons": {"WS0003": "heavymauler"}
+            "weapons": {
+                "WS0003": "heavymauler",
+            }
         },
         {
             "autofire": false,
             "mode": "LINKED",
-            "weapons": {"WS 002": "breach"}
+            "weapons": {
+                "WS 002": "breach",
+            }
         },
         {
             "autofire": false,
             "mode": "LINKED",
-            "weapons": {"WS0002": "hveldriver"}
+            "weapons": {
+                "WS0002": "hveldriver",
+            }
         },
         {
             "autofire": false,
             "mode": "LINKED",
-            "weapons": {"WS 004": "sabotpod"}
+            "weapons": {
+                "WS 004": "sabotpod",
+            }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
+                "WS0001": "lightac",
                 "WS 007": "lightac",
-                "WS0001": "lightac"
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS 012": "vulcan",
                 "WS 013": "vulcan",
-                "WS 014": "vulcan"
+                "WS 014": "vulcan",
+                "WS 012": "vulcan",
             }
-        }
+        },
     ],
     "wings": [
         "eis_broadsword_wing",
         "eis_thunder_mk2_wing",
-        "eis_thunder_mk2_wing"
-    ]
+        "eis_thunder_mk2_wing",
+    ],
+    "modules": [],
 }

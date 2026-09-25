@@ -1,36 +1,39 @@
 {
     "displayName": "Assault",
-    "fluxCapacitors": 24,
+    "fluxCapacitors": 28,
     "fluxVents": 30,
+    "goalVariant": true,
     "hullId": "eis_indomitable",
-	"goalVariant": true,
     "hullMods": [
+        "hardenedshieldemitter",
         "heavyarmor",
-        "hardenedshieldemitter"
     ],
     "permaMods": [],
     "sMods": [],
+    "suppressedMods": [],
     "variantId": "eis_indomitable_assault",
     "weaponGroups": [
         {
             "autofire": false,
             "mode": "LINKED",
-            "weapons": {"WS0003": "mark9"}
-        },
-        {
-            "autofire": false,
-            "mode": "ALTERNATING",
             "weapons": {
-                "WS 014": "eis_celestials_aster",
-                "WS 016": "eis_celestials_aster"
+                "WS0003": "mark9",
             }
         },
         {
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
+                "WS 016": "eis_celestials_aster",
+                "WS 014": "eis_celestials_aster",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0008": "sabot",
                 "WS0007": "sabot",
-                "WS0008": "sabot"
             }
         },
         {
@@ -38,25 +41,29 @@
             "mode": "ALTERNATING",
             "weapons": {
                 "WS0005": "reaper",
-                "WS0006": "reaper"
+                "WS0006": "reaper",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
-            "weapons": {"WS0004": "devastator"}
+            "weapons": {
+                "WS0004": "devastator",
+            }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
                 "WS0001": "flak",
-                "WS0002": "flak",
-                "WS0009": "vulcan",
                 "WS0012": "vulcan",
+                "WS0014": "vulcan",
+                "WS0002": "flak",
                 "WS0013": "vulcan",
-                "WS0014": "vulcan"
+                "WS0009": "vulcan",
             }
-        }
-	]
+        },
+    ],
+    "wings": [],
+    "modules": [],
 }

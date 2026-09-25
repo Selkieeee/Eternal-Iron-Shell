@@ -1,30 +1,35 @@
 {
-  "variantId": "eis_endeavor_elite",
-  "hullId": "eis_endeavor",
-  "displayName": "Elite",
-  "goalVariant": true,
-  "fluxCapacitors": 0,
-  "fluxVents": 41,
+    "displayName": "Elite",
+    "fluxCapacitors": 0,
+    "fluxVents": 46,
+    "goalVariant": true,
+    "hullId": "eis_endeavor",
     "hullMods": [
         "eis_aquila",
-		"hardenedshieldemitter",
+        "hardenedshieldemitter",
     ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "eis_endeavor_elite",
     "weaponGroups": [
         {
             "autofire": false,
             "mode": "LINKED",
-            "weapons": {"WS0011": "eis_barretta"}
+            "weapons": {
+                "WS0011": "eis_barretta",
+            }
         },
         {
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "WS0009": "swarmer",
+                "WS0047": "swarmer",
+                "WS0046": "swarmer",
                 "WS0010": "swarmer",
-                "WS0028": "swarmer",
+                "WS0009": "swarmer",
                 "WS0029": "swarmer",
-				"WS0046": "swarmer",
-				"WS0047": "swarmer"
+                "WS0028": "swarmer",
             }
         },
         {
@@ -32,7 +37,7 @@
             "mode": "ALTERNATING",
             "weapons": {
                 "WS0005": "sabotpod",
-                "WS0006": "sabotpod"
+                "WS0006": "sabotpod",
             }
         },
         {
@@ -40,7 +45,7 @@
             "mode": "LINKED",
             "weapons": {
                 "WS0003": "hveldriver",
-                "WS0004": "hveldriver"
+                "WS0004": "hveldriver",
             }
         },
         {
@@ -48,9 +53,9 @@
             "mode": "LINKED",
             "weapons": {
                 "WS0012": "railgun",
-                "WS0013": "railgun",
                 "WS0014": "railgun",
-                "WS0015": "railgun"
+                "WS0013": "railgun",
+                "WS0015": "railgun",
             }
         },
         {
@@ -59,14 +64,15 @@
             "weapons": {
                 "WS0001": "dualflak",
                 "WS0002": "dualflak",
+                "WS0008": "vulcan",
                 "WS0007": "vulcan",
-                "WS0008": "vulcan"
             }
-        }
+        },
     ],
     "wings": [
         "eis_peacekeeper_wing",
         "eis_peacekeeper_wing",
-        "eis_peacekeeper_wing"
-    ]
+        "eis_peacekeeper_wing",
+    ],
+    "modules": [],
 }
