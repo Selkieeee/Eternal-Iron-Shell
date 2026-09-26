@@ -1,3 +1,11 @@
+2.0.2
+
+-Fixed a crash on new game with certain cross-mod industries
+-Fixed Relentless not having its Gunshield drones
+-Fixed a jar size issue (oops)
+-Added a fallback recruit option for Hartley if "Operation World Above" is failed (beat him in a duel).
+-Fixed some variants
+
 2.0.1
 
 -Fixed a crash with the pirate bounty contact mission
