@@ -10,16 +10,18 @@
 	#"engineGlowWidthMult":1.1,
 	#"engineGlowGlowMult":1.25,
 	
-	"flameoutOnImpactChance":0,
+	#"flameoutOnImpactChance":0,
 
-	"clampTurnRateAfter":true,
-	"clampMaxSpeedAfter":false,
+	#"clampTurnRateAfter":true,
+	#"clampMaxSpeedAfter":false,
 	
 	#"useSound":"beam_heavy_intro",
 	#"outOfUsesSound":"gun_out_of_ammo",
 
 	#"activatingShieldsCancels":true,
 	
+	#"weaponGlowColor":[255,0,255,255],
+	"weaponTypes":[ENERGY, BALLISTIC],
 	
 	"useSound":"system_high_energy_focus_activate",
 	"deactivateSound":"system_high_energy_focus_deactivate",
