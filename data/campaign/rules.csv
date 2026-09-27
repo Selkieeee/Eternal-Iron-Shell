@@ -69,7 +69,7 @@ $faction.id == ironshell
 ",,,,,B,,,
 greetingEISWtfIhatecoding,OpenCommLink,"$faction.id == ironshell score:50
 $isPerson
-$tag:VNSector
+$tag:eis_VNSector
 !$entity.cargoScanConv
 !$entity.isHostile
 !$faction.isHostile","FireBest PickGreeting
@@ -1899,7 +1899,9 @@ You may report to either myself or my subordinate Charlotte Hex here on Yami thr
 ""Regardless of your decision, I've notified our patrol fleets of your status. Dismissed.""",,"Added SetTextHighlights for Kim Quy, Iron Shell, Charlotte Hex, Yami, Chitagupta, Darren Hartley, Caeda Celeste (in the order they appear in the text). Fixed: split the single 7-term SetTextHighlights call into 7 separate single-term calls. Vanilla never combines more than ~2 terms (and never several multi-word phrases) in one call; separate consecutive calls on the same paragraph is the proven vanilla pattern (e.g. ome_askHireSel, gaTJMissionText5) and accumulate rather than overwrite.",b,,,
 AvaShipSaleSel,DialogOptionSelected,$option == AvaShipSaleOffer,"EISPrepareShipSale eis_dauntless_Standard
 EISPrepareShipSale SHOW
-FireBest AvaShipSaleBuyCheck","""Apologies for making you come in person, $playername."" Ava puts down her Tri-Pad after reviewing your request. ""It's true we have had some nanoforge capacity free up on Chitagupta, but..."" She trails off and sends over the specifications of an advanced dreadnought hull. ""From your description, it can only be this, right? Iron Shell's Dauntless-class isn't a part of the public record, and I won't pry on where you spotted one. We typically don't authorize production outside of Iron Sentinel, but you've done enough that I can pull some strings, Captain.""","AvaShipSaleBuy:Authorize the production (500,000 credits)
+FireBest AvaShipSaleBuyCheck","""Apologies for making you come in person, $playername."" Ava puts down her Tri-Pad after reviewing your request. ""It's true we have had some nanoforge capacity free up on Chitagupta, but..."" She trails off and taps her desk, lost in thought. Soon she turns to a secure terminal, enters her codes, and sends over the specifications of an advanced dreadnought hull.
+
+""From your description, it can only be this, right? Iron Shell's Dauntless-class isn't a part of the public record, and I won't pry on where you spotted one. We typically don't authorize production outside of Iron Sentinel, but you've done enough that I can pull some strings, Captain.""","AvaShipSaleBuy:Authorize the production (500,000 credits)
 AvaShipSaleDecline:""I need to think it over.""",,b,,,
 AvaShipSaleBuyCheckRow,AvaShipSaleBuyCheck,$player.credits < 500000,"SetTooltip AvaShipSaleBuy ""You do not have enough credits.""
 SetEnabled AvaShipSaleBuy false",,,,b,,,
@@ -2008,8 +2010,11 @@ AranitiaGreeting3b,UpdateEngagementChoice,$EIS_YKWYD score:1000,EISCheck,,,,,,,
 eis_VNSectorMenu,DialogOptionSelected,$option == eis_VNS_Setup,"FireAll eis_PopulateVNSector
 Nex_DynamicPaginatedOptions show
 FireAll eis_VNSectorDiscussionOptionsCheck",,,,,,,
-eis_VNSectorDiscuss,PopulateOptions,"$isPerson
-$tag:VNSector",,,10:eis_VNS_Setup:Request to speak with $personFirstName,,,,,
+eis_VNSectorDiscussCeleste,PopulateOptions,"$isPerson
+$tag:eis_celeste",,,10:eis_VNS_Setup:Request to speak with $personFirstName,,,"Replaces the old $tag:VNSector check (too generic - matched other mods' characters sharing that ambient tag, e.g. UAF's Nia Aurora). Scoped by Iron-Shell's own person tags instead of faction, since faction changes on recruitment (Charlotte becomes player-faction once hired) but these tags don't. Split into two rows (Celeste / military) since conditions don't support OR directly.",,,,
+eis_VNSectorDiscussMilitary,PopulateOptions,"$isPerson
+$tag:eis_military
+!$tag:eis_celeste",,,10:eis_VNS_Setup:Request to speak with $personFirstName,,,"Mutually exclusive with eis_VNSectorDiscussCeleste via the !$tag:eis_celeste guard, so even if some future contact ever carried both tags, only one row would fire - avoids relying on Nex_DynamicPaginatedOptions deduping a double addOption call on the same id.",,,,
 eis_VNSectorHaveYouHeard,eis_PopulateVNSector,,"Nex_DynamicPaginatedOptions addOption eis_VNS_HaveYouReply ""Start a conversation about...""",,,"Player option text changed: was ""Ask $hisOrHer opinion on...""; dropped the now-unneeded $hisOrHer token.",,,,
 eis_VNSectorDiscussionOption,eis_PopulateVNSector,,FireAll eis_VNSectorDiscussionOptions,,,,,,,
 eis_VNSectorCancelOut,eis_PopulateVNSector,,"Nex_DynamicPaginatedOptions addOptionAllPages eis_VNSectorCancelMenu ""Talk about something else""

@@ -70,7 +70,7 @@ public class eis_modPlugin extends BaseModPlugin {
     public static boolean haveArma = Global.getSettings().getModManager().isModEnabled("armaa");
 
     public static final String IRONSTANDSETERNAL = "ironshell";
-    private static final String MOD_ID = "timid_xiv";
+    private static final String MOD_ID = "selkie_eis";
 
     // Reads a LunaLib-configurable boolean if LunaLib is present, otherwise falls back to the hardcoded default.
     public static boolean getEISBooleanSetting(String fieldId, boolean fallback) {
@@ -339,6 +339,17 @@ public class eis_modPlugin extends BaseModPlugin {
     
     @Override
     public void onGameLoad(boolean newGame) {
+        // Save-compat migration: contacts tagged "VNSector" (from before the eis_VNSector rename) get
+        // re-tagged so other mods sharing that old generic tag convention (e.g. UAF) stop picking up
+        // Iron Shell's own contacts now that renaming the mod id to selkie_eis means timid_xiv-based
+        // compatibility checks in other mods no longer mask them. Runs every load; no-ops once migrated.
+        for (String eisContactId : new String[]{"eiskimquy", "eisdarren", "eisceleste", "eissneed", "eisava"}) {
+            PersonAPI eisContact = Global.getSector().getImportantPeople().getPerson(eisContactId);
+            if (eisContact != null && eisContact.hasTag("VNSector")) {
+                eisContact.removeTag("VNSector");
+                eisContact.addTag("eis_VNSector");
+            }
+        }
         /*Whatever they should know should be from the Hegemony Auxiliary and XIV Blueprint respectively.
         for (String ship : Global.getSector().getFaction(Factions.HEGEMONY).getKnownShips()) {
             if (!Global.getSector().getFaction(IRONSTANDSETERNAL).knowsShip(ship)) {

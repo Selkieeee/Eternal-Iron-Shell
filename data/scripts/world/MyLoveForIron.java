@@ -77,7 +77,7 @@ public class MyLoveForIron implements EveryFrameScript {
             factionLeader.getName().setFirst("Kim");
             factionLeader.getName().setLast("Quy");
             factionLeader.setPortraitSprite("graphics/portraits/eis_hegemomy.png");
-            factionLeader.addTag("VNSector");
+            factionLeader.addTag("eis_VNSector");
             //Administrator
             factionLeader.getStats().setSkillLevel(Skills.INDUSTRIAL_PLANNING, 1);
             //Admiral (6)
@@ -121,7 +121,7 @@ public class MyLoveForIron implements EveryFrameScript {
             heartless.getName().setFirst("Darren");
             heartless.getName().setLast("Hartley");
             heartless.setPortraitSprite("graphics/portraits/eis_dunscaith.png");
-            heartless.addTag("VNSector");
+            heartless.addTag("eis_VNSector");
             //Askonian Veterans during its Crisis (7 + 5)
             heartless.getStats().setSkillLevel(Skills.HELMSMANSHIP, 2);
             heartless.getStats().setSkillLevel(Skills.TARGET_ANALYSIS, 1);
@@ -158,7 +158,7 @@ public class MyLoveForIron implements EveryFrameScript {
             sweetperson.getName().setFirst("Caeda");
             sweetperson.getName().setLast("Celeste");
             sweetperson.setPortraitSprite("graphics/portraits/eis_celeste.png");
-            sweetperson.addTag("VNSector");
+            sweetperson.addTag("eis_VNSector");
             //Eat Dee's Elf! (7 + 5) I am the last for my House Celeste of Eventide
             sweetperson.getStats().setSkillLevel(Skills.GUNNERY_IMPLANTS, 2);
             sweetperson.getStats().setSkillLevel(Skills.POLARIZED_ARMOR, 2);
@@ -192,7 +192,7 @@ public class MyLoveForIron implements EveryFrameScript {
             warden.getName().setFirst("Charlotte");
             warden.getName().setLast("Hex");
             warden.setPortraitSprite("graphics/portraits/eis_charlotte.png");
-            warden.addTag("VNSector");
+            warden.addTag("eis_VNSector");
             //Forgive her she's still new... (7 vanilla skill points + 2 npc-only skills)
             warden.getStats().setSkillLevel(Skills.COMBAT_ENDURANCE, 1);
             warden.getStats().setSkillLevel(Skills.SYSTEMS_EXPERTISE, 2);
@@ -221,7 +221,7 @@ public class MyLoveForIron implements EveryFrameScript {
             coffeemom.getName().setFirst("Ava");
             coffeemom.getName().setLast("Nitia");
             coffeemom.setPortraitSprite("graphics/portraits/eis_ava.png");
-            coffeemom.addTag("VNSector");
+            coffeemom.addTag("eis_VNSector");
             coffeemom.getMemoryWithoutUpdate().set("$nex_preferredAdmin", true);
             coffeemom.getMemoryWithoutUpdate().set("$nex_preferredAdmin_factionId", "ironshell");
             //Gacha whatever pilot (7 + 5 elite)
