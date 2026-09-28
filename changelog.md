@@ -1,3 +1,10 @@
+2.0.3
+
+-Save compat
+-Mod ID has changed. This is due to multiple other mods hard-coded disabling of their own dialog options if Iron Shell was present.
+-Modified annihilation protocol AI, now does not burn uses for speed under AI control.
+-Fixed a sentinel interaction in rules.
+
 2.0.2
 
 -Fixed a crash on new game with certain cross-mod industries
