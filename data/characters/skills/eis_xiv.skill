@@ -20,6 +20,7 @@
 			"effects":[
 				{"type":"SHIP", "script":"data.scripts.eis_xiv$Level3"},
 				{"type":"SHIP", "script":"data.scripts.eis_xiv$Level4"},
+				{"type":"SHIP", "script":"data.scripts.eis_xiv$Level5"},
 			]
 		},
 	],

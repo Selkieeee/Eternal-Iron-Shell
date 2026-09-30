@@ -179,6 +179,17 @@
 		"fighters":[
 		],
 	},
+	# multiplier for how often a known fighter wing shows up on the military/open market sell screen (unlisted = 1)
+	"fighterSellFrequency":{
+	"eis_broadsword_wing":5,
+	"eis_gladius_wing":5,
+	"eis_xyphos_wing":5,
+	"eis_kopis_wing":5,
+	"eis_dagger_wing":5,
+	"eis_thunder_mk2_wing":5,
+	"eis_peacekeeper_wing":5,
+	"eis_amity_wing":5,
+	},
 	"priorityFighters":{
 		"tags":["eis_bp", "heg_aux_bp"],
 		"fighters":[
@@ -275,6 +286,20 @@
 			#"tahlan_armiger",
 			#"tahlan_efreet",
 		],
+	},
+	# multiplier
+	"weaponFrequency":{
+		"tags":[],
+	},
+	# multiplier for how often a known weapon shows up on the military/open market sell screen (unlisted = 1)
+	"weaponSellFrequency":{
+	"eis_superheavy_needler":10,
+	"eis_infernal_star":10,
+	"eis_celestials_aster":10,
+	"eis_celestials_blossom":10,
+	"eis_lunarrose":10,
+	"eis_barretta":10,
+	"eis_milf":10,
 	},
 	"priorityWeapons":{
 		"tags":[],
