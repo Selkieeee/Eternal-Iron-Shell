@@ -8,11 +8,13 @@ bar_descEISYami,BarPrintDesc,"$faction.id == ironshell
 $market.id == eis_yami
 $id == eis_yami",ShowImageVisual hegemony_bar,"You enter the drinking establishment, better warmed than the rest of the frigid planet. You see an eclectic mix of patrons: off-duty guards, businessmen, and relatives of prisoners all mingle uneasily. The rules of the bar are prominently displayed on a big bulletin board, though the Iron Shell bureaucracy guarantees a myriad of unlisted rules as well. Everyone is polite and on good behavior, perhaps out of fear for the consequences of acting otherwise.",,,B,,,
 AvaRecruitAdBarAddHegemony,AddBarEvents,"$faction.id == hegemony
+$locationId != galatia
 !$global.eisAvaContact
-!$global.eisAvaRecruitAdSeen","AddBarEvent AvaRecruitAdBar_open ""View the Tri-Pad message."" ""Your Tri-Pad pings with a message from the Hegemony military."" highlight",,,,B,,,
+!$global.eisAvaRecruitAdSeen","AddBarEvent AvaRecruitAdBar_open ""View the Tri-Pad message."" ""Your Tri-Pad pings with a message from the Hegemony military."" highlight",,,"Added a locationId != galatia check so the Tri-Pad message no longer appears at any market in the Galatia star system (a star system's id is its lowercased name).",B,,,
 AvaRecruitAdBarAddIronShell,AddBarEvents,"$faction.id == ironshell
+$locationId != galatia
 !$global.eisAvaContact
-!$global.eisAvaRecruitAdSeen","AddBarEvent AvaRecruitAdBar_open ""View the Tri-Pad message."" ""Your Tri-Pad pings with a message from the Hegemony military."" highlight",,,,B,,,
+!$global.eisAvaRecruitAdSeen","AddBarEvent AvaRecruitAdBar_open ""View the Tri-Pad message."" ""Your Tri-Pad pings with a message from the Hegemony military."" highlight",,,"Added a locationId != galatia check so the Tri-Pad message no longer appears at any market in the Galatia star system (a star system's id is its lowercased name).",B,,,
 AvaRecruitAdBarSel,DialogOptionSelected,$option == AvaRecruitAdBar_open,"$global.eisAvaRecruitAdSeen = true
 SetTextHighlights ""Chief Administrator Ava Nitia"" Yami Naraka","Drowned in the usual formal pleasentries, the message is an invitation to speak with Chief Administrator Ava Nitia of Iron Shell, stationed on Yami, in the Naraka system.
 

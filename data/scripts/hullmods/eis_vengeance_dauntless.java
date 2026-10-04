@@ -322,6 +322,12 @@ public class eis_vengeance_dauntless extends BaseHullMod {
             if (glowOpacity <= 0f) {
                 return;
             }
+            // MagicSubsystem.advanceInternal() returns early for a dead ship (unless getAdvancesWhileDead()), so
+            // updateVengeanceGlow() never runs again to fade glowOpacity out - without this check the last drawn
+            // opacity would stay on the wreck forever.
+            if (!ship.isAlive() || ship.isHulk() || ship.isPiece()) {
+                return;
+            }
             CombatEngineAPI engine = Global.getCombatEngine();
             if (engine == null || !engine.isUIShowingHUD() || engine.isUIShowingDialog() || engine.getCombatUI().isShowingCommandUI()) {
                 return;

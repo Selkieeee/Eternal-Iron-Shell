@@ -60,6 +60,8 @@
 		"eis_xiv4":"Doubles wing size of built-in Gunshield and Gunblade drones,",
 		"eis_xiv5":"or deploys 2 Gunshield drones around XIV Ships with neither.",
 		"eis_xiv_gunshieldEscort":"Gunshield Escort",
+		"eis_hegInspNegatedDesc":"Iron Shell commission",
+		"eis_hegInspNegatedTooltip":"As an officer commissioned by the Iron Shell, your AI core use is exempt from Hegemony AI inspections.",
 
 		"eis_weaponmastery1":"Ballistic and energy weapons deal up to %s damage at close range, based on the firing ship's flux level",
 		"eis_weaponmastery1b":"Full bonus damage at %s range and below, no bonus damage at %s range and above",

@@ -189,10 +189,10 @@ public class eis_vengeancecore extends BaseHullMod {
         float HEIGHT = 50f;
         float PAD = 10f;
         Color YELLOW = new Color(241,199,0);
-        if (ship.getShield() != null) {tooltip.addPara(Paragraph, PAD);} else {tooltip.addPara(ParagraphShunted, PAD);}
+        if (ship == null || ship.getShield() != null) {tooltip.addPara(Paragraph, PAD);} else {tooltip.addPara(ParagraphShunted, PAD);}
         TooltipMakerAPI success = tooltip.beginImageWithText(successIcon, HEIGHT);
         success.addPara(successTitle, 0f, YELLOW, successTitle);
-        success.addPara(successText1, 0f, YELLOW, BULLET, Integer.toString(Math.round(ship.getMutableStats().getSystemRangeBonus().computeEffective(rangeRadius))));
+        success.addPara(successText1, 0f, YELLOW, BULLET, Integer.toString(Math.round(ship != null ? ship.getMutableStats().getSystemRangeBonus().computeEffective(rangeRadius) : rangeRadius)));
         success.addPara(successText2, 0f, Misc.getPositiveHighlightColor(), BULLET, Integer.toString(rofBuff)+"%", Integer.toString(buffDur));
         success.addPara(successText3, 0f, Misc.getPositiveHighlightColor(), BULLET, Integer.toString(fluxReductionBuff)+"%", Integer.toString(buffDur));
         tooltip.addImageWithText(PAD);

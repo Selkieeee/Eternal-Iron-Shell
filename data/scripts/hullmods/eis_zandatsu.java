@@ -87,7 +87,7 @@ public class eis_zandatsu extends BaseHullMod {
 
         TooltipMakerAPI parry = tooltip.beginImageWithText(ParryIcon, HEIGHT);
         parry.addPara(ParryTitle, 0f, YELLOW, ParryTitle);
-        parry.addPara(ParryText1, 0f, YELLOW, BULLET, Integer.toString(Math.round(ship.getMutableStats().getSystemRangeBonus().computeEffective(PARRY_RADIUS))));
+        parry.addPara(ParryText1, 0f, YELLOW, BULLET, Integer.toString(Math.round(ship != null ? ship.getMutableStats().getSystemRangeBonus().computeEffective(PARRY_RADIUS) : PARRY_RADIUS)));
         if (hullSize == ShipAPI.HullSize.FRIGATE) { parry.addPara(ParryText2, 0f, Misc.getPositiveHighlightColor(), BULLET, Math.round(PARRY_SHIELD_EFF_CHANGE)+"%", Integer.toString(Math.round(PARRY_BUFF_DURATION)));}
         parry.addPara(ParryText3b, 0f, Misc.getPositiveHighlightColor(), BULLET, RAFTitle, Integer.toString(Math.round(PARRY_BUFF_DURATION)));
         //parry.addPara(ParryText4, 0f, Misc.getNegativeHighlightColor(), BULLET, Math.round(PARRY_ROF_BUFF)+"%");

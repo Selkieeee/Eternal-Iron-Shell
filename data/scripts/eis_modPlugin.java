@@ -554,6 +554,10 @@ public class eis_modPlugin extends BaseModPlugin {
         if (SectorManager.getCorvusMode() && Global.getSector().getImportantPeople().getPerson("eiskimquy") != null && !Global.getSector().getImportantPeople().getPerson("eiskimquy").getMemoryWithoutUpdate().getBoolean("$EISDoneQuest1Success") && ((Global.getSector().getEntityById("hanan_pacha") != null && Global.getSector().getEntityById("hanan_pacha").getMarket().getFactionId().equals(IRONSTANDSETERNAL)) || (Global.getSector().getEntityById("udana_stations") != null && Global.getSector().getEntityById("udana_stations").getMarket().getFactionId().equals(IRONSTANDSETERNAL)))) {
             Global.getSector().getImportantPeople().getPerson("eiskimquy").getMemoryWithoutUpdate().set("$EISDoneQuest1Success", true);
         }
+        EISHegemonyInspectionGuard inspectionGuard = new EISHegemonyInspectionGuard();
+        Global.getSector().addTransientListener(inspectionGuard);
+        Global.getSector().getListenerManager().addListener(inspectionGuard, true);
+        inspectionGuard.ensureInstalled();
         //Substance Abuse compatibility
         if (Global.getSettings().getModManager().isModEnabled("alcoholism")) {
             Global.getSector().getFaction(IRONSTANDSETERNAL).getMemoryWithoutUpdate().set("$alcoholism_faction_alcohol_types", new String[]{"alcoholism_stout"});

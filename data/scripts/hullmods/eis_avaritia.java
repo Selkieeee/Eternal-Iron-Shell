@@ -415,7 +415,7 @@ public class eis_avaritia extends BaseHullMod {
             avaritia.addPara(Text5, 0f, Misc.getPositiveHighlightColor(), BULLET, Math.round(DAMAGE_BUFF_PERCENT) + "%", "2");
             avaritia.addPara(Text7, 0f, Misc.getPositiveHighlightColor(), BULLET, "80");
         } else {
-            avaritia.addPara(Text5, 0f, Misc.getPositiveHighlightColor(), BULLET, Math.round(DAMAGE_BUFF_PERCENT) + "%", Misc.getRoundedValueMaxOneAfterDecimal((Float) DAMAGE_BUFF_DURATION.get(ship.getHullSize())) + "");
+            avaritia.addPara(Text5, 0f, Misc.getPositiveHighlightColor(), BULLET, Math.round(DAMAGE_BUFF_PERCENT) + "%", Misc.getRoundedValueMaxOneAfterDecimal((Float) DAMAGE_BUFF_DURATION.get(hullSize)) + "");
             avaritia.addPara(Text7, 0f, Misc.getPositiveHighlightColor(), BULLET, String.valueOf(Math.round((float)speed.get(hullSize))));
         }
         tooltip.addImageWithText(PAD);

@@ -18,6 +18,12 @@ public class eis_prototypetu extends BaseHullMod {
         //stats.getDamageToCruisers().modifyMult(id, HAVE_SEX2_BONUS);
         //stats.getDamageToCapital().modifyMult(id, HAVE_SEX2_BONUS);
     }
+
+    @Override
+    public String getDescriptionParam(int index, HullSize hullSize) {
+        if (index == 0) return "" + (int) HAVE_SEX_BONUS + "%";
+        return null;
+    }
 }
 
 

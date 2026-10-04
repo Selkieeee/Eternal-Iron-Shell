@@ -26,6 +26,12 @@ public class eis_peacekeepercore extends BaseHullMod {
         //stats.getDamageToCapital().modifyMult(id, HAVE_SEX_BONUS2);
     }
     @Override
+    public String getDescriptionParam(int index, HullSize hullSize) {
+        if (index == 0) return "" + (int) HAVE_SEX_BONUS + "%";
+        return null;
+    }
+
+    @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
         CombatEngineAPI engine =  Global.getCombatEngine();
         if (engine == null || engine.isPaused() || !ship.isAlive()) {return;}
