@@ -131,6 +131,8 @@ public class eis_modPlugin extends BaseModPlugin {
                     "Creates the Greater Hegemony Alliance at the start of the game. (Default: True)", true);
             lunalib.lunaSettings.LunaSettings.SettingsCreator.addBoolean(MOD_ID, "NoEISPlayer", "Disable Iron Shell Portraits For Player Faction",
                     "Prevents the player faction from generating Iron Shell portraits. True = NO PORTRAITS. (Default: False)", false);
+            lunalib.lunaSettings.LunaSettings.SettingsCreator.addBoolean(MOD_ID, "AudaciousAutoEscort", "Audacious auto-escorts vengeance core ships",
+                    "Re-enables custom AI code to auto-issue escort orders from Audacious to Vengeance-core ships. May cause issues overriding player orders in some edge cases. (Default: False)", false);
             // Without this, the settings values file for this mod may never get written/loaded if LunaLib's
             // lazy first-load pass fires (from some other mod) before this point, crashing the settings UI.
             lunalib.lunaSettings.LunaSettings.SettingsCreator.refresh(MOD_ID);

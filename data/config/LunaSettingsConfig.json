@@ -1,0 +1,6 @@
+{
+	"selkie_eis": {
+		# Icon shown next to Eternal Iron Shell in the LunaLib settings menu. Must be square (scaled to 40x40).
+		"iconPath": "graphics/factions/crest_ironshell.png"
+	}
+}

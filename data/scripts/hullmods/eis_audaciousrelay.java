@@ -10,6 +10,7 @@ import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
+import data.scripts.eis_modPlugin;
 import java.awt.Color;
 import java.util.List;
 import org.lazywizard.lazylib.MathUtils;
@@ -107,7 +108,9 @@ public class eis_audaciousrelay extends BaseHullMod {
             data.tracker.advance(amount);
             if (data.tracker.intervalElapsed()) {
                 List<ShipAPI> shipinrange = CombatUtils.getShipsWithinRange(ship.getLocation(), RANGE_RELAY*2.5f);
-                if (ship.getShipAI() != null) {
+                // Escort-order nudge only runs when the "Audacious auto-escorts vengeance core ships" LunaLib setting is on (default off, also off without LunaLib).
+                // Releasing the order below is already limited to orders this code issued (data.hasEscortAssignment), so with the setting off nothing here touches orders.
+                if (ship.getShipAI() != null && eis_modPlugin.getEISBooleanSetting("AudaciousAutoEscort", false)) {
                     for (ShipAPI ship2ai : shipinrange) {
                         if (ship2ai.getOwner() == ship.getOwner() && (ship2ai.getVariant().hasHullMod("eis_vengeance") || ship2ai.getVariant().hasHullMod("eis_perfect_vengeance") || ship2ai.getVariant().hasHullMod("eis_vengeance_dauntless"))) {
                             if (!ship.isRetreating() && engine.getFleetManager(ship.getOwner()).getTaskManager(ship.isAlly()).getAssignmentFor(ship) == null && !data.hasEscortAssignment) {
