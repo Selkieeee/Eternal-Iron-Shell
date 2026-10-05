@@ -76,7 +76,7 @@ public class EISAICores extends BaseCommandPlugin {
 		
 		//buysAICores = faction.getCustomBoolean("buysAICores");
 		valueMult = 3f; //faction.getCustomFloat("AICoreValueMult");
-		repMult = 0.5f; //faction.getCustomFloat("AICoreRepMult");
+		repMult = 2f; //faction.getCustomFloat("AICoreRepMult");
                 switch (command) {
                     case "selectCores":
                         WeightedRandomPicker<String> iconPicker = new WeightedRandomPicker<String>();

@@ -6,6 +6,10 @@ import java.awt.Color;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
+import com.fs.starfarer.api.campaign.TextPanelAPI;
+import com.fs.starfarer.api.impl.campaign.CoreReputationPlugin.RepActions;
+import data.scripts.EISContactFaction;
+import com.fs.starfarer.api.impl.campaign.CoreReputationPlugin.RepRewards;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.impl.campaign.missions.hub.HubMissionWithSearch;
@@ -27,6 +31,17 @@ public class EISSpySatDeployment extends HubMissionWithSearch {
 	protected MarketAPI market;
 	protected SectorEntityToken target;
 	
+	// Faction rep goes to Iron Shell even after a recruited contact has switched to the player faction.
+	@Override
+	protected void adjustRep(TextPanelAPI textPanel, HubMissionResult result, RepActions action) {
+		String previousFaction = EISContactFaction.enter(getPerson());
+		try {
+			super.adjustRep(textPanel, result, action);
+		} finally {
+			EISContactFaction.exit(getPerson(), previousFaction);
+		}
+	}
+
 	@Override
 	protected boolean create(MarketAPI createdAt, boolean barEvent) {
 		PersonAPI person = getPerson();
@@ -40,7 +55,7 @@ public class EISSpySatDeployment extends HubMissionWithSearch {
 		requireMarketIsNot(createdAt);
 		requireMarketLocationNot(createdAt.getContainingLocation());
 		requireMarketFactionNotPlayer();
-		requireMarketFactionNot(person.getFaction().getId());requireMarketFactionNot("hegemony");
+		requireMarketFactionNot(EISContactFaction.getId(person));requireMarketFactionNot("hegemony");
 		requireMarketFactionCustom(ReqMode.NOT_ANY, Factions.CUSTOM_ALLOWS_TRANSPONDER_OFF_TRADE);
 		//requireMarketMilitary();
 		requireMarketNotHidden();
@@ -69,6 +84,8 @@ public class EISSpySatDeployment extends HubMissionWithSearch {
 //		int sizeModifier = market.getSize() * 10000;
 //		setCreditReward(10000 + sizeModifier, 30000 + sizeModifier);
 		setCreditReward(CreditReward.AVERAGE, market.getSize());
+		// reputation on completion: person +8 / faction +5 (failure penalties unchanged: person -2 / faction -1)
+		setRepChanges(0.08f, RepRewards.SMALL, 0.05f, RepRewards.TINY);
 		
 		if (rollProbability(PROB_PATROL_AROUND_TARGET)) {
                         triggerCreateSmallPatrolAroundMarket(market, Stage.DEPLOY, 1f);

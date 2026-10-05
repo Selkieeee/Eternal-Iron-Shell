@@ -40,6 +40,7 @@
 	"hullFrequency":{
 		"tags":{
 			"eis_bp":4,
+			"eis_crossmod":4,
 		},
 		"hulls":{
 			"eis_skyrend": 0.5, 
@@ -69,11 +70,22 @@
 			"armaa_valkyrie": 0.5,
 			"armaa_panther_frig_xiv": 0.5,
 			"armaa_musha_frig_sniper": 0.5,
+
+			# vanilla XIV hulls are no longer tagged eis_bp, so the frequency the eis_bp tag gave them (4) is set explicitly
+			"eagle_xiv": 4,
+			"dominator_xiv": 4,
+			"falcon_xiv": 4,
+			"enforcer_xiv": 4,
+			"onslaught_xiv": 4,
+
+			# XIV hulls learned through Kim (known/priority are handled in code, not here)
+			"legion_xiv": 2,
+			"tahlan_Castigator_xiv": 2,
 		},
 	},
 	
 	"shipsWhenImporting":{
-		"tags":["ironshell", "eis_bp"],
+		"tags":["ironshell", "eis_bp", "eis_crossmod"],
 		"hulls":[
 			#base_bp
 			"mercury",
@@ -106,6 +118,7 @@
 			"dominator_xiv",
 			"enforcer_xiv",
 			"falcon_xiv",
+			"onslaught_xiv",
 			"eis_vanguard_xiv",
 			"eis_courageous",
 			#"tahlan_Bungalow",
@@ -121,7 +134,7 @@
 		],
 	},
 	"knownShips":{
-		"tags":["ironshell", "eis_bp", "eisceleste_bp"], #no longer uses XIV_bp
+		"tags":["ironshell", "eis_bp", "eis_crossmod", "eisceleste_bp"], #no longer uses XIV_bp
 		"hulls":[
 			#base_bp
 			"mercury",
@@ -175,7 +188,7 @@
 		],
 	},
 	"knownFighters":{
-		"tags":["ironshell", "eis_bp", "heg_aux_bp", "eisceleste_bp"],
+		"tags":["ironshell", "eis_bp", "eis_crossmod", "heg_aux_bp", "eisceleste_bp"],
 		"fighters":[
 		],
 	},
@@ -191,7 +204,7 @@
 	"eis_amity_wing":5,
 	},
 	"priorityFighters":{
-		"tags":["eis_bp", "heg_aux_bp"],
+		"tags":["eis_bp", "eis_crossmod", "heg_aux_bp"],
 		"fighters":[
 		],
 	},

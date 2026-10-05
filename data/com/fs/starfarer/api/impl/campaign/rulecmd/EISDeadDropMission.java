@@ -9,6 +9,10 @@ import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.StarSystemAPI;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
+import com.fs.starfarer.api.campaign.TextPanelAPI;
+import com.fs.starfarer.api.impl.campaign.CoreReputationPlugin.RepActions;
+import data.scripts.EISContactFaction;
+import com.fs.starfarer.api.impl.campaign.CoreReputationPlugin.RepRewards;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
 import com.fs.starfarer.api.impl.campaign.missions.DelayedFleetEncounter;
@@ -32,6 +36,17 @@ public class EISDeadDropMission extends HubMissionWithSearch {
 	protected SectorEntityToken target;
 	protected StarSystemAPI system;
 	
+	// Faction rep goes to Iron Shell even after a recruited contact has switched to the player faction.
+	@Override
+	protected void adjustRep(TextPanelAPI textPanel, HubMissionResult result, RepActions action) {
+		String previousFaction = EISContactFaction.enter(getPerson());
+		try {
+			super.adjustRep(textPanel, result, action);
+		} finally {
+			EISContactFaction.exit(getPerson(), previousFaction);
+		}
+	}
+
 	@Override
 	protected boolean create(MarketAPI createdAt, boolean barEvent) {
 		//genRandom = Misc.random;
@@ -103,6 +118,8 @@ public class EISDeadDropMission extends HubMissionWithSearch {
 		
 
 		setCreditReward(CreditReward.HIGH);
+		// reputation on completion: person +8 / faction +5 (failure penalties unchanged: person -2 / faction -1)
+		setRepChanges(0.08f, RepRewards.SMALL, 0.05f, RepRewards.TINY);
 		
 		if (rollProbability(PROB_COMPLICATIONS)) {
 			triggerComplicationBegin(Stage.DROP_OFF, ComplicationSpawn.APPROACHING_OR_ENTERING,
@@ -125,7 +142,7 @@ public class EISDeadDropMission extends HubMissionWithSearch {
 			PersonAPI person = getPerson();
 			if (person == null || person.getMarket() == null) return;
 			String patrolFaction = person.getMarket().getFactionId();
-			if (patrolFaction.equals(person.getFaction().getId()) || 
+			if (patrolFaction.equals(EISContactFaction.getId(person)) || 
 					Misc.isPirateFaction(person.getMarket().getFaction()) ||
 					Factions.PLAYER.equals(patrolFaction)) {
 				return;

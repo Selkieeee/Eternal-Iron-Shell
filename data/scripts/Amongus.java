@@ -142,6 +142,8 @@ public class Amongus implements ColonyPlayerHostileActListener {
             coffeemom.getName().setLast("Nitia");
             coffeemom.setPortraitSprite("graphics/portraits/eis_ava.png");
             coffeemom.addTag("eis_VNSector");
+            coffeemom.addTag("eis_mission");
+            coffeemom.addTag("eis_ava");
             coffeemom.getMemoryWithoutUpdate().set("$nex_preferredAdmin", true);
             coffeemom.getMemoryWithoutUpdate().set("$nex_preferredAdmin_factionId", "ironshell");
             //Gacha whatever pilot (7 + 5 elite)

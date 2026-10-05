@@ -140,35 +140,33 @@ public class eis_modPlugin extends BaseModPlugin {
             TextureData.readTextureDataCSV("data/lights/eis_texture_data.csv");
             LightData.readLightDataCSV("data/lights/eis_lights_data.csv");
         }
-            if (Global.getSettings().getHullSpec("eagle_xiv") != null) {Global.getSettings().getHullSpec("eagle_xiv").addTag("eis_bp");}
             if (Global.getSettings().getFighterWingSpec("eis_piranha") != null) {Global.getSettings().getFighterWingSpec("eis_piranha").addTag("leader_no_swarm");Global.getSettings().getFighterWingSpec("eis_piranha").addTag("attack_at_an_angle");}
-            if (Global.getSettings().getHullSpec("dominator_xiv") != null) {Global.getSettings().getHullSpec("dominator_xiv").addTag("eis_bp");}if (Global.getSettings().getHullSpec("enforcer_xiv") != null) {Global.getSettings().getHullSpec("enforcer_xiv").addTag("eis_bp");}if (Global.getSettings().getHullSpec("falcon_xiv") != null) {Global.getSettings().getHullSpec("falcon_xiv").addTag("eis_bp");}
-            if (Global.getSettings().getHullSpec("onslaught_xiv") != null) {Global.getSettings().getHullSpec("onslaught_xiv").addTag("eis_bp");}
+            // Cross-mod XIV hulls/wings get eis_crossmod (not eis_bp) so they are known/used by the Iron Shell factions (see knownShips/knownFighters/hullFrequency tags in the .faction files) without being eis_bp blueprint hulls.
             if (hasTart) {
-                if (Global.getSettings().getHullSpec("TADA_tinnitus_xiv") != null) {Global.getSettings().getHullSpec("TADA_tinnitus_xiv").addTag("eis_bp");}
-                if (Global.getSettings().getHullSpec("TADA_gunwall_XIV") != null) {Global.getSettings().getHullSpec("TADA_gunwall_XIV").addTag("eis_bp");}
+                if (Global.getSettings().getHullSpec("TADA_tinnitus_xiv") != null) {Global.getSettings().getHullSpec("TADA_tinnitus_xiv").addTag("eis_crossmod");}
+                if (Global.getSettings().getHullSpec("TADA_gunwall_XIV") != null) {Global.getSettings().getHullSpec("TADA_gunwall_XIV").addTag("eis_crossmod");}
             }
             if (haveNia) {
-                if (Global.getSettings().getHullSpec("tahlan_nelson_xiv") != null) {Global.getSettings().getHullSpec("tahlan_nelson_xiv").addTag("eis_bp");}
-		if (Global.getSettings().getHullSpec("tahlan_tower_xiv") != null) {Global.getSettings().getHullSpec("tahlan_tower_xiv").addTag("eis_bp");}
+                if (Global.getSettings().getHullSpec("tahlan_nelson_xiv") != null) {Global.getSettings().getHullSpec("tahlan_nelson_xiv").addTag("eis_crossmod");}
+		if (Global.getSettings().getHullSpec("tahlan_tower_xiv") != null) {Global.getSettings().getHullSpec("tahlan_tower_xiv").addTag("eis_crossmod");}
             }
             if (haveSWP) {
-                if (Global.getSettings().getHullSpec("swp_alastor_xiv") != null) {Global.getSettings().getHullSpec("swp_alastor_xiv").addTag("eis_bp");}
-                if (Global.getSettings().getHullSpec("swp_conquest_xiv") != null) {Global.getSettings().getHullSpec("swp_conquest_xiv").addTag("eis_bp");}
-                if (Global.getSettings().getHullSpec("swp_gryphon_xiv") != null) {Global.getSettings().getHullSpec("swp_gryphon_xiv").addTag("eis_bp");}
-                if (Global.getSettings().getHullSpec("swp_hammerhead_xiv") != null) {Global.getSettings().getHullSpec("swp_hammerhead_xiv").addTag("eis_bp");}
-                if (Global.getSettings().getHullSpec("swp_lasher_xiv") != null) {Global.getSettings().getHullSpec("swp_lasher_xiv").addTag("eis_bp");}
-                if (Global.getSettings().getHullSpec("swp_sunder_xiv") != null) {Global.getSettings().getHullSpec("swp_sunder_xiv").addTag("eis_bp");}
+                if (Global.getSettings().getHullSpec("swp_alastor_xiv") != null) {Global.getSettings().getHullSpec("swp_alastor_xiv").addTag("eis_crossmod");}
+                if (Global.getSettings().getHullSpec("swp_conquest_xiv") != null) {Global.getSettings().getHullSpec("swp_conquest_xiv").addTag("eis_crossmod");}
+                if (Global.getSettings().getHullSpec("swp_gryphon_xiv") != null) {Global.getSettings().getHullSpec("swp_gryphon_xiv").addTag("eis_crossmod");}
+                if (Global.getSettings().getHullSpec("swp_hammerhead_xiv") != null) {Global.getSettings().getHullSpec("swp_hammerhead_xiv").addTag("eis_crossmod");}
+                if (Global.getSettings().getHullSpec("swp_lasher_xiv") != null) {Global.getSettings().getHullSpec("swp_lasher_xiv").addTag("eis_crossmod");}
+                if (Global.getSettings().getHullSpec("swp_sunder_xiv") != null) {Global.getSettings().getHullSpec("swp_sunder_xiv").addTag("eis_crossmod");}
             }
             if (haveArma) {
-                if (Global.getSettings().getHullSpec("armaa_garegga_xiv_carrier") != null) {Global.getSettings().getHullSpec("armaa_garegga_xiv_carrier").addTag("eis_bp");}
-                if (Global.getSettings().getHullSpec("armaa_corsair_xiv") != null) {Global.getSettings().getHullSpec("armaa_corsair_xiv").addTag("eis_bp");}
-                if (Global.getSettings().getHullSpec("armaa_monitor_xiv") != null) {Global.getSettings().getHullSpec("armaa_monitor_xiv").addTag("eis_bp");}
-                if (Global.getSettings().getHullSpec("armaa_valkyrie") != null) {Global.getSettings().getHullSpec("armaa_valkyrie").addTag("eis_bp");}
-                if (Global.getSettings().getHullSpec("armaa_panther_frig_xiv") != null) {Global.getSettings().getHullSpec("armaa_panther_frig_xiv").addTag("eis_bp");}
-                if (Global.getSettings().getHullSpec("armaa_musha_frig_sniper") != null) {Global.getSettings().getHullSpec("armaa_musha_frig_sniper").addTag("eis_bp");}
-                if (Global.getSettings().getFighterWingSpec("armaa_musha_bomber_wing") != null) {Global.getSettings().getFighterWingSpec("armaa_musha_bomber_wing").addTag("eis_bp");}
-                if (Global.getSettings().getFighterWingSpec("armaa_musha_wing") != null) {Global.getSettings().getFighterWingSpec("armaa_musha_wing").addTag("eis_bp");}
+                if (Global.getSettings().getHullSpec("armaa_garegga_xiv_carrier") != null) {Global.getSettings().getHullSpec("armaa_garegga_xiv_carrier").addTag("eis_crossmod");}
+                if (Global.getSettings().getHullSpec("armaa_corsair_xiv") != null) {Global.getSettings().getHullSpec("armaa_corsair_xiv").addTag("eis_crossmod");}
+                if (Global.getSettings().getHullSpec("armaa_monitor_xiv") != null) {Global.getSettings().getHullSpec("armaa_monitor_xiv").addTag("eis_crossmod");}
+                if (Global.getSettings().getHullSpec("armaa_valkyrie") != null) {Global.getSettings().getHullSpec("armaa_valkyrie").addTag("eis_crossmod");}
+                if (Global.getSettings().getHullSpec("armaa_panther_frig_xiv") != null) {Global.getSettings().getHullSpec("armaa_panther_frig_xiv").addTag("eis_crossmod");}
+                if (Global.getSettings().getHullSpec("armaa_musha_frig_sniper") != null) {Global.getSettings().getHullSpec("armaa_musha_frig_sniper").addTag("eis_crossmod");}
+                if (Global.getSettings().getFighterWingSpec("armaa_musha_bomber_wing") != null) {Global.getSettings().getFighterWingSpec("armaa_musha_bomber_wing").addTag("eis_crossmod");}
+                if (Global.getSettings().getFighterWingSpec("armaa_musha_wing") != null) {Global.getSettings().getFighterWingSpec("armaa_musha_wing").addTag("eis_crossmod");}
             }
             Global.getSettings().resetCached();
             if (Global.getSettings().getVariant("eis_eradicator_elite") != null) {
@@ -343,12 +341,24 @@ public class eis_modPlugin extends BaseModPlugin {
         // re-tagged so other mods sharing that old generic tag convention (e.g. UAF) stop picking up
         // Iron Shell's own contacts now that renaming the mod id to selkie_eis means timid_xiv-based
         // compatibility checks in other mods no longer mask them. Runs every load; no-ops once migrated.
-        for (String eisContactId : new String[]{"eiskimquy", "eisdarren", "eisceleste", "eissneed", "eisava"}) {
-            PersonAPI eisContact = Global.getSector().getImportantPeople().getPerson(eisContactId);
-            if (eisContact != null && eisContact.hasTag("VNSector")) {
+        // Same loop back-fills the eis_mission tag (all contacts) and each contact's own name tag onto older saves,
+        // since person tags are stored in the save and MyLoveForIron only runs for new campaigns. Add-if-missing, so safe every load.
+        String[][] eisContactTags = {
+            {"eiskimquy", "eis_kim"},
+            {"eisdarren", "eis_hartley"},
+            {"eisceleste", "eis_celeste"},
+            {"eissneed", "eis_charlotte"},
+            {"eisava", "eis_ava"}
+        };
+        for (String[] eisContactEntry : eisContactTags) {
+            PersonAPI eisContact = Global.getSector().getImportantPeople().getPerson(eisContactEntry[0]);
+            if (eisContact == null) continue;
+            if (eisContact.hasTag("VNSector")) {
                 eisContact.removeTag("VNSector");
                 eisContact.addTag("eis_VNSector");
             }
+            if (!eisContact.hasTag("eis_mission")) eisContact.addTag("eis_mission");
+            if (!eisContact.hasTag(eisContactEntry[1])) eisContact.addTag(eisContactEntry[1]);
         }
         /*Whatever they should know should be from the Hegemony Auxiliary and XIV Blueprint respectively.
         for (String ship : Global.getSector().getFaction(Factions.HEGEMONY).getKnownShips()) {
@@ -570,14 +580,16 @@ public class eis_modPlugin extends BaseModPlugin {
         
         if (Global.getSector().getImportantPeople().getPerson("eiskimquy") != null) {
             if (Global.getSector().getImportantPeople().getPerson("eiskimquy").getMemoryWithoutUpdate().getBoolean("$eis_xiv_legion")) {
-                Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("legion_xiv");Global.getSector().getFaction(IRONSTANDSETERNAL).getPriorityShips().add("legion_xiv");Global.getSector().getFaction("ironshell").getHullFrequency().put("legion_xiv", 1f);
-                Global.getSector().getFaction("ironsentinel").getKnownShips().add("legion_xiv");Global.getSector().getFaction("ironsentinel").getPriorityShips().add("legion_xiv");Global.getSector().getFaction("ironsentinel").getHullFrequency().put("legion_xiv", 1f);
+                // Legion (XIV): known to all three factions, but only a priority ship for the Hegemony. Priority ships make ship picking use only priority hulls for their role,
+                // so ironshell/ironsentinel never get it (removePriorityShip also cleans older saves). Their hull frequency (2) is set in the .faction files.
+                Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("legion_xiv");Global.getSector().getFaction(IRONSTANDSETERNAL).removePriorityShip("legion_xiv");
+                Global.getSector().getFaction("ironsentinel").getKnownShips().add("legion_xiv");Global.getSector().getFaction("ironsentinel").removePriorityShip("legion_xiv");
                 if (getEISBooleanSetting("GreaterHegemony", true)) {Global.getSector().getFaction("hegemony").getKnownShips().add("legion_xiv");Global.getSector().getFaction("hegemony").getPriorityShips().add("legion_xiv");Global.getSector().getFaction("hegemony").getHullFrequency().put("legion_xiv", 0.25f);}
             }
             if (haveNia && Global.getSettings().getHullSpec("tahlan_Castigator_xiv") != null && Global.getSector().getImportantPeople().getPerson("eiskimquy").getMemoryWithoutUpdate().getBoolean("$eis_xiv_castigator")) {
-                Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("tahlan_Castigator_xiv");Global.getSector().getFaction("ironshell").getHullFrequency().put("tahlan_Castigator_xiv", 1f);
-                Global.getSector().getFaction("ironsentinel").getKnownShips().add("tahlan_Castigator_xiv");Global.getSector().getFaction("ironsentinel").getPriorityShips().add("tahlan_Castigator_xiv");Global.getSector().getFaction("ironsentinel").getHullFrequency().put("tahlan_Castigator_xiv", 1f);
-                if (getEISBooleanSetting("GreaterHegemony", true)) {Global.getSector().getFaction("hegemony").getKnownShips().add("tahlan_Castigator_xiv");Global.getSector().getFaction("hegemony").getHullFrequency().put("tahlan_Castigator_xiv", 0.25f);}
+                Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("tahlan_Castigator_xiv");Global.getSector().getFaction("ironshell").removePriorityShip("tahlan_Castigator_xiv");
+                Global.getSector().getFaction("ironsentinel").getKnownShips().add("tahlan_Castigator_xiv");Global.getSector().getFaction("ironsentinel").removePriorityShip("tahlan_Castigator_xiv");
+                if (getEISBooleanSetting("GreaterHegemony", true)) {Global.getSector().getFaction("hegemony").getKnownShips().add("tahlan_Castigator_xiv");Global.getSector().getFaction("hegemony").getPriorityShips().add("tahlan_Castigator_xiv");Global.getSector().getFaction("hegemony").getHullFrequency().put("tahlan_Castigator_xiv", 0.25f);}
                 if (Global.getSettings().getDescription("tahlan_Castigator_xiv", Description.Type.SHIP) != null) {Global.getSettings().getDescription("tahlan_Castigator_xiv", Description.Type.SHIP).setText1(Global.getSettings().getString("eis_ironshell", "tahlan_Castigator_xiv_update"));}
             }
             Global.getSector().getFaction(IRONSTANDSETERNAL).clearShipRoleCache();
@@ -585,12 +597,21 @@ public class eis_modPlugin extends BaseModPlugin {
             Global.getSector().getFaction("hegemony").clearShipRoleCache();
         }
         
+        // Ship sale unlocks (EISUnlockShipSale, fired from the Hartley/Ava ship rows): hull specs reset from ship_data.csv every launch,
+        // so strip no_sell again from this save's unlocked hulls (and restore it on hulls another loaded save had unlocked).
+        com.fs.starfarer.api.impl.campaign.rulecmd.EISUnlockShipSale.applyAll();
+
             for (PersonMissionSpec mission: Global.getSettings().getAllMissionSpecs()) {
-                if (!(mission.getTagsAny().contains("eis_celeste") || mission.getTagsAny().contains("eis_military")) && 
-                        !(mission.getTagsAny().isEmpty() && mission.getTagsAll().isEmpty() && mission.getTagsNotAny().isEmpty()) 
-                        && mission.getPersonId() == null
-                        && !mission.getTagsNotAny().contains("ironshell")) {
-                    mission.getTagsNotAny().add("ironshell");
+                // Iron Shell rows are recognised by their eis_* tags; every other (vanilla) row is blocked for Iron Shell contacts.
+                // "ironshell" only blocks while a contact's faction is still ironshell (the faction id is an implicit tag), so the
+                // eis_mission person tag is blocked too - it survives a recruited contact (Charlotte) switching to the player faction.
+                boolean isIronShellMission = mission.getTagsAll().contains("eis_mission") || mission.getTagsAny().contains("eis_mission")
+                        || mission.getTagsAny().contains("eis_celeste") || mission.getTagsAny().contains("eis_military");
+                if (!isIronShellMission
+                        && !(mission.getTagsAny().isEmpty() && mission.getTagsAll().isEmpty() && mission.getTagsNotAny().isEmpty())
+                        && mission.getPersonId() == null) {
+                    if (!mission.getTagsNotAny().contains("ironshell")) mission.getTagsNotAny().add("ironshell");
+                    if (!mission.getTagsNotAny().contains("eis_mission")) mission.getTagsNotAny().add("eis_mission");
                 }
             }
             for (String illegal: Global.getSector().getFaction(Factions.HEGEMONY).getIllegalCommodities()) {

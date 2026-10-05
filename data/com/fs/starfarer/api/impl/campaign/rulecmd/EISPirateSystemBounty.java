@@ -16,6 +16,7 @@ import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.campaign.listeners.FleetEventListener;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
+import data.scripts.EISContactFaction;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.CoreReputationPlugin;
 import com.fs.starfarer.api.impl.campaign.CoreReputationPlugin.MissionCompletionRep;
@@ -71,7 +72,7 @@ public class EISPirateSystemBounty extends HubMissionWithSearch implements Fleet
 		PersonAPI person = getPerson();
 		if (person == null) return false;
 		
-		if (Factions.PIRATES.equals(person.getFaction().getId())) return false;
+		if (Factions.PIRATES.equals(EISContactFaction.getId(person))) return false;
 		
 		if (!setPersonMissionRef(person, "$psb_ref")) {
 			return false;
@@ -80,7 +81,7 @@ public class EISPirateSystemBounty extends HubMissionWithSearch implements Fleet
 		//requireMarketFaction(Factions.PIRATES);
 		requireMarketFactionCustom(ReqMode.ALL, Factions.CUSTOM_MAKES_PIRATE_BASES);
 		requireMarketMemoryFlag(PirateBaseIntel.MEM_FLAG, true);
-		requireMarketFactionNot(person.getFaction().getId());
+		requireMarketFactionNot(EISContactFaction.getId(person));
 		requireMarketHidden();
 		requireMarketIsMilitary();
 		preferMarketInDirectionOfOtherMissions();
@@ -94,7 +95,7 @@ public class EISPirateSystemBounty extends HubMissionWithSearch implements Fleet
                 makeImportant(market, "$psb_target", Stage.BOUNTY);
 		system = market.getStarSystem();
 
-		faction = person.getFaction();
+		faction = EISContactFaction.get(person);
 		enemy = market.getFaction();
 		
 		baseBounty = getRoundNumber(BASE_BOUNTY * getRewardMult()); 
@@ -332,18 +333,16 @@ public class EISPirateSystemBounty extends HubMissionWithSearch implements Fleet
 			
 			float repFP = (int)(fpDestroyed * battle.getPlayerInvolvementFraction());
 			
-			float fDelta = 0f;
-			float pDelta = 0f;
-			if (repFP < 30) {
-				fDelta = RepRewards.TINY;
-				pDelta = RepRewards.TINY;
-			} else if (repFP < 70) {
-				fDelta = RepRewards.SMALL;
-				pDelta = RepRewards.SMALL;
-			} else {
-				fDelta = RepRewards.SMALL;
-				pDelta = RepRewards.MEDIUM;
-			}
+			// Rep for this battle by fleet points destroyed (after your involvement share), in rep points (1 point = 0.01):
+			//   FP:       0-10  11-30  31-50  51-70  71-90  91-110  111-130  131-150  151-170  171-190  191-210  211-230  231+
+			//   contact:     0      1      2      3      4       5        6        7        8        9       10       11    12
+			//   faction:     0      0      1      1      2       2        3        3        4        4        5        5     6
+			// i.e. contact = 1 + (FP - 11) / 20 (max 12) once FP is above 10, and faction = contact / 2 (rounded down).
+			int fpForRep = (int) repFP;
+			int personPoints = fpForRep <= 10 ? 0 : Math.min(12, 1 + (fpForRep - 11) / 20);
+			int factionPoints = personPoints / 2;
+			float fDelta = factionPoints * 0.01f;
+			float pDelta = personPoints * 0.01f;
 			
 			MissionCompletionRep completionRepPerson = new MissionCompletionRep(
 											pDelta, getRewardLimitPerson(), 0, null);
@@ -364,7 +363,7 @@ public class EISPirateSystemBounty extends HubMissionWithSearch implements Fleet
 				ReputationAdjustmentResult rep = Global.getSector().adjustPlayerReputation(
 						new RepActionEnvelope(RepActions.MISSION_SUCCESS, completionRepFaction,
 								null, true, false), 
-								getPerson().getFaction().getId());
+								EISContactFaction.getId(getPerson()));
 				latestResult.repFaction = rep;
 			}
 			

@@ -14,6 +14,9 @@ import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.campaign.listeners.ShowLootListener;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
+import com.fs.starfarer.api.campaign.TextPanelAPI;
+import com.fs.starfarer.api.impl.campaign.CoreReputationPlugin.RepActions;
+import data.scripts.EISContactFaction;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.combat.ShipHullSpecAPI;
 import com.fs.starfarer.api.combat.WeaponAPI.WeaponSize;
@@ -172,6 +175,17 @@ public class EISBlueprintIntel extends HubMissionWithSearch implements ShowLootL
 	}
 	
 	
+	// Faction rep goes to Iron Shell even after a recruited contact has switched to the player faction.
+	@Override
+	protected void adjustRep(TextPanelAPI textPanel, HubMissionResult result, RepActions action) {
+		String previousFaction = EISContactFaction.enter(getPerson());
+		try {
+			super.adjustRep(textPanel, result, action);
+		} finally {
+			EISContactFaction.exit(getPerson(), previousFaction);
+		}
+	}
+
 	@Override
 	protected boolean create(MarketAPI createdAt, boolean barEvent) {
 		//genRandom = Misc.random;
@@ -289,7 +303,7 @@ public class EISBlueprintIntel extends HubMissionWithSearch implements ShowLootL
 		PersonAPI person = getPerson();
 		if (person == null || person.getMarket() == null) return;
 		String patrolFaction = person.getMarket().getFactionId();
-		if (patrolFaction.equals(person.getFaction().getId()) || 
+		if (patrolFaction.equals(EISContactFaction.getId(person)) || 
 				Misc.isPirateFaction(person.getMarket().getFaction())) {
 			return;
 		}

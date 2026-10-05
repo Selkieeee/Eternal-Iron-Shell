@@ -9,6 +9,9 @@ import com.fs.starfarer.api.campaign.econ.CommoditySpecAPI;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
+import com.fs.starfarer.api.campaign.TextPanelAPI;
+import com.fs.starfarer.api.impl.campaign.CoreReputationPlugin.RepActions;
+import data.scripts.EISContactFaction;
 import com.fs.starfarer.api.impl.campaign.ids.Commodities;
 import com.fs.starfarer.api.impl.campaign.missions.hub.HubMissionWithBarEvent;
 import com.fs.starfarer.api.util.Misc;
@@ -26,6 +29,17 @@ public class EISCheapCommodityMission extends HubMissionWithBarEvent {
 	protected int pricePerUnit;
 	
 	
+	// Faction rep goes to Iron Shell even after a recruited contact has switched to the player faction.
+	@Override
+	protected void adjustRep(TextPanelAPI textPanel, HubMissionResult result, RepActions action) {
+		String previousFaction = EISContactFaction.enter(getPerson());
+		try {
+			super.adjustRep(textPanel, result, action);
+		} finally {
+			EISContactFaction.exit(getPerson(), previousFaction);
+		}
+	}
+
 	@Override
 	protected boolean create(MarketAPI createdAt, boolean barEvent) {
 		

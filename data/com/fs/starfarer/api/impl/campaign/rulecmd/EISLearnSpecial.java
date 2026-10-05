@@ -14,6 +14,7 @@ import com.fs.starfarer.api.util.Misc.Token;
 
 /**
  * EISLearnSpecial <string> <string> <boolean>
+ * 3rd param: make the ship a priority ship for the hegemony only (ironshell/ironsentinel never get priority; their hull frequencies come from the .faction files).
  */
 
 public class EISLearnSpecial extends BaseCommandPlugin {
@@ -27,14 +28,10 @@ public class EISLearnSpecial extends BaseCommandPlugin {
                         dialog.getTextPanel().addParagraph(Global.getSettings().getString("eis_ironshell", "EISLost") + Global.getSettings().getHullSpec(params.get(1).getString(memoryMap)).getHullName() + Global.getSettings().getString("eis_ironshell", "EISBlueprint"), Misc.getNegativeHighlightColor());
                     }
                     Global.getSector().getFaction("ironshell").getKnownShips().add(params.get(1).getString(memoryMap));
-                    Global.getSector().getFaction("ironshell").getHullFrequency().put(params.get(1).getString(memoryMap), 1f);
                     Global.getSector().getFaction("ironsentinel").getKnownShips().add(params.get(1).getString(memoryMap));
-                    Global.getSector().getFaction("ironsentinel").getHullFrequency().put(params.get(1).getString(memoryMap), 1f);
-                    Global.getSector().getFaction("ironsentinel").getPriorityShips().add(params.get(1).getString(memoryMap));
                     if (data.scripts.eis_modPlugin.getEISBooleanSetting("GreaterHegemony", true)) {Global.getSector().getFaction("hegemony").getKnownShips().add(params.get(1).getString(memoryMap));Global.getSector().getFaction("hegemony").getHullFrequency().put(params.get(1).getString(memoryMap), 0.25f);}
-                    if (params.get(2).getBoolean(memoryMap)) {
-                        Global.getSector().getFaction("ironshell").getPriorityShips().add(params.get(1).getString(memoryMap));
-                        if (data.scripts.eis_modPlugin.getEISBooleanSetting("GreaterHegemony", true)) {Global.getSector().getFaction("hegemony").getPriorityShips().add(params.get(1).getString(memoryMap));}
+                    if (params.get(2).getBoolean(memoryMap) && data.scripts.eis_modPlugin.getEISBooleanSetting("GreaterHegemony", true)) {
+                        Global.getSector().getFaction("hegemony").getPriorityShips().add(params.get(1).getString(memoryMap));
                     }
                     Global.getSector().getFaction("ironshell").clearShipRoleCache();
                     Global.getSector().getFaction("ironsentinel").clearShipRoleCache();

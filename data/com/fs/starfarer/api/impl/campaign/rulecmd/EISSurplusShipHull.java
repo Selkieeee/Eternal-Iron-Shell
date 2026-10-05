@@ -13,11 +13,15 @@ import com.fs.starfarer.api.campaign.PersonImportance;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
+import com.fs.starfarer.api.campaign.TextPanelAPI;
+import com.fs.starfarer.api.impl.campaign.CoreReputationPlugin.RepActions;
+import data.scripts.EISContactFaction;
+import com.fs.starfarer.api.impl.campaign.CoreReputationPlugin.RepRewards;
+import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.combat.ShipVariantAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.fleet.FleetMemberType;
 import com.fs.starfarer.api.fleet.ShipRolePick;
-import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
 import com.fs.starfarer.api.impl.campaign.ids.ShipRoles;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
@@ -30,15 +34,24 @@ import com.fs.starfarer.api.util.WeightedRandomPicker;
 
 public class EISSurplusShipHull extends HubMissionWithSearch {
 
-	public static float BASE_PRICE_MULT = 0.8f;
+	public static final float BASE_PRICE_MULT = 0.4f;
 	
 	protected FleetMemberAPI member;
 	protected int price;
-        private boolean grantedAquila = false;
-	
+
+	// Faction rep goes to Iron Shell even after a recruited contact has switched to the player faction.
+	@Override
+	protected void adjustRep(TextPanelAPI textPanel, HubMissionResult result, RepActions action) {
+		String previousFaction = EISContactFaction.enter(getPerson());
+		try {
+			super.adjustRep(textPanel, result, action);
+		} finally {
+			EISContactFaction.exit(getPerson(), previousFaction);
+		}
+	}
+
 	@Override
 	protected boolean create(MarketAPI createdAt, boolean barEvent) {
-                grantedAquila = false;
 		PersonAPI person = getPerson();
 		if (person == null) return false;
 		MarketAPI market = person.getMarket();
@@ -54,7 +67,7 @@ public class EISSurplusShipHull extends HubMissionWithSearch {
 		
 		
 		ShipPickParams params = new ShipPickParams(ShipPickMode.PRIORITY_THEN_ALL);
-		String role = pickRole(getQuality(), person.getFaction(), person.getImportance(), genRandom);
+		String role = pickRole(getQuality(), EISContactFaction.get(person), person.getImportance(), genRandom);
 		
 		ShipVariantAPI variant = null;
 		for (int i = 0; i < 10; i++) {
@@ -71,17 +84,29 @@ public class EISSurplusShipHull extends HubMissionWithSearch {
 				variant = null;
 				continue;
 			}
+			// cruisers and capitals must be Iron Shell blueprint hulls
+			HullSize pickedSize = variant.getHullSpec().getHullSize();
+			if ((pickedSize == HullSize.CRUISER || pickedSize == HullSize.CAPITAL_SHIP) && !variant.getHullSpec().hasTag("eis_bp")) {
+				variant = null;
+				continue;
+			}
+			// eis_aquila can't be installed on top of Safety Overrides, and every ship sold here must have it
+			if (variant.hasHullMod(HullMods.SAFETYOVERRIDES)) {
+				variant = null;
+				continue;
+			}
 			break;
 		}
 		if (variant == null) return false;
 			
 		member = Global.getFactory().createFleetMember(FleetMemberType.SHIP, variant.clone());
 		//assignShipName(member, Factions.INDEPENDENT);
-                if (person.getTags().contains("eis_celeste") || genRandom.nextFloat() >= 0.25f) {
-                    assignShipName(member, "ironshell");
-                    if (!member.getVariant().hasHullMod(HullMods.SAFETYOVERRIDES) && !member.getVariant().hasHullMod("eis_aquila")) {grantedAquila=true;member.getVariant().addPermaMod("eis_aquila", true);member.getVariant().setSource(VariantSource.REFIT);member.getVariant().addTag(Tags.VARIANT_ALWAYS_RETAIN_SMODS_ON_SALVAGE);}
-                } else {
-                    assignShipName(member, Factions.HEGEMONY);BASE_PRICE_MULT = 0.4f;
+                // Every ship is an Iron Shell refit with the built-in Aquila Reactor (hulls with Safety Overrides are rejected in the pick loop above)
+                assignShipName(member, "ironshell");
+                if (!member.getVariant().hasHullMod("eis_aquila")) {
+                    member.getVariant().addPermaMod("eis_aquila", true);
+                    member.getVariant().setSource(VariantSource.REFIT);
+                    member.getVariant().addTag(Tags.VARIANT_ALWAYS_RETAIN_SMODS_ON_SALVAGE);
                 }
                 
                 
@@ -101,8 +126,8 @@ public class EISSurplusShipHull extends HubMissionWithSearch {
 			price = getRoundNumber(variant.getHullSpec().getBaseValue() * BASE_PRICE_MULT);
 		//}
 		
-		setRepFactionChangesTiny();
-		setRepPersonChangesVeryLow();
+		// reputation on purchase: person +5 / faction +3 (penalties unchanged: person -1 / faction 0)
+		setRepChanges(0.05f, RepRewards.TINY, 0.03f, 0f);
 		
 		return true;
 	}
@@ -112,7 +137,7 @@ public class EISSurplusShipHull extends HubMissionWithSearch {
 		// $sShip_ref. So: we use $sShip_ref2 in the ContactPostAccept rule
 		// and $sShip_ref2 has an expiration of 0, so it'll get unset on its own later.
 		set("$sShip_ref2", this);
-                set("$sShip_aquila", grantedAquila);
+                set("$sShip_aquila", true);
 		set("$sShip_hullSize", member.getHullSpec().getDesignation().toLowerCase());
 		set("$sShip_hullClass", member.getHullSpec().getHullNameWithDashClass());
 		set("$sShip_price", Misc.getWithDGS(price));

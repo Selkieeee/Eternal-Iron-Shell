@@ -12,6 +12,7 @@ import com.fs.starfarer.api.campaign.StarSystemAPI;
 import com.fs.starfarer.api.campaign.TextPanelAPI;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
+import data.scripts.EISContactFaction;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.fleet.FleetMemberType;
 import com.fs.starfarer.api.impl.campaign.DebugFlags;
@@ -31,7 +32,7 @@ public class EIS_CBRemnantStation extends BaseCustomBountyCreator {
 
 	@Override
 	public float getFrequency(HubMissionWithBarEvent mission, int difficulty) {
-		String faction = mission.getPerson().getFaction().getId();
+		String faction = EISContactFaction.getId(mission.getPerson());
 		if (!("ironshell".equals(faction))) {
 			return 0f;
 		}
@@ -145,6 +146,8 @@ public class EIS_CBRemnantStation extends BaseCustomBountyCreator {
 	
 	public List<CampaignFleetAPI> getStations(HubMissionWithBarEvent mission, int difficulty) {
 		List<CampaignFleetAPI> stations = new ArrayList<CampaignFleetAPI>();
+		// stations beyond EISMilitaryCustomBounty.MAX_TARGET_DISTANCE_LY of the contact's market are never offered
+		MarketAPI origin = mission.getPerson() == null ? null : mission.getPerson().getMarket();
 		for (StarSystemAPI system : Global.getSector().getStarSystems()) {
 			if (!system.hasTag(Tags.THEME_REMNANT_MAIN)) continue;
 			if (system.hasTag(Tags.THEME_REMNANT_DESTROYED)) continue;
@@ -152,6 +155,7 @@ public class EIS_CBRemnantStation extends BaseCustomBountyCreator {
 			for (CampaignFleetAPI fleet : system.getFleets()) {
 				if (!fleet.isStationMode()) continue;
 				if (!Factions.REMNANTS.equals(fleet.getFaction().getId())) continue;
+				if (origin != null && Misc.getDistanceLY(origin.getLocationInHyperspace(), fleet.getLocationInHyperspace()) > EISMilitaryCustomBounty.MAX_TARGET_DISTANCE_LY) continue;
 				
 				/*boolean damaged = fleet.getMemoryWithoutUpdate().getBoolean("$damagedStation");
 				if ((difficulty == 7 || difficulty == 8) && damaged) {
