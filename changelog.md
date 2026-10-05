@@ -1,3 +1,27 @@
+2.0.4
+MISC
+-Iron Shell military markets now sell Iron Shell weapons and wings far more frequently.
+-The "iron heritage" skill now deploys 2 Gunshield drones around XIV ships without drones.
+-Iron Shell commission now prevent hegemony AI inspection crisis and crisis progress.
+-Disabled bespoke Audacious auto-escort AI behavior. Can be re-enabled with a lunalib toggle.
+-Added a few extra dialog options to Kim/Hartley to explain some otherwise-missable faction mechanics.
+-Fixed/added a bunch of hullmod codex descriptions.
+-Renown burn 8->9
+-Bar event pointing to ava now shouldn't fire in the galatia system in case someone with nex installed selects the tutorial start for some reason
+
+REWARD/MISSION CHANGES
+-Adjusted rep thresholds and mission probabilities. You now see some missions at lower rep thresholds.
+-Bounties reworked. Each contact now offers a different set of difficulties and factions. Generally these now start harder and scale less. Range of offered bounties soft-caps, no more 40LY bounties.
+-Contact reputation gains from missions buffed. Bounties received the heaviest buff. Most went from +5 to +8. Bounties now start at +8 and scale up.
+-Pirate system bounty rep gains adjusted. Now scale with fleet size killed. Most noticeable when killing large fleets and stations. Less than 10fp killed at a time rewards no rep (anti- re-engage spamming measures)
+-Confiscated commodity, production contract are no longer offered as contact missions.
+-Once hartley is a contact, he will permanently offer recurring nanoforge production.
+-Dauntless/Illustrious now cannot be sold on markets/custom production at game start.
+-Dauntless/Illustrious rep rewards now unlock the sale on markets/custom production as well as a discount on hartley's custom production. No longer offer to sell the ship at half off.
+-Caeda Celeste AI core turn in rep 50->200%, payout unchanged
+-Contacts now add themselves over-contact-cap automatically.
+-Charlotte now only offers Iron Shell missions when recruited as well.
+
 2.0.3
 
 -Save compat
