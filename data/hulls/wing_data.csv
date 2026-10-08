@@ -10,7 +10,7 @@ eis_amity_wing,eis_amity_elite,"bomber5, bomber, mid, eisceleste_bp, rd_no_extra
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #Drones,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 eis_gunblade_wing,eis_gunblade_Fighter,"no_buy, no_drop, no_sell",3,,5,0,BOX,0,200,,2,SUPPORT,Point Defense,10,6000,,,,,,,,,,,,,
-eis_gunshield_wing,eis_gunshield_Defender,"no_buy, no_drop, no_sell",1,,5,0,V,0,200,,2,SUPPORT,Point Defense,15,6000,,,,,,,,,,,,,
+eis_gunshield_wing,eis_gunshield_Defender,"no_buy, no_drop, no_sell",1,,5,0,DIAMOND,0,200,,2,SUPPORT,Point Defense,15,6000,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #Pirates,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 eis_piranha_wing,eis_piranha_Bomber,"bomber4, bomber, low, pirates",2,,4,8,CLAW,4000,1200,600,1,BOMBER,Bomber,10,8000,,,,,,,,,,,,,

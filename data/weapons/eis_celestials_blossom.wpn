@@ -26,10 +26,10 @@
   ],
   "turretAngleOffsets": [
     0,
-    -7.5,                                     
-    7.5,
-    -16,
-    16
+    -6,                                     
+    6,
+    -12,
+    12
   ],
   "hardpointOffsets": [
     27,
@@ -45,10 +45,10 @@
   ],
   "hardpointAngleOffsets": [
     0,
-    9,
-    -9,
-    -18,
-    18
+    6,
+    -6,
+    -12,
+    12
   ],
   "barrelMode": "LINKED",
   "animationType": "SMOKE",

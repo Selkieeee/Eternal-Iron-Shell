@@ -164,148 +164,148 @@ public class eis_modPlugin extends BaseModPlugin {
                 if (Global.getSettings().getHullSpec("armaa_garegga_xiv_carrier") != null) {Global.getSettings().getHullSpec("armaa_garegga_xiv_carrier").addTag("eis_crossmod");}
                 if (Global.getSettings().getHullSpec("armaa_corsair_xiv") != null) {Global.getSettings().getHullSpec("armaa_corsair_xiv").addTag("eis_crossmod");}
                 if (Global.getSettings().getHullSpec("armaa_monitor_xiv") != null) {Global.getSettings().getHullSpec("armaa_monitor_xiv").addTag("eis_crossmod");}
-                if (Global.getSettings().getHullSpec("armaa_valkyrie") != null) {Global.getSettings().getHullSpec("armaa_valkyrie").addTag("eis_crossmod");}
                 if (Global.getSettings().getHullSpec("armaa_panther_frig_xiv") != null) {Global.getSettings().getHullSpec("armaa_panther_frig_xiv").addTag("eis_crossmod");}
                 if (Global.getSettings().getHullSpec("armaa_musha_frig_sniper") != null) {Global.getSettings().getHullSpec("armaa_musha_frig_sniper").addTag("eis_crossmod");}
                 if (Global.getSettings().getFighterWingSpec("armaa_musha_bomber_wing") != null) {Global.getSettings().getFighterWingSpec("armaa_musha_bomber_wing").addTag("eis_crossmod");}
                 if (Global.getSettings().getFighterWingSpec("armaa_musha_wing") != null) {Global.getSettings().getFighterWingSpec("armaa_musha_wing").addTag("eis_crossmod");}
             }
             Global.getSettings().resetCached();
-            if (Global.getSettings().getVariant("eis_eradicator_elite") != null) {
-                ShipVariantAPI EliteEVariant = Global.getSettings().getVariant("eis_eradicator_elite");
-                if (haveSWP) {
-                    if (Global.getSettings().getWeaponSpec("swp_iontorpedo") != null) {
-                        EliteEVariant.setNumFluxCapacitors(EliteEVariant.getNumFluxCapacitors()-6); //27 to 21
-                        EliteEVariant.clearSlot("WS 000");
-                        EliteEVariant.addWeapon("WS 000", "swp_iontorpedo"); //from atropos
-                        EliteEVariant.clearSlot("WS 001");
-                        EliteEVariant.addWeapon("WS 001","swp_iontorpedo"); //from atropos
-                    }
-                }
-            }
-            if (Global.getSettings().getVariant("eis_vengeance_standard") != null) {
-                ShipVariantAPI StandardVVariant = Global.getSettings().getVariant("eis_vengeance_standard");
-                if (haveNia) {
-                    if (Global.getSettings().getWeaponSpec("tahlan_armiger") != null) {
-                        StandardVVariant.setNumFluxCapacitors(StandardVVariant.getNumFluxCapacitors()-10);
-                        StandardVVariant.clearSlot("WS0012");
-                        StandardVVariant.addWeapon("WS0012", "tahlan_armiger"); //from tac laser
-                    }
-                } 
-            }
-            if (Global.getSettings().getVariant("eis_tyrant_standard") != null) {
-                ShipVariantAPI StandardTVariant = Global.getSettings().getVariant("eis_tyrant_standard");
-                if (haveSWP) {
-                    if (Global.getSettings().getWeaponSpec("swp_contender") != null) {
-                        StandardTVariant.setNumFluxCapacitors(StandardTVariant.getNumFluxCapacitors()+1);
-                        StandardTVariant.clearSlot("WS0001");
-                        StandardTVariant.addWeapon("WS0001", "swp_contender"); //from vulcan
-                    }
-                }
-                if (haveNia) {
-                    if (Global.getSettings().getWeaponSpec("tahlan_efreet") != null) {
-                        //StandardTVariant.setNumFluxCapacitors(StandardTVariant.getNumFluxCapacitors()-1);
-                        StandardTVariant.clearSlot("WS0020");
-                        StandardTVariant.addWeapon("WS0020", "tahlan_efreet"); //from gauss
-                    }
-                    if (Global.getSettings().getWeaponSpec("tahlan_armiger") != null) {
-                        //StandardTVariant.setNumFluxCapacitors(StandardTVariant.getNumFluxCapacitors()-1);
-                        StandardTVariant.clearSlot("WS0021");
-                        StandardTVariant.addWeapon("WS0021", "tahlan_armiger"); //from gauss
-                    }
-                } 
-            }
-            if (Global.getSettings().getVariant("eis_skyrend_standard") != null) {
-                ShipVariantAPI StandardSVariant = Global.getSettings().getVariant("eis_skyrend_standard");
-                if (haveSWP) {
-                    if (Global.getSettings().getWeaponSpec("swp_lightphaselance") != null) {
-                        StandardSVariant.clearSlot("WS0009");
-                        StandardSVariant.addWeapon("WS0009", "swp_lightphaselance"); //from burst pd laser
-                        StandardSVariant.clearSlot("WS0010");
-                        StandardSVariant.addWeapon("WS0010", "swp_lightphaselance"); //from burst pd laser
-                        StandardSVariant.clearSlot("WS0011");
-                        StandardSVariant.addWeapon("WS0011", "swp_lightphaselance"); //from burst pd laser
-                        StandardSVariant.clearSlot("WS0012");
-                        StandardSVariant.addWeapon("WS0012", "swp_lightphaselance"); //from burst pd laser
-                    }
-                } 
-            }
-            if (Global.getSettings().getVariant("eis_endeavor_attack") != null) {
-                ShipVariantAPI AttackEVariant = Global.getSettings().getVariant("eis_endeavor_attack");
-                if (haveSWP) {
-                    if (Global.getSettings().getWeaponSpec("swp_iontorpedo") != null) {
-                        AttackEVariant.setNumFluxCapacitors(AttackEVariant.getNumFluxCapacitors()-6); //from 22 to 18
-                        AttackEVariant.clearSlot("WS0028");
-                        AttackEVariant.addWeapon("WS0028", "swp_iontorpedo"); //from harpoon
-                        AttackEVariant.clearSlot("WS0029");
-                        AttackEVariant.addWeapon("WS0029", "swp_iontorpedo"); //from harpoon
-                    }
-                } 
-            }
-            if (Global.getSettings().getVariant("eis_endeavor_standard") != null) {
-                ShipVariantAPI StandardEVariant = Global.getSettings().getVariant("eis_endeavor_standard");
-                if (haveNia) {
-                    if (Global.getSettings().getWeaponSpec("tahlan_armiger") != null) {
-                        StandardEVariant.setNumFluxCapacitors(StandardEVariant.getNumFluxCapacitors()-10); //from 39 to 29
-                        StandardEVariant.clearSlot("WS0011");
-                        StandardEVariant.addWeapon("WS0011", "tahlan_armiger"); //from mjonir
-                    }
-                } 
-            }
-            if (Global.getSettings().getVariant("eis_endeavor_support") != null) {
-                ShipVariantAPI SupportEVariant = Global.getSettings().getVariant("eis_endeavor_support");
-                if (haveSWP) {
-                    if (Global.getSettings().getWeaponSpec("swp_iontorpedo") != null) {
-                        SupportEVariant.setNumFluxCapacitors(SupportEVariant.getNumFluxCapacitors()-4); //from 21 to 17
-                        SupportEVariant.clearSlot("WS0028");
-                        SupportEVariant.addWeapon("WS0028", "swp_iontorpedo"); //from harpoon
-                        SupportEVariant.clearSlot("WS0029");
-                        SupportEVariant.addWeapon("WS0029", "swp_iontorpedo"); //from harpoon
-                    }
-                } 
-            }
-            if (Global.getSettings().getVariant("eis_indomitable_assault") != null) {
-                ShipVariantAPI AssaultIVariant = Global.getSettings().getVariant("eis_indomitable_assault");
-                if (haveNia) {
-                    if (Global.getSettings().getWeaponSpec("tahlan_efreet") != null) {
-                        AssaultIVariant.setNumFluxCapacitors(AssaultIVariant.getNumFluxCapacitors()-8); //from 24 to 16
-                        AssaultIVariant.clearSlot("WS0003");
-                        AssaultIVariant.addWeapon("WS0003", "tahlan_efreet"); //from mjolnir
-                    }
-                } 
-            }
-            if (Global.getSettings().getVariant("eis_indomitable_missile") != null) {
-                ShipVariantAPI MissileIVariant = Global.getSettings().getVariant("eis_indomitable_missile");
-                if (haveSWP) {
-                    if (Global.getSettings().getWeaponSpec("swp_iontorpedo") != null) {
-                        MissileIVariant.setNumFluxCapacitors(MissileIVariant.getNumFluxCapacitors()-4); //from 24 to 20
-                        MissileIVariant.clearSlot("WS0005");
-                        MissileIVariant.addWeapon("WS0005", "swp_iontorpedo"); //from annihilator
-                        MissileIVariant.clearSlot("WS0006");
-                        MissileIVariant.addWeapon("WS0006", "swp_iontorpedo"); //from annihilator
-                    }
-                } 
-            }
-            if (Global.getSettings().getVariant("eis_champion_standard") != null) {
-                ShipVariantAPI StandardCVariant = Global.getSettings().getVariant("eis_champion_standard");
-                if (haveNia) {
-                    if (Global.getSettings().getWeaponSpec("tahlan_armiger") != null) {
-                        StandardCVariant.setNumFluxCapacitors(StandardCVariant.getNumFluxCapacitors()-10); //from 26 to 16
-                        StandardCVariant.clearSlot("WS 008");
-                        StandardCVariant.addWeapon("WS 008", "tahlan_armiger"); //from mjollnir
-                    }
-                } 
-            }
-            if (Global.getSettings().getVariant("eis_champion_elite") != null) {
-                ShipVariantAPI EliteCVariant = Global.getSettings().getVariant("eis_champion_elite");
-                if (hasTart) {
-                    if (Global.getSettings().getWeaponSpec("TADA_dioscuri") != null) {
-                        EliteCVariant.setNumFluxCapacitors(EliteCVariant.getNumFluxCapacitors()+2); //from 22 to 24
-                        EliteCVariant.clearSlot("WS 008");
-                        EliteCVariant.addWeapon("WS 008", "TADA_dioscuri"); //from hephag
-                    }
-                } 
-            }
+            // Cross-mod weapon swaps on Iron Shell variants (SWP / Tahlan / Tart) are disabled. Uncomment this whole block to restore them.
+            //if (Global.getSettings().getVariant("eis_eradicator_elite") != null) {
+                //ShipVariantAPI EliteEVariant = Global.getSettings().getVariant("eis_eradicator_elite");
+                //if (haveSWP) {
+                    //if (Global.getSettings().getWeaponSpec("swp_iontorpedo") != null) {
+                        //EliteEVariant.setNumFluxCapacitors(EliteEVariant.getNumFluxCapacitors()-6); //27 to 21
+                        //EliteEVariant.clearSlot("WS 000");
+                        //EliteEVariant.addWeapon("WS 000", "swp_iontorpedo"); //from atropos
+                        //EliteEVariant.clearSlot("WS 001");
+                        //EliteEVariant.addWeapon("WS 001","swp_iontorpedo"); //from atropos
+                    //}
+                //}
+            //}
+            //if (Global.getSettings().getVariant("eis_vengeance_standard") != null) {
+                //ShipVariantAPI StandardVVariant = Global.getSettings().getVariant("eis_vengeance_standard");
+                //if (haveNia) {
+                    //if (Global.getSettings().getWeaponSpec("tahlan_armiger") != null) {
+                        //StandardVVariant.setNumFluxCapacitors(StandardVVariant.getNumFluxCapacitors()-10);
+                        //StandardVVariant.clearSlot("WS0012");
+                        //StandardVVariant.addWeapon("WS0012", "tahlan_armiger"); //from tac laser
+                    //}
+                //} 
+            //}
+            //if (Global.getSettings().getVariant("eis_tyrant_standard") != null) {
+                //ShipVariantAPI StandardTVariant = Global.getSettings().getVariant("eis_tyrant_standard");
+                //if (haveSWP) {
+                    //if (Global.getSettings().getWeaponSpec("swp_contender") != null) {
+                        //StandardTVariant.setNumFluxCapacitors(StandardTVariant.getNumFluxCapacitors()+1);
+                        //StandardTVariant.clearSlot("WS0001");
+                        //StandardTVariant.addWeapon("WS0001", "swp_contender"); //from vulcan
+                    //}
+                //}
+                //if (haveNia) {
+                    //if (Global.getSettings().getWeaponSpec("tahlan_efreet") != null) {
+                        ////StandardTVariant.setNumFluxCapacitors(StandardTVariant.getNumFluxCapacitors()-1);
+                        //StandardTVariant.clearSlot("WS0020");
+                        //StandardTVariant.addWeapon("WS0020", "tahlan_efreet"); //from gauss
+                    //}
+                    //if (Global.getSettings().getWeaponSpec("tahlan_armiger") != null) {
+                        ////StandardTVariant.setNumFluxCapacitors(StandardTVariant.getNumFluxCapacitors()-1);
+                        //StandardTVariant.clearSlot("WS0021");
+                        //StandardTVariant.addWeapon("WS0021", "tahlan_armiger"); //from gauss
+                    //}
+                //} 
+            //}
+            //if (Global.getSettings().getVariant("eis_skyrend_standard") != null) {
+                //ShipVariantAPI StandardSVariant = Global.getSettings().getVariant("eis_skyrend_standard");
+                //if (haveSWP) {
+                    //if (Global.getSettings().getWeaponSpec("swp_lightphaselance") != null) {
+                        //StandardSVariant.clearSlot("WS0009");
+                        //StandardSVariant.addWeapon("WS0009", "swp_lightphaselance"); //from burst pd laser
+                        //StandardSVariant.clearSlot("WS0010");
+                        //StandardSVariant.addWeapon("WS0010", "swp_lightphaselance"); //from burst pd laser
+                        //StandardSVariant.clearSlot("WS0011");
+                        //StandardSVariant.addWeapon("WS0011", "swp_lightphaselance"); //from burst pd laser
+                        //StandardSVariant.clearSlot("WS0012");
+                        //StandardSVariant.addWeapon("WS0012", "swp_lightphaselance"); //from burst pd laser
+                    //}
+                //} 
+            //}
+            //if (Global.getSettings().getVariant("eis_endeavor_attack") != null) {
+                //ShipVariantAPI AttackEVariant = Global.getSettings().getVariant("eis_endeavor_attack");
+                //if (haveSWP) {
+                    //if (Global.getSettings().getWeaponSpec("swp_iontorpedo") != null) {
+                        //AttackEVariant.setNumFluxCapacitors(AttackEVariant.getNumFluxCapacitors()-6); //from 22 to 18
+                        //AttackEVariant.clearSlot("WS0028");
+                        //AttackEVariant.addWeapon("WS0028", "swp_iontorpedo"); //from harpoon
+                        //AttackEVariant.clearSlot("WS0029");
+                        //AttackEVariant.addWeapon("WS0029", "swp_iontorpedo"); //from harpoon
+                    //}
+                //} 
+            //}
+            //if (Global.getSettings().getVariant("eis_endeavor_standard") != null) {
+                //ShipVariantAPI StandardEVariant = Global.getSettings().getVariant("eis_endeavor_standard");
+                //if (haveNia) {
+                    //if (Global.getSettings().getWeaponSpec("tahlan_armiger") != null) {
+                        //StandardEVariant.setNumFluxCapacitors(StandardEVariant.getNumFluxCapacitors()-10); //from 39 to 29
+                        //StandardEVariant.clearSlot("WS0011");
+                        //StandardEVariant.addWeapon("WS0011", "tahlan_armiger"); //from mjonir
+                    //}
+                //} 
+            //}
+            //if (Global.getSettings().getVariant("eis_endeavor_support") != null) {
+                //ShipVariantAPI SupportEVariant = Global.getSettings().getVariant("eis_endeavor_support");
+                //if (haveSWP) {
+                    //if (Global.getSettings().getWeaponSpec("swp_iontorpedo") != null) {
+                        //SupportEVariant.setNumFluxCapacitors(SupportEVariant.getNumFluxCapacitors()-4); //from 21 to 17
+                        //SupportEVariant.clearSlot("WS0028");
+                        //SupportEVariant.addWeapon("WS0028", "swp_iontorpedo"); //from harpoon
+                        //SupportEVariant.clearSlot("WS0029");
+                        //SupportEVariant.addWeapon("WS0029", "swp_iontorpedo"); //from harpoon
+                    //}
+                //} 
+            //}
+            //if (Global.getSettings().getVariant("eis_indomitable_assault") != null) {
+                //ShipVariantAPI AssaultIVariant = Global.getSettings().getVariant("eis_indomitable_assault");
+                //if (haveNia) {
+                    //if (Global.getSettings().getWeaponSpec("tahlan_efreet") != null) {
+                        //AssaultIVariant.setNumFluxCapacitors(AssaultIVariant.getNumFluxCapacitors()-8); //from 24 to 16
+                        //AssaultIVariant.clearSlot("WS0003");
+                        //AssaultIVariant.addWeapon("WS0003", "tahlan_efreet"); //from mjolnir
+                    //}
+                //} 
+            //}
+            //if (Global.getSettings().getVariant("eis_indomitable_missile") != null) {
+                //ShipVariantAPI MissileIVariant = Global.getSettings().getVariant("eis_indomitable_missile");
+                //if (haveSWP) {
+                    //if (Global.getSettings().getWeaponSpec("swp_iontorpedo") != null) {
+                        //MissileIVariant.setNumFluxCapacitors(MissileIVariant.getNumFluxCapacitors()-4); //from 24 to 20
+                        //MissileIVariant.clearSlot("WS0005");
+                        //MissileIVariant.addWeapon("WS0005", "swp_iontorpedo"); //from annihilator
+                        //MissileIVariant.clearSlot("WS0006");
+                        //MissileIVariant.addWeapon("WS0006", "swp_iontorpedo"); //from annihilator
+                    //}
+                //} 
+            //}
+            //if (Global.getSettings().getVariant("eis_champion_standard") != null) {
+                //ShipVariantAPI StandardCVariant = Global.getSettings().getVariant("eis_champion_standard");
+                //if (haveNia) {
+                    //if (Global.getSettings().getWeaponSpec("tahlan_armiger") != null) {
+                        //StandardCVariant.setNumFluxCapacitors(StandardCVariant.getNumFluxCapacitors()-10); //from 26 to 16
+                        //StandardCVariant.clearSlot("WS 008");
+                        //StandardCVariant.addWeapon("WS 008", "tahlan_armiger"); //from mjollnir
+                    //}
+                //} 
+            //}
+            //if (Global.getSettings().getVariant("eis_champion_elite") != null) {
+                //ShipVariantAPI EliteCVariant = Global.getSettings().getVariant("eis_champion_elite");
+                //if (hasTart) {
+                    //if (Global.getSettings().getWeaponSpec("TADA_dioscuri") != null) {
+                        //EliteCVariant.setNumFluxCapacitors(EliteCVariant.getNumFluxCapacitors()+2); //from 22 to 24
+                        //EliteCVariant.clearSlot("WS 008");
+                        //EliteCVariant.addWeapon("WS 008", "TADA_dioscuri"); //from hephag
+                    //}
+                //} 
+            //}
             Global.getSettings().resetCached();
             if (Global.getSettings().getMissionScore("eis_traitors") > 0) {
                 for (int i=1; i <= NexConfig.getFactionConfig("ironshell").getStartFleetSet(NexFactionConfig.StartFleetType.SUPER.name()).getNumFleets(); i++) {
@@ -432,11 +432,8 @@ public class eis_modPlugin extends BaseModPlugin {
             if (haveSWP) {
                 //{Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_nautilus");} We really have no use for this.
                 //{Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_caliber");} Flagellator fills this role.
-                if (Global.getSettings().getHullSpec("swp_striker") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_striker");}
                 //{Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_vindicator");} Champion and Nelson fills this role.
                 //{Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_punisher");} Indomitable fills this role.
-                if (Global.getSettings().getHullSpec("swp_alastor") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_alastor");}
-                if (Global.getSettings().getHullSpec("swp_archer") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_archer");}
                 //{Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_albatross");} Courageous fills this role.
                 //{Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_vulture");} We really have no use for this.
 		//{Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_liberator");} We really have no use for this.
@@ -451,15 +448,11 @@ public class eis_modPlugin extends BaseModPlugin {
                 if (Global.getSettings().getWeaponSpec("swp_hornet") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownWeapons().add("swp_hornet");}
                 if (Global.getSettings().getWeaponSpec("swp_tornado") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownWeapons().add("swp_tornado");}
                 if (Global.getSettings().getWeaponSpec("swp_iontorpedo") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownWeapons().add("swp_iontorpedo");}
-                if (Global.getSettings().getWeaponSpec("swp_ionblaster") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownWeapons().add("swp_ionblaster");}
                 if (Global.getSettings().getWeaponSpec("swp_lightphaselance") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownWeapons().add("swp_lightphaselance");}
                 //{Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_nautilus");} We really have no use for this.
                 //{Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_caliber");} Flagellator fills this role.
-                if (Global.getSettings().getHullSpec("swp_striker") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_striker");}
                 //{Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_vindicator");} Champion and Nelson fills this role.
                 //{Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_punisher");} Indomitable fills this role.
-                if (Global.getSettings().getHullSpec("swp_alastor") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_alastor");}
-                if (Global.getSettings().getHullSpec("swp_archer") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_archer");}
                 //{Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_albatross");} Courageous fills this role.
                 //{Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_vulture");} We really have no use for this.
 		//{Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_liberator");} We really have no use for this.
@@ -474,51 +467,46 @@ public class eis_modPlugin extends BaseModPlugin {
                 if (Global.getSettings().getWeaponSpec("swp_hornet") != null) {Global.getSector().getFaction("ironsentinel").getKnownWeapons().add("swp_hornet");}
                 if (Global.getSettings().getWeaponSpec("swp_tornado") != null) {Global.getSector().getFaction("ironsentinel").getKnownWeapons().add("swp_tornado");}
                 if (Global.getSettings().getWeaponSpec("swp_iontorpedo") != null) {Global.getSector().getFaction("ironsentinel").getKnownWeapons().add("swp_iontorpedo");}
-                if (Global.getSettings().getWeaponSpec("swp_ionblaster") != null) {Global.getSector().getFaction("ironsentinel").getKnownWeapons().add("swp_ionblaster");}
                 if (Global.getSettings().getWeaponSpec("swp_lightphaselance") != null) {Global.getSector().getFaction("ironsentinel").getKnownWeapons().add("swp_lightphaselance");}
             }
             if (haveNia) {
                 //{Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("tahlan_Bungalow");} Mora fills this role.
                 //if (Global.getSettings().getHullSpec("tahlan_Flagellator") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("tahlan_Flagellator");}
                 //{Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("tahlan_Bronco");} Flagellator fills this role.
-                if (Global.getSettings().getHullSpec("tahlan_blockhead") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("tahlan_blockhead");}
-                if (Global.getSettings().getHullSpec("tahlan_Bento") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("tahlan_Bento");}
                 //{Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("tahlan_Phoca");} Champion or Eagle fills this role.
 		 if (Global.getSettings().getHullSpec("tahlan_Castigator") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("tahlan_Castigator");}
-                if (Global.getSettings().getHullSpec("tahlan_nelson") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("tahlan_nelson");}
                 if (Global.getSettings().getHullSpec("tahlan_nelson_xiv") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("tahlan_nelson_xiv");}
 		if (Global.getSettings().getHullSpec("tahlan_tower_xiv") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("tahlan_tower_xiv");}
                 //{Global.getSector().getFaction(IRONSTANDSETERNAL).getHullFrequency().replace("tahlan_nelson_xiv", 1.1f);}
-                if (Global.getSettings().getWeaponSpec("tahlan_armiger") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownWeapons().add("tahlan_armiger");}
-                if (Global.getSettings().getWeaponSpec("tahlan_efreet") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownWeapons().add("tahlan_efreet");}
                 //{Global.getSector().getFaction("ironsentinel").getKnownShips().add("tahlan_Bungalow");} Mora fills this role.
                 //if (Global.getSettings().getHullSpec("tahlan_Flagellator") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("tahlan_Flagellator");}
                 //{Global.getSector().getFaction("ironsentinel").getKnownShips().add("tahlan_Bronco");} Flagellator fills this role.
-                if (Global.getSettings().getHullSpec("tahlan_blockhead") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("tahlan_blockhead");}
-                if (Global.getSettings().getHullSpec("tahlan_Bento") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("tahlan_Bento");}
                 //{Global.getSector().getFaction("ironsentinel").getKnownShips().add("tahlan_Phoca");} Champion or Eagle fills this role.
 		if (Global.getSettings().getHullSpec("tahlan_Castigator") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("tahlan_Castigator");}
-                if (Global.getSettings().getHullSpec("tahlan_nelson") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("tahlan_nelson");}
                 if (Global.getSettings().getHullSpec("tahlan_nelson_xiv") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("tahlan_nelson_xiv");}
 		if (Global.getSettings().getHullSpec("tahlan_tower_xiv") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("tahlan_tower_xiv");}
-                if (Global.getSettings().getWeaponSpec("tahlan_armiger") != null) {Global.getSector().getFaction("ironsentinel").getKnownWeapons().add("tahlan_armiger");}
-                if (Global.getSettings().getWeaponSpec("tahlan_efreet") != null) {Global.getSector().getFaction("ironsentinel").getKnownWeapons().add("tahlan_efreet");}
             }
             if (hasTart) {
                 //{Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("TADA_bully");} This ship is not a bully.
                 //{Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("TADA_scalper");} Role feels weird.
-                if (Global.getSettings().getHullSpec("TADA_tinnitus") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("TADA_tinnitus");}
-                if (Global.getSettings().getHullSpec("TADA_gunwall") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("TADA_gunwall");}
                 if (Global.getSettings().getHullSpec("TADA_tinnitus_xiv") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("TADA_tinnitus_xiv");}
                 if (Global.getSettings().getHullSpec("TADA_gunwall_XIV") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("TADA_gunwall_XIV");}
-                if (Global.getSettings().getWeaponSpec("TADA_dioscuri") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownWeapons().add("TADA_dioscuri");}
                 //{Global.getSector().getFaction("ironsentinel").getKnownShips().add("TADA_bully");} This ship is not a bully.
                 //{Global.getSector().getFaction("ironsentinel").getKnownShips().add("TADA_scalper");} Role feels weird.
-                if (Global.getSettings().getHullSpec("TADA_tinnitus") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("TADA_tinnitus");}
-                if (Global.getSettings().getHullSpec("TADA_gunwall") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("TADA_gunwall");}
                 if (Global.getSettings().getHullSpec("TADA_tinnitus_xiv") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("TADA_tinnitus_xiv");}
                 if (Global.getSettings().getHullSpec("TADA_gunwall_XIV") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("TADA_gunwall_XIV");}
-                if (Global.getSettings().getWeaponSpec("TADA_dioscuri") != null) {Global.getSector().getFaction("ironsentinel").getKnownWeapons().add("TADA_dioscuri");}
+            }
+            if (haveArma) {
+                if (Global.getSettings().getHullSpec("armaa_garegga_xiv_carrier") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("armaa_garegga_xiv_carrier");}
+                if (Global.getSettings().getHullSpec("armaa_corsair_xiv") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("armaa_corsair_xiv");}
+                if (Global.getSettings().getHullSpec("armaa_monitor_xiv") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("armaa_monitor_xiv");}
+                if (Global.getSettings().getHullSpec("armaa_panther_frig_xiv") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("armaa_panther_frig_xiv");}
+                if (Global.getSettings().getHullSpec("armaa_musha_frig_sniper") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("armaa_musha_frig_sniper");}
+                if (Global.getSettings().getHullSpec("armaa_garegga_xiv_carrier") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("armaa_garegga_xiv_carrier");}
+                if (Global.getSettings().getHullSpec("armaa_corsair_xiv") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("armaa_corsair_xiv");}
+                if (Global.getSettings().getHullSpec("armaa_monitor_xiv") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("armaa_monitor_xiv");}
+                if (Global.getSettings().getHullSpec("armaa_panther_frig_xiv") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("armaa_panther_frig_xiv");}
+                if (Global.getSettings().getHullSpec("armaa_musha_frig_sniper") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("armaa_musha_frig_sniper");}
             }
             Global.getSector().getFaction(IRONSTANDSETERNAL).clearShipRoleCache();
             Global.getSector().getFaction("ironsentinel").clearShipRoleCache();

@@ -84,8 +84,8 @@ public class EISSpySatDeployment extends HubMissionWithSearch {
 //		int sizeModifier = market.getSize() * 10000;
 //		setCreditReward(10000 + sizeModifier, 30000 + sizeModifier);
 		setCreditReward(CreditReward.AVERAGE, market.getSize());
-		// reputation on completion: person +8 / faction +5 (failure penalties unchanged: person -2 / faction -1)
-		setRepChanges(0.08f, RepRewards.SMALL, 0.05f, RepRewards.TINY);
+		// reputation on completion: person +6 / faction +5 (failure penalties unchanged: person -2 / faction -1)
+		setRepChanges(0.06f, RepRewards.SMALL, 0.05f, RepRewards.TINY);
 		
 		if (rollProbability(PROB_PATROL_AROUND_TARGET)) {
                         triggerCreateSmallPatrolAroundMarket(market, Stage.DEPLOY, 1f);

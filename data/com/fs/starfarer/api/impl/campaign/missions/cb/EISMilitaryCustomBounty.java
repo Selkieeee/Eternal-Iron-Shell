@@ -59,18 +59,33 @@ public class EISMilitaryCustomBounty extends BaseCustomBounty {
 	private static final Map<String, List<CustomBountyCreator>> CONTACT_CREATORS = new HashMap<String, List<CustomBountyCreator>>();
 	// {min, max} difficulty for the LOW, NORMAL and HIGH offers (DifficultyChoice order)
 	private static final Map<String, int[][]> CONTACT_RANGES = new HashMap<String, int[][]>();
+	// Exact {LOW, NORMAL, HIGH} offers, indexed by base difficulty (the average of the last completed bounties, before the per-offer adjustment).
+	// V keeps the vanilla value for that offer, and so does any base difficulty past the end of a table. Every result is clamped to the range above.
+	private static final Map<String, int[][]> CONTACT_TABLES = new HashMap<String, int[][]>();
+	private static final int V = -1;
+	private static final int[][] EARLY_OFFERS = {{0, 1, 4}, {1, 2, 5}, {1, 3, 5}, {1, 4, 6}};
+	private static final int[][] CELESTE_OFFERS = {
+		{V, V, V}, {V, V, V}, {V, V, V}, {V, V, V}, {V, V, V},
+		{V, 7, V}, {V, 7, V}, {V, 8, V}, {V, 9, V}, {V, 9, V}, {V, 9, V}};
+	private static final int[][] HARTLEY_OFFERS = {
+		{V, V, V}, {V, V, V}, {V, V, V}, {V, V, V}, {V, V, V}, {V, V, V},
+		{V, 7, V}, {V, 8, V}, {V, 9, V}, {V, 9, V}, {V, 9, V}};
 	static {
 		CONTACT_CREATORS.put("eis_ava", Arrays.asList(PIRATE, PATHER, DESERTER, MERC, ENEMY_STATION));
-		CONTACT_RANGES.put("eis_ava", new int[][]{{1, 3}, {4, 5}, {6, 7}});
+		CONTACT_RANGES.put("eis_ava", new int[][]{{0, 3}, {1, 5}, {4, 7}});
 
 		CONTACT_CREATORS.put("eis_charlotte", Arrays.asList(PIRATE, PATHER, DERELICT, MERC, ENEMY_STATION));
-		CONTACT_RANGES.put("eis_charlotte", new int[][]{{0, 3}, {4, 5}, {6, 7}});
+		CONTACT_RANGES.put("eis_charlotte", new int[][]{{0, 3}, {1, 5}, {4, 7}});
+		CONTACT_TABLES.put("eis_ava", EARLY_OFFERS);
+		CONTACT_TABLES.put("eis_charlotte", EARLY_OFFERS);
 
 		CONTACT_CREATORS.put("eis_hartley", Arrays.asList(PIRATE, DESERTER, ENEMY_STATION, REMNANT, REMNANT_STATION, REMNANT_PLUS));
-		CONTACT_RANGES.put("eis_hartley", new int[][]{{2, 4}, {5, 7}, {8, 10}});
+		CONTACT_RANGES.put("eis_hartley", new int[][]{{2, 4}, {5, 9}, {8, 10}});
+		CONTACT_TABLES.put("eis_hartley", HARTLEY_OFFERS);
 
 		CONTACT_CREATORS.put("eis_celeste", Arrays.asList(DERELICT, REMNANT, REMNANT_STATION, REMNANT_PLUS));
-		CONTACT_RANGES.put("eis_celeste", new int[][]{{5, 5}, {6, 7}, {8, 10}});
+		CONTACT_RANGES.put("eis_celeste", new int[][]{{5, 5}, {6, 9}, {8, 10}});
+		CONTACT_TABLES.put("eis_celeste", CELESTE_OFFERS);
 	}
 
 	private String getContactKey() {
@@ -119,13 +134,28 @@ public class EISMilitaryCustomBounty extends BaseCustomBounty {
 	}
 
 	// The vanilla history-based value is kept, then clamped to the contact's range for that offer.
+	// Contacts with a table use its exact value for that offer and base difficulty, unless it is V.
 	@Override
 	protected int pickDifficulty(DifficultyChoice choice) {
 		int difficulty = super.pickDifficulty(choice);
 		String key = getContactKey();
 		if (key == null) return difficulty;
+		int[][] table = CONTACT_TABLES.get(key);
+		if (table != null && difficultyOverride == null) {
+			int base = getBaseDifficulty();
+			if (base < table.length && table[base][choice.ordinal()] != V) difficulty = table[base][choice.ordinal()];
+		}
 		int[] range = CONTACT_RANGES.get(key)[choice.ordinal()];
 		return Math.max(range[0], Math.min(range[1], difficulty));
+	}
+
+	// The same average of the last completed bounties that the vanilla pickDifficulty starts from.
+	private int getBaseDifficulty() {
+		List<Integer> completed = getAggregateData().completedDifficulty;
+		if (completed.isEmpty()) return 0;
+		float total = 0f;
+		for (Integer diff : completed) total += diff;
+		return (int) (total / Math.max(completed.size(), NUM_TO_TRACK_FOR_DIFFICULTY));
 	}
 
 	// Vanilla randomly skips types based on contact quality (more often for higher-minimum types). A contact whose list has no
@@ -168,19 +198,15 @@ public class EISMilitaryCustomBounty extends BaseCustomBounty {
 		return true;
 	}
 
-	// Reputation on completion (person / faction): difficulty 3 or less +8/+5, 4 to 7 +12/+8, 8 or more +16/+10.
+	// Reputation on completion by final difficulty (0 to 10), person / faction: +6/+4 at difficulty 0 rising to +16/+10 at difficulty 10.
+	private static final float[] REP_PERSON  = {0.06f, 0.07f, 0.08f, 0.09f, 0.10f, 0.11f, 0.12f, 0.13f, 0.14f, 0.15f, 0.16f};
+	private static final float[] REP_FACTION = {0.04f, 0.04f, 0.05f, 0.05f, 0.06f, 0.07f, 0.07f, 0.08f, 0.09f, 0.09f, 0.10f};
+
 	private static void applyRepByDifficulty(CustomBountyData data) {
 		if (data == null) return;
-		if (data.difficulty <= 3) {
-			data.repPerson = 0.08f;
-			data.repFaction = 0.05f;
-		} else if (data.difficulty <= 7) {
-			data.repPerson = 0.12f;
-			data.repFaction = 0.08f;
-		} else {
-			data.repPerson = 0.16f;
-			data.repFaction = 0.10f;
-		}
+		int index = Math.max(0, Math.min(REP_PERSON.length - 1, data.difficulty));
+		data.repPerson = REP_PERSON[index];
+		data.repFaction = REP_FACTION[index];
 	}
 
 	@Override

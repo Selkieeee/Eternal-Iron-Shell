@@ -38,10 +38,18 @@ public class EISCustomProductionContract extends CustomProductionContract {
 	public static final float COST_MULT_HARTLEY = 1.2f; // Hartley's starting cost, before the ship clearance discounts below
 	// Hartley's contract costs this much less per ship clearance unlocked ($global.eisIllustriousUnlocked from Hartley, $global.eisDauntlessUnlocked from Ava), so 50% off with both.
 	public static final float CLEARANCE_DISCOUNT = 0.25f;
+	// Reputation for placing an order scales with the credits spent: 1 contact rep per REP_PERSON_PER_CREDITS and 1 faction rep per REP_FACTION_PER_CREDITS (whole blocks only).
+	public static final float REP_PERSON_PER_CREDITS = 100000f;
+	public static final float REP_FACTION_PER_CREDITS = 200000f;
 	
 	// Faction rep goes to Iron Shell even after a recruited contact has switched to the player faction.
 	@Override
 	protected void adjustRep(TextPanelAPI textPanel, HubMissionResult result, RepActions action) {
+		if (action == RepActions.MISSION_SUCCESS) {
+			// cost is the total price of the order. A zero reward skips the rep change entirely (vanilla would otherwise round any positive amount up to 1).
+			setRepRewardPerson(((int) (cost / REP_PERSON_PER_CREDITS)) / 100f);
+			setRepRewardFaction(((int) (cost / REP_FACTION_PER_CREDITS)) / 100f);
+		}
 		String previousFaction = EISContactFaction.enter(getPerson());
 		try {
 			super.adjustRep(textPanel, result, action);

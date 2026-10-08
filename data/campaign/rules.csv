@@ -325,16 +325,18 @@ AddText ""You're due for a tax refund: Approximately $EIS_taxesDGS is to be refu
 SetTextHighlights $EIS_taxesDGS","""Seems like you were due for a tax refund."" $PersonRank $personLastName begins printing out your tax records.","0:EISGoodBoy:""Good to hear.""
 1:EISTaxHelp:""How are my taxes calculated?""",,B
 EISTax_TutorialOption,DialogOptionSelected,$option == EISTaxHelp,SetEnabled EISTaxHelp false,"""Simple, you get tax credits for conducting open market recordable transactions. For commissioning with the Hegemony, Iron Shell, or an allied member, you're eligible for a payroll tax credit. Funding freedom fighters in our cause is a tax credit. Now... if you come into a sudden source of income and don't have the receipts to prove it? You'll get taxed at a rate. No questions asked. Then there's the wealth tax, which kicks in at roughly 2 to 4 million, give or take... and that's basically it. Oh and if you can't seem to pay the taxes, they roll over to your next business quarter of course...""",,,B
-EISTax_AcceptedOption,DialogOptionSelected,$option == EISGoodBoy,"AddRemoveCommodity credits -$EIS_taxes true
+EISTax_AcceptedOption,DialogOptionSelected,"$option == EISGoodBoy
+!$global.EIS_taxespaid","AddRemoveCommodity credits -$EIS_taxes true
 EISTaxesFiled $EIS_taxes false
 $global.EIS_taxespaid = true 90
 $global.EIS_paidtaxes++
 AdjustRep hegemony  COMBAT_HELP_MINOR
 AdjustRep ironshell COMBAT_HELP_MINOR
 AdjustRepActivePerson 5
+SetEnabled EISGoodBoy false
 FireAll PopulateOptions","""There you go! Your tax obligations are fulfilled for the next 90 days.""
 OR
-""For the next 90 days, you're clear of your financial responsibilities and obligations as a citizen of the Domain.""",,"Filing taxes now gives the contact +5 personal rep with no level limit (was AdjustRepActivePerson SHRINE_OFFERING = +3, limit Friendly). Shared by every contact that takes your taxes.",B
+""For the next 90 days, you're clear of your financial responsibilities and obligations as a citizen of the Domain.""",,"Filing taxes now gives the contact +5 personal rep with no level limit (was AdjustRepActivePerson SHRINE_OFFERING = +3, limit Friendly). Shared by every contact that takes your taxes. Hardened against other mods that replay this option or leave the Accept button on screen: the row now also requires !$global.EIS_taxespaid, EISTax_AcceptedAlready (end of file) answers if the flag is already set, and SetEnabled EISGoodBoy false greys the old button before the menu is rebuilt. Normal filing is unchanged.",B
 ,,,,,,,N
 greetingEISTaxLink,OpenCommLink,"$global.CaughtTaxEvading
 !$global.EIS_taxespaid score:9001
@@ -2210,17 +2212,15 @@ Call $extr_ref updateData
 $extr_variation == COLONY
 FireBest GenericMissionReturn","ShowPersonVisual
 $extr_completed = true
-Call $extr_ref updateStage
-SetTooltip eis_letmehirethem ""You should be close to Iron Shell before asking...""","""Impressive work, captain,"" the $faction $rank says. ""I'm told that you've helped us gather quite a lot of intel here.""","contact_pickAnotherGreeting:Continue
-eis_letmehirethem:Allow me to hire them.",,idk what this does tbh
-eis_extrOfferTextContactHiringProcess,DialogOptionSelected,"$option == eis_letmehirethem
-!EISOneOfUs score:5",,"""I'm afraid the Councilor would not approve of letting go one of her vital assets.""",contact_pickAnotherGreeting:Understandable.,,idk what this does tbh
+Call $extr_ref updateStage","""Impressive work, captain,"" the $faction $rank says. ""I'm told that you've helped us gather quite a lot of intel here.""","contact_pickAnotherGreeting:Continue
+eis_letmehirethem:Allow me to hire them.",hire option tooltip removed,idk what this does tbh
+#eis_extrOfferTextContactHiringProcess,DialogOptionSelected,"$option == eis_letmehirethem
+!EISOneOfUs score:5",,"""I'm afraid the Councilor would not approve of letting go one of her vital assets.""",contact_pickAnotherGreeting:Understandable.,disabled - the rep check on Processa was removed so this refusal would tie with it,idk what this does tbh
 eis_extrOfferTextContactHiringProcessa,DialogOptionSelected,"$option == eis_letmehirethem
-!EISOneOfUs score:5
-EISVibeCheck 75 100","EISPoopyStinky true
+!EISOneOfUs score:5","EISPoopyStinky true
 ShowSecondPerson $global.EISWowOfficer
 SetStoryOption eisome_hireYes 1 0 leadership","""Although the Councilor would not approve of letting go one of her vital assets, I can make an exception on your behalf seeing the work you've done for me. Here is the case file. Still interested in hiring them?""","0:eisome_hireYes:""Sounds good.""
-1:cutCommLink:""Actually, I've changed my mind.""",,idk what this does tbh
+1:cutCommLink:""Actually, I've changed my mind.""",rep check (EISVibeCheck 75 100) removed - applies to everyone who is not EISOneOfUs,idk what this does tbh
 eis_extrOfferTextContactHiringProcessb,DialogOptionSelected,"$option == eis_letmehirethem
 EISOneOfUs","EISPoopyStinky true
 ShowSecondPerson $global.EISWowOfficer
@@ -2783,3 +2783,16 @@ $option == eis_Nachiketa",,"""Nachiketa? Despite the rumors, they lie outside Ir
 EISHartleyThoughtsLogistics,eis_VNSectorOpinionOptions,$id == eisdarren,"Nex_DynamicPaginatedOptions addOption eis_HegLogistics ""Hegemony production logistics""",,,"New Hartley conversation topic (Hegemony production logistics). Added through the eis_VNSectorOpinionOptions hook (fired by eis_VNSectorChatter), so it sits directly under Start a conversation about... instead of under People (People only fires the contact id trigger, eisdarren). Always listed for Hartley.",b
 EISHartleyThoughtsLogisticsR,DialogOptionSelected,"$id == eisdarren
 $option == eis_HegLogistics","SetTextHighlights ""Nanoforge quality""","""As a division of the Hegemony military, our production naturally benefits from the Nanoforge quality of our largest orbital dockyards. Components requiring the most precision are delivered on a regular basis, and it keeps everything running smoothly.""",,"Reply to the topic above. Matches the eis_NanoforgeQualityShare script, which tops Iron Shell markets up to the best nanoforge quality bonus found in any Hegemony market.",b
+# new lines - tax filing guards,,,,,,,n
+EISTax_AcceptedAlready,DialogOptionSelected,"$option == EISGoodBoy
+$global.EIS_taxespaid score:1000","EISCalculatingTime
+AddText ""You've already filed your taxes. Your obligation will recur in $EIS_taxespaidDGS.""
+SetEnabled EISGoodBoy false
+FireAll PopulateOptions",,,"Guard for EISTax_AcceptedOption. If Accept is selected while the paid flag is already set (another mod replaying the option or leaving the old button on screen), no credits are charged and no rep is given. Score 1000 outranks everything else that can match. Never reached in normal play: the filing option is greyed while the flag is set. The script prints the text so that $EIS_taxespaidDGS is already filled in by EISCalculatingTime.",b
+EISTax_EntryAlready,DialogOptionSelected,"$option == EISTax_startTurnIn
+$global.EIS_taxespaid score:1000","EISCalculatingTime
+AddText ""You've already filed your taxes. Your obligation will recur in $EIS_taxespaidDGS.""
+SetEnabled EISTax_startTurnIn false
+FireAll PopulateOptions",,,"Guard for the ten filing entry rows (EISTax_turnInOptionHegemony / IronShell / Player and their variants). If the filing option is selected while the paid flag is set (the TaxesFile disable did not take effect), this answers instead of the filing screen. Score 1000 outranks all ten entry rows. Never reached in normal play.",b
+EISTax_EntryHartley,DialogOptionSelected,"$option == EISTax_startTurnIn
+$id == eisdarren score:2000",FireAll PopulateOptions,"""Does it look like I want to do your taxes? Bother someone else.""",,"Hartley never files taxes (HartleyTax_disableTurnInOption greys the option out unconditionally). If the option is selected anyway, he refuses with his tooltip line. Score 2000 outranks the paid-flag guard and the ten entry rows. Never reached in normal play.",b

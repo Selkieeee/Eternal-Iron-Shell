@@ -8,6 +8,7 @@ import com.fs.starfarer.api.characters.MutableCharacterStatsAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.impl.campaign.events.OfficerManagerEvent;
 import com.fs.starfarer.api.impl.campaign.ids.Personalities;
+import com.fs.starfarer.api.plugins.OfficerLevelupPlugin;
 import com.fs.starfarer.api.util.Misc;
 import java.awt.Color;
 import java.util.List;
@@ -26,6 +27,10 @@ public class EISPoopyStinky extends BaseCommandPlugin {
                 person.setPersonality(Personalities.AGGRESSIVE);
                 MutableCharacterStatsAPI stats = person.getStats();
                 stats.setSkillLevel("eis_xiv", 1);
+                // Generated at level 5 (5 level-up skills), then shown and gained as level 6 to count the eis_xiv skill. Only the level and XP are set here; no skill is added.
+                stats.setLevel(6);
+                OfficerLevelupPlugin levelup = (OfficerLevelupPlugin) Global.getSettings().getPlugin("officerLevelUp");
+                if (levelup != null) {stats.setXP(levelup.getXPForLevel(6));}
 		TextPanelAPI text = dialog.getTextPanel();
 		Color hl = Misc.getHighlightColor();
 		text.addSkillPanel(person, false);

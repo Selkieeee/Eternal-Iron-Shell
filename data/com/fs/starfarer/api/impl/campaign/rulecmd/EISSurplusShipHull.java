@@ -1,15 +1,13 @@
 package com.fs.starfarer.api.impl.campaign.rulecmd;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.FactionAPI;
-import com.fs.starfarer.api.campaign.FactionAPI.ShipPickMode;
-import com.fs.starfarer.api.campaign.FactionAPI.ShipPickParams;
 import com.fs.starfarer.api.campaign.InteractionDialogAPI;
-import com.fs.starfarer.api.campaign.PersonImportance;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
@@ -18,19 +16,17 @@ import com.fs.starfarer.api.impl.campaign.CoreReputationPlugin.RepActions;
 import data.scripts.EISContactFaction;
 import com.fs.starfarer.api.impl.campaign.CoreReputationPlugin.RepRewards;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
+import com.fs.starfarer.api.combat.ShipHullSpecAPI;
+import com.fs.starfarer.api.combat.ShipHullSpecAPI.ShipTypeHints;
 import com.fs.starfarer.api.combat.ShipVariantAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.fleet.FleetMemberType;
-import com.fs.starfarer.api.fleet.ShipRolePick;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
-import com.fs.starfarer.api.impl.campaign.ids.ShipRoles;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
-import com.fs.starfarer.api.impl.campaign.intel.bases.PirateBaseManager;
 import com.fs.starfarer.api.impl.campaign.missions.hub.HubMissionWithSearch;
 import com.fs.starfarer.api.loading.VariantSource;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Misc.Token;
-import com.fs.starfarer.api.util.WeightedRandomPicker;
 
 public class EISSurplusShipHull extends HubMissionWithSearch {
 
@@ -66,35 +62,38 @@ public class EISSurplusShipHull extends HubMissionWithSearch {
 		//genRandom = Misc.random;
 		
 		
-		ShipPickParams params = new ShipPickParams(ShipPickMode.PRIORITY_THEN_ALL);
-		String role = pickRole(getQuality(), EISContactFaction.get(person), person.getImportance(), genRandom);
+		// Every hull the contact's faction knows is equally likely. The pick ignores contact importance, campaign age, reputation and fleet doctrine.
+		FactionAPI pickFaction = EISContactFaction.get(person);
+		List<String> candidates = new ArrayList<String>(pickFaction.getKnownShips());
+		Collections.shuffle(candidates, genRandom);
 		
 		ShipVariantAPI variant = null;
-		for (int i = 0; i < 10; i++) {
-			List<ShipRolePick> picks = market.getFaction().pickShip(role, params, null, genRandom);
-			if (picks.isEmpty()) return false;
-			String variantId = picks.get(0).variantId;
-			variant = Global.getSettings().getVariant(variantId);
-			variant = Global.getSettings().getVariant(variant.getHullSpec().getHullId() + "_Hull").clone();
-                        /*if (!(variant.getHullSpec().hasTag("") || variant.getHullSpec().hasTag(""))) {
-                            variant = null;
-                            continue;
-                        } pure laziness that I won't add yet...*/
-			if (variant.getHullSpec().hasTag(Tags.NO_SELL)) {
-				variant = null;
+		for (String hullId : candidates) {
+			ShipHullSpecAPI spec;
+			try {
+				spec = Global.getSettings().getHullSpec(hullId);
+			} catch (Throwable t) {
 				continue;
 			}
+			if (spec == null) continue;
+			// freighters, tankers and stations are not warship hulls
+			if (spec.isCivilianNonCarrier() || spec.getHints().contains(ShipTypeHints.STATION)) continue;
+			if (spec.hasTag(Tags.NO_SELL)) continue;
 			// cruisers and capitals must be Iron Shell blueprint hulls
-			HullSize pickedSize = variant.getHullSpec().getHullSize();
-			if ((pickedSize == HullSize.CRUISER || pickedSize == HullSize.CAPITAL_SHIP) && !variant.getHullSpec().hasTag("eis_bp")) {
-				variant = null;
+			HullSize pickedSize = spec.getHullSize();
+			if ((pickedSize == HullSize.CRUISER || pickedSize == HullSize.CAPITAL_SHIP) && !spec.hasTag("eis_bp")) continue;
+			// the stock hull variant has to exist
+			ShipVariantAPI candidate;
+			try {
+				ShipVariantAPI stock = Global.getSettings().getVariant(spec.getHullId() + "_Hull");
+				if (stock == null) continue;
+				candidate = stock.clone();
+			} catch (Throwable t) {
 				continue;
 			}
 			// eis_aquila can't be installed on top of Safety Overrides, and every ship sold here must have it
-			if (variant.hasHullMod(HullMods.SAFETYOVERRIDES)) {
-				variant = null;
-				continue;
-			}
+			if (candidate.hasHullMod(HullMods.SAFETYOVERRIDES)) continue;
+			variant = candidate;
 			break;
 		}
 		if (variant == null) return false;
@@ -174,71 +173,6 @@ public class EISSurplusShipHull extends HubMissionWithSearch {
 		
 		currentStage = new Object(); // so that the abort() assumes the mission was successful
 		abort();
-	}
-	
-	public static String pickRole(float quality, FactionAPI faction, PersonImportance imp, Random random) {
-		WeightedRandomPicker<String> picker = new WeightedRandomPicker<String>(random);
-		
-		float cycles = PirateBaseManager.getInstance().getDaysSinceStart() / 365f;
-		
-		if (imp == PersonImportance.VERY_HIGH && cycles < 3) imp = PersonImportance.HIGH;
-		if (imp == PersonImportance.HIGH && cycles < 1) imp = PersonImportance.MEDIUM;
-		
-		if (quality < 0.5f && imp.ordinal() > PersonImportance.MEDIUM.ordinal()) {
-			imp = PersonImportance.MEDIUM;
-		}
-		
-		float w = faction.getDoctrine().getWarships() - 1f;
-		float c = faction.getDoctrine().getCarriers() - 1f;
-		//float p = faction.getDoctrine().getPhaseShips() - 1f;
-		//if (w + c + p < 1) w = 1;
-		if (w + c < 1) w = 1;
-                
-		switch (imp) {
-		case VERY_LOW:
-			picker.add(ShipRoles.COMBAT_SMALL, w);
-			picker.add(ShipRoles.COMBAT_MEDIUM, w/1.5f);
-			picker.add(ShipRoles.CARRIER_SMALL, c);
-			//picker.add(ShipRoles.PHASE_SMALL, p);
-			break;
-		case LOW:
-			picker.add(ShipRoles.COMBAT_SMALL, w/1.5f);
-			picker.add(ShipRoles.COMBAT_MEDIUM, w);
-			picker.add(ShipRoles.CARRIER_SMALL, c);
-			//picker.add(ShipRoles.PHASE_SMALL, p);
-			break;
-		case MEDIUM:
-                        picker.add(ShipRoles.COMBAT_SMALL, w/2f);
-			picker.add(ShipRoles.COMBAT_MEDIUM, w/1.5f);
-			picker.add(ShipRoles.COMBAT_LARGE, w);
-			picker.add(ShipRoles.CARRIER_SMALL, c/1.5f);
-			picker.add(ShipRoles.CARRIER_MEDIUM, c);
-			//picker.add(ShipRoles.PHASE_SMALL, p/2f);
-			//picker.add(ShipRoles.PHASE_MEDIUM, p);
-			break;
-		case HIGH:
-                        picker.add(ShipRoles.COMBAT_SMALL, w/2.5f);
-			picker.add(ShipRoles.COMBAT_MEDIUM, w/2f);
-			picker.add(ShipRoles.COMBAT_LARGE, w);
-			picker.add(ShipRoles.COMBAT_CAPITAL, w/1.5f);
-			picker.add(ShipRoles.CARRIER_MEDIUM, c);
-			picker.add(ShipRoles.CARRIER_LARGE, c/1.5f);
-			//picker.add(ShipRoles.PHASE_MEDIUM, p);
-			//picker.add(ShipRoles.PHASE_LARGE, p/2f);
-			break;
-		case VERY_HIGH:
-                        picker.add(ShipRoles.COMBAT_SMALL, w/2.5f);
-			picker.add(ShipRoles.COMBAT_MEDIUM, w/2f);
-			picker.add(ShipRoles.COMBAT_LARGE, w/1.5f);
-			picker.add(ShipRoles.COMBAT_CAPITAL, w);
-			picker.add(ShipRoles.CARRIER_MEDIUM, c/2f);
-			picker.add(ShipRoles.CARRIER_LARGE, c);
-			//picker.add(ShipRoles.PHASE_MEDIUM, p/2f);
-			//picker.add(ShipRoles.PHASE_LARGE, p);
-			//picker.add(ShipRoles.PHASE_CAPITAL, p/2f);
-			break;
-		}
-		return picker.pick();
 	}
 	
 }
