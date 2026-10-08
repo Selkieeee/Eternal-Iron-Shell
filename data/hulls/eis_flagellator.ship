@@ -230,7 +230,7 @@
       "location": [-40, 46],
       "length": 34.233833,
       "width": 8.612677,
-      "angle": 155,
+      "angle": 150,
       "contrailSize": 8.612677,
       "style": "LOW_TECH"
     },
@@ -238,7 +238,7 @@
       "location": [-40, -46],
       "length": 34.233833,
       "width": 8.612677,
-      "angle": -155,
+      "angle": -150,
       "contrailSize": 8.612677,
       "style": "LOW_TECH"
     },
@@ -246,7 +246,7 @@
       "location": [-35.5, 51],
       "length": 34.233833,
       "width": 8.612677,
-      "angle": 155,
+      "angle": 150,
       "contrailSize": 8.612677,
       "style": "LOW_TECH"
     },
@@ -254,7 +254,7 @@
       "location": [-35.5, -51],
       "length": 34.233833,
       "width": 8.612677,
-      "angle": -155,
+      "angle": -150,
       "contrailSize": 8.612677,
       "style": "LOW_TECH"
     }
