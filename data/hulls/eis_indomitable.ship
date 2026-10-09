@@ -23,7 +23,15 @@
     "WS0015": "eis_deco_indomitable_tl",
     "WS0016": "eis_deco_indomitable_tr",
     "WS0017": "eis_deco_indomitable_mls",
-    "WS0018": "eis_deco_indomitable_mrs"
+    "WS0018": "eis_deco_indomitable_mrs",
+    "WS0019": "eis_blinker_white30",
+    "WS0020": "eis_blinker_white30",
+    "WS0021": "eis_blinker_white",
+    "WS0024": "eis_blinker_white",
+    "WS0025": "eis_blinker_white",
+    "WS0026": "eis_blinker_white",
+    "WS0027": "eis_blinker_white",
+    "WS0028": "eis_blinker_white"
   },
   "weaponSlots": [
     {
@@ -214,6 +222,80 @@
       "angle": -0,
       "locations": [-72, -51],
       "renderOrderMod": 100
+    },
+    {
+      "id": "WS0019",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-11, 16]
+    },
+    {
+      "id": "WS0020",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [-11, -16]
+    },
+    {
+      "id": "WS0021",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-66.5, 8.5]
+    },
+    {
+      "id": "WS0024",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [-66.5, -8.5]
+    },
+    {
+      "id": "WS0025",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [17, 54.5]
+    },
+    {
+      "id": "WS0026",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [17, -54.5]
+    },
+    {
+      "id": "WS0027",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [17, 25],
+      "renderOrderMod": 201
+    },
+    {
+      "id": "WS0028",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [17, -25],
+      "renderOrderMod": 201
     }
   ],
   "engineSlots": [
