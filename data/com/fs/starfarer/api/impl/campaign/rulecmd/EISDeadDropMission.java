@@ -118,8 +118,8 @@ public class EISDeadDropMission extends HubMissionWithSearch {
 		
 
 		setCreditReward(CreditReward.HIGH);
-		// reputation on completion: person +8 / faction +5 (failure penalties unchanged: person -2 / faction -1)
-		setRepChanges(0.08f, RepRewards.SMALL, 0.05f, RepRewards.TINY);
+		// reputation on completion: person +6 / faction +5 (failure penalties unchanged: person -2 / faction -1)
+		setRepChanges(0.06f, RepRewards.SMALL, 0.05f, RepRewards.TINY);
 		
 		if (rollProbability(PROB_COMPLICATIONS)) {
 			triggerComplicationBegin(Stage.DROP_OFF, ComplicationSpawn.APPROACHING_OR_ENTERING,

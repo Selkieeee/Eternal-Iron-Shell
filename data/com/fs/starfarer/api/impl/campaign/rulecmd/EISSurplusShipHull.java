@@ -1,9 +1,10 @@
 package com.fs.starfarer.api.impl.campaign.rulecmd;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.FactionAPI;
@@ -27,10 +28,15 @@ import com.fs.starfarer.api.impl.campaign.missions.hub.HubMissionWithSearch;
 import com.fs.starfarer.api.loading.VariantSource;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Misc.Token;
+import com.fs.starfarer.api.util.WeightedRandomPicker;
 
 public class EISSurplusShipHull extends HubMissionWithSearch {
 
 	public static final float BASE_PRICE_MULT = 0.4f;
+	// Weight of a hull that is not tagged eis_bp, relative to 1 for an eis_bp hull.
+	public static final float NON_BP_WEIGHT = 0.5f;
+	// Hulls tagged no_sell that this mission may still offer.
+	private static final Set<String> NO_SELL_ALLOWED = new HashSet<String>(Arrays.asList("armaa_monitor_xiv"));
 	
 	protected FleetMemberAPI member;
 	protected int price;
@@ -62,13 +68,11 @@ public class EISSurplusShipHull extends HubMissionWithSearch {
 		//genRandom = Misc.random;
 		
 		
-		// Every hull the contact's faction knows is equally likely. The pick ignores contact importance, campaign age, reputation and fleet doctrine.
+		// Every hull the contact's faction knows is a candidate. The pick ignores contact importance, campaign age, reputation and fleet doctrine.
+		// Hulls tagged eis_bp have full weight; every other hull (vanilla and cross-mod alike) has NON_BP_WEIGHT.
 		FactionAPI pickFaction = EISContactFaction.get(person);
-		List<String> candidates = new ArrayList<String>(pickFaction.getKnownShips());
-		Collections.shuffle(candidates, genRandom);
-		
-		ShipVariantAPI variant = null;
-		for (String hullId : candidates) {
+		WeightedRandomPicker<String> picker = new WeightedRandomPicker<String>(genRandom);
+		for (String hullId : pickFaction.getKnownShips()) {
 			ShipHullSpecAPI spec;
 			try {
 				spec = Global.getSettings().getHullSpec(hullId);
@@ -78,14 +82,22 @@ public class EISSurplusShipHull extends HubMissionWithSearch {
 			if (spec == null) continue;
 			// freighters, tankers and stations are not warship hulls
 			if (spec.isCivilianNonCarrier() || spec.getHints().contains(ShipTypeHints.STATION)) continue;
-			if (spec.hasTag(Tags.NO_SELL)) continue;
+			// no_sell hulls are skipped unless this mission is explicitly allowed to offer them
+			if (spec.hasTag(Tags.NO_SELL) && !NO_SELL_ALLOWED.contains(spec.getHullId())) continue;
 			// cruisers and capitals must be Iron Shell blueprint hulls
 			HullSize pickedSize = spec.getHullSize();
 			if ((pickedSize == HullSize.CRUISER || pickedSize == HullSize.CAPITAL_SHIP) && !spec.hasTag("eis_bp")) continue;
+			picker.add(spec.getHullId(), spec.hasTag("eis_bp") ? 1f : NON_BP_WEIGHT);
+		}
+		
+		// A drawn hull can still be rejected below, so keep drawing (without replacement) until one passes. Rejections don't change the relative odds.
+		ShipVariantAPI variant = null;
+		while (!picker.isEmpty()) {
+			String hullId = picker.pickAndRemove();
 			// the stock hull variant has to exist
 			ShipVariantAPI candidate;
 			try {
-				ShipVariantAPI stock = Global.getSettings().getVariant(spec.getHullId() + "_Hull");
+				ShipVariantAPI stock = Global.getSettings().getVariant(hullId + "_Hull");
 				if (stock == null) continue;
 				candidate = stock.clone();
 			} catch (Throwable t) {

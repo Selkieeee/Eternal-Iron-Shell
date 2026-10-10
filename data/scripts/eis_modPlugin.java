@@ -151,6 +151,7 @@ public class eis_modPlugin extends BaseModPlugin {
             if (haveNia) {
                 if (Global.getSettings().getHullSpec("tahlan_nelson_xiv") != null) {Global.getSettings().getHullSpec("tahlan_nelson_xiv").addTag("eis_crossmod");}
 		if (Global.getSettings().getHullSpec("tahlan_tower_xiv") != null) {Global.getSettings().getHullSpec("tahlan_tower_xiv").addTag("eis_crossmod");}
+                if (Global.getSettings().getHullSpec("tahlan_Castigator") != null) {Global.getSettings().getHullSpec("tahlan_Castigator").addTag("eis_crossmod");}
             }
             if (haveSWP) {
                 if (Global.getSettings().getHullSpec("swp_alastor_xiv") != null) {Global.getSettings().getHullSpec("swp_alastor_xiv").addTag("eis_crossmod");}

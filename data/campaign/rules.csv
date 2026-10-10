@@ -2402,18 +2402,18 @@ EISOneOfUs hegemony",,"In moments, the crest disappears and you speak with a rea
 ""Captain $playerName?"" Finally they seem to look at you and realize who you are, ""Of course, I should have realized that you are one of the leading members of $player.allianceName. Our records indicate that you have done much good in service of the Hegemony.""
 
 ""You're lucky."" The officer turns back to their display, tapping away. ""It will be your great honor to meet with the man himself. Please do forgive the ad-hoc nature of the arrangement; the High Hegemon is a very busy man.""",gaATG_daudMeetingSetupEnd:Continue,,B
-eis_GAPZHegHub1,GAPZHegHub,$player.fcm_faction == ironshell,,,0:gaPZ_hegHub1:Appeal on the basis of your Iron Shell commission,,
+#eis_GAPZHegHub1,GAPZHegHub,$player.fcm_faction == ironshell,,,0:gaPZ_hegHub1:Appeal on the basis of your Iron Shell commission,commented out - duplicate of eis_GAPZISHub1 (both showed for an Iron Shell commission),
 eis_GAPZHegHubAlliance,GAPZHegHub,"$player.fcm_faction != hegemony
 $player.fcm_faction != ironshell
 EISOneOfUs hegemony",,,0:gaPZ_hegHub1:Appeal on the basis of your alliance membership,,
-eis_gaATGhegFleetDialogHub1,GAATGhegFleetDialogHub,$player.fcm_faction == ironshell,,,"gaATG_hegFleetCom1:""I bear an Iron Shell commission, $rank""",,
+#eis_gaATGhegFleetDialogHub1,GAATGhegFleetDialogHub,$player.fcm_faction == ironshell,,,"gaATG_hegFleetCom1:""I bear an Iron Shell commission, $rank""",commented out - duplicate of eis_gaATGisFleetDialogHub1 (both showed for an Iron Shell commission),
 eis_gaATGhegFleetDialogHub1Alliance,GAATGhegFleetDialogHub,"$player.fcm_faction != hegemony
 $player.fcm_faction != ironshell
 EISOneOfUs hegemony",,,"gaATG_hegFleetCom1:""I belong to a shared alliance, $rank""",,B
-eis_gaATGdaudMeeting3a,GAATGdaudMeetingFirearm,$player.fcm_faction == ironshell,"$option = gaATG_daudMeeting4 0
+eis_gaATGdaudMeeting3a,GAATGdaudMeetingFirearm,$player.fcm_faction == ironshell score:2,"$option = gaATG_daudMeeting4 0
 FireBest DialogOptionSelected","The chief of security examines your sidearm as if it were his own. With a light touch he slips the cellmag out, checks its status, then reloads it. He hands the weapon back to you.
 
-""Captain,"" he says. ""It is the High Hegemon's opinion that if you have earned yourself a reputation from one of the Hegemony executive council members, you may bear your weapon in his presence.""",gaATG_daudMeeting4:Continue,,
+""Captain,"" he says. ""It is the High Hegemon's opinion that if you have earned yourself a reputation from one of the Hegemony executive council members, you may bear your weapon in his presence.""",gaATG_daudMeeting4:Continue,condition now has score:2 like vanilla gaATGdaudMeeting3a so it beats the neutral row instead of tying,
 eis_gaATGdaudMeeting3aAlliance,GAATGdaudMeetingFirearm,"$player.fcm_faction != hegemony
 $player.fcm_faction != ironshell
 EISOneOfUs hegemony","$option = gaATG_daudMeeting4 0
@@ -2563,8 +2563,8 @@ $global.soldSierraToCeleste = true","The hairs on your neck suddenly stand up of
 # new lines,,,,,,,n
 ,,,,,,,n
 #Vanilla Hege Comm stuff,,,,,,,n
-eis_lppJangalaProtestRespIS,PPJangalaProtestResponses,$player.fcm_faction == ironshell,,,eis_lppJangalaProtestInfoISCom:Use your commission with the Hegemony to pass,,b
-eis_lppJangalaProtestInfoISCom,DialogOptionSelected,$option == eis_lppJangalaProtestInfoISCom,EndConversation DO_NOT_FIRE,"""Look, sorry about all of this,"" $heOrShe indicates the protest. ""Tell you what- I can route you and your crew through secure access so you don't have to wait on the circus.""",,,b
+eis_lppJangalaProtestRespIS,PPJangalaProtestResponses,$player.fcm_faction == ironshell,,,lpp_jangalaProtestInfoHegCom:Use your commission with the Hegemony to pass,option id changed from eis_lppJangalaProtestInfoISCom to the vanilla lpp_jangalaProtestInfoHegCom so the vanilla Accept/Wait follow-up runs,b
+#eis_lppJangalaProtestInfoISCom,DialogOptionSelected,$option == eis_lppJangalaProtestInfoISCom,EndConversation DO_NOT_FIRE,"""Look, sorry about all of this,"" $heOrShe indicates the protest. ""Tell you what- I can route you and your crew through secure access so you don't have to wait on the circus.""",,commented out - orphaned by the option id change on eis_lppJangalaProtestRespIS (vanilla lpp_jangalaProtestInfoHegCom continues instead),b
 eis_sdtuMacReasonIronshell,SDTUMacIntroReasoning,$player.commissionFactionId == ironshell,,"""Why, it is because you work for the enemy, the Hegemony!""
 
 ""The Diktat has always been a knife to their throat. Small, yes, but with a keen edge, a ruthlessness that the best of the officer corps could recognize, and those too craven to commit to Philip's vision look upon with jealousy. The children of Eventide wish they could dispense with the cloying ideology of the Domain and exercise a power truer and purer.""
@@ -2584,13 +2584,13 @@ FireAll PKSentinelHubOptions","""It is not unimaginable that Tri-Tachyon, or som
 She doesn't quite smile, but a moment of tension has broken. Her guards relax slightly at her words, and her lieutenants exchange a grin.
 
 (""Praise Command,"" you hear someone say.)",,,b
-eis_GAPZISHub1,GAPZHegHub,$player.commissionFactionId == ironshell,,,4:eis_gaPZ_isHub1:Appeal on the basis of your Hegemony commission,,b
+eis_GAPZISHub1,GAPZHegHub,$player.commissionFactionId == ironshell,,,0:gaPZ_hegHub1:Appeal on the basis of your Hegemony commission,option id changed from eis_gaPZ_isHub1 to the vanilla gaPZ_hegHub1 (and order 4 to 0) so the vanilla follow-up runs,b
 eis_gaPZ_isHub1,DialogOptionSelected,$option == eis_gaPZ_isHub1,,"You take the comm-link with the Hegemony $personRank off hold, and explain that you bear a commission from the Hegemony. You fight for the same cause, you hold the same loyalties. If the Hegemony wishes to access your technology, let them ask properly.
 
 Let them act as officers and speak to your face, not bureaucrats hiding their motives behind old regulations.
 
 By the end of your speech, you find $personRank $personName nodding along with you.",cutCommLink:Cut the comm link,,b
-eis_gaATGisFleetDialogHub1,GAATGhegFleetDialogHub,$player.commissionFactionId == ironshell,,,"eis_gaATG_isFleetCom1:""I bear a Hegemony commission, $rank""",,b
+eis_gaATGisFleetDialogHub1,GAATGhegFleetDialogHub,$player.commissionFactionId == ironshell,,,"gaATG_hegFleetCom1:""I bear a Hegemony commission, $rank""",option id changed from eis_gaATG_isFleetCom1 to the vanilla gaATG_hegFleetCom1 so the vanilla follow-up runs,b
 eis_gaATG_isFleetCom1,DialogOptionSelected,$option == eis_gaATG_isFleetCom1,,"""Transmit your commission codes, please,"" $heOrShe says, the imperious tone relaxing slightly. ""Captain.""
 
 You do, and they are confirmed.

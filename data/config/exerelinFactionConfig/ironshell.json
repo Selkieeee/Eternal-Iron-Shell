@@ -27,45 +27,26 @@
 	#"factionConditionSubplugin":"data.scripts.campaign.econ.eis_ironshell", # class was never written - caused a NexUtils ClassNotFoundException -> NPE in FactionConditionPlugin.loadPlugin whenever Nexerelin tried to instantiate it (e.g. during a Hegemony colony expedition to Hanan Pacha in Operation World Above)
 	#For Random Sector apparently. (friendly relations with hegemony are reduced in iron shell to prevent uhh alliance stacking)
     "startRelationships":{
-		"apex_design": 0.1, #from 0.15
-		"al_ars": -0.5,
-		"almighty_dollar": 0.2, #from 0.6
-		"ashen_keepers": 0,
-		"blade_breakers":  -1.00,
-		"blackrock_driveyards":-0.5,
-		"communist_clouds": -0.6,
-		"dassault_mikoyan": 0.15, #from 0.25
 		"diableavionics": -0.6,
-		"exalted":-1.00,
 		"hegemony":1.00,
-		"fpe": 0.2, #from 0.5 despite... an interesting alliance they oppose the idea of taxes being given to appease the Ludds.
+       	 	"sindrian_diktat":-0.4,
+		"lions_guard":-0.4,
 		"interstellarimperium": -0.8,
-		"JYD": -0.2,
 		"kadur_remnant": -1.00,
-		"keruvim": 0.2, #from 0.6
-		"luddic_church": -0.2,
+		"luddic_church": 0.2,
+		"knights_of_selkie": 0.2,
+		"knights_of_ludd": 0.2,
 		"luddic_path":-0.5,
-		"mayasura": -1.00,
-		"magellan_protectorate": -0.9,
-		"persean":-0.5,
+		"persean":-0.4,
 		"pirates": -0.5,
-		"prv": -0.3,
-		"ocua":-0.3,
 		"remnant": -0.5,
 		"rb": -0.6,
 		"scalartech": -0.3,
-		"science_fuckers ": -0.6,
-		"shadow_industry": -0.6,
-		"sylphon":-0.2,
 		"tahlan_legioinfernalis":-1.00,
 		"tritachyon": -0.25,
-		"tiandong": 0,
 		"xhanempire": -0.6,
-		"warhawk_republic": -0.6,
-		"xlu":-0.8,
-		"unitedpamed": 0.15, #from 0.25
-		"vanidad": 0.25, #from 1
-		"vic": 0.2, #from 0.6
+		"unitedpamed": 0.15,
+		"vic": 0.2,
 	},
     
 	"minRelationships":{
@@ -73,20 +54,9 @@
 	},
 	
     "maxRelationships":{
-		"al_ars": -0.5,
-		"blackrock_driveyards":0.25,
-		"blade_breakers": -1.00,
-		"communist_clouds": -0.2,
-		"dassault_mikoyan": 0.25,
 		"interstellarimperium": -0.4,
-		"kadur_remnant": -0.6,
-		"mayasura": -1,
-		"magellan_protectorate": 0.1,
-		"remnant":-0.51,
-		"sylphon":0,
-		"tahlan_legioinfernalis": -0.5,
-		"warhawk_republic": -0.6,
-		"xlu":0.25,
+		"kadur_remnant": -0.4,
+		"tahlan_legioinfernalis": -0.4,
 	},
 	
     "diplomacyPositiveChance":{"hegemony":2.0},

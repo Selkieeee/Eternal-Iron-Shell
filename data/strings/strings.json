@@ -177,7 +177,7 @@
 		#"eis_damper3": "% hard flux dissipation",
 		#"eis_damper4": "0 shield upkeep",
 	
-		"eis_highballisticfocus1":"energy weapon damage ", #Translator Tip: Yes this space at the end is intentional, leave it alone.
+		"eis_highballisticfocus1":"energy weapon damage",
 		"eis_highballisticfocus2":"ballistic rate of fire",
 		"eis_highballisticfocus3":"ballistic flux use",
 		"eis_highballisticfocus4":"top speed and maneuvering stats",
