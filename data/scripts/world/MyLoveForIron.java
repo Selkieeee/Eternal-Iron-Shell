@@ -33,7 +33,7 @@ public class MyLoveForIron implements EveryFrameScript {
         ImportantPeopleAPI ip = Global.getSector().getImportantPeople();
         MarketAPI market = Global.getSector().getEconomy().getMarket("eis_chitagupta");
         MarketAPI market2 = Global.getSector().getEconomy().getMarket("eis_yami");
-        if (market != null && "ironshell".equals(market.getFactionId()) && market2 != null && "ironshell".equals(market.getFactionId())) {
+        if (market != null && "ironshell".equals(market.getFactionId()) && market2 != null && "ironshell".equals(market2.getFactionId())) {
             market.getPlanetEntity().setInteractionImage("illustrations", "is_station_illustration");
             for (SectorEntityToken linked : market.getConnectedEntities()) {
                 if (!"eis_chitagupta".equals(linked.getId())) {

@@ -12,7 +12,8 @@ import com.fs.starfarer.api.util.IntervalUtil;
 public class eis_peacekeepercore extends BaseHullMod {
     private static final float HAVE_SEX_BONUS = 50f;
     private static final float HAVE_SEX_BONUS2 = 0.66f;
-    IntervalUtil tracker = new IntervalUtil(0.5f, 0.5f);
+    // One hullmod object is shared by every ship that has it, so each ship's overload-check timer lives in the combat engine's custom data instead of in a field here.
+    private static final String DATA_KEY = "eis_peacekeepercore_data";
     
     @Override
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
@@ -35,8 +36,14 @@ public class eis_peacekeepercore extends BaseHullMod {
     public void advanceInCombat(ShipAPI ship, float amount) {
         CombatEngineAPI engine =  Global.getCombatEngine();
         if (engine == null || engine.isPaused() || !ship.isAlive()) {return;}
-        tracker.advance(amount);
-        if (tracker.intervalElapsed()) {
+        String key = DATA_KEY + "_" + ship.getId();
+        PeacekeeperData data = (PeacekeeperData) engine.getCustomData().get(key);
+        if (data == null) {
+            data = new PeacekeeperData();
+            engine.getCustomData().put(key, data);
+        }
+        data.tracker.advance(amount);
+        if (data.tracker.intervalElapsed()) {
                 FluxTrackerAPI flux = ship.getFluxTracker();
                 if (flux.isOverloadedOrVenting() && ship.getSystem().getAmmo() > 0) {
                     flux.stopOverload();
@@ -49,6 +56,10 @@ public class eis_peacekeepercore extends BaseHullMod {
                     //engine.addFloatingText(ship.getLocation(), "My Life For Ava!", 15f, Color.WHITE, ship, 1f, 0.5f);
                 } //else {ship.getMutableStats().getCombatEngineRepairTimeMult().unmodifyMult("eis_peacekeepercore");}
         }
+    }
+
+    private static class PeacekeeperData {
+        IntervalUtil tracker = new IntervalUtil(0.5f, 0.5f);
     }
 }
 

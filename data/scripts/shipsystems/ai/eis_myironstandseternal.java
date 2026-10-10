@@ -9,6 +9,7 @@ import com.fs.starfarer.api.combat.ShipwideAIFlags;
 import com.fs.starfarer.api.util.IntervalUtil;
 import java.util.List;
 import org.lazywizard.lazylib.MathUtils;
+import org.lazywizard.lazylib.combat.AIUtils;
 import org.lazywizard.lazylib.combat.CombatUtils;
 import org.lwjgl.util.vector.Vector2f;
 
@@ -26,7 +27,7 @@ public class eis_myironstandseternal implements ShipSystemAIScript {
         if (engine.isPaused()) {return;}
         tracker.advance(amount);
         if (tracker.intervalElapsed()) {
-            if (!ship.getFluxTracker().isOverloadedOrVenting() || !system.isActive() || !system.isCoolingDown()) {
+            if (!ship.getFluxTracker().isOverloadedOrVenting() && AIUtils.canUseSystemThisFrame(ship)) {
                 float missileThreatLevel = 0f;
                 int missileThreatAmount = 0;
                 List<MissileAPI> allMissiles = CombatUtils.getMissilesWithinRange(ship.getLocation(), ship.getCollisionRadius()+ship.getMutableStats().getSystemRangeBonus().computeEffective(EFFECT_RANGE) * MathUtils.getRandomNumberInRange(0.5f,0.8f));

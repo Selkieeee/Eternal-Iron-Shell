@@ -76,6 +76,7 @@ public class eis_ironsneedeternal implements ShipSystemAIScript {
             } else if (system.getAmmo() >= 2) {
                 desire -= 0.1f;
             } // 3 why are you holding onto it? USE IT.*/
+            if (desire < 0f) {desire = 0f;} // desire never builds up below zero (e.g. from sitting under DO_NOT_PURSUE)
             float missileThreatLevel = 0f;
             int missileThreatAmount = 0;
             List<MissileAPI> allMissiles = CombatUtils.getMissilesWithinRange(ship.getLocation(), ship.getCollisionRadius()+ship.getMutableStats().getSystemRangeBonus().computeEffective(EFFECT_RANGE) * MathUtils.getRandomNumberInRange(0.5f,1f));

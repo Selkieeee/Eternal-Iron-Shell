@@ -2,6 +2,7 @@ package data.scripts.hullmods;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseHullMod;
+import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.combat.WeaponAPI.WeaponSize;
@@ -11,9 +12,8 @@ import java.awt.Color;
 
 public class eis_indomitable extends BaseHullMod {
     
-    private boolean AlreadyCame = false;
-    private int storedHashCode;
-    private int iMissile = 0;
+    // One hullmod object is shared by every ship that has it, so the per-ship state lives in the combat engine's custom data instead of in fields here.
+    private static final String DATA_KEY = "eis_indomitable_data";
     private static String failIcon = Global.getSettings().getSpriteName("misc", "eis_parryfail");
     //private static String pogIcon = "graphics/icons/hullsys/burn_drive.png";
     private static final String BULLET = "\u2022";
@@ -30,21 +30,24 @@ public class eis_indomitable extends BaseHullMod {
     
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
-        if (Global.getCombatEngine().isPaused()) {return;}
-        if (Global.getCombatEngine().hashCode() != storedHashCode) {
-          AlreadyCame = false;
-          ship.getMutableStats().getPeakCRDuration().unmodifyMult("eis_indomitable");
-          iMissile = 0;
-          storedHashCode = Global.getCombatEngine().hashCode();
+        CombatEngineAPI engine = Global.getCombatEngine();
+        if (engine == null || engine.isPaused()) {return;}
+        String key = DATA_KEY + "_" + ship.getId();
+        IndomitableData data = (IndomitableData) engine.getCustomData().get(key);
+        if (data == null) {
+            // first frame of this ship in this battle
+            data = new IndomitableData();
+            engine.getCustomData().put(key, data);
+            ship.getMutableStats().getPeakCRDuration().unmodifyMult("eis_indomitable");
         }
-        if (!AlreadyCame) {
+        if (!data.alreadyCame) {
             for (WeaponAPI w : ship.getAllWeapons()) {
-                if (w.getType() == WeaponAPI.WeaponType.MISSILE && w.usesAmmo() && w.getSize() == WeaponSize.MEDIUM) {iMissile += 1;}
-                if (w.getType() == WeaponAPI.WeaponType.MISSILE && w.usesAmmo() && w.getSize() == WeaponSize.LARGE) {iMissile += 2;}
-                if (iMissile > 2) {break;}
+                if (w.getType() == WeaponAPI.WeaponType.MISSILE && w.usesAmmo() && w.getSize() == WeaponSize.MEDIUM) {data.missileCount += 1;}
+                if (w.getType() == WeaponAPI.WeaponType.MISSILE && w.usesAmmo() && w.getSize() == WeaponSize.LARGE) {data.missileCount += 2;}
+                if (data.missileCount > 2) {break;}
             }
         }
-        if (iMissile > 2 && !AlreadyCame) {
+        if (data.missileCount > 2 && !data.alreadyCame) {
             for (WeaponAPI w : ship.getAllWeapons()) {
                 if (w.getType() == WeaponAPI.WeaponType.MISSILE && w.usesAmmo()) {
                     int modifiedAmmo = (int) (w.getMaxAmmo()*(1f - 0.4f));
@@ -55,10 +58,15 @@ public class eis_indomitable extends BaseHullMod {
             ship.getMutableStats().getPeakCRDuration().modifyMult("eis_indomitable", 0.6f);
             if (ship == Global.getCombatEngine().getPlayerShip()) Global.getSoundPlayer().playUISound("cr_playership_warning", 1f, 1f);
         }
-	if (ship == Global.getCombatEngine().getPlayerShip() && iMissile > 2) {
+	if (ship == Global.getCombatEngine().getPlayerShip() && data.missileCount > 2) {
             Global.getCombatEngine().maintainStatusForPlayerShip("eis_indeez", failIcon, indeezTitle, indeezText1d, true);
 	}
-        AlreadyCame = true;
+        data.alreadyCame = true;
+    }
+
+    private static class IndomitableData {
+        boolean alreadyCame = false;
+        int missileCount = 0;
     }
     
     @Override

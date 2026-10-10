@@ -1,3 +1,26 @@
+2.0.5
+-\[buff] Celestial blossom/aster spread reduced. Increased max ammo, top speed, and damage.
+-\[nerf] Azalean lance refire delay 5s -> 6s (-17% less dps, from 276 to 230)
+-Annihilation Protocol speed buff duration 6s -> 3s, speed 20 -> 40 (intended to be power neutral)
+-Relentless sprite updated.
+
+\-Added deco lights to Indomitable.
+
+CONTACT MISSION BALANCING
+-Lowered rep payout for the lowest level bounties from 8 to 6. Smoothed out rep to difficulty scaling
+-Ava and charlotte bounties start at a lower difficulty closer to vanilla
+-Lowered rep payout for dead drops from 8 to 6
+-Extraction missions now stop timer once operative is extracted to match vanilla
+-Pirate system bounties now 120 days to match vanilla
+-Hartley production contract rep now scales by credits spent on the order
+-Surplus ship mission weightings flattened a bit
+
+BUGFIXES
+-Fixed a bug with AOTD QOL where it's rebuilding of contact menus allowed for infinite tax-paying
+-Fixed some duplicated rules line with vanilla hege comm integration
+-Fixed some random variant issues
+-Fixed some edge case bugs
+
 2.0.4
 MISC
 -Iron Shell military markets now sell Iron Shell weapons and wings far more frequently.
@@ -24,14 +47,14 @@ REWARD/MISSION CHANGES
 
 2.0.3
 
--Save compat
+\-Save compat
 -Mod ID has changed. This is due to multiple other mods hard-coded disabling of their own dialog options if Iron Shell was present.
 -Modified annihilation protocol AI, now does not burn uses for speed under AI control.
 -Fixed a sentinel interaction in rules.
 
 2.0.2
 
--Fixed a crash on new game with certain cross-mod industries
+\-Fixed a crash on new game with certain cross-mod industries
 -Fixed Relentless not having its Gunshield drones
 -Fixed a jar size issue (oops)
 -Added a fallback recruit option for Hartley if "Operation World Above" is failed (beat him in a duel).
@@ -39,9 +62,9 @@ REWARD/MISSION CHANGES
 
 2.0.1
 
--Fixed a crash with the pirate bounty contact mission
+\-Fixed a crash with the pirate bounty contact mission
 
--Fixed some missing string issues with various contact missions
+\-Fixed some missing string issues with various contact missions
 
 2.0.0: ETERNAL IRON SHELL Prerelease
 
