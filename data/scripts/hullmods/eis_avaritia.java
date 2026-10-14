@@ -267,7 +267,8 @@ public class eis_avaritia extends BaseHullMod {
         }
         data.timer.advance(amount);
         if (data.timer.intervalElapsed()) {
-            if (ship.getFluxTracker().isOverloadedOrVenting() || ship.getSystem().isActive()) {
+            // getSystem() is null for ships without a ship system (e.g. station modules)
+            if (ship.getFluxTracker().isOverloadedOrVenting() || (ship.getSystem() != null && ship.getSystem().isActive())) {
                 return;
             }
 
