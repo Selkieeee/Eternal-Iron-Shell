@@ -39,7 +39,8 @@ Endeavor (XIV),eis_endeavor,Battlecarrier,Iron Shell,eis_jump,28,12000,1000,1500
 Tyrant (XIV),eis_tyrant,Fast Battleship,Iron Shell,eis_microburn,27,14000,1250,16000,,750,310,2,40,30,25,6,8,2750,FRONT,,210,0.4,1,,,575,1150,350,425,12,,8,595000,3,12,660,0.25,40,40,SHIP_WITH_MODULES,eis_bp,,0.5,2,5,,
 Skysplitter (XIV),eis_skyrend,Battlecruiser,Iron Shell,eis_highballisticfocus,25,11000,700,18000,,1200,280,2,60,90,55,15,20,3000,FRONT,,300,0.4,1.2,,,350,500,250,250,10,30,8,665000,3,12,660,0.25,40,40,,eis_bp,,0.5,2,5,,
 Dauntless (XIV),eis_dauntless,Dreadnought,Iron Shell,eis_microburn_dauntless,35,25000,1500,22000,,1200,340,4,35,30,25,6,6,5000,FRONT,,120,0.4,0.8,,,900,1800,550,650,18,,7,1000000,3,12,720,0.25,65,65,,"eis_bp, codex_unlockable, no_sell",,0.5,2,5,,
-Illustrious (XIV),eis_illustrious,Battlestar,Iron Shell,eis_damper,28,22000,1500,20000,,700,340,5,30,15,10,5,5,4200,FRONT,,270,0.4,0.8,,,1200,3000,500,500,20,25,7,850000,3,12,720,0.25,60,60,"CARRIER, COMBAT, NO_AUTO_ESCORT","eis_bp, codex_unlockable, no_sell",,0.4,2,4,,507
+Illustrious (XIV),eis_illustrious,Battlestar,Iron Shell,eis_damper,28,22000,1500,20000,,700,340,5,30,15,10,5,5,4200,FRONT,,270,0.4,0.8,,,1200,3000,500,500,20,25,7,850000,3,12,720,0.25,60,60,"CARRIER, COMBAT, NO_AUTO_ESCORT","eis_bp, codex_unlockable, no_sell",,0.4,2,4,,
+Acheron,eis_acheron,Dreadnought,Iron Shell,eis_rampagedrive_indomitable,40,22000,1800,20000,,900,370,0,20,10,10,4,4,6000,FRONT,,60,0.4,1,,,900,1800,500,600,20,30,7,800000,3,15,720,0.25,50,50,,"eis_bp, codex_unlockable, no_sell",,0.4,3,5,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #Modules,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Armor,eis_tyrant_tl,,,,1,7000,600,0,,0,0,,50,50,50,50,50,400,NONE,,,,,,,,,,,,,,,,10,,,0,0,"UNBOARDABLE, HIDE_IN_CODEX","module_hull_bar_only, module_unselectable, module_refit_bright, no_autofit",,0.7,1,2,,

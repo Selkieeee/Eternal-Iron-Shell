@@ -177,6 +177,10 @@
                 {"file":"sounds/weapons/eis_infernal_star_fire.ogg","pitch":1.33,"volume":1},
                 {"file":"sounds/weapons/eis_infernal_star_fire.ogg","pitch":1.36,"volume":1},
         ],
+	"eis_DURANDAL_fire":
+		[
+		{"file":"sounds/sfx_wpn_energy/thermal_pulse_cannon_fire_01.ogg","pitch":0.8,"volume":1.3},
+		],
 }
 
 
