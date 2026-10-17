@@ -13,7 +13,10 @@
   "viewOffset": 0,
   "builtInMods": [
     "fourteenth",
-    "hbi"
+    "hbi",
+	"eis_microforge",
+    "rugged",
+	"operations_center"
   ],
   "builtInWeapons": {
     "WS0015": "eis_DURANDAL"
