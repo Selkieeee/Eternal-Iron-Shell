@@ -4,6 +4,7 @@
   },
   "designTypeColors":{
       "Iron Shell":[252,173,60,255],
+      "House Celeste":[252,173,60,255],
       "XlV Battlegroup":[200,0,0,255],
   },
 	"graphics":{
@@ -13,7 +14,6 @@
 			"eis_hartley":"graphics/portraits/eis_dunscaith.png",
 			"eis_celeste":"graphics/portraits/eis_celeste.png",
 			"eis_charlotte":"graphics/portraits/eis_charlotte.png",
-			"eis_charlotte2":"graphics/portraits/eis_charlotte2.png",
 			"eis_ava":"graphics/portraits/eis_ava.png",
 		},
 		"illustrations":{
@@ -22,6 +22,14 @@
 		},
 		"planets":{
 			"eis_pinkplanet1":"graphics/planets/eis_pinkplanet1.png",
+			"eis_pinkplanet2":"graphics/planets/eis_pinkplanet2.png",
+			"eis_pinkstar":"graphics/planets/eis_pinkstar.png",
+			"eis_leviathan_gas":"graphics/planets/eis_leviathan_gas.png",
+			"eis_clouds_banded01":"graphics/planets/eis_clouds_banded01.png",
+		},
+		"terrain":{
+			"eis_nebula_pink":"graphics/terrain/eis_nebula_pink.png",
+			"eis_nebula_pink_map":"graphics/terrain/eis_nebula_pink.png",
 		},
 		"blueprint_packages":{
 			"eis_package":"graphics/icons/cargo/package_ironshell.png",
@@ -34,6 +42,8 @@
 			"eisceleste_package":"graphics/icons/cargo/package_celeste_enlarged.png",
 			"sfxvengeance":"graphics/fx/eis_revengeance.png",
 			"sfxvengeance2":"graphics/fx/eis_revengeance2.png",
+			"eis_rings_big":"graphics/terrain/eis_rings_big.png",
+			"eis_rings_pink":"graphics/terrain/eis_rings_pink.png",
 		},
 	},
 }

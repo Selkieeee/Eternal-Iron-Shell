@@ -126,6 +126,9 @@ public class eis_modPlugin extends BaseModPlugin {
     
     @Override
     public void onApplicationLoad() throws JSONException, IOException {
+        // The codex links every "colony_item" item to its effect while the title screen loads, before any onGameLoad,
+        // so Iron Shell's item effects have to be registered here too (onGameLoad registers them again; putAll is harmless)
+        eis_SpecialItemEffectsRepo.addItemEffectsToVanillaRepo();
         if (haveLuna) {
             lunalib.lunaSettings.LunaSettings.SettingsCreator.addBoolean(MOD_ID, "GreaterHegemony", "Greater Hegemony Alliance",
                     "Creates the Greater Hegemony Alliance at the start of the game. (Default: True)", true);
@@ -384,6 +387,10 @@ public class eis_modPlugin extends BaseModPlugin {
                Global.getSector().getFaction(IRONSTANDSETERNAL).addKnownWeapon(weapon, true);
             }
         }*/
+        // Leviathan system: generated on the first load of any save that doesn't have it yet (new or existing).
+        if (!data.scripts.world.eis_LeviathanGen.exists()) {
+            new data.scripts.world.eis_LeviathanGen().generate(Global.getSector());
+        }
         eis_SpecialItemEffectsRepo.addItemEffectsToVanillaRepo();
         // Lets a nanoforge in a Hegemony colony raise Iron Shell production quality when it beats the best one in Iron Shell markets.
         Global.getSector().addTransientScript(new data.scripts.campaign.econ.eis_NanoforgeQualityShare());

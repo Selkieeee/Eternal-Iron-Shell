@@ -73,6 +73,10 @@
 		"eis_aquaculture_condition1":"%s to food production (Aquaculture)",
 		"eis_aquaculture_condition2":"%s hazard rating",
 		"eis_aquaculture_condition3":"Inadequate Harvest",
+
+		"eis_volatile_atmosphere_condition1":"%s food production (Aquaculture)",
+		"eis_volatile_atmosphere_condition2":"%s volatiles production (Mining)",
+		"eis_volatile_atmosphere_condition3":"%s hazard rating",
 		
 		"eis_aquilaTitle":"Aquila Reactor Protocol",
 		"eis_aquilaText1":"%s Increases max speed by %s/%s or %s, whichever is lower",
@@ -220,6 +224,8 @@
 		"eis_ironshellhq3":"Reduces the Pather Intrigue by %s.", #%s same number
 		"eis_bbp":"Colony's income increased by %s.", #%s is percentage
 		"eis_bbp_warning":"WARNING: DO NOT REMOVE", #%s is percentage
+		"eis_regulator_core":"Removes food production and hazard rating penalties of Volatile-rich Atmosphere. Increases Mining Volatiles production by %s units.", #%s is units
+		"eis_regulator_core_req":"volatile-rich atmosphere", #installation requirement, shown after "Requires:"
 		
 		"CHM_ironshell1":"\"Stand inside yourself for an impenetrable shield.\"", #these \ are what makes quotes go in
 		"CHM_ironshell1a":"         — Charlotte Hex",

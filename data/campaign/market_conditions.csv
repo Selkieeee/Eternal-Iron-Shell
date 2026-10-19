@@ -1,2 +1,3 @@
 name,id,planetary,decivRemove,script,desc,icon,order
 Dangerous Sealife,eis_aquaculture,TRUE,,data.scripts.campaign.econ.eis_aquaculture_condition,"Due to the nature of the planet's current state, its vast oceans lack a sufficient pH level to sustain a natural ecosystem, requiring recovered terraforming hardware to run effective aquacultures.",graphics/icons/market/eis_aqua.png,919
+Volatile-rich Atmosphere,eis_volatile_atmosphere,TRUE,,data.scripts.campaign.econ.eis_volatile_atmosphere_condition,"Dense gasses form clouds of volatile elements in the lower atmosphere. These may be harvested by specialized equipment, but the elements dissolved into the water make survival difficult for all but the hardiest species of sea life.",graphics/icons/market/eis_phazon.png,920
