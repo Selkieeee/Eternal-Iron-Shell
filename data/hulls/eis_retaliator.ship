@@ -1,0 +1,340 @@
+{
+  "hullName": "Retaliator (XIV)",
+  "hullId": "eis_retaliator",
+  "hullSize": "CRUISER",
+  "spriteName": "graphics/ships/eis_retaliator.png",
+  "style": "LOW_TECH",
+  "height": 172,
+  "width": 246,
+  "center": [123, 88],
+  "collisionRadius": 135.5,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 128.5,
+  "viewOffset": 0,
+  "builtInMods": [
+    "fourteenth",
+    "rugged"
+  ],
+  "builtInWings": [
+    "eis_gunblade_wing"
+  ],
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "MEDIUM",
+      "type": "UNIVERSAL",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 0,
+      "locations": [57, 32]
+    },
+    {
+      "id": "WS0002",
+      "size": "MEDIUM",
+      "type": "UNIVERSAL",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -0,
+      "locations": [57, -32]
+    },
+    {
+      "id": "WS0003",
+      "size": "MEDIUM",
+      "type": "BALLISTIC",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 45,
+      "locations": [50, 66],
+      "renderOrderMod": 201
+    },
+    {
+      "id": "WS0004",
+      "size": "MEDIUM",
+      "type": "BALLISTIC",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": -45,
+      "locations": [50, -66],
+      "renderOrderMod": 201
+    },
+    {
+      "id": "WS0005",
+      "size": "MEDIUM",
+      "type": "LAUNCH_BAY",
+      "mount": "HIDDEN",
+      "arc": 30,
+      "angle": 0,
+      "locations": [
+        60, 31,
+        60, 19,
+        60, 43
+      ]
+    },
+    {
+      "id": "WS0008",
+      "size": "SMALL",
+      "type": "BALLISTIC",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 180,
+      "locations": [-38, -0]
+    },
+    {
+      "id": "WS0009",
+      "size": "MEDIUM",
+      "type": "COMPOSITE",
+      "mount": "HARDPOINT",
+      "arc": 7,
+      "angle": 0,
+      "locations": [58, -0]
+    },
+    {
+      "id": "WS0006",
+      "size": "MEDIUM",
+      "type": "BALLISTIC",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": -90,
+      "locations": [12, -30]
+    },
+    {
+      "id": "WS0007",
+      "size": "MEDIUM",
+      "type": "BALLISTIC",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 90,
+      "locations": [12, 30]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-37, 62],
+      "length": 43.529999,
+      "width": 30.02,
+      "angle": 150,
+      "contrailSize": 128,
+      "style": "EIS_BOOST"
+    },
+    {
+      "location": [-37, -62],
+      "length": 43.529999,
+      "width": 30.02,
+      "angle": -150,
+      "contrailSize": 128,
+      "style": "EIS_BOOST"
+    },
+    {
+      "location": [-42.5, 64.5],
+      "length": 70.190002,
+      "width": 21.969999,
+      "angle": 150,
+      "contrailSize": 128,
+      "style": "EIS_LTBOOST"
+    },
+    {
+      "location": [-42.5, -64.5],
+      "length": 70.190002,
+      "width": 21.969999,
+      "angle": -150,
+      "contrailSize": 128,
+      "style": "EIS_LTBOOST"
+    },
+    {
+      "location": [-66.5, 20],
+      "length": 34.233833,
+      "width": 8.612677,
+      "angle": 172,
+      "contrailSize": 8.612677,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-66.5, -20],
+      "length": 34.233833,
+      "width": 8.612677,
+      "angle": -172,
+      "contrailSize": 8.612677,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [5, 93],
+      "length": 55.555748,
+      "width": 9.123422,
+      "angle": 149.5,
+      "contrailSize": 9.123422,
+      "style": "EIS_LTBOOST"
+    },
+    {
+      "location": [5, -93],
+      "length": 55.555748,
+      "width": 9.123422,
+      "angle": -149.5,
+      "contrailSize": 9.123422,
+      "style": "EIS_LTBOOST"
+    },
+    {
+      "location": [18, 104],
+      "length": 55.555748,
+      "width": 9.123422,
+      "angle": 135,
+      "contrailSize": 9.123422,
+      "style": "EIS_LTBOOST"
+    },
+    {
+      "location": [18, -104],
+      "length": 55.555748,
+      "width": 9.123422,
+      "angle": -135,
+      "contrailSize": 9.123422,
+      "style": "EIS_LTBOOST"
+    },
+    {
+      "location": [-62.5, -25.5],
+      "length": 34.233833,
+      "width": 8.612677,
+      "angle": -172,
+      "contrailSize": 8.612677,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-62.5, 25.5],
+      "length": 34.233833,
+      "width": 8.612677,
+      "angle": 172,
+      "contrailSize": 8.612677,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-50, 46],
+      "length": 34.233833,
+      "width": 8.612677,
+      "angle": 150,
+      "contrailSize": 8.612677,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-50, -46],
+      "length": 34.233833,
+      "width": 8.612677,
+      "angle": -150,
+      "contrailSize": 8.612677,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-45.5, 51],
+      "length": 34.233833,
+      "width": 8.612677,
+      "angle": 150,
+      "contrailSize": 8.612677,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-45.5, -51],
+      "length": 34.233833,
+      "width": 8.612677,
+      "angle": -150,
+      "contrailSize": 8.612677,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-73, 11],
+      "length": 44,
+      "width": 17,
+      "angle": 180,
+      "contrailSize": 17,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-73, -11],
+      "length": 44,
+      "width": 17,
+      "angle": -180,
+      "contrailSize": 17,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-23, 85],
+      "length": 43.529999,
+      "width": 30.02,
+      "angle": 150,
+      "contrailSize": 128,
+      "style": "EIS_BOOST"
+    },
+    {
+      "location": [-23, -85],
+      "length": 43.529999,
+      "width": 30.02,
+      "angle": -150,
+      "contrailSize": 128,
+      "style": "EIS_BOOST"
+    },
+    {
+      "location": [-26, 86.5],
+      "length": 70.190002,
+      "width": 21.969999,
+      "angle": 150,
+      "contrailSize": 128,
+      "style": "EIS_LTBOOST"
+    },
+    {
+      "location": [-26, -86.5],
+      "length": 70.190002,
+      "width": 21.969999,
+      "angle": -150,
+      "contrailSize": 128,
+      "style": "EIS_LTBOOST"
+    }
+  ],
+  "bounds": [
+    -87, -2,
+    -75, -6,
+    -65, -35.5,
+    -56, -38,
+    -28, -74,
+    -30, -79.5,
+    -18.5, -92.5,
+    -46.5, -108,
+    -43, -111,
+    0, -93,
+    4.5, -98,
+    -17, -113,
+    -15.5, -116.5,
+    6, -107,
+    20, -110,
+    37, -101,
+    48, -98.5,
+    79, -69,
+    79, -63,
+    83, -54.5,
+    79, -46,
+    74, -43,
+    62, -44.5,
+    62, -17,
+    66, -12,
+    66, 12,
+    62, 17,
+    62, 44.5,
+    74, 43,
+    79, 46,
+    83, 54.5,
+    79, 63,
+    79, 69,
+    48, 98.5,
+    37, 101,
+    20, 110,
+    6, 107,
+    -15.5, 116.5,
+    -17, 113,
+    4.5, 98,
+    0, 93,
+    -43, 111,
+    -46.5, 108,
+    -18.5, 92.5,
+    -30, 79.5,
+    -28, 74,
+    -56, 38,
+    -65, 35.5,
+    -75, 6,
+    -87, 2
+  ]
+}
