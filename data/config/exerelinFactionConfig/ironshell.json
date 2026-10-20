@@ -24,7 +24,7 @@
 	"specialForcesPointMult":1.75,
 	"specialForcesSizeMult":1.75,
 	"stabilizeCommodities":["food", "hand_weapons", "supplies"],
-	#"factionConditionSubplugin":"data.scripts.campaign.econ.eis_ironshell", # class was never written - caused a NexUtils ClassNotFoundException -> NPE in FactionConditionPlugin.loadPlugin whenever Nexerelin tried to instantiate it (e.g. during a Hegemony colony expedition to Hanan Pacha in Operation World Above)
+	#"factionConditionSubplugin":"data.scripts.campaign.econ.eis_ironshell", # kept disabled: the class's source was missing from this repo, which caused a NexUtils ClassNotFoundException -> NPE in FactionConditionPlugin.loadPlugin whenever Nexerelin tried to instantiate it (e.g. during a Hegemony colony expedition to Hanan Pacha in Operation World Above). eis_ironshell now exists only as an empty save-compatibility stub (older builds' saves store an instance of it); its old lore tooltip is not restored
 	#For Random Sector apparently. (friendly relations with hegemony are reduced in iron shell to prevent uhh alliance stacking)
     "startRelationships":{
 		"diableavionics": -0.6,
