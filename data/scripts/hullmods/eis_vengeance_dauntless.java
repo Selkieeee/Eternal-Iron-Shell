@@ -135,6 +135,9 @@ public class eis_vengeance_dauntless extends BaseHullMod {
         private static final float CHAIN_SCAN_RANGE = 1000f;
         private static final String CHAIN_VENGEANCE_HULL_ID = "eis_vengeance";
         private static final String CHAIN_AUDACIOUS_HULL_ID = "eis_audacious";
+        // ISEN copies of the same hulls (separate .ship files) chain the same way
+        private static final String CHAIN_VENGEANCE_EDF_HULL_ID = "eis_vengeance_edf";
+        private static final String CHAIN_AUDACIOUS_EDF_HULL_ID = "eis_audacious_edf";
         private static final Color CHAIN_ARC_CORE_COLOR = new Color(255, 40, 30, 220);
         private static final Color CHAIN_ARC_FRINGE_COLOR = new Color(150, 0, 0, 160);
 
@@ -235,7 +238,8 @@ public class eis_vengeance_dauntless extends BaseHullMod {
             for (ShipAPI other : CombatUtils.getShipsWithinRange(ship.getLocation(), CHAIN_SCAN_RANGE * 3f)) {
                 if (other == ship || other.getOwner() != ship.getOwner()) continue;
                 if (!MathUtils.isWithinRange(other, ship, CHAIN_SCAN_RANGE)) continue;
-                if (other.getHullSpec() != null && CHAIN_VENGEANCE_HULL_ID.equals(other.getHullSpec().getHullId())) {
+                if (other.getHullSpec() != null && (CHAIN_VENGEANCE_HULL_ID.equals(other.getHullSpec().getHullId())
+                        || CHAIN_VENGEANCE_EDF_HULL_ID.equals(other.getHullSpec().getHullId()))) {
                     nearbyVengeance.add(other);
                 }
             }
@@ -249,7 +253,8 @@ public class eis_vengeance_dauntless extends BaseHullMod {
                     if (other == ship || other.getOwner() != ship.getOwner()) continue;
                     if (nearbyVengeance.contains(other) || nearbyAudacious.contains(other)) continue;
                     if (!MathUtils.isWithinRange(other, center, CHAIN_SCAN_RANGE)) continue;
-                    if (other.getHullSpec() != null && CHAIN_AUDACIOUS_HULL_ID.equals(other.getHullSpec().getHullId())) {
+                    if (other.getHullSpec() != null && (CHAIN_AUDACIOUS_HULL_ID.equals(other.getHullSpec().getHullId())
+                            || CHAIN_AUDACIOUS_EDF_HULL_ID.equals(other.getHullSpec().getHullId()))) {
                         nearbyAudacious.add(other);
                     }
                 }

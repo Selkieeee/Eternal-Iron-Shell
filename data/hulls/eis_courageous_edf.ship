@@ -1,0 +1,230 @@
+{
+  "hullName": "Courageous (ISEN)",
+  "hullId": "eis_courageous_edf",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/ships/edf/eis_courageous_edf.png",
+  "style": "LOW_TECH",
+  "coversColor": "200,200,200,255",
+  "height": 108,
+  "width": 168,
+  "center": [84, 54],
+  "collisionRadius": 91.5,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 88.5,
+  "viewOffset": 0,
+  "builtInMods": [
+    "fourteenth"
+  ],
+  "builtInWings": [
+    "eis_gunblade_wing"
+  ],
+  "builtInWeapons": {
+    "WS0004": "eis_deco_courageous_front_edf",
+    "WS0007": "eis_emthrust_s",
+    "WS0008": "eis_emthrust_s"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS 005",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 5,
+      "angle": 147,
+      "locations": [-14.5, -42.5]
+    },
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "UNIVERSAL",
+      "mount": "HARDPOINT",
+      "arc": 7,
+      "angle": 0,
+      "locations": [30, 30]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "UNIVERSAL",
+      "mount": "HARDPOINT",
+      "arc": 7,
+      "angle": -0,
+      "locations": [30, -30]
+    },
+    {
+      "id": "WS0003",
+      "size": "MEDIUM",
+      "type": "HYBRID",
+      "mount": "HARDPOINT",
+      "arc": 20,
+      "angle": 0,
+      "locations": [36, -0]
+    },
+    {
+      "id": "WS0004",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [30, -0],
+      "renderOrderMod": 100
+    },
+    {
+      "id": "WS0007",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 161.5,
+      "locations": [-26, 32]
+    },
+    {
+      "id": "WS0008",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": -161.5,
+      "locations": [-26, -32]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-29.5, 65.5],
+      "length": 40.336689,
+      "width": 11.567452,
+      "angle": 157.5,
+      "contrailSize": 11.567452,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-29.5, -65.5],
+      "length": 40.336689,
+      "width": 11.567452,
+      "angle": -157.5,
+      "contrailSize": 11.567452,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-36.5, 55.5],
+      "length": 40.336689,
+      "width": 11.567452,
+      "angle": 157.5,
+      "contrailSize": 11.567452,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-36.5, -55.5],
+      "length": 40.336689,
+      "width": 11.567452,
+      "angle": -157.5,
+      "contrailSize": 11.567452,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-42, -18.5],
+      "length": 46.689999,
+      "width": 18.17,
+      "angle": -172,
+      "contrailSize": 18.17,
+      "style": "EIS_BOOST"
+    },
+    {
+      "location": [-42, 18.5],
+      "length": 46.689999,
+      "width": 18.17,
+      "angle": 172,
+      "contrailSize": 18.17,
+      "style": "EIS_BOOST"
+    },
+    {
+      "location": [-49, -0],
+      "length": 57,
+      "width": 29,
+      "angle": 180,
+      "contrailSize": 29,
+      "style": "EIS_BOOST"
+    },
+    {
+      "location": [-47, -19.5],
+      "length": 53.798325,
+      "width": 11.133793,
+      "angle": -172,
+      "contrailSize": 11.133793,
+      "style": "EIS_LTBOOST"
+    },
+    {
+      "location": [-47, 19.5],
+      "length": 53.798325,
+      "width": 11.133793,
+      "angle": 172,
+      "contrailSize": 11.133793,
+      "style": "EIS_LTBOOST"
+    },
+    {
+      "location": [-55, -0],
+      "length": 75.5,
+      "width": 16,
+      "angle": 180,
+      "contrailSize": 16,
+      "style": "EIS_LTBOOST"
+    },
+    {
+      "location": [-24.5, 30.5],
+      "length": 43.441567,
+      "width": 17.587507,
+      "angle": 157.5,
+      "contrailSize": 17.587507,
+      "style": "EIS_BOOST"
+    },
+    {
+      "location": [-24.5, -30.5],
+      "length": 43.441567,
+      "width": 17.587507,
+      "angle": -157.5,
+      "contrailSize": 17.587507,
+      "style": "EIS_BOOST"
+    },
+    {
+      "location": [-29.5, 32.5],
+      "length": 54.428986,
+      "width": 7.412345,
+      "angle": 158.5,
+      "contrailSize": 7.412345,
+      "style": "EIS_LTBOOST"
+    },
+    {
+      "location": [-29.5, -32.5],
+      "length": 54.428986,
+      "width": 7.412345,
+      "angle": -158.5,
+      "contrailSize": 7.412345,
+      "style": "EIS_LTBOOST"
+    }
+  ],
+  "bounds": [
+    46.5, -21,
+    23, -29.5,
+    21, -42.5,
+    -12.5, -79,
+    -15.5, -62,
+    -28.5, -68,
+    -40.5, -51.5,
+    -52, -50.5,
+    -25, -35.5,
+    -41, -11.5,
+    -50.5, -8,
+    -50.5, 8,
+    -41, 11.5,
+    -25, 35.5,
+    -52, 50.5,
+    -40.5, 51.5,
+    -28.5, 68,
+    -15.5, 62,
+    -12.5, 79,
+    21, 42.5,
+    23, 29.5,
+    46.5, 21
+  ]
+}

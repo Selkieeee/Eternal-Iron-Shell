@@ -1,0 +1,178 @@
+{
+  "hullName": "Audacious (ISEN)",
+  "hullId": "eis_audacious_edf",
+  "hullSize": "DESTROYER",
+  "spriteName": "graphics/ships/edf/eis_audacious_edf.png",
+  "style": "EIS_VENGEANCE",
+  "coversColor": "255,255,255,255",
+  "height": 221,
+  "width": 160,
+  "center": [80, 127],
+  "collisionRadius": 130,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 128.5,
+  "viewOffset": 0,
+  "builtInMods": [
+    "fourteenth",
+    "eis_vengeance2"
+  ],
+  "builtInWeapons": {
+    "WS0001": "eis_deco_audacious_front_edf",
+    "WS0002": "eis_deco_audacious_back"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS 001",
+      "size": "MEDIUM",
+      "type": "UNIVERSAL",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 0,
+      "locations": [60, 0]
+    },
+    {
+      "id": "WS 002",
+      "size": "MEDIUM",
+      "type": "HYBRID",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 0,
+      "locations": [40, 0]
+    },
+    {
+      "id": "WS0003",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -0,
+      "locations": [83, -16]
+    },
+    {
+      "id": "WS0004",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 0,
+      "locations": [83, 16]
+    },
+    {
+      "id": "WS0001",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [50, -0]
+    },
+    {
+      "id": "WS0002",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-81.5, -0]
+    },
+    {
+      "id": "WS0005",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 250,
+      "angle": -180,
+      "locations": [-27, 0]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-80, 28],
+      "length": 47,
+      "width": 13,
+      "angle": 169.5,
+      "contrailSize": 11,
+      "style": "EIS_BOOST"
+    },
+    {
+      "location": [-80, -28],
+      "length": 47,
+      "width": 13,
+      "angle": -169.5,
+      "contrailSize": 11,
+      "style": "EIS_BOOST"
+    },
+    {
+      "location": [-94, 18],
+      "length": 74.5,
+      "width": 15,
+      "angle": 180,
+      "contrailSize": 25,
+      "style": "EIS_LTBOOST"
+    },
+    {
+      "location": [-94, -18],
+      "length": 74.5,
+      "width": 15,
+      "angle": -180,
+      "contrailSize": 25,
+      "style": "EIS_LTBOOST"
+    },
+    {
+      "location": [-87, 18],
+      "length": 60,
+      "width": 30,
+      "angle": 180,
+      "contrailSize": 25,
+      "style": "EIS_BOOST"
+    },
+    {
+      "location": [-87, -18],
+      "length": 60,
+      "width": 30,
+      "angle": -180,
+      "contrailSize": 25,
+      "style": "EIS_BOOST"
+    },
+    {
+      "location": [-85, 29],
+      "length": 47,
+      "width": 7,
+      "angle": 169.5,
+      "contrailSize": 11,
+      "style": "EIS_LTBOOST"
+    },
+    {
+      "location": [-85, -29],
+      "length": 47,
+      "width": 7,
+      "angle": -169.5,
+      "contrailSize": 11,
+      "style": "EIS_LTBOOST"
+    }
+  ],
+  "bounds": [
+    94, -24,
+    60, -36,
+    19, -77,
+    -3, -53,
+    -30, -56,
+    -2.5, -30.5,
+    -74, -45,
+    -96, -33,
+    -82, -30,
+    -87, -9,
+    -126, -0,
+    -87, 9,
+    -82, 30,
+    -96, 33,
+    -74, 45,
+    -2.5, 30.5,
+    -30, 56,
+    -3, 53,
+    19, 77,
+    60, 36,
+    94, 24,
+    65, -0
+  ]
+}
