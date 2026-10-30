@@ -578,6 +578,8 @@ public class eis_modPlugin extends BaseModPlugin {
         
         if (Global.getSector().getImportantPeople().getPerson("eiskimquy") != null) {
             if (Global.getSector().getImportantPeople().getPerson("eiskimquy").getMemoryWithoutUpdate().getBoolean("$eis_xiv_legion")) {
+                // Save-compat: Ava's second-training rows check $global.eis_xiv_legion (the turn-in rule now sets both), so back-fill it for saves that shared the blueprint before that.
+                Global.getSector().getMemoryWithoutUpdate().set("$eis_xiv_legion", true);
                 // Legion (XIV): known to all three factions, but only a priority ship for the Hegemony. Priority ships make ship picking use only priority hulls for their role,
                 // so ironshell/ironsentinel never get it (removePriorityShip also cleans older saves). Their hull frequency (2) is set in the .faction files.
                 Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("legion_xiv");Global.getSector().getFaction(IRONSTANDSETERNAL).removePriorityShip("legion_xiv");

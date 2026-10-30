@@ -259,7 +259,7 @@ public class eis_aquila_1time extends BaseHullMod {
     @Override
     public boolean isApplicableToShip(ShipAPI ship) {
         if (Global.getSector().getMemoryWithoutUpdate().get("$EIS_aquila") == null || (Global.getSector().getMemoryWithoutUpdate().get("$EIS_aquila") != null && Global.getSector().getMemoryWithoutUpdate().getInt("$EIS_aquila") < 1)) {Global.getSector().getCharacterData().removeHullMod("eis_aquila_1time");}
-        return !((Global.getSector().getMemoryWithoutUpdate().get("$EIS_aquila") != null ? !(Global.getSector().getMemoryWithoutUpdate().getInt("$EIS_aquila") > 0) : true) || (ship.getVariant().hasHullMod(HullMods.CIVGRADE) && !ship.getVariant().hasHullMod(HullMods.MILITARIZED_SUBSYSTEMS)) || ship.getVariant().hasHullMod(HullMods.SAFETYOVERRIDES));
+        return !((Global.getSector().getMemoryWithoutUpdate().get("$EIS_aquila") != null ? !(Global.getSector().getMemoryWithoutUpdate().getInt("$EIS_aquila") > 0) : true) || (ship.getVariant().hasHullMod(HullMods.CIVGRADE) && !ship.getVariant().hasHullMod(HullMods.MILITARIZED_SUBSYSTEMS)) || ship.getVariant().hasHullMod(HullMods.SAFETYOVERRIDES) || ship.getVariant().getHullSpec().getShieldType() == ShieldType.PHASE);
     }
 
     /*@Override

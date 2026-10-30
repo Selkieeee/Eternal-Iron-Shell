@@ -727,7 +727,8 @@ AdjustRep hegemony COOPERATIVE 15
 AdjustRep ironshell COOPERATIVE 15
 AdjustRepActivePerson COOPERATIVE 10
 $eis_xiv_legion = true
-FireAll PopulateOptions","""A ship worthy to serve alongside the Onslaught."" She gives a soft smile. ""No longer will the Hoan Kiem fly alone, but with her sisters. It's amazing you were able to track this down, Captain $player.firstName.""",,"EISLearnSpecial's 3rd param now only makes the ship a priority ship for the Hegemony (ironshell/ironsentinel never get priority; their Legion hull frequency is set in the .faction files). A priority ship makes ship picking use only priority hulls for its role, which crowded out other hulls (e.g. surplus ship offers).",B
+$global.eis_xiv_legion = true
+FireAll PopulateOptions","""A ship worthy to serve alongside the Onslaught."" She gives a soft smile. ""No longer will the Hoan Kiem fly alone, but with her sisters. It's amazing you were able to track this down, Captain $player.firstName.""",,"EISLearnSpecial's 3rd param now only makes the ship a priority ship for the Hegemony (ironshell/ironsentinel never get priority; their Legion hull frequency is set in the .faction files). A priority ship makes ship picking use only priority hulls for its role, which crowded out other hulls (e.g. surplus ship offers). Added $global.eis_xiv_legion: $eis_xiv_legion lives in Kim's own memory, so Ava's second-training rows could never see it. eis_modPlugin back-fills the global flag for older saves.",B
 EISQuyTurnInCastigatorXIV,eis_VNSectorDiscussionOptions,"$id == eiskimquy
 $eis_xiv_can_trade
 !$eis_xiv_castigator
@@ -1832,13 +1833,13 @@ FireAll PopulateOptions","Ava checks her Tri-Pad and smiles softly. ""I see you 
 Ava congratulates you personally after the training is finished. You now feel fully capable of commanding and maintaining XIV vessels.",,,B
 AvaIronHeritage1f,DialogOptionSelected,"$option == AvaIronHeritage2
 $AlreadyLearnedIronHeritage
-$eis_xiv_legion
+$global.eis_xiv_legion
 !$AlreadyLearnedIronHeritageLevel2","$AlreadyLearnedIronHeritageLevel2 = true
 EISAddSkill eis_xiv true
 EISAddSound combat4
 FireAll PopulateOptions","Ava checks her Tri-Pad. ""I see you put in a request for further training. Unfortunately, your skill already exceeds the typical officer cirriculum. Why don't we spend some time in the simulator? I think there are some things that can't be taught in a classroom."" You spend several hours sparring, helming various vessels of the Fourteenth Battlegroup. While at first you were completely outmatched, you pick up several techniques utilizing the quirks of each vessel, and manage to meet her on nearly equal terms. Ava bids you farewell with a smile, clearly enjoying the diversion.
 
-You feel capable of commanding and maintaining XIV vessels even better than before.",,,B
+You feel capable of commanding and maintaining XIV vessels even better than before.",,"Was $eis_xiv_legion, which read Ava's own memory (the flag is set on Kim), so sharing the Legion (XIV) blueprint never unlocked this. Now checks $global.eis_xiv_legion.",B
 AvaIronHeritage1f2,DialogOptionSelected,"$option == AvaIronHeritage2
 $AlreadyLearnedIronHeritage
 $global.toldAboutSentinel
@@ -1861,10 +1862,10 @@ SetTooltipHighlightColors hGood
 SetTooltipHighlights AvaIronHeritage Friendly
 SetEnabled AvaIronHeritage false",,,,b
 AvaIronHeritageLvl2Disable,eis_VNSectorDiscussionOptionsCheck,"$AlreadyLearnedIronHeritage
-!$eis_xiv_legion
+!$global.eis_xiv_legion
 !$global.toldAboutSentinel
 $id == eisava","SetTooltip AvaIronHeritage2 ""You need to have either turned in a certain blueprint to Councilor Quy, or reconnected a certain colony to the Hegemony, before Ava will consider a second round of training.""
-SetEnabled AvaIronHeritage2 false",,,,b
+SetEnabled AvaIronHeritage2 false",,,"Was !$eis_xiv_legion (Ava's own memory, never set), so the option stayed greyed out after sharing the Legion (XIV) blueprint. Now checks $global.eis_xiv_legion.",b
 AvaAquila1Disable1,eis_VNSectorDiscussionOptionsCheck,"!$AvaContact
 $id == eisava
 !$AlreadyAquilaConsummed

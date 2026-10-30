@@ -254,7 +254,7 @@ public class eis_aquila extends BaseHullMod {
 
     @Override
     public boolean isApplicableToShip(ShipAPI ship) {
-        return !((ship.getVariant().getHullSize() == HullSize.FRIGATE || ship.getVariant().getHullSize() == HullSize.DESTROYER) || (ship.getVariant().hasHullMod(HullMods.CIVGRADE) && !ship.getVariant().hasHullMod(HullMods.MILITARIZED_SUBSYSTEMS)) || ship.getVariant().hasHullMod(HullMods.SAFETYOVERRIDES));
+        return !((ship.getVariant().getHullSize() == HullSize.FRIGATE || ship.getVariant().getHullSize() == HullSize.DESTROYER) || (ship.getVariant().hasHullMod(HullMods.CIVGRADE) && !ship.getVariant().hasHullMod(HullMods.MILITARIZED_SUBSYSTEMS)) || ship.getVariant().hasHullMod(HullMods.SAFETYOVERRIDES) || ship.getVariant().getHullSpec().getShieldType() == ShieldType.PHASE);
     }
 
     /*@Override

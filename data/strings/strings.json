@@ -92,7 +92,7 @@
 		"eis_aquilaText5":"%s Prevents weapon range from exceeding base range",
 		"eis_aquilaText5a":"%s Prevents weapon range from exceeding base range. Affects modules",
 		"eis_aquilaText5b":"%s A skill or hullmod is attempting to increase the ship's bonus weapon range. This will be blocked",
-		"eis_aquilaText6":"Can not be normally installed on civilian ships, frigates, or destroyers.",
+		"eis_aquilaText6":"Can not be normally installed on civilian ships, phase ships, frigates, or destroyers.",
 		"eis_aquilaText7":"Precludes use of Safety Overrides.",
 		
 		"eis_vanagloriaTitle":"Vanagloria Subsystem",
