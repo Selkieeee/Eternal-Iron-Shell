@@ -94,6 +94,7 @@
 		"eis_aquilaText5b":"%s A skill or hullmod is attempting to increase the ship's bonus weapon range. This will be blocked",
 		"eis_aquilaText6":"Can not be normally installed on civilian ships, phase ships, frigates, or destroyers.",
 		"eis_aquilaText7":"Precludes use of Safety Overrides.",
+		"eis_aquilaAdvancedSizeReason":"Can only be installed on frigates and destroyers.",
 		
 		"eis_vanagloriaTitle":"Vanagloria Subsystem",
 		"eis_vanagloriaText12":"%s %s/%s/%s armor for hull damage reduction calculation only (Destroyer/Cruiser/Capital)",
@@ -341,6 +342,7 @@
 		"EISStoryPointForceEngageHighlight":"The opposing fleet has used a series of special maneuvers to outmaneuver you, forcing you to fight them head on.",
 		
 		"EISLearnHullmod":"You have unlocked ", # You have unlocked [Hull Name]
+		"EISGainItem":"You have acquired ", # You have acquired [Item Name]
 		
 		"EISOfficerPersonality":"Personality: ", # Personality: [Personality], level: [Officer Level]
 		"EISOfficerLevel":", level: ", # Personality: [Personality], level: [Officer Level]

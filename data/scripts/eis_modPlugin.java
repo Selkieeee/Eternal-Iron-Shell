@@ -71,6 +71,9 @@ public class eis_modPlugin extends BaseModPlugin {
 
     public static final String IRONSTANDSETERNAL = "ironshell";
     private static final String MOD_ID = "selkie_eis";
+    // TEMPORARILY DISABLED: Leviathan system generation on game load. Set back to true to re-enable it.
+    // While off, the system can still be generated for testing with the eis_generatelevi console command.
+    private static final boolean GENERATE_LEVIATHAN = false;
 
     // Reads a LunaLib-configurable boolean if LunaLib is present, otherwise falls back to the hardcoded default.
     public static boolean getEISBooleanSetting(String fieldId, boolean fallback) {
@@ -387,8 +390,18 @@ public class eis_modPlugin extends BaseModPlugin {
                Global.getSector().getFaction(IRONSTANDSETERNAL).addKnownWeapon(weapon, true);
             }
         }*/
+        // Older saves: the consumable Aquila used to count unspent uses in $EIS_aquila. Each one becomes an
+        // Advanced Aquila Reactor Core LPC chip in the player's cargo (the item eis_aquila_1time now requires).
+        if (Global.getSector().getMemoryWithoutUpdate().contains("$EIS_aquila") && Global.getSector().getPlayerFleet() != null) {
+            int aquilaUses = Global.getSector().getMemoryWithoutUpdate().getInt("$EIS_aquila");
+            if (aquilaUses > 0) {
+                Global.getSector().getPlayerFleet().getCargo().addSpecial(new SpecialItemData("eis_aquila_core", null), aquilaUses);
+            }
+            Global.getSector().getMemoryWithoutUpdate().unset("$EIS_aquila");
+        }
         // Leviathan system: generated on the first load of any save that doesn't have it yet (new or existing).
-        if (!data.scripts.world.eis_LeviathanGen.exists()) {
+        // Temporarily disabled through GENERATE_LEVIATHAN above.
+        if (GENERATE_LEVIATHAN && !data.scripts.world.eis_LeviathanGen.exists()) {
             new data.scripts.world.eis_LeviathanGen().generate(Global.getSector());
         }
         eis_SpecialItemEffectsRepo.addItemEffectsToVanillaRepo();

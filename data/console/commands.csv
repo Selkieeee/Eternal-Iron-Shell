@@ -1,2 +1,3 @@
 command,class,tags,syntax,help
 SpawnIRSMommies,data.scripts.console.eis_irsmommies,"campaign,ironshell",SpawnIRSMommies,Generate Iron Shell campaign planetary stuff... WARNING: DON’T RUN IT IT PROBABLY DOESNT WORK ANYMORE
+eis_generatelevi,data.scripts.console.eis_generatelevi,"campaign,ironshell",eis_generatelevi,Generates the Leviathan star system for testing. Does nothing if the system already exists.

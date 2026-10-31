@@ -223,7 +223,7 @@ public class eis_LeviathanGen {
         // Roaming Remnant fleets, with vanilla's settings for a suppressed Remnant system: 7-12 fleets of 4-12 points
         // (x8 fleet points each), each with a 25% chance to be active
         system.addScript(new RemnantSeededFleetManager(system, 7, 12, 4, 12, 0.25f));
-        PlanetAPI waterWorld = system.addPlanet("eis_leviathan_3", leviathan, "Aether", "water", 280f, 220f, 7500f, 375f);
+        PlanetAPI waterWorld = system.addPlanet("eis_leviathan_3", leviathan, "Aether", "water", 280f, 220f, 7250f, 375f);
         waterWorld.getSpec().setTexture(Global.getSettings().getSpriteName("planets", "eis_pinkplanet2"));
         waterWorld.applySpecChanges();
         // Untinted eis_rings_pink ring (full 516px texture width) around the water world, drawn 256 wide like the ring around
@@ -234,7 +234,7 @@ public class eis_LeviathanGen {
         // Vanilla inactive gate orbiting the water world, as DA Mistral adds its Angelos Gate
         SectorEntityToken gate = system.addCustomEntity("eis_leviathan_gate", "Leviathan Gate", Entities.INACTIVE_GATE, Factions.NEUTRAL);
         gate.setCircularOrbit(waterWorld, 0f, 800f, 60f);
-        PlanetAPI gasGiant = system.addPlanet("eis_leviathan_4", leviathan, "Serris", "gas_giant", 100f, 450f, 9000f, 450f);
+        PlanetAPI gasGiant = system.addPlanet("eis_leviathan_4", leviathan, "Serris", "gas_giant", 100f, 450f, 9750f, 450f);
         gasGiant.getSpec().setTexture(Global.getSettings().getSpriteName("planets", "eis_leviathan_gas"));
         // Cloud layer: a copy of vanilla's gas giant clouds (clouds_banded01) to customise, tinted Leviathan pink
         // (vanilla's gas giant cloud alpha of 200 kept)
@@ -263,7 +263,7 @@ public class eis_LeviathanGen {
         // Unowned objectives on the three stable points (an objective takes a stable location's place, as in vanilla
         // systems): comm relay out past Serris, nav buoy mid, sensor array outer. Named like vanilla's "Naraka Relay".
         SectorEntityToken commRelay = system.addCustomEntity("eis_leviathan_relay", "Leviathan Relay", Entities.COMM_RELAY, Factions.NEUTRAL);
-        commRelay.setCircularOrbitPointingDown(leviathan, 200f, 11000f, 550f);
+        commRelay.setCircularOrbitPointingDown(leviathan, 200f, 11750f, 550f);
         SectorEntityToken navBuoy = system.addCustomEntity("eis_leviathan_nav_buoy", "Leviathan Nav Buoy", Entities.NAV_BUOY, Factions.NEUTRAL);
         navBuoy.setCircularOrbitPointingDown(leviathan, 60f, 4500f, 225f);
         SectorEntityToken sensorArray = system.addCustomEntity("eis_leviathan_sensor_array", "Leviathan Sensor Array", Entities.SENSOR_ARRAY, Factions.NEUTRAL);

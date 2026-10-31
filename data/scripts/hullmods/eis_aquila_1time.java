@@ -17,9 +17,9 @@ import com.fs.starfarer.api.impl.campaign.ids.HullMods;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 import data.scripts.util.MagicIncompatibleHullmods;
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
+import com.fs.starfarer.api.campaign.CargoAPI.CargoItemType;
+import com.fs.starfarer.api.campaign.CargoStackAPI;
+import com.fs.starfarer.api.campaign.SpecialItemData;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -73,33 +73,19 @@ public class eis_aquila_1time extends BaseHullMod {
     private static final float DAMAGE_BONUS2 = 10f;
     private static boolean getreal = false;
 
+    // Installing this hullmod uses one Advanced Aquila Reactor Core LPC. Vanilla's HullModItemManager takes the chip
+    // from cargo (or the docked market's storage) when the refit is saved, and gives it back when the hullmod is
+    // removed, the ship leaves the fleet, or the ship is lost (into the battle loot), as with vanilla's Shrouded and
+    // Threat hullmods. The refit tooltip's "Requires item" line comes from BaseHullMod.addRequiredItemSection.
+    public static final String REQUIRED_ITEM_ID = "eis_aquila_core";
+
     @Override
-    public void advanceInCampaign(FleetMemberAPI member, float amount) {
-            member.getVariant().removeMod("eis_aquila_1time");
+    public CargoStackAPI getRequiredItem() {
+        return Global.getFactory().createCargoStack(CargoItemType.SPECIAL, new SpecialItemData(REQUIRED_ITEM_ID, null), null);
     }
-    
+
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        //if (Global.getSector().getMemoryWithoutUpdate().get("$EIS_StoryPoint") == null) {Global.getSector().getMemoryWithoutUpdate().set("$EIS_StoryPoint", Global.getSector().getPlayerPerson().getStats().getStoryPoints(), 0);}
-        //if (Global.getSector().getPlayerPerson().getStats().getStoryPoints() < Global.getSector().getMemoryWithoutUpdate().getInt("$EIS_StoryPoint")) {
-        if (ship.getVariant().getSMods().contains("eis_aquila_1time")) {
-            if (Global.getSector().getMemoryWithoutUpdate().get("$EIS_aquila") != null) {
-                if (Global.getSector().getMemoryWithoutUpdate().getInt("$EIS_aquila") > 1) {
-                    Global.getSector().getMemoryWithoutUpdate().set("$EIS_aquila", Global.getSector().getMemoryWithoutUpdate().getInt("$EIS_aquila")-1);
-                    ship.getVariant().addPermaMod("eis_aquila", true);
-                } else {
-                    Global.getSector().getMemoryWithoutUpdate().unset("$EIS_aquila");
-                    Global.getSector().getCharacterData().removeHullMod("eis_aquila_1time");
-                    ship.getVariant().addPermaMod("eis_aquila", true);
-                }
-                try {
-                Robot robot = new Robot();
-                robot.keyPress(KeyEvent.VK_G);
-                robot.keyRelease(KeyEvent.VK_G);
-                } catch (AWTException exception) {}
-            }
-            ship.getVariant().removePermaMod("eis_aquila_1time");
-        }
         getreal = false;
         if (ship.getOwner() == 0) { //(At least the AI can understand its range blocks now I think hopefully?)
             MutableShipStatsAPI stats = ship.getMutableStats();
@@ -248,18 +234,24 @@ public class eis_aquila_1time extends BaseHullMod {
         stats.getFighterWingRange().modifyMult(id, 0.5f);
     }
 
-    @Override
-    public String getDescriptionParam(int index, HullSize hullSize) {
-        if (index == 0) {
-            return "" + (Global.getSector().getMemoryWithoutUpdate().get("$EIS_aquila") != null ? String.valueOf(Global.getSector().getMemoryWithoutUpdate().getInt("$EIS_aquila")) + (Global.getSector().getMemoryWithoutUpdate().getInt("$EIS_aquila") > 1 ? " uses" : " use") : "0 use");
-        }
-        return null;
+    // Chip availability is checked by the refit screen itself (vanilla's required-item handling)
+    // Frigates and destroyers only: cruisers and capitals can already use the regular eis_aquila
+    private static boolean isSmallHull(ShipAPI ship) {
+        HullSize size = ship.getVariant().getHullSize();
+        return size == HullSize.FRIGATE || size == HullSize.DESTROYER;
     }
 
     @Override
     public boolean isApplicableToShip(ShipAPI ship) {
-        if (Global.getSector().getMemoryWithoutUpdate().get("$EIS_aquila") == null || (Global.getSector().getMemoryWithoutUpdate().get("$EIS_aquila") != null && Global.getSector().getMemoryWithoutUpdate().getInt("$EIS_aquila") < 1)) {Global.getSector().getCharacterData().removeHullMod("eis_aquila_1time");}
-        return !((Global.getSector().getMemoryWithoutUpdate().get("$EIS_aquila") != null ? !(Global.getSector().getMemoryWithoutUpdate().getInt("$EIS_aquila") > 0) : true) || (ship.getVariant().hasHullMod(HullMods.CIVGRADE) && !ship.getVariant().hasHullMod(HullMods.MILITARIZED_SUBSYSTEMS)) || ship.getVariant().hasHullMod(HullMods.SAFETYOVERRIDES) || ship.getVariant().getHullSpec().getShieldType() == ShieldType.PHASE);
+        return isSmallHull(ship) && !((ship.getVariant().hasHullMod(HullMods.CIVGRADE) && !ship.getVariant().hasHullMod(HullMods.MILITARIZED_SUBSYSTEMS)) || ship.getVariant().hasHullMod(HullMods.SAFETYOVERRIDES) || ship.getVariant().getHullSpec().getShieldType() == ShieldType.PHASE);
+    }
+
+    @Override
+    public String getUnapplicableReason(ShipAPI ship) {
+        if (ship != null && !isSmallHull(ship)) {
+            return Global.getSettings().getString("eis_ironshell", "eis_aquilaAdvancedSizeReason");
+        }
+        return null;
     }
 
     /*@Override
@@ -342,10 +334,15 @@ public class eis_aquila_1time extends BaseHullMod {
             }
         }
         aquila.addPara(aquilaText4c, 0f, Misc.getNegativeHighlightColor(), BULLET, Math.round(ENGAGEMENT_REDUCTION_PERCENT) + "%");
-        tooltip.addImageWithText(PAD);
+        // Range-cap line, laid out the same as in eis_aquila: a bulleted entry inside the image block (its %s is the bullet)
         if (getreal) {
-            tooltip.addPara(aquilaText5b, 10f, Misc.getNegativeHighlightColor(), aquilaText5);
-        } else {if (ship != null && ship.isShipWithModules()) tooltip.addPara(aquilaText5a, 10f, Misc.getNegativeHighlightColor(), aquilaText5a); else {tooltip.addPara(aquilaText5, 10f, Misc.getNegativeHighlightColor(), aquilaText5);}}
+            aquila.addPara(aquilaText5b, 0f, Misc.getNegativeHighlightColor(), Misc.getNegativeHighlightColor(), BULLET);
+        } else if (ship != null && ship.isShipWithModules()) {
+            aquila.addPara(aquilaText5a, 0f, Misc.getNegativeHighlightColor(), Misc.getNegativeHighlightColor(), BULLET);
+        } else {
+            aquila.addPara(aquilaText5, 0f, Misc.getNegativeHighlightColor(), Misc.getNegativeHighlightColor(), BULLET);
+        }
+        tooltip.addImageWithText(PAD);
         tooltip.addPara(aquilaText7, 5f, Misc.getNegativeHighlightColor(), aquilaText7);
 
     }

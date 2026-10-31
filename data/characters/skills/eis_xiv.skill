@@ -1,6 +1,6 @@
 {
 	"id":"eis_xiv",
-	"governingAptitude":"combat",
+	"governingAptitude":"eis_ironshell_aptitude",
 	"compressHullmods":false,
 	"elite": true,
 	"scope":"PILOTED_SHIP",

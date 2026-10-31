@@ -1,0 +1,2 @@
+id,name,color,description,order,effect_skill_id,sound1,sound2,sound3,sound4,sound5,sound_story,elite_overlay,elite_overlay_medium,elite_overlay_small
+eis_ironshell_aptitude,Iron Shell,"219,122,81,255",,100,eis_ironshell_aptitude,combat1,combat2,combat3,combat4,combat5,ui_char_spent_story_point_combat,graphics/icons/skills/eis_elite_apt.png,graphics/icons/skills/eis_elite_apt48.png,graphics/icons/skills/eis_elite_apt32.png

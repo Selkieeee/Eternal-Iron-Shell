@@ -711,13 +711,11 @@ AddTextSmall ""Hybrids do well in having a variety of options that saboteurs and
 SetEnabled QuyAgentClarify false",,,,B
 ,,,,,,,N
 EISQuyTurnInLegionXIV,eis_VNSectorDiscussionOptions,"$id == eiskimquy
-$eis_xiv_can_trade
 !$eis_xiv_legion
-EISLearnSpecial ship_bp legion_xiv","Nex_DynamicPaginatedOptions addOption QuyOfferLegion ""\""I'd like to share the Legion (XIV) blueprint with you.\""""",,,,B
+EISLearnSpecial ship_bp legion_xiv","Nex_DynamicPaginatedOptions addOption QuyOfferLegion ""\""I'd like to share the Legion (XIV) blueprint with you.\""""",,,Changed: removed $eis_xiv_can_trade (only set by the smalltalk reply EISQuyVNSectorHaveYouHeardReply2) so the share option no longer needs smalltalk first,B
 EISQuyTurnInLegionXIV3,eis_VNSectorDiscussionOptionsCheck,"$id == eiskimquy
-$eis_xiv_can_trade
 !$eis_xiv_legion
-EISLearnSpecial ship_bp legion_xiv","Nex_AddOptionConfirmation QuyOfferLegion ""Are you sure you want to share the Legion (XIV) with the Hegemony and Iron Shell."" ""Confirm"" ""Never mind""",,,,B
+EISLearnSpecial ship_bp legion_xiv","Nex_AddOptionConfirmation QuyOfferLegion ""Are you sure you want to share the Legion (XIV) with the Hegemony and Iron Shell."" ""Confirm"" ""Never mind""",,,Changed: removed $eis_xiv_can_trade (only set by the smalltalk reply EISQuyVNSectorHaveYouHeardReply2) so the share option no longer needs smalltalk first,B
 EISQuyTurnInLegionXIV2,DialogOptionSelected,"$id == eiskimquy score:100
 $option == QuyOfferLegion
 ","EISLearnSpecial ship_bp legion_xiv true
@@ -730,15 +728,13 @@ $eis_xiv_legion = true
 $global.eis_xiv_legion = true
 FireAll PopulateOptions","""A ship worthy to serve alongside the Onslaught."" She gives a soft smile. ""No longer will the Hoan Kiem fly alone, but with her sisters. It's amazing you were able to track this down, Captain $player.firstName.""",,"EISLearnSpecial's 3rd param now only makes the ship a priority ship for the Hegemony (ironshell/ironsentinel never get priority; their Legion hull frequency is set in the .faction files). A priority ship makes ship picking use only priority hulls for its role, which crowded out other hulls (e.g. surplus ship offers). Added $global.eis_xiv_legion: $eis_xiv_legion lives in Kim's own memory, so Ava's second-training rows could never see it. eis_modPlugin back-fills the global flag for older saves.",B
 EISQuyTurnInCastigatorXIV,eis_VNSectorDiscussionOptions,"$id == eiskimquy
-$eis_xiv_can_trade
 !$eis_xiv_castigator
 EISLearnSpecial ship_bp tahlan_Castigator_xiv
-EIS_HasModId tahlan score:100","Nex_DynamicPaginatedOptions addOption QuyOfferCastigator ""\""I'd like to share the Castigator (XIV) blueprint with you.\""""",,,,B
+EIS_HasModId tahlan score:100","Nex_DynamicPaginatedOptions addOption QuyOfferCastigator ""\""I'd like to share the Castigator (XIV) blueprint with you.\""""",,,Changed: removed $eis_xiv_can_trade (only set by the smalltalk reply EISQuyVNSectorHaveYouHeardReply2) so the share option no longer needs smalltalk first,B
 EISQuyTurnInCastigatorXIV3,eis_VNSectorDiscussionOptionsCheck,"$id == eiskimquy
-$eis_xiv_can_trade
 !$eis_xiv_castigator
 EISLearnSpecial ship_bp tahlan_Castigator_xiv
-EIS_HasModId tahlan score:100","Nex_AddOptionConfirmation QuyOfferCastigator ""Are you sure you want to share the Castigator (XIV) with the Hegemony and Iron Shell."" ""Confirm"" ""Never mind""",,,,B
+EIS_HasModId tahlan score:100","Nex_AddOptionConfirmation QuyOfferCastigator ""Are you sure you want to share the Castigator (XIV) with the Hegemony and Iron Shell."" ""Confirm"" ""Never mind""",,,Changed: removed $eis_xiv_can_trade (only set by the smalltalk reply EISQuyVNSectorHaveYouHeardReply2) so the share option no longer needs smalltalk first,B
 EISQuyTurnInCastigatorXIV2,DialogOptionSelected,"$id == eiskimquy
 $option == QuyOfferCastigator
 EIS_HasModId tahlan score:100","EISLearnSpecial ship_bp tahlan_Castigator_xiv true
@@ -1209,9 +1205,8 @@ SetEnabled EISHartleyReward false",,,,b
 EISHartleyVanguardPrintFallback,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisdarren score:1000
 !$EISQuickiesRewardOnce
-$EISBeatHartleyOnce
 EISMegamind eiskimquy ""$EISDoneQuest1""
-!EISMegamind eiskimquy ""$EISDoneQuest1Success""","Nex_DynamicPaginatedOptions addOption EISHartleyVanguardRewardFallback ""\""Is that enough proof for you?.\""""",,,"Fallback recruitment path if Operation World Above was failed, available if the player has also beaten Hartley in a duel at least once ($EISBeatHartleyOnce). Exact copy of EISHartleyVanguardReward's offer/reward for now, gated on failure+duel instead of success. No disable row per request - either both conditions are met and it's fully available, or it's hidden.",B
+!EISMegamind eiskimquy ""$EISDoneQuest1Success""","Nex_DynamicPaginatedOptions addOption EISHartleyVanguardRewardFallback ""\""Is that enough proof for you?\""""",,,"Fallback recruitment path if Operation World Above was failed, available if the player has also beaten Hartley in a duel at least once ($EISBeatHartleyOnce). Exact copy of EISHartleyVanguardReward's offer/reward for now, gated on failure+duel instead of success. No disable row per request - either both conditions are met and it's fully available, or it's hidden. | Changed: no longer needs $EISBeatHartleyOnce to show, so a failed operation always shows this option; EISHartleyVanguardFallbackDisable greys it out until the player has won a duel. Players who never did the operation use EISHartleyVanguardPrintFallbackNoQuest instead",B
 EISHartleyVanguardRewardFallback,DialogOptionSelected,"$option == EISHartleyVanguardRewardFallback
 !$EISQuickiesRewardOnce","$EISQuickiesReward = true 30
 $EISQuickiesRewardOnce = true
@@ -1481,7 +1476,8 @@ EISRingRingBananaPhone 10
 EISCharlotteHire,eis_VNSectorDiscussionOptions,"$id == eissneed score:1000
 !$DidNotAskCharlotte","Nex_DynamicPaginatedOptions addOption Charlotteome ""Offer to hire $himOrHer""",,,,B
 EISCharlotteReward,eis_VNSectorDiscussionOptions,"$id == eissneed score:1000
-!$EISQuickies1","Nex_DynamicPaginatedOptions addOption EISCharlotteReward1 ""I recall you had a special hullmod for me?""",,,,B
+!$EISQuickies1
+$EISCharlotteContact","Nex_DynamicPaginatedOptions addOption EISCharlotteReward1 ""I recall you had a special hullmod for me?""",,,"Changed: added $EISCharlotteContact so the option (and its greyed-out state) only appears once Charlotte is a contact, matching Ava's $AvaContact reward options",B
 CharlotteHireInquiry,DialogOptionSelected,$option == Charlotteome,"AddText ""You ask $personName some questions to establish where $hisOrHer skills lie.""
 EISPoopyStinky false","""Oh, I suppose my reputation preceeds me. So you want the Witch of Naraka under your command, hmm?""","0:ome_hireYes:""Sounds good.""
 1:ome_hireWitch:""The 'Witch of Naraka'? Really?""
@@ -1519,8 +1515,9 @@ EISCharlotteRealHireSel,DialogOptionSelected,$option == EISCharlotteRealHireOffe
 She pauses a bit before continuing, looking off into space. ""I actually applied for a position as a liason for your fleet. I don't really fancy the idea of being made to work under another Eventide prick again. So what do you think, want to fly together after all, Captain?"" She gives you a smirk.","EISCharlotteRealHireAccept:""Sounds good, miss 'Witch of Naraka'.""
 EISCharlotteRealHireDecline:""Maybe another time.""",,B
 EISCharlotteRealHireAccept,DialogOptionSelected,$option == EISCharlotteRealHireAccept,"$EISCharlotteRecruited = true
-EISHireOfficerWithShip eissneed eis_flagellator_elite_hex
-FireAll PopulateOptions","You hear her hold back a snicker. ""If you still doubt me, we can make some time to go one on one in the simulator. Loser buys the first round?"" She gives a brief salute. ""Won't let you down, Captain. I'll gather my things.""",,,B
+$EISCharlotteRetaliator = true
+EISHireOfficerWithShip eissneed eis_retaliator_Custom
+FireAll PopulateOptions","You hear her hold back a snicker. ""If you still doubt me, we can make some time to go one on one in the simulator. Loser buys the first round?"" She gives a brief salute. ""Won't let you down, Captain. I'll gather my things.""",,"Changed: recruit ship is now eis_retaliator_Custom (was eis_flagellator_elite_hex). Added $EISCharlotteRetaliator so EISCharlotteRetaliatorCompatPrint can tell saves that recruited her before this change.",B
 EISCharlotteRealHireDecline,DialogOptionSelected,$option == EISCharlotteRealHireDecline,FireAll PopulateOptions,"""Well, I won't wait for you forever. I'm getting off this rock one way or another.""",,,B
 ,,,,,,,N
 CharlotteVNSectorMenu,DialogOptionSelected,"$option == eis_VNS_Setup
@@ -1961,9 +1958,10 @@ AvaAquila2,DialogOptionSelected,"$option == AvaAquila1
 EISVibeCheck 100 100","SetTextHighlightColors good good hColor
 SetTextHighlights special modifications once
 $AlreadyAquilaConsummed = true
-EISLearn eis_aquila_1time ""$EIS_aquila"" 1
+EISLearn eis_aquila_1time
+EISGainItem eis_aquila_core 1
 EISAddSound technology2
-FireAll PopulateOptions","""Well, you've been very good to me and Iron Shell, which means I can..."" Ava sends few files to your Tri-Pad. ""... give you something fairly interesting. Celeste has sent me few of these experimental Aquila modspecs. It is somewhat different from and needs some special modifications to utilize. The result is that you can integrate Aquila on ships that couldn't use it otherwise, namely frigates and destroyers. Unfortunately, the chip is one-use. Once again, I thank you for your service to the Hegemony.""",,,B
+FireAll PopulateOptions","""Well, you've been very good to me and Iron Shell, which means I can..."" Ava sends few files to your Tri-Pad. ""... give you something fairly interesting. Celeste has sent me few of these experimental Aquila modspecs. It is somewhat different from and needs some special modifications to utilize. The result is that you can integrate Aquila on ships that couldn't use it otherwise, namely frigates and destroyers. Unfortunately, the chip is one-use. Once again, I thank you for your service to the Hegemony.""",,Changed: grants the Advanced Aquila Reactor Core LPC item (eis_aquila_core) instead of adding a use to $EIS_aquila. The chip is now reusable (returned when the hullmod is removed). EISGainItem announces the chip in the same style as the EISLearn unlock line,B
 ,,,,,,,N
 EISAvaThoughtsPlayer,eisava,,"Nex_DynamicPaginatedOptions addOption eis_Player ""Me""",,,,n
 EISAvaThoughtsPlayerR1,DialogOptionSelected,"$id == eisava
@@ -2797,3 +2795,31 @@ SetEnabled EISTax_startTurnIn false
 FireAll PopulateOptions",,,"Guard for the ten filing entry rows (EISTax_turnInOptionHegemony / IronShell / Player and their variants). If the filing option is selected while the paid flag is set (the TaxesFile disable did not take effect), this answers instead of the filing screen. Score 1000 outranks all ten entry rows. Never reached in normal play.",b
 EISTax_EntryHartley,DialogOptionSelected,"$option == EISTax_startTurnIn
 $id == eisdarren score:2000",FireAll PopulateOptions,"""Does it look like I want to do your taxes? Bother someone else.""",,"Hartley never files taxes (HartleyTax_disableTurnInOption greys the option out unconditionally). If the option is selected anyway, he refuses with his tooltip line. Score 2000 outranks the paid-flag guard and the ten entry rows. Never reached in normal play.",b
+# new lines,,,,,,,
+EISHartleyVanguardFallbackDisable,eis_VNSectorDiscussionOptionsCheck,"$id == eisdarren
+!$EISBeatHartleyOnce","SetTooltip EISHartleyVanguardRewardFallback ""You have not beaten Hartley in a duel.""
+SetEnabled EISHartleyVanguardRewardFallback false",,,"Greys out the failed-operation duel option (EISHartleyVanguardRewardFallback) until the player has won a duel.
+INVENTED: tooltip text, modelled on EISHartleyVanguardPrintDisable's ""You have not successfully completed Operation World Above.""",
+EISHartleyVanguardPrintFallbackNoQuest,eis_VNSectorDiscussionOptions,"$isPerson
+$id == eisdarren score:1000
+!$EISQuickiesRewardOnce
+$EISBeatHartleyOnce
+!EISMegamind eiskimquy ""$EISDoneQuest1""","Nex_DynamicPaginatedOptions addOption EISHartleyVanguardRewardFallbackNoQuest ""\""I think I have proven myself.\""""",,,"Duel recruit route for players who never did Operation World Above: copy of EISHartleyVanguardPrintFallback with the quest check inverted, with its own option label.",
+EISHartleyVanguardRewardFallbackNoQuest,DialogOptionSelected,"$option == EISHartleyVanguardRewardFallbackNoQuest
+!$EISQuickiesRewardOnce","$EISQuickiesReward = true 30
+$EISQuickiesRewardOnce = true
+EISAddContact
+$EISHartleyContact = true
+FireAll PopulateOptions","""It's rare to find such a capable sparring partner. I can arrange some work for you if you need any.""",,Reply for the never-did-the-operation duel route. Reward script copied from EISHartleyVanguardRewardFallback.,
+EISHartleyVanguardHighlightFallbackNoQuest,eis_VNSectorDiscussionOptionsCheck,"$id == eisdarren
+$EISBeatHartleyOnce
+!EISMegamind eiskimquy ""$EISDoneQuest1""
+!$EISQuickiesRewardOnce",SetOptionColor EISHartleyVanguardRewardFallbackNoQuest highlight,,,"Highlight for EISHartleyVanguardPrintFallbackNoQuest, copied from EISHartleyVanguardHighlightFallback.",
+EISCharlotteRetaliatorCompatPrint,eis_VNSectorDiscussionOptions,"$id == eissneed score:1000
+$EISCharlotteRecruited
+!$EISCharlotteRetaliator","Nex_DynamicPaginatedOptions addOption EISCharlotteRetaliatorCompat ""About your ship...""",,,"Mid-save compat only: shows for saves where Charlotte was recruited before her recruit ship changed to eis_retaliator_Custom (recruited, but no $EISCharlotteRetaliator). No disable/tooltip row on purpose, so it is never greyed out or shown otherwise.",
+EISCharlotteRetaliatorCompatSel,DialogOptionSelected,"$option == EISCharlotteRetaliatorCompat
+!$EISCharlotteRetaliator","$EISCharlotteRetaliator = true
+EISAddShip eis_retaliator_Custom
+AddTextSmall ""[mid-save compat only, you shouldn't see this unless you updated!]""
+FireAll PopulateOptions","""Fresh out of drydock. Let's give it a spin shall we?""",,"Reply for EISCharlotteRetaliatorCompatPrint. Gives the same eis_retaliator_Custom variant as EISCharlotteRealHireAccept, without recruiting her again, and sets $EISCharlotteRetaliator so it only happens once.",
