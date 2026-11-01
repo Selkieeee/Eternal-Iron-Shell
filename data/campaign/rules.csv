@@ -1517,7 +1517,7 @@ EISCharlotteRealHireDecline:""Maybe another time.""",,B
 EISCharlotteRealHireAccept,DialogOptionSelected,$option == EISCharlotteRealHireAccept,"$EISCharlotteRecruited = true
 $EISCharlotteRetaliator = true
 EISHireOfficerWithShip eissneed eis_retaliator_Custom
-FireAll PopulateOptions","You hear her hold back a snicker. ""If you still doubt me, we can make some time to go one on one in the simulator. Loser buys the first round?"" She gives a brief salute. ""Won't let you down, Captain. I'll gather my things.""",,"Changed: recruit ship is now eis_retaliator_Custom (was eis_flagellator_elite_hex). Added $EISCharlotteRetaliator so EISCharlotteRetaliatorCompatPrint can tell saves that recruited her before this change.",B
+FireAll PopulateOptions","You hear her hold back a snicker. ""If you still doubt me, we can make some time to go one on one in the simulator. Loser buys the first round?"" She gives a brief salute. ""Won't let you down, Captain. I'll gather my things.""",,Changed: recruit ship is now eis_retaliator_Custom (was eis_flagellator_elite_hex). Added $EISCharlotteRetaliator so EISCharlotteRetaliatorCompatPrint can tell saves that recruited her before this change.,B
 EISCharlotteRealHireDecline,DialogOptionSelected,$option == EISCharlotteRealHireDecline,FireAll PopulateOptions,"""Well, I won't wait for you forever. I'm getting off this rock one way or another.""",,,B
 ,,,,,,,N
 CharlotteVNSectorMenu,DialogOptionSelected,"$option == eis_VNS_Setup
@@ -2798,8 +2798,7 @@ $id == eisdarren score:2000",FireAll PopulateOptions,"""Does it look like I want
 # new lines,,,,,,,
 EISHartleyVanguardFallbackDisable,eis_VNSectorDiscussionOptionsCheck,"$id == eisdarren
 !$EISBeatHartleyOnce","SetTooltip EISHartleyVanguardRewardFallback ""You have not beaten Hartley in a duel.""
-SetEnabled EISHartleyVanguardRewardFallback false",,,"Greys out the failed-operation duel option (EISHartleyVanguardRewardFallback) until the player has won a duel.
-INVENTED: tooltip text, modelled on EISHartleyVanguardPrintDisable's ""You have not successfully completed Operation World Above.""",
+SetEnabled EISHartleyVanguardRewardFallback false",,,Greys out the failed-operation duel option (EISHartleyVanguardRewardFallback) until the player has won a duel.,
 EISHartleyVanguardPrintFallbackNoQuest,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisdarren score:1000
 !$EISQuickiesRewardOnce

@@ -1,3 +1,22 @@
+2.0.6
+Charlotte has a new flagship, the Retaliator, which is obtained when she is recruited.
+If you update mid-save and have already recruited her, talk to her again to get it.
+
+Vanguard (XIV) DP 6->5 (vanilla Vanguard is going from 6->4 in 0.98.5)
+Ship prices adjusted down a bit.
+Hartley is now able to become a contact without a comm by beating him in a duel.
+Aquila Reactor no longer slottable on phase ships (previously had an unclear self-nerf).
+One-time Aquila Reactor tweaked, now uses an item, no longer requires a dock or S-mod to work.
+This item will automatically go in your inventory if you had the "1-use" available previously. If the hullmod is removed, you get it back.
+
+New/updated descriptions for Vanguard, Relentless, Indomitable, Renown.
+Fixed some grammar/description issues.
+Fixed an issue when migrating a save from the forum version to Eternal due to a missing Nex faction plugin.
+Fixed a crash with Avaritia not null-checking that its ship system exists.
+Fixed some extra harmless files hanging out in the jar.
+Fixed XIV Legion BP sharing not working for Ava's reward.
+Dauntless/Illust no longer buyable by Nex agents.
+
 2.0.5
 -\[buff] Celestial blossom/aster spread reduced. Increased max ammo, top speed, and damage.
 -\[nerf] Azalean lance refire delay 5s -> 6s (-17% less dps, from 276 to 230)
