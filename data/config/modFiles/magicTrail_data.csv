@@ -4,3 +4,5 @@ eis_barretta_trail2,eis_barretta_shot,base_trail_smooth,10,0,0,1.8,20,60,"[255,1
 eis_barretta_trail3,eis_barretta_shot,base_trail_smooth,10,0,0.05,0.1,10,2,"[255,255,255]","[255,255,255]",1,128,0,TRUE,20,0,1,TRUE,FALSE,TRUE,0,0,0,0,0,0,true,false
 eis_barretta_trail4,eis_barretta_shot,base_trail_smooth,10,0,0,0.2,40,5,"[255,110,80]","[255,110,80]",0.5,512,0,TRUE,20,0,1,TRUE,FALSE,TRUE,0,0,0,0,0,0,true,false
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+eis_durandal_trail_1,eis_DURANDAL_shot,eis_durandal_trail_glow,10,0,0.05,0.2,50,20,"[255,54,0]","[255,54,0]",0.3,300,500,true,30,0,1,TRUE,FALSE,TRUE,0,0,0,0,0,0,false,false
+eis_durandal_trail_2,eis_DURANDAL_shot,eis_durandal_trail_smoke,10,0,0.1,0.6,16,24,"[150,120,110]","[50,50,50]",0.4,300,500,true,10,5,1,TRUE,FALSE,FALSE,30,50,0.3,0,75,100,true,false

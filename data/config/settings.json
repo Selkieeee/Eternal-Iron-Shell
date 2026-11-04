@@ -35,6 +35,10 @@
 			"eis_package":"graphics/icons/cargo/package_ironshell.png",
 			"eisceleste_package":"graphics/icons/cargo/package_celeste.png"
 		},
+		"fx":{
+			"eis_durandal_trail_glow":"graphics/fx/eis_durandal_trail_glow.png",
+			"eis_durandal_trail_smoke":"graphics/fx/eis_durandal_trail_smoke.png",
+		},
 		"misc":{
 			"eis_parryfail":"graphics/icons/hullsys/eis_parryfail.png",
 			"eis_zandatsulunge":"graphics/icons/hullsys/eis_zandatsulunge.png",

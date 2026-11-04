@@ -31,17 +31,18 @@
   "barrelMode": "ALTERNATING",
   "animationType": "GLOW_AND_FLASH",
   "autocharge": true,
+  "everyFrameEffect": "data.scripts.weapons.eis_DurandalMuzzleBurst",
   "muzzleFlashSpec": {
     "length": 50,
-    "spread": 8,
+    "spread": 5,
     "particleSizeMin": 15,
     "particleSizeRange": 20,
-    "particleDuration": 0.12,
-    "particleCount": 10,
+    "particleDuration": 0.5,
+    "particleCount": 20,
     "particleColor": [
       255,
-      100,
-      100,
+      80,
+      40,
       255
     ]
   },

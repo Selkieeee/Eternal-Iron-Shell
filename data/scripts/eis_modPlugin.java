@@ -127,6 +127,34 @@ public class eis_modPlugin extends BaseModPlugin {
         new Seriouslywhatisthewholepointofthisisweartoluddiwillmakethispersoneattheirshoe().generate(Global.getSector());
     }
     
+    // getHullSpec throws instead of returning null when a hull is missing (e.g. an older version of the mod that adds it),
+    // so cross-mod hulls have to be checked through this.
+    private static boolean hasHull(String hullId) {
+        try {
+            return Global.getSettings().getHullSpec(hullId) != null;
+        } catch (RuntimeException e) {
+            return false;
+        }
+    }
+
+    // Same as hasHull: getWeaponSpec also throws when the weapon is missing.
+    private static boolean hasWeapon(String weaponId) {
+        try {
+            return Global.getSettings().getWeaponSpec(weaponId) != null;
+        } catch (RuntimeException e) {
+            return false;
+        }
+    }
+
+    // getFighterWingSpec currently returns null for a missing wing; this also covers it if that ever throws like the others.
+    private static boolean hasWing(String wingId) {
+        try {
+            return Global.getSettings().getFighterWingSpec(wingId) != null;
+        } catch (RuntimeException e) {
+            return false;
+        }
+    }
+
     @Override
     public void onApplicationLoad() throws JSONException, IOException {
         // The codex links every "colony_item" item to its effect while the title screen loads, before any onGameLoad,
@@ -151,30 +179,30 @@ public class eis_modPlugin extends BaseModPlugin {
             if (Global.getSettings().getFighterWingSpec("eis_piranha") != null) {Global.getSettings().getFighterWingSpec("eis_piranha").addTag("leader_no_swarm");Global.getSettings().getFighterWingSpec("eis_piranha").addTag("attack_at_an_angle");}
             // Cross-mod XIV hulls/wings get eis_crossmod (not eis_bp) so they are known/used by the Iron Shell factions (see knownShips/knownFighters/hullFrequency tags in the .faction files) without being eis_bp blueprint hulls.
             if (hasTart) {
-                if (Global.getSettings().getHullSpec("TADA_tinnitus_xiv") != null) {Global.getSettings().getHullSpec("TADA_tinnitus_xiv").addTag("eis_crossmod");}
-                if (Global.getSettings().getHullSpec("TADA_gunwall_XIV") != null) {Global.getSettings().getHullSpec("TADA_gunwall_XIV").addTag("eis_crossmod");}
+                if (hasHull("TADA_tinnitus_xiv")) {Global.getSettings().getHullSpec("TADA_tinnitus_xiv").addTag("eis_crossmod");}
+                if (hasHull("TADA_gunwall_XIV")) {Global.getSettings().getHullSpec("TADA_gunwall_XIV").addTag("eis_crossmod");}
             }
             if (haveNia) {
-                if (Global.getSettings().getHullSpec("tahlan_nelson_xiv") != null) {Global.getSettings().getHullSpec("tahlan_nelson_xiv").addTag("eis_crossmod");}
-		if (Global.getSettings().getHullSpec("tahlan_tower_xiv") != null) {Global.getSettings().getHullSpec("tahlan_tower_xiv").addTag("eis_crossmod");}
-                if (Global.getSettings().getHullSpec("tahlan_Castigator") != null) {Global.getSettings().getHullSpec("tahlan_Castigator").addTag("eis_crossmod");}
+                if (hasHull("tahlan_nelson_xiv")) {Global.getSettings().getHullSpec("tahlan_nelson_xiv").addTag("eis_crossmod");}
+		if (hasHull("tahlan_tower_xiv")) {Global.getSettings().getHullSpec("tahlan_tower_xiv").addTag("eis_crossmod");}
+                if (hasHull("tahlan_Castigator")) {Global.getSettings().getHullSpec("tahlan_Castigator").addTag("eis_crossmod");}
             }
             if (haveSWP) {
-                if (Global.getSettings().getHullSpec("swp_alastor_xiv") != null) {Global.getSettings().getHullSpec("swp_alastor_xiv").addTag("eis_crossmod");}
-                if (Global.getSettings().getHullSpec("swp_conquest_xiv") != null) {Global.getSettings().getHullSpec("swp_conquest_xiv").addTag("eis_crossmod");}
-                if (Global.getSettings().getHullSpec("swp_gryphon_xiv") != null) {Global.getSettings().getHullSpec("swp_gryphon_xiv").addTag("eis_crossmod");}
-                if (Global.getSettings().getHullSpec("swp_hammerhead_xiv") != null) {Global.getSettings().getHullSpec("swp_hammerhead_xiv").addTag("eis_crossmod");}
-                if (Global.getSettings().getHullSpec("swp_lasher_xiv") != null) {Global.getSettings().getHullSpec("swp_lasher_xiv").addTag("eis_crossmod");}
-                if (Global.getSettings().getHullSpec("swp_sunder_xiv") != null) {Global.getSettings().getHullSpec("swp_sunder_xiv").addTag("eis_crossmod");}
+                if (hasHull("swp_alastor_xiv")) {Global.getSettings().getHullSpec("swp_alastor_xiv").addTag("eis_crossmod");}
+                if (hasHull("swp_conquest_xiv")) {Global.getSettings().getHullSpec("swp_conquest_xiv").addTag("eis_crossmod");}
+                if (hasHull("swp_gryphon_xiv")) {Global.getSettings().getHullSpec("swp_gryphon_xiv").addTag("eis_crossmod");}
+                if (hasHull("swp_hammerhead_xiv")) {Global.getSettings().getHullSpec("swp_hammerhead_xiv").addTag("eis_crossmod");}
+                if (hasHull("swp_lasher_xiv")) {Global.getSettings().getHullSpec("swp_lasher_xiv").addTag("eis_crossmod");}
+                if (hasHull("swp_sunder_xiv")) {Global.getSettings().getHullSpec("swp_sunder_xiv").addTag("eis_crossmod");}
             }
             if (haveArma) {
-                if (Global.getSettings().getHullSpec("armaa_garegga_xiv_carrier") != null) {Global.getSettings().getHullSpec("armaa_garegga_xiv_carrier").addTag("eis_crossmod");}
-                if (Global.getSettings().getHullSpec("armaa_corsair_xiv") != null) {Global.getSettings().getHullSpec("armaa_corsair_xiv").addTag("eis_crossmod");}
-                if (Global.getSettings().getHullSpec("armaa_monitor_xiv") != null) {Global.getSettings().getHullSpec("armaa_monitor_xiv").addTag("eis_crossmod");}
-                if (Global.getSettings().getHullSpec("armaa_panther_frig_xiv") != null) {Global.getSettings().getHullSpec("armaa_panther_frig_xiv").addTag("eis_crossmod");}
-                if (Global.getSettings().getHullSpec("armaa_musha_frig_sniper") != null) {Global.getSettings().getHullSpec("armaa_musha_frig_sniper").addTag("eis_crossmod");}
-                if (Global.getSettings().getFighterWingSpec("armaa_musha_bomber_wing") != null) {Global.getSettings().getFighterWingSpec("armaa_musha_bomber_wing").addTag("eis_crossmod");}
-                if (Global.getSettings().getFighterWingSpec("armaa_musha_wing") != null) {Global.getSettings().getFighterWingSpec("armaa_musha_wing").addTag("eis_crossmod");}
+                if (hasHull("armaa_garegga_xiv_carrier")) {Global.getSettings().getHullSpec("armaa_garegga_xiv_carrier").addTag("eis_crossmod");}
+                if (hasHull("armaa_corsair_xiv")) {Global.getSettings().getHullSpec("armaa_corsair_xiv").addTag("eis_crossmod");}
+                if (hasHull("armaa_monitor_xiv")) {Global.getSettings().getHullSpec("armaa_monitor_xiv").addTag("eis_crossmod");}
+                if (hasHull("armaa_panther_frig_xiv")) {Global.getSettings().getHullSpec("armaa_panther_frig_xiv").addTag("eis_crossmod");}
+                if (hasHull("armaa_musha_frig_sniper")) {Global.getSettings().getHullSpec("armaa_musha_frig_sniper").addTag("eis_crossmod");}
+                if (hasWing("armaa_musha_bomber_wing")) {Global.getSettings().getFighterWingSpec("armaa_musha_bomber_wing").addTag("eis_crossmod");}
+                if (hasWing("armaa_musha_wing")) {Global.getSettings().getFighterWingSpec("armaa_musha_wing").addTag("eis_crossmod");}
             }
             Global.getSettings().resetCached();
             // Cross-mod weapon swaps on Iron Shell variants (SWP / Tahlan / Tart) are disabled. Uncomment this whole block to restore them.
@@ -458,18 +486,18 @@ public class eis_modPlugin extends BaseModPlugin {
                 //{Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_albatross");} Courageous fills this role.
                 //{Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_vulture");} We really have no use for this.
 		//{Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_liberator");} We really have no use for this.
-                if (Global.getSettings().getHullSpec("swp_alastor_xiv") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_alastor_xiv");}
-                if (Global.getSettings().getHullSpec("swp_conquest_xiv") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_conquest_xiv");}
-                if (Global.getSettings().getHullSpec("swp_gryphon_xiv") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_gryphon_xiv");}
-                if (Global.getSettings().getHullSpec("swp_hammerhead_xiv") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_hammerhead_xiv");}
-                if (Global.getSettings().getHullSpec("swp_lasher_xiv") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_lasher_xiv");}
-                if (Global.getSettings().getHullSpec("swp_sunder_xiv") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_sunder_xiv");}
-                if (Global.getSettings().getWeaponSpec("swp_contender") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownWeapons().add("swp_contender");}
-                if (Global.getSettings().getWeaponSpec("swp_plasmaflame") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownWeapons().add("swp_plasmaflame");}
-                if (Global.getSettings().getWeaponSpec("swp_hornet") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownWeapons().add("swp_hornet");}
-                if (Global.getSettings().getWeaponSpec("swp_tornado") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownWeapons().add("swp_tornado");}
-                if (Global.getSettings().getWeaponSpec("swp_iontorpedo") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownWeapons().add("swp_iontorpedo");}
-                if (Global.getSettings().getWeaponSpec("swp_lightphaselance") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownWeapons().add("swp_lightphaselance");}
+                if (hasHull("swp_alastor_xiv")) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_alastor_xiv");}
+                if (hasHull("swp_conquest_xiv")) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_conquest_xiv");}
+                if (hasHull("swp_gryphon_xiv")) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_gryphon_xiv");}
+                if (hasHull("swp_hammerhead_xiv")) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_hammerhead_xiv");}
+                if (hasHull("swp_lasher_xiv")) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_lasher_xiv");}
+                if (hasHull("swp_sunder_xiv")) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("swp_sunder_xiv");}
+                if (hasWeapon("swp_contender")) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownWeapons().add("swp_contender");}
+                if (hasWeapon("swp_plasmaflame")) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownWeapons().add("swp_plasmaflame");}
+                if (hasWeapon("swp_hornet")) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownWeapons().add("swp_hornet");}
+                if (hasWeapon("swp_tornado")) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownWeapons().add("swp_tornado");}
+                if (hasWeapon("swp_iontorpedo")) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownWeapons().add("swp_iontorpedo");}
+                if (hasWeapon("swp_lightphaselance")) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownWeapons().add("swp_lightphaselance");}
                 //{Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_nautilus");} We really have no use for this.
                 //{Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_caliber");} Flagellator fills this role.
                 //{Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_vindicator");} Champion and Nelson fills this role.
@@ -477,57 +505,57 @@ public class eis_modPlugin extends BaseModPlugin {
                 //{Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_albatross");} Courageous fills this role.
                 //{Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_vulture");} We really have no use for this.
 		//{Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_liberator");} We really have no use for this.
-                if (Global.getSettings().getHullSpec("swp_alastor_xiv") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_alastor_xiv");}
-                if (Global.getSettings().getHullSpec("swp_conquest_xiv") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_conquest_xiv");}
-                if (Global.getSettings().getHullSpec("swp_gryphon_xiv") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_gryphon_xiv");}
-                if (Global.getSettings().getHullSpec("swp_hammerhead_xiv") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_hammerhead_xiv");}
-                if (Global.getSettings().getHullSpec("swp_lasher_xiv") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_lasher_xiv");}
-                if (Global.getSettings().getHullSpec("swp_sunder_xiv") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_sunder_xiv");}
-                if (Global.getSettings().getWeaponSpec("swp_contender") != null) {Global.getSector().getFaction("ironsentinel").getKnownWeapons().add("swp_contender");}
-                if (Global.getSettings().getWeaponSpec("swp_plasmaflame") != null) {Global.getSector().getFaction("ironsentinel").getKnownWeapons().add("swp_plasmaflame");}
-                if (Global.getSettings().getWeaponSpec("swp_hornet") != null) {Global.getSector().getFaction("ironsentinel").getKnownWeapons().add("swp_hornet");}
-                if (Global.getSettings().getWeaponSpec("swp_tornado") != null) {Global.getSector().getFaction("ironsentinel").getKnownWeapons().add("swp_tornado");}
-                if (Global.getSettings().getWeaponSpec("swp_iontorpedo") != null) {Global.getSector().getFaction("ironsentinel").getKnownWeapons().add("swp_iontorpedo");}
-                if (Global.getSettings().getWeaponSpec("swp_lightphaselance") != null) {Global.getSector().getFaction("ironsentinel").getKnownWeapons().add("swp_lightphaselance");}
+                if (hasHull("swp_alastor_xiv")) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_alastor_xiv");}
+                if (hasHull("swp_conquest_xiv")) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_conquest_xiv");}
+                if (hasHull("swp_gryphon_xiv")) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_gryphon_xiv");}
+                if (hasHull("swp_hammerhead_xiv")) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_hammerhead_xiv");}
+                if (hasHull("swp_lasher_xiv")) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_lasher_xiv");}
+                if (hasHull("swp_sunder_xiv")) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("swp_sunder_xiv");}
+                if (hasWeapon("swp_contender")) {Global.getSector().getFaction("ironsentinel").getKnownWeapons().add("swp_contender");}
+                if (hasWeapon("swp_plasmaflame")) {Global.getSector().getFaction("ironsentinel").getKnownWeapons().add("swp_plasmaflame");}
+                if (hasWeapon("swp_hornet")) {Global.getSector().getFaction("ironsentinel").getKnownWeapons().add("swp_hornet");}
+                if (hasWeapon("swp_tornado")) {Global.getSector().getFaction("ironsentinel").getKnownWeapons().add("swp_tornado");}
+                if (hasWeapon("swp_iontorpedo")) {Global.getSector().getFaction("ironsentinel").getKnownWeapons().add("swp_iontorpedo");}
+                if (hasWeapon("swp_lightphaselance")) {Global.getSector().getFaction("ironsentinel").getKnownWeapons().add("swp_lightphaselance");}
             }
             if (haveNia) {
                 //{Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("tahlan_Bungalow");} Mora fills this role.
                 //if (Global.getSettings().getHullSpec("tahlan_Flagellator") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("tahlan_Flagellator");}
                 //{Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("tahlan_Bronco");} Flagellator fills this role.
                 //{Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("tahlan_Phoca");} Champion or Eagle fills this role.
-		 if (Global.getSettings().getHullSpec("tahlan_Castigator") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("tahlan_Castigator");}
-                if (Global.getSettings().getHullSpec("tahlan_nelson_xiv") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("tahlan_nelson_xiv");}
-		if (Global.getSettings().getHullSpec("tahlan_tower_xiv") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("tahlan_tower_xiv");}
+		 if (hasHull("tahlan_Castigator")) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("tahlan_Castigator");}
+                if (hasHull("tahlan_nelson_xiv")) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("tahlan_nelson_xiv");}
+		if (hasHull("tahlan_tower_xiv")) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("tahlan_tower_xiv");}
                 //{Global.getSector().getFaction(IRONSTANDSETERNAL).getHullFrequency().replace("tahlan_nelson_xiv", 1.1f);}
                 //{Global.getSector().getFaction("ironsentinel").getKnownShips().add("tahlan_Bungalow");} Mora fills this role.
                 //if (Global.getSettings().getHullSpec("tahlan_Flagellator") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("tahlan_Flagellator");}
                 //{Global.getSector().getFaction("ironsentinel").getKnownShips().add("tahlan_Bronco");} Flagellator fills this role.
                 //{Global.getSector().getFaction("ironsentinel").getKnownShips().add("tahlan_Phoca");} Champion or Eagle fills this role.
-		if (Global.getSettings().getHullSpec("tahlan_Castigator") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("tahlan_Castigator");}
-                if (Global.getSettings().getHullSpec("tahlan_nelson_xiv") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("tahlan_nelson_xiv");}
-		if (Global.getSettings().getHullSpec("tahlan_tower_xiv") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("tahlan_tower_xiv");}
+		if (hasHull("tahlan_Castigator")) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("tahlan_Castigator");}
+                if (hasHull("tahlan_nelson_xiv")) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("tahlan_nelson_xiv");}
+		if (hasHull("tahlan_tower_xiv")) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("tahlan_tower_xiv");}
             }
             if (hasTart) {
                 //{Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("TADA_bully");} This ship is not a bully.
                 //{Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("TADA_scalper");} Role feels weird.
-                if (Global.getSettings().getHullSpec("TADA_tinnitus_xiv") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("TADA_tinnitus_xiv");}
-                if (Global.getSettings().getHullSpec("TADA_gunwall_XIV") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("TADA_gunwall_XIV");}
+                if (hasHull("TADA_tinnitus_xiv")) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("TADA_tinnitus_xiv");}
+                if (hasHull("TADA_gunwall_XIV")) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("TADA_gunwall_XIV");}
                 //{Global.getSector().getFaction("ironsentinel").getKnownShips().add("TADA_bully");} This ship is not a bully.
                 //{Global.getSector().getFaction("ironsentinel").getKnownShips().add("TADA_scalper");} Role feels weird.
-                if (Global.getSettings().getHullSpec("TADA_tinnitus_xiv") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("TADA_tinnitus_xiv");}
-                if (Global.getSettings().getHullSpec("TADA_gunwall_XIV") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("TADA_gunwall_XIV");}
+                if (hasHull("TADA_tinnitus_xiv")) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("TADA_tinnitus_xiv");}
+                if (hasHull("TADA_gunwall_XIV")) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("TADA_gunwall_XIV");}
             }
             if (haveArma) {
-                if (Global.getSettings().getHullSpec("armaa_garegga_xiv_carrier") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("armaa_garegga_xiv_carrier");}
-                if (Global.getSettings().getHullSpec("armaa_corsair_xiv") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("armaa_corsair_xiv");}
-                if (Global.getSettings().getHullSpec("armaa_monitor_xiv") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("armaa_monitor_xiv");}
-                if (Global.getSettings().getHullSpec("armaa_panther_frig_xiv") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("armaa_panther_frig_xiv");}
-                if (Global.getSettings().getHullSpec("armaa_musha_frig_sniper") != null) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("armaa_musha_frig_sniper");}
-                if (Global.getSettings().getHullSpec("armaa_garegga_xiv_carrier") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("armaa_garegga_xiv_carrier");}
-                if (Global.getSettings().getHullSpec("armaa_corsair_xiv") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("armaa_corsair_xiv");}
-                if (Global.getSettings().getHullSpec("armaa_monitor_xiv") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("armaa_monitor_xiv");}
-                if (Global.getSettings().getHullSpec("armaa_panther_frig_xiv") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("armaa_panther_frig_xiv");}
-                if (Global.getSettings().getHullSpec("armaa_musha_frig_sniper") != null) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("armaa_musha_frig_sniper");}
+                if (hasHull("armaa_garegga_xiv_carrier")) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("armaa_garegga_xiv_carrier");}
+                if (hasHull("armaa_corsair_xiv")) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("armaa_corsair_xiv");}
+                if (hasHull("armaa_monitor_xiv")) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("armaa_monitor_xiv");}
+                if (hasHull("armaa_panther_frig_xiv")) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("armaa_panther_frig_xiv");}
+                if (hasHull("armaa_musha_frig_sniper")) {Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("armaa_musha_frig_sniper");}
+                if (hasHull("armaa_garegga_xiv_carrier")) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("armaa_garegga_xiv_carrier");}
+                if (hasHull("armaa_corsair_xiv")) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("armaa_corsair_xiv");}
+                if (hasHull("armaa_monitor_xiv")) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("armaa_monitor_xiv");}
+                if (hasHull("armaa_panther_frig_xiv")) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("armaa_panther_frig_xiv");}
+                if (hasHull("armaa_musha_frig_sniper")) {Global.getSector().getFaction("ironsentinel").getKnownShips().add("armaa_musha_frig_sniper");}
             }
             Global.getSector().getFaction(IRONSTANDSETERNAL).clearShipRoleCache();
             Global.getSector().getFaction("ironsentinel").clearShipRoleCache();
@@ -599,7 +627,7 @@ public class eis_modPlugin extends BaseModPlugin {
                 Global.getSector().getFaction("ironsentinel").getKnownShips().add("legion_xiv");Global.getSector().getFaction("ironsentinel").removePriorityShip("legion_xiv");
                 if (getEISBooleanSetting("GreaterHegemony", true)) {Global.getSector().getFaction("hegemony").getKnownShips().add("legion_xiv");Global.getSector().getFaction("hegemony").getPriorityShips().add("legion_xiv");Global.getSector().getFaction("hegemony").getHullFrequency().put("legion_xiv", 0.25f);}
             }
-            if (haveNia && Global.getSettings().getHullSpec("tahlan_Castigator_xiv") != null && Global.getSector().getImportantPeople().getPerson("eiskimquy").getMemoryWithoutUpdate().getBoolean("$eis_xiv_castigator")) {
+            if (haveNia && hasHull("tahlan_Castigator_xiv") && Global.getSector().getImportantPeople().getPerson("eiskimquy").getMemoryWithoutUpdate().getBoolean("$eis_xiv_castigator")) {
                 Global.getSector().getFaction(IRONSTANDSETERNAL).getKnownShips().add("tahlan_Castigator_xiv");Global.getSector().getFaction("ironshell").removePriorityShip("tahlan_Castigator_xiv");
                 Global.getSector().getFaction("ironsentinel").getKnownShips().add("tahlan_Castigator_xiv");Global.getSector().getFaction("ironsentinel").removePriorityShip("tahlan_Castigator_xiv");
                 if (getEISBooleanSetting("GreaterHegemony", true)) {Global.getSector().getFaction("hegemony").getKnownShips().add("tahlan_Castigator_xiv");Global.getSector().getFaction("hegemony").getPriorityShips().add("tahlan_Castigator_xiv");Global.getSector().getFaction("hegemony").getHullFrequency().put("tahlan_Castigator_xiv", 0.25f);}
