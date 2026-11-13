@@ -2,7 +2,7 @@
   <library name="javadoc1">
     <CLASSES />
     <JAVADOC>
-      <root url="file://$PROJECT_DIR$/../../../../../Program Files (x86)/Fractal Softworks/Starsector/mods/zz GraphicsLib-1.12.1/javadoc" />
+      <root url="file://$PROJECT_DIR$/../../../../../Program Files (x86)/Fractal Softworks/Starsector/mods/zz GraphicsLib-1.12.2/jars/javadoc" />
     </JAVADOC>
     <SOURCES />
   </library>

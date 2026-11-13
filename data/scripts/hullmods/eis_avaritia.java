@@ -19,7 +19,7 @@ import com.fs.starfarer.api.mission.FleetSide;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
-import data.scripts.util.MagicIncompatibleHullmods;
+import org.magiclib.util.MagicIncompatibleHullmods;
 import data.scripts.util.MagicUI;
 import java.awt.Color;
 import java.util.EnumSet;

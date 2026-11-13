@@ -16,7 +16,7 @@ import com.fs.starfarer.api.impl.campaign.ids.HullMods;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
-import data.scripts.util.MagicIncompatibleHullmods;
+import org.magiclib.util.MagicIncompatibleHullmods;
 import data.scripts.util.MagicUI;
 import java.util.HashSet;
 import java.util.List;
@@ -257,6 +257,16 @@ public class eis_damperhull extends BaseHullMod {
         @Override
         public void onActivate() {
             Global.getSoundPlayer().playSound("system_damper", 1.1f, 0.3f, ship.getLocation(), ship.getVelocity());
+        }
+
+        // Can't be triggered while the ship system or the phase cloak / shield-slot system (getPhaseCloak) is running.
+        // isActive() covers charging up, active and charging down; isOn() leaves out charging down, which let this
+        // start during the end of Rampage Drive. MagicLib checks this for both the player's key and the AI.
+        @Override
+        public boolean canActivate() {
+            boolean systemRunning = ship.getSystem() != null && ship.getSystem().isActive();
+            boolean defenseRunning = ship.getPhaseCloak() != null && ship.getPhaseCloak().isActive();
+            return !systemRunning && !defenseRunning;
         }
 
         // Mirrors the original's AI heuristic exactly - missile-threat detection, low hull + needs-help,

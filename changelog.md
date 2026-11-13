@@ -1,3 +1,16 @@
+2.1.0
+Updated to 0.98.5
+
+Bug/minor fixes
+Now requires magiclib 1.6.1
+Reworked portraits to new 0.98.5 formatting (player/faction split)
+Fixed issue with 0.98.5 changing officer salary calls
+Vanagloria Ionized Armor no longer can activate during another ship system
+Changed Iron Heritage drone ai with the new magiclib fighterAIformation, so they now behave identically to built-in ones
+Updated hullmods with new magiclib incompatible hullmods
+Add some nullchecks on cross-mod hulls
+(mostly just a hardening thing if those hulls get removed, Ceres was on armaa 3.2.5 lol)
+
 2.0.6
 Charlotte has a new flagship, the Retaliator, which is obtained when she is recruited.
 If you update mid-save and have already recruited her, talk to her again to get it.

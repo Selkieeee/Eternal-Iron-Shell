@@ -11,6 +11,8 @@ import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
 import com.fs.starfarer.api.loading.FighterWingSpecAPI;
 import org.magiclib.subsystems.MagicSubsystemsManager;
+import org.magiclib.subsystems.drones.DroneFormation;
+import org.magiclib.subsystems.drones.FighterAIFormation;
 import org.magiclib.subsystems.drones.MagicDroneSubsystem;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -307,6 +309,12 @@ public class eis_xiv {
 			// not the underlying craft's .variant id - it resolves the variant through that row's
 			// own "variant" column (see DA Mistral's Mistral_featherDronesSubsystem for reference).
 			return GUNSHIELD_ESCORT_WING_ID;
+		}
+
+		// Vanilla fighter AI, held on REGROUP so the drones only escort and defend the ship. The mode is fixed
+		// here and there is no key to change it (canAssignKey above is false).
+		public DroneFormation getDroneFormation() {
+			return new FighterAIFormation(FighterAIFormation.Mode.REGROUP);
 		}
 	}
 }

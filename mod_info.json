@@ -1,17 +1,33 @@
 {
-    "id": "selkie_eis",
-    "name": "Eternal Iron Shell",
-    "author": "Selkie (art), Bass (code, new), Timid (code, old)",
-    "utility": "false",
-	"version":"2.0.6",
-    "description": "Adds a faction dedicated to the XIV Battlegroup and her legacy. Adds multiple XIV ships!",
-    "gameVersion": "0.98",
-	"jars":["jars/EternalIronShell.jar"],
-	"dependencies": [
-    {"id": "lw_lazylib", "name": "LazyLib"},
-	{"id": "MagicLib", "name": "MagicLib"},
-	{"id": "nexerelin", "name": "Nexerelin"},
-	{"id": "shaderLib", "name": "GraphicsLib"},
+  "id": "selkie_eis",
+  "name": "Eternal Iron Shell",
+  "author": "Selkie (art), Bass (code, new), Timid (code, old)",
+  "utility": "false",
+  "version": "2.1.0",
+  "description": "Adds a faction dedicated to the XIV Battlegroup and her legacy. Adds multiple XIV ships!",
+  "gameVersion": "0.98.5a-RC5",
+  "jars": [
+    "jars/EternalIronShell.jar"
   ],
-	"modPlugin":"data.scripts.eis_modPlugin",
+  "dependencies": [
+    {
+      "id": "lw_lazylib",
+      "name": "LazyLib"
+    },
+    {
+      "id": "MagicLib",
+      "name": "MagicLib",
+      "version": "1.6.1"
+    },
+    {
+      "id": "nexerelin",
+      "name": "Nexerelin"
+    },
+    {
+      "id": "shaderLib",
+      "name": "GraphicsLib"
+    }
+  ],
+  "modPlugin": "data.scripts.eis_modPlugin",
+  "originalGameVersion": "0.98"
 }

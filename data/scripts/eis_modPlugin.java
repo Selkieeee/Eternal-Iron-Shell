@@ -28,6 +28,7 @@ import com.fs.starfarer.api.impl.campaign.econ.impl.eis_SpecialItemEffectsRepo;
 import com.fs.starfarer.api.impl.campaign.ids.Conditions;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
+import org.magiclib.util.MagicIncompatibleHullmods;
 import com.fs.starfarer.api.impl.campaign.ids.Submarkets;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.impl.campaign.intel.BaseMissionIntel.MissionResult;
@@ -155,16 +156,28 @@ public class eis_modPlugin extends BaseModPlugin {
         }
     }
 
+    // Two-way hullmod blocks through MagicLib. Only the vanilla hullmods and Avaritia get MagicLib blockers: eis_aquila, eis_aquila_1time and
+    // eis_damperhull already refuse their conflicts in their own isApplicableToShip, and wrapping them would show "null"
+    // as the reason wherever they are blocked for another cause, since they have no unapplicable reason of their own.
+    private static void addHullmodIncompatibilities() {
+        MagicIncompatibleHullmods.addIncompatibility(HullMods.SAFETYOVERRIDES, "eis_aquila");
+        MagicIncompatibleHullmods.addIncompatibility(HullMods.SAFETYOVERRIDES, "eis_aquila_1time");
+        MagicIncompatibleHullmods.addIncompatibility(HullMods.SAFETYOVERRIDES, "eis_avaritia");
+        MagicIncompatibleHullmods.addIncompatibility("eis_avaritia", HullMods.SAFETYOVERRIDES);
+        MagicIncompatibleHullmods.addIncompatibility(HullMods.HEAVYARMOR, "eis_damperhull");
+    }
+
     @Override
     public void onApplicationLoad() throws JSONException, IOException {
         // The codex links every "colony_item" item to its effect while the title screen loads, before any onGameLoad,
         // so Iron Shell's item effects have to be registered here too (onGameLoad registers them again; putAll is harmless)
         eis_SpecialItemEffectsRepo.addItemEffectsToVanillaRepo();
+        addHullmodIncompatibilities();
         if (haveLuna) {
             lunalib.lunaSettings.LunaSettings.SettingsCreator.addBoolean(MOD_ID, "GreaterHegemony", "Greater Hegemony Alliance",
                     "Creates the Greater Hegemony Alliance at the start of the game. (Default: True)", true);
             lunalib.lunaSettings.LunaSettings.SettingsCreator.addBoolean(MOD_ID, "NoEISPlayer", "Disable Iron Shell Portraits For Player Faction",
-                    "Prevents the player faction from generating Iron Shell portraits. True = NO PORTRAITS. (Default: False)", false);
+                    "Prevents the player faction from generating new Iron Shell portraits when the player did not start as Iron Shell or Hegemony. True = NO PORTRAITS. (Default: False)", false);
             lunalib.lunaSettings.LunaSettings.SettingsCreator.addBoolean(MOD_ID, "AudaciousAutoEscort", "Audacious auto-escorts vengeance core ships",
                     "Re-enables custom AI code to auto-issue escort orders from Audacious to Vengeance-core ships. May cause issues overriding player orders in some edge cases. (Default: False)", false);
             // Without this, the settings values file for this mod may never get written/loaded if LunaLib's
@@ -694,6 +707,7 @@ public class eis_modPlugin extends BaseModPlugin {
                 Global.getSector().getFaction(Factions.HEGEMONY).getPortraits(FullName.Gender.FEMALE).remove("graphics/portraits/eis_velma.png");*/
                 Global.getSector().getPlayerFaction().getPortraits(FullName.Gender.MALE).remove("graphics/portraits/eis_hegelin.png");
                 Global.getSector().getPlayerFaction().getPortraits(FullName.Gender.MALE).remove("graphics/portraits/eis_richard.png");
+                Global.getSector().getPlayerFaction().getPortraits(FullName.Gender.MALE).remove("graphics/portraits/eis_dong.png");
                 Global.getSector().getPlayerFaction().getPortraits(FullName.Gender.FEMALE).remove("graphics/portraits/eis_audrey.png");
                 Global.getSector().getPlayerFaction().getPortraits(FullName.Gender.FEMALE).remove("graphics/portraits/eis_elsa.png");
                 Global.getSector().getPlayerFaction().getPortraits(FullName.Gender.FEMALE).remove("graphics/portraits/eis_hang.png");
@@ -808,7 +822,7 @@ public class eis_modPlugin extends BaseModPlugin {
                 float officersalary = 0;
                 float adminsalary = 0;
                 for (OfficerDataAPI od : playerFleet.getFleetData().getOfficersCopy()) {
-                    float salary = Misc.getOfficerSalary(od.getPerson());
+                    float salary = Misc.getOfficerSalary(od.getPerson(), true); // 0.98.5: matches vanilla CoreScript's officer upkeep
                     if (salary <= 0) continue;
                     officersalary += salary * 0.05f * f;
                 }

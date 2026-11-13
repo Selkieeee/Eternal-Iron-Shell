@@ -1,0 +1,93 @@
+{
+    "displayName": "Vengeance",
+    "fluxCapacitors": 28,
+    "fluxVents": 50,
+    "goalVariant": true,
+    "hullId": "eis_acheron",
+    "hullMods": [
+        "eis_damperhull",
+        "hardenedshieldemitter",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "eis_acheron_Vengeance",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0015": "eis_DURANDAL",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0020": "sabotpod",
+                "WS0021": "sabotpod",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "breach",
+                "WS0003": "breach",
+                "WS0002": "breach",
+                "WS0005": "breach",
+                "WS0004": "breach",
+                "WS0006": "breach",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0009": "eis_superheavy_needler",
+                "WS0010": "eis_superheavy_needler",
+                "WS0031": "eis_barretta",
+                "WS0032": "eis_barretta",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0013": "typhoon",
+                "WS0014": "typhoon",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "eis_celestials_aster",
+                "WS0033": "eis_celestials_aster",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0023": "devastator",
+                "WS0027": "devastator",
+                "WS0028": "devastator",
+                "WS0007": "vulcan",
+                "WS0011": "vulcan",
+                "WS0012": "vulcan",
+                "WS0017": "vulcan",
+                "WS0018": "vulcan",
+                "WS0019": "vulcan",
+                "WS0022": "vulcan",
+                "WS0024": "vulcan",
+                "WS0025": "vulcan",
+                "WS0026": "vulcan",
+                "WS0029": "vulcan",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}
