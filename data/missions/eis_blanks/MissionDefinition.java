@@ -17,8 +17,7 @@ import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
-import exerelin.utilities.NexConfig;
-import exerelin.utilities.NexFactionConfig.StartFleetType;
+import data.scripts.eis_nex;
 import java.util.ArrayList;
 import java.util.List;
 import org.lazywizard.lazylib.combat.AIUtils;
@@ -131,18 +130,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
 										Global.getCombatEngine().getCombatUI().addMessage(1, Global.getCombatEngine().getPlayerShip().getFleetMember(), Misc.getPositiveHighlightColor(), Global.getCombatEngine().getPlayerShip().getName(), Misc.getTextColor(), ": ", Global.getSettings().getColor("standardTextColor"), "Never knew Tri-Tachs were this pathetic.");
 										Global.getCombatEngine().addFloatingText(Global.getCombatEngine().getPlayerShip().getLocation(), "Never knew Tri-Tachs were this pathetic.", Global.getSettings().getModManager().isModEnabled("chatter") ? Global.getSettings().getInt("chatter_floaterFontSize") : 32, Global.getSettings().getColor("standardTextColor"), Global.getCombatEngine().getPlayerShip(), 0, 0);
 									}
-                                    for (int i=1; i <= NexConfig.getFactionConfig("ironshell").getStartFleetSet(StartFleetType.SUPER.name()).getNumFleets(); i++) {
-                                        if ("eis_wolf_avaritia".equals(NexConfig.getFactionConfig("ironshell").getStartFleetSet(StartFleetType.SUPER.name()).getFleet(i).get(0))) {break;}
-                                        if ((i) == NexConfig.getFactionConfig("ironshell").getStartFleetSet(StartFleetType.SUPER.name()).getNumFleets()) {
-                                            List<String> wolfFleet = new ArrayList<String>();
-                                            wolfFleet.add("eis_wolf_avaritia");
-                                            wolfFleet.add("eis_wolf_avaritia");
-                                            wolfFleet.add("eis_wolf_avaritia");
-											wolfFleet.add("eis_wolf_avaritia");
-                                            NexConfig.getFactionConfig("ironshell").getStartFleetSet(StartFleetType.SUPER.name()).addFleet(wolfFleet);
-                                            break;
-                                        }
-                                    }
+                                    eis_nex.unlockSuperStartFleet("eis_wolf_avaritia", "eis_wolf_avaritia", "eis_wolf_avaritia", "eis_wolf_avaritia"); // Nexerelin start fleet; nothing to unlock without it
                                 }
                             }
                         }

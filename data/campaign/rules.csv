@@ -18,7 +18,7 @@ $locationId != galatia
 AvaRecruitAdBarSel,DialogOptionSelected,$option == AvaRecruitAdBar_open,"$global.eisAvaRecruitAdSeen = true
 SetTextHighlights ""Chief Administrator Ava Nitia"" Yami Naraka","Drowned in the usual formal pleasentries, the message is an invitation to speak with Chief Administrator Ava Nitia of Iron Shell, stationed on Yami, in the Naraka system.
 
-Apparently your exploits in the Galatia system have garnered you some attention.",backToBar:Close the message.,,B
+Apparently your exploits in the Galatia system have garnered you some attention.",backToBar:Close the message,Changed: removed the trailing period from the option text (options without quotes do not end in a period).,B
 ,,,,,,,N
 aiCores_turnInOptionSellIronshell,DialogOptionSelected,"$option == aiCores_startTurnIn
 $faction.id == ironshell",FireAll PopulateCoresTurnInOptions,"""We don't generally like the public to be aware that these are still out there, but the Hegemony is treaty-bound to take possession of any such objects and ensure they're destroyed.""",,,B
@@ -342,7 +342,7 @@ greetingEISTaxLink,OpenCommLink,"$global.CaughtTaxEvading
 !$global.EIS_taxespaid score:9001
 EISCalculatePercentage ""$EIScommitTaxFraud2"" $faction.relValue 0.25","SetStoryOption EIScommitTaxFraud 1 avoidCargoScan ui_char_spent_story_point ""Attempted to lies about tax records.""
 SetOptionColor EIScommitTaxFraud2 mountOrangeColor
-Nex_AddOptionConfirmation EIScommitTaxFraud2 ""This action checks your reputation with the faction, and will cost reputation with the faction if confirmed."" ""Confirm"" ""Cancel""
+EIS_AddOptionConfirmation EIScommitTaxFraud2 ""This action checks your reputation with the faction, and will cost reputation with the faction if confirmed."" ""Confirm"" ""Cancel""
 $hailing = false","$PersonRank $personName looks at you and your fleet. A pause is given for a moment before a realization. ""You're $player.name, aren't you?""","0:greetingEISPayTaxes:""Who's asking?""
 1:EIScommitTaxFraud:Attempt to talk your way out of it
 2:EIScommitTaxFraud2:Attempt to use your connections [$EIScommitTaxFraud2]",,B
@@ -368,7 +368,7 @@ AdjustRepActivePerson CUSTOMS_REFUSED_TOLL","Realizing this is another tax audit
 greetingEISPayTaxesa,DialogOptionSelected,"$option == greetingEISPayTaxes
 EISTaxes
 $global.CaughtTaxEvading
-!$global.EIS_taxespaid","Nex_AddOptionConfirmation greetingEISPayTaxesYes ""Are you sure you want to file your taxes?"" ""Yes"" ""No""
+!$global.EIS_taxespaid","EIS_AddOptionConfirmation greetingEISPayTaxesYes ""Are you sure you want to file your taxes?"" ""Yes"" ""No""
 SetTextHighlights $EIS_taxesDGS
 AddTextSmall ""- $EIS_OMTaxes is your refund from your declared market transactions."" good
 SetTextHighlights $EIS_OMTaxes
@@ -392,7 +392,7 @@ cutCommLink:Cut the comm link",,B
 greetingEISPayTaxesb,DialogOptionSelected,"$option == greetingEISPayTaxes
 EISTaxes
 $global.CaughtTaxEvading
-!$global.EIS_taxespaid","Nex_AddOptionConfirmation greetingEISPayTaxesYes ""Are you sure you want to file your taxes?"" ""Yes"" ""No""
+!$global.EIS_taxespaid","EIS_AddOptionConfirmation greetingEISPayTaxesYes ""Are you sure you want to file your taxes?"" ""Yes"" ""No""
 SetTextHighlights $EIS_taxesDGS
 AddTextSmall ""- $EIS_OMTaxes is your refund from your declared market transactions."" good
 SetTextHighlights $EIS_OMTaxes
@@ -416,7 +416,7 @@ cutCommLink:Cut the comm link",,B
 greetingEISPayTaxesc,DialogOptionSelected,"$option == greetingEISPayTaxes
 EISTaxes
 $global.CaughtTaxEvading
-!$global.EIS_taxespaid","Nex_AddOptionConfirmation greetingEISPayTaxesYes ""Are you sure you want to file your taxes?"" ""Yes"" ""No""
+!$global.EIS_taxespaid","EIS_AddOptionConfirmation greetingEISPayTaxesYes ""Are you sure you want to file your taxes?"" ""Yes"" ""No""
 SetTextHighlights $EIS_taxesDGS
 AddTextSmall ""- $EIS_OMTaxes is your refund from your declared market transactions."" good
 SetTextHighlights $EIS_OMTaxes
@@ -440,7 +440,7 @@ cutCommLink:Cut the comm link",,B
 greetingEISPayTaxesd,DialogOptionSelected,"$option == greetingEISPayTaxes
 EISTaxes
 $global.CaughtTaxEvading
-!$global.EIS_taxespaid","Nex_AddOptionConfirmation greetingEISPayTaxesYes ""Are you sure you want to file your taxes?"" ""Yes"" ""No""
+!$global.EIS_taxespaid","EIS_AddOptionConfirmation greetingEISPayTaxesYes ""Are you sure you want to file your taxes?"" ""Yes"" ""No""
 SetTextHighlights $EIS_taxesDGS
 AddTextSmall ""- $EIS_OMTaxes is your refund from your declared market transactions."" good
 SetTextHighlights $EIS_OMTaxes
@@ -603,7 +603,7 @@ defaultQuyShutOffTooFar,PickGreeting,"$id == eiskimquy score:110
 EISRingRingBananaPhone 10
 ","SetShortcut cutCommLinkPolite ""ESCAPE""","After a short wait, your connection request could not be completed. Must be out of range.",0:cutCommLink:Cut the comm link,,B
 ,,,,,,,N
-EISQuyThoughtsPlayer,eiskimquy,,"Nex_DynamicPaginatedOptions addOption eis_Player ""Me""",,,,B
+EISQuyThoughtsPlayer,eiskimquy,,"EIS_DynamicPaginatedOptions addOption eis_Player ""Me""",,,,B
 EISQuyThoughtsPlayerR1,DialogOptionSelected,"$id == eiskimquy
 $option == eis_Player",,"""I imagine you would have true potential.""
 OR
@@ -624,22 +624,22 @@ EISQuyThoughtsPlayerR6,DialogOptionSelected,"$id == eiskimquy
 $option == eis_Player
 $eis_xiv_castigator score:0
 EIS_HasModId tahlan score:0",,"""$player.firstName, I knew I saw great potential in you. The Council is pleased with the rediscovery of the 14th Battlegroup pattern Castigator.""",,,B
-EISQuyThoughtsDaud,eiskimquy,,"Nex_DynamicPaginatedOptions addOption eis_BaikalDaud ""High Hegemon Baikal Daud""",,,,B
+EISQuyThoughtsDaud,eiskimquy,,"EIS_DynamicPaginatedOptions addOption eis_BaikalDaud ""High Hegemon Baikal Daud""",,,,B
 EISQuyThoughtsDaudR,DialogOptionSelected,"$id == eiskimquy
 $option == eis_BaikalDaud
 ",,"""I question the High Hegemon's diplomacy toward some factions, but we see eye-to-eye on many issues. Anyone capable of working his way up the way he did will find a welcoming home in the Fourteenth Battlegroup.""",,,B
 EISQuyThoughtsDaudR2,DialogOptionSelected,"$id == eiskimquy
 $option == eis_BaikalDaud
 $player.metDaud",,"""You're quite the talk around in the Hegemony executive council, he had good things to say of what you've done for the Hegemony, and I'm glad we see eye-to-eye.""",,,B
-EISQuyThoughtsHartley,eiskimquy,$player.metEISHartley,"Nex_DynamicPaginatedOptions addOption eis_Hartley ""Commissioner Hartley""",,,,B
+EISQuyThoughtsHartley,eiskimquy,$player.metEISHartley,"EIS_DynamicPaginatedOptions addOption eis_Hartley ""Commissioner Hartley""",,,,B
 EISQuyThoughtsHartleyR,DialogOptionSelected,"$id == eiskimquy
 $option == eis_Hartley",,"""Commissioner Hartley... a dear friend of mine. Losing his wife on Opis changed him. He's become more and more drawn in, and won't even sit down to chat with me anymore... Perhaps you could change his mind?""",,,B
 EISQuyThoughtsHartleyR2,DialogOptionSelected,"$id == eiskimquy
 $option == eis_Hartley score:2","EISMegamind eisdarren ""$LearnedtoDuel"" true","""Commissioner Hartley... a dear friend of mine. Losing his wife on Opis changed him. He's become more and more drawn in, and won't even sit down to chat with me anymore... He's an honorable man, and proud of his swordplay. You may be able to reach him by crossing blades.""",,,B
-EISQuyThoughtsCeleste,eiskimquy,$player.metEISCeleste,"Nex_DynamicPaginatedOptions addOption eis_CaedaCeleste ""Caeda Celeste""",,,,B
+EISQuyThoughtsCeleste,eiskimquy,$player.metEISCeleste,"EIS_DynamicPaginatedOptions addOption eis_CaedaCeleste ""Caeda Celeste""",,,,B
 EISQuyThoughtsCelesteR,DialogOptionSelected,"$id == eiskimquy
 $option == eis_CaedaCeleste",,"""Ms. Celeste? She created and modernized a majority of our Battlegroup's prototypes into acceptable designs for adoption for the Iron Shell Navy. She's a quiet person and hates  her work being interrupted. I suppose, however, that you might be the exception, considering your recent accomplishments.""",,,B
-EISQuyThoughtsAva,eiskimquy,$player.metEISNitia,"Nex_DynamicPaginatedOptions addOption eis_Avanitia ""Ava Nitia""",,,,B
+EISQuyThoughtsAva,eiskimquy,$player.metEISNitia,"EIS_DynamicPaginatedOptions addOption eis_Avanitia ""Ava Nitia""",,,,B
 EISQuyThoughtsAvaR,DialogOptionSelected,"$id == eiskimquy
 $option == eis_Avanitia",,"""Miss Nitia? She's one of the best pilots in Iron Shell. She's on Yami to keep people on-site - you'd have to be either insane, an ace pilot, or probably both to escape her grasp. If you need some flying lessons, you should ask her for some advice.""",,,B
 ,,,,,,,N
@@ -661,28 +661,33 @@ FireAll PopulateOptions","""It's a shame that some Fourteenth Battlegroup bluepr
 EISQuyVNSectorMenu,DialogOptionSelected,"$option == eis_VNS_Setup
 $id == eiskimquy score:100","FireAll eis_PopulateVNSector
 FireBest VNSectorGreetingOptions
-Nex_DynamicPaginatedOptions show
+EIS_DynamicPaginatedOptions show
 FireAll eis_VNSectorDiscussionOptionsCheck",,,,B
-EISQuyAgentOffer,eis_VNSectorDiscussionOptions,$id == eiskimquy,"Nex_DynamicPaginatedOptions addOption QuyAgentOfferA ""\""I would like to request an operative.\""""",,,,B
+EISQuyAgentOffer,eis_VNSectorDiscussionOptions,"$id == eiskimquy
+EIS_HasModId nexerelin","EIS_DynamicPaginatedOptions addOption QuyAgentOfferA ""\""I would like to request an operative.\""""",,,Agents are a Nexerelin feature: EIS_HasModId nexerelin added so the operative option is not offered at all without Nexerelin.,B
 EISQuyAgentOffer1,eis_VNSectorDiscussionOptionsCheck,"$id == eiskimquy
-!EISAddAgent","SetTooltip QuyAgentOfferA ""You are at the max capacity for agents.""
-SetEnabled QuyAgentOfferA false",,,,B
+!EISAddAgent
+EIS_HasModId nexerelin","SetTooltip QuyAgentOfferA ""You are at the max capacity for agents.""
+SetEnabled QuyAgentOfferA false",,,EIS_HasModId nexerelin added: the option this row greys out (QuyAgentOfferA) only exists with Nexerelin.,B
 EISQuyAgentOffer2,eis_VNSectorDiscussionOptionsCheck,"$id == eiskimquy
-!EISAddAgent 3","SetTooltip QuyAgentOfferA ""You do not have enough credits. You need at least $eis_agent_salary credits.""
+!EISAddAgent 3
+EIS_HasModId nexerelin","SetTooltip QuyAgentOfferA ""You do not have enough credits. You need at least $eis_agent_salary credits.""
 SetTooltipHighlights QuyAgentOfferA $eis_agent_salary
-SetEnabled QuyAgentOfferA false",,,,B
+SetEnabled QuyAgentOfferA false",,,EIS_HasModId nexerelin added: the option this row greys out (QuyAgentOfferA) only exists with Nexerelin.,B
 EISQuyAgentOffer3,eis_VNSectorDiscussionOptionsCheck,"$id == eiskimquy
-!EISOneOfUs","SetTooltip QuyAgentOfferA ""You need to be commissioned or be in an alliance with the Hegemony and Iron Shell.""
-SetEnabled QuyAgentOfferA false",,,,B
+!EISOneOfUs
+EIS_HasModId nexerelin","SetTooltip QuyAgentOfferA ""You need to be commissioned or be in an alliance with the Hegemony and Iron Shell.""
+SetEnabled QuyAgentOfferA false",,,EIS_HasModId nexerelin added: the option this row greys out (QuyAgentOfferA) only exists with Nexerelin.,B
 EISQuyAgentOffer4,eis_VNSectorDiscussionOptionsCheck,"$id == eiskimquy
-$eiskimquy_agent_bought_recently","VNSectorTime ""$eiskimquy_agent_bought_recently"" ""$eiskimquy_agent_bought_recentlyDGS""
+$eiskimquy_agent_bought_recently
+EIS_HasModId nexerelin","VNSectorTime ""$eiskimquy_agent_bought_recently"" ""$eiskimquy_agent_bought_recentlyDGS""
 SetTooltip QuyAgentOfferA ""It is too soon to request an operative recently. You must wait for $eiskimquy_agent_bought_recentlyDGS.""
 SetTooltipHighlights QuyAgentOfferA $eiskimquy_agent_bought_recentlyDGS
-SetEnabled QuyAgentOfferA false",,,,B
+SetEnabled QuyAgentOfferA false",,,EIS_HasModId nexerelin added: the option this row greys out (QuyAgentOfferA) only exists with Nexerelin.,B
 EISQuyAgentOfferA,DialogOptionSelected,"$id == eiskimquy score:100
-$option == QuyAgentOfferA","Nex_AddOptionConfirmation QuyAgentNegotiator ""Are you sure you want to recruit a negotiator?"" ""Confirm"" ""Never mind""
-Nex_AddOptionConfirmation QuyAgentSaboteur ""Are you sure you want to recruit a saboteur?"" ""Confirm"" ""Never mind""
-Nex_AddOptionConfirmation QuyAgentHybrid ""Are you sure you want to recruit a hybrid?"" ""Confirm"" ""Never mind""
+$option == QuyAgentOfferA","EIS_AddOptionConfirmation QuyAgentNegotiator ""Are you sure you want to recruit a negotiator?"" ""Confirm"" ""Never mind""
+EIS_AddOptionConfirmation QuyAgentSaboteur ""Are you sure you want to recruit a saboteur?"" ""Confirm"" ""Never mind""
+EIS_AddOptionConfirmation QuyAgentHybrid ""Are you sure you want to recruit a hybrid?"" ""Confirm"" ""Never mind""
 AddText ""You'll need to pay agents recruited here a salary of $eis_agent_salary credits per month.""
 SetTextHighlights $eis_agent_salary credits
 SetShortcut QuyDisagreeQuest ""ESCAPE""","""Certainly, you are at sufficient clearance to be able to request an operative. What type of operatives are you looking for? Keep in mind you're still expected to pay them a salary. No one works for free in these trying times, but I can waive the hiring bonus required for most operatives.""
@@ -712,10 +717,10 @@ SetEnabled QuyAgentClarify false",,,,B
 ,,,,,,,N
 EISQuyTurnInLegionXIV,eis_VNSectorDiscussionOptions,"$id == eiskimquy
 !$eis_xiv_legion
-EISLearnSpecial ship_bp legion_xiv","Nex_DynamicPaginatedOptions addOption QuyOfferLegion ""\""I'd like to share the Legion (XIV) blueprint with you.\""""",,,Changed: removed $eis_xiv_can_trade (only set by the smalltalk reply EISQuyVNSectorHaveYouHeardReply2) so the share option no longer needs smalltalk first,B
+EISLearnSpecial ship_bp legion_xiv","EIS_DynamicPaginatedOptions addOption QuyOfferLegion ""\""I'd like to share the Legion (XIV) blueprint with you.\""""",,,Changed: removed $eis_xiv_can_trade (only set by the smalltalk reply EISQuyVNSectorHaveYouHeardReply2) so the share option no longer needs smalltalk first,B
 EISQuyTurnInLegionXIV3,eis_VNSectorDiscussionOptionsCheck,"$id == eiskimquy
 !$eis_xiv_legion
-EISLearnSpecial ship_bp legion_xiv","Nex_AddOptionConfirmation QuyOfferLegion ""Are you sure you want to share the Legion (XIV) with the Hegemony and Iron Shell."" ""Confirm"" ""Never mind""",,,Changed: removed $eis_xiv_can_trade (only set by the smalltalk reply EISQuyVNSectorHaveYouHeardReply2) so the share option no longer needs smalltalk first,B
+EISLearnSpecial ship_bp legion_xiv","EIS_AddOptionConfirmation QuyOfferLegion ""Are you sure you want to share the Legion (XIV) with the Hegemony and Iron Shell."" ""Confirm"" ""Never mind""",,,Changed: removed $eis_xiv_can_trade (only set by the smalltalk reply EISQuyVNSectorHaveYouHeardReply2) so the share option no longer needs smalltalk first,B
 EISQuyTurnInLegionXIV2,DialogOptionSelected,"$id == eiskimquy score:100
 $option == QuyOfferLegion
 ","EISLearnSpecial ship_bp legion_xiv true
@@ -730,11 +735,11 @@ FireAll PopulateOptions","""A ship worthy to serve alongside the Onslaught."" Sh
 EISQuyTurnInCastigatorXIV,eis_VNSectorDiscussionOptions,"$id == eiskimquy
 !$eis_xiv_castigator
 EISLearnSpecial ship_bp tahlan_Castigator_xiv
-EIS_HasModId tahlan score:100","Nex_DynamicPaginatedOptions addOption QuyOfferCastigator ""\""I'd like to share the Castigator (XIV) blueprint with you.\""""",,,Changed: removed $eis_xiv_can_trade (only set by the smalltalk reply EISQuyVNSectorHaveYouHeardReply2) so the share option no longer needs smalltalk first,B
+EIS_HasModId tahlan score:100","EIS_DynamicPaginatedOptions addOption QuyOfferCastigator ""\""I'd like to share the Castigator (XIV) blueprint with you.\""""",,,Changed: removed $eis_xiv_can_trade (only set by the smalltalk reply EISQuyVNSectorHaveYouHeardReply2) so the share option no longer needs smalltalk first,B
 EISQuyTurnInCastigatorXIV3,eis_VNSectorDiscussionOptionsCheck,"$id == eiskimquy
 !$eis_xiv_castigator
 EISLearnSpecial ship_bp tahlan_Castigator_xiv
-EIS_HasModId tahlan score:100","Nex_AddOptionConfirmation QuyOfferCastigator ""Are you sure you want to share the Castigator (XIV) with the Hegemony and Iron Shell."" ""Confirm"" ""Never mind""",,,Changed: removed $eis_xiv_can_trade (only set by the smalltalk reply EISQuyVNSectorHaveYouHeardReply2) so the share option no longer needs smalltalk first,B
+EIS_HasModId tahlan score:100","EIS_AddOptionConfirmation QuyOfferCastigator ""Are you sure you want to share the Castigator (XIV) with the Hegemony and Iron Shell."" ""Confirm"" ""Never mind""",,,Changed: removed $eis_xiv_can_trade (only set by the smalltalk reply EISQuyVNSectorHaveYouHeardReply2) so the share option no longer needs smalltalk first,B
 EISQuyTurnInCastigatorXIV2,DialogOptionSelected,"$id == eiskimquy
 $option == QuyOfferCastigator
 EIS_HasModId tahlan score:100","EISLearnSpecial ship_bp tahlan_Castigator_xiv true
@@ -746,17 +751,19 @@ AdjustRepActivePerson COOPERATIVE 5
 $eis_xiv_castigator = true
 FireAll PopulateOptions","""They said a pair of standard TPCs was impractical."" She gives a soft smile. ""And yet it was such a joy to test-pilot. I can't imagine where you found this, Captain $player.firstName.""""",,"3rd param changed false -> true: Castigator (XIV) is now a Hegemony-only priority ship (never ironshell/ironsentinel), same as Legion (XIV).",B
 ,,,,,,,N
-QuyQuestGiver,eis_PopulateVNSector,$id == eiskimquy,"Nex_DynamicPaginatedOptions addOption QuyQuest ""Inquire about any missions that need to be fulfilled.""",,,,
+QuyQuestGiver,eis_PopulateVNSector,$id == eiskimquy,"EIS_DynamicPaginatedOptions addOption QuyQuest ""Inquire about any missions that need to be fulfilled""",,,Changed: removed the trailing period from the option text (options without quotes do not end in a period).,
 QuyQuestGiverReply,DialogOptionSelected,$option == QuyQuest,FireAll PopulateQuyOptions,"""Of course, I always have some work that needs to be done. Let's see what you are authorized to do.""",,,
 QuyQuestDisable,PopulateQuyOptions,"$id == eiskimquy
-!EISOneOfUs","SetTooltip QuyYmaQuest1 ""You need to be commissioned or be in an alliance with the Hegemony and Iron Shell.""
+!EISOneOfUs
+EIS_HasModId nexerelin","SetTooltip QuyYmaQuest1 ""You need to be commissioned or be in an alliance with the Hegemony and Iron Shell.""
 SetEnabled QuyYmaQuest1 false
 SetTooltip QuyKanniQuest1 ""You need to be commissioned or be in an alliance with the Hegemony and Iron Shell.""
-SetEnabled QuyKanniQuest1 false",,,,
+SetEnabled QuyKanniQuest1 false",,,"EIS_HasModId nexerelin added so this tooltip cannot replace the ""Requires Nexerelin"" one from QuyQuestDisableNoNex when Nexerelin is missing.",
 QuyQuestDisable1stNoFP,PopulateQuyOptions,"$id == eiskimquy
 EIS_HasFleetPoints 75 true
-EIS_HasModId shadow_ships","SetTooltip QuyYmaQuest1 ""Your fleet isn't strong enough to attempt this mission. Acquire more ships and officers first.""
-SetEnabled QuyYmaQuest1 false",,,,
+EIS_HasModId shadow_ships
+EIS_HasModId nexerelin","SetTooltip QuyYmaQuest1 ""Your fleet isn't strong enough to attempt this mission. Acquire more ships and officers first.""
+SetEnabled QuyYmaQuest1 false",,,"EIS_HasModId nexerelin added so this tooltip cannot replace the ""Requires Nexerelin"" one from QuyQuestDisableNoNex when Nexerelin is missing.",
 #QuyQuestDisable2ndNoFP,PopulateQuyOptions,"$id == eiskimquy
 EIS_HasFleetPoints 75 true","SetTooltip QuyKanniQuest1 ""Your fleet isn't strong enough to attempt this mission. Acquire more ships and officers first.""
 SetEnabled QuyKanniQuest1 false",,,,
@@ -804,7 +811,7 @@ EISTaxesFiled 50000 true","""Done. The 150,000 credits will be transferred to yo
 QuyYmaQuest1Success,PopulateOptions,"$id == eiskimquy
 $EISQuyYma
 !$EISQuyYmaBusy
-!$EISDoneQuest1",SetOptionColor QuyYmaQuest2 highlight,,12:QuyYmaQuest2:Hand her the report on Operation World Above.,,
+!$EISDoneQuest1",SetOptionColor QuyYmaQuest2 highlight,,12:QuyYmaQuest2:Hand her the report on Operation World Above,Changed: removed the trailing period from the option text (options without quotes do not end in a period).,
 QuyYmaQuest1PlayerColonize,DialogOptionSelected,"$option == QuyYmaQuest2
 EISKillaOwned hanan_pacha player score:3","SetTextHighlights 150,000 50,000","""So, it seems you have a foothold inside the Yma System. Iron Shell is authorized to offer you 150,000 credits for ownership of Hanan Pacha. We'll even throw in a 50,000 credit tax rebate in your next quarterly tax filing. Interested?""","0:QuyYmaQuest1AgreeTransfer:Agree
 1:QuyYmaQuest2:Disagree
@@ -903,7 +910,7 @@ EndConversation","""Return back to me when the re-colonization effort is a succe
 QuyKanniQuest1Success,PopulateOptions,"$id == eiskimquy
 $EISQuyKanni
 !$EISQuyKanniBusy
-!$EISDoneQuest2",SetOptionColor QuyKanniQuest2 highlight,,12:QuyKanniQuest2:Hand her the report on Operation Purity of Heart.,,
+!$EISDoneQuest2",SetOptionColor QuyKanniQuest2 highlight,,12:QuyKanniQuest2:Hand her the report on Operation Purity of Heart,Changed: removed the trailing period from the option text (options without quotes do not end in a period).,
 QuyKanniQuest1SuccessInvadeReply,DialogOptionSelected,"$option == QuyKanniQuest2
 EISKillaOwned kanni ironshell","AddXP 5000
 $EISDoneQuest2 = true
@@ -988,7 +995,7 @@ defaultHartleyShutOffTooFar,PickGreeting,"$id == eisdarren score:110
 EISRingRingBananaPhone 10
 ","SetShortcut cutCommLinkPolite ""ESCAPE""","After a short wait, your connection request could not be completed. Must be out of range.",0:cutCommLink:Cut the comm link,,B
 ,,,,,,,N
-EISHartleyThoughtsPlayer,eisdarren,,"Nex_DynamicPaginatedOptions addOption eis_Player ""Me""",,,,B
+EISHartleyThoughtsPlayer,eisdarren,,"EIS_DynamicPaginatedOptions addOption eis_Player ""Me""",,,,B
 EISHartleyThoughtsPlayerR1,DialogOptionSelected,"$id == eisdarren
 $option == eis_Player",,"""I don't have the time to be chit-chatting, Captain.""",,,B
 EISHartleyThoughtsPlayerR2,DialogOptionSelected,"$id == eisdarren
@@ -997,16 +1004,16 @@ $DuelScore < 0 score:0",,"""A bad duelist I would say.""",,,B
 EISHartleyThoughtsPlayerR3,DialogOptionSelected,"$id == eisdarren
 $option == eis_Player
 $DuelScore > 0",,"""A good duelist I would say.""",,,B
-EISHartleyThoughtsQuy,eisdarren,$player.metEISQuy,"Nex_DynamicPaginatedOptions addOption eis_KimQuy ""Councilor Quy""",,,,B
+EISHartleyThoughtsQuy,eisdarren,$player.metEISQuy,"EIS_DynamicPaginatedOptions addOption eis_KimQuy ""Councilor Quy""",,,,B
 EISHartleyThoughtsQuyR,DialogOptionSelected,"$id == eisdarren
 $option == eis_KimQuy",,"""Councilor Quy is a valuable asset to Iron Shell as well as an old friend of mine. We used to spend quite a bit of time together conversing over inconsequential matters, but I haven't had the time for such luxuries with the burden of my own responsibilities. I'm sure she understands.""",,,
-EISHartleyThoughtsCeleste,eisdarren,$player.metEISCeleste,"Nex_DynamicPaginatedOptions addOption eis_CaedaCeleste ""Caeda Celeste""",,,,
+EISHartleyThoughtsCeleste,eisdarren,$player.metEISCeleste,"EIS_DynamicPaginatedOptions addOption eis_CaedaCeleste ""Caeda Celeste""",,,,
 EISHartleyThoughtsCelesteR,DialogOptionSelected,"$id == eisdarren
 $option == eis_CaedaCeleste",,"""That woman and her house - from Eventide, I believe - are responsible for many of the advancements within Iron Shell. I appreciate her efforts, but...hmm. I have had my misgivings about the means these advancements have been made, but everything seems above board. For now.""",,,
-EISHartleyThoughtsAva,eisdarren,$player.metEISNitia,"Nex_DynamicPaginatedOptions addOption eis_Avanitia ""Ava Nitia""",,,,
+EISHartleyThoughtsAva,eisdarren,$player.metEISNitia,"EIS_DynamicPaginatedOptions addOption eis_Avanitia ""Ava Nitia""",,,,
 EISHartleyThoughtsAvaR,DialogOptionSelected,"$id == eisdarren
 $option == eis_Avanitia",,"""Administrator Nitia? She earned her reputation as a skilled pilot due to her accomplishments during the Second AI War. Nowadays she mostly works from behind a desk instead of the cockpit. I don't have time to regale you with the tale myself, but I'm sure she would be willing to humor you, if you're interested.""",,,
-EISHartleyThoughtsAndrada,eisdarren,$player.gotAndradaBook,"Nex_DynamicPaginatedOptions addOption eis_Andrada ""Phillip Andrada""",,,,
+EISHartleyThoughtsAndrada,eisdarren,$player.gotAndradaBook,"EIS_DynamicPaginatedOptions addOption eis_Andrada ""Phillip Andrada""",,,,
 EISHartleyThoughtsAndradaR,DialogOptionSelected,"$id == eisdarren
 $option == eis_Andrada",,"Hartley's expression immediately hardens as he scoffs. ""Oh. Yes. The 'Lion of Sindria'? Little more than a despot who refused to follow orders and instead chose to rebel. I lead Hegemony forces against him and his little band of traitors myself during the Askonian Crisis. Opis... a lot of good people died that day."" The Chief Commissioner stops speaking, looking off to the side as a silent rage boils over him; moments later he seems to remember you are still on the line. ""Was there anything else you needed, or can I get back to work?""",,,
 EISHartleyVNSectorHaveYouHeardReply,DialogOptionSelected,"$id == eisdarren score:100
@@ -1023,34 +1030,34 @@ FireAll PopulateOptions","""Have you any experience with a sword, Captain? I'd b
 EISHartleyChallenge,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisdarren score:1000
 $LearnedtoDuel
-","Nex_DynamicPaginatedOptions addOption EISDuelChallenge ""\""Care to cross swords?\""""",,,,
+","EIS_DynamicPaginatedOptions addOption EISDuelChallenge ""\""Care to cross swords?\""""",,,,
 EISHartleyChallengeAcceptedSkilled,DialogOptionSelected,$option == EISDuelChallenge,,You put on your robe and dueling helmet.,"0:EISDuelChallenge2:It's time to duel!
-1:nex_duelTutorialCheckSkill:Take a few practice swings (sword tutorial)",,
-EISHartleyChallengeAcceptedSkilled2,DialogOptionSelected,$option == EISDuelChallenge2,"$nex_duelContext = HartleyDuel 0
+1:eis_duelTutorial:Take a few practice swings (sword tutorial)","Practice option id changed from nex_duelTutorialCheckSkill (handled by a Nexerelin row) to eis_duelTutorial, handled by EISHartleyChallengeTutorial, so it works without Nexerelin.",
+EISHartleyChallengeAcceptedSkilled2,DialogOptionSelected,$option == EISDuelChallenge2,"$eis_duelContext = HartleyDuel 0
 $DueledRecently = true 30
-Nex_FencingDuel start $player.bladeSkill true",,,,
-EISHartleyChallengeThatsIt,Nex_FencingDuelFinished,"$nex_duelContext == HartleyDuel
-$nex_playerWonDuel","AddXP 500
+EISFencingDuel start $player.bladeSkill true",,,"Duel now runs through EISFencingDuel (Iron Shell copy of the Nexerelin command, base game duel) with $eis_duelContext, so it works without Nexerelin.",
+EISHartleyChallengeThatsIt,EISFencingDuelFinished,"$eis_duelContext == HartleyDuel
+$eis_playerWonDuel","AddXP 500
 AdjustRepActivePerson 10
 $DuelScore++
 $EISBeatHartleyOnce = true
 FireAll PopulateOptions","""Well fought I would say.""
 OR
-""Now that's a good duel.""",,,
-EISHartleyChallengeThatsYourBlade,Nex_FencingDuelFinished,"$nex_duelContext == HartleyDuel
-$nex_playerLostDuel","AdjustRepActivePerson 1
+""Now that's a good duel.""",,"Trigger and memory keys renamed from the Nexerelin ones (Nex_FencingDuelFinished, $nex_duelContext, $nex_playerWonDuel) to the ones EISFencingDuel sets.",
+EISHartleyChallengeThatsYourBlade,EISFencingDuelFinished,"$eis_duelContext == HartleyDuel
+$eis_playerLostDuel","AdjustRepActivePerson 1
 $DuelScore--
-FireAll PopulateOptions","""And here I thought I had a challenge. Better luck next time.""",,,
+FireAll PopulateOptions","""And here I thought I had a challenge. Better luck next time.""",,"Trigger and memory keys renamed from the Nexerelin ones (Nex_FencingDuelFinished, $nex_duelContext, $nex_playerLostDuel) to the ones EISFencingDuel sets.",
 EISHartleyChallengeRejected,eis_VNSectorDiscussionOptionsCheck,"$DueledRecently
 $id == eisdarren","SetTooltip EISDuelChallenge ""You have recently dueled.""
 SetEnabled EISDuelChallenge false",,,,
 EISHartleyChallengeProposing,eis_VNSectorDiscussionOptionsCheck,"!$DueledRecently
-$id == eisdarren","Nex_AddOptionConfirmation EISDuelChallenge ""Are you sure you want to duel Hartley?"" ""I'm ready"" ""Never mind""",,,,
+$id == eisdarren","EIS_AddOptionConfirmation EISDuelChallenge ""Are you sure you want to duel Hartley?"" ""I'm ready"" ""Never mind""",,,,
 ,,,,,,,
 EISHartleyVNSectorMenu,DialogOptionSelected,"$option == eis_VNS_Setup
 $id == eisdarren score:100","FireAll eis_PopulateVNSector
 FireBest VNSectorGreetingOptions
-Nex_DynamicPaginatedOptions show
+EIS_DynamicPaginatedOptions show
 FireAll eis_VNSectorDiscussionOptionsCheck",,,,
 defaultHartleyGreetingUrgent,VNSectorGreetingOptions,"$id == eisdarren score:100
 !$EISQuickies
@@ -1058,11 +1065,13 @@ EISVibeCheck 50 100","AddText ""\""I have good news about the Vanguard enhanceme
 EISHartleyVanguardPrint,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisdarren score:1000
 !$EISQuickiesRewardOnce
-!EISMegamind eiskimquy ""$EISDoneQuest1""","Nex_DynamicPaginatedOptions addOption EISHartleyVanguardReward ""\""The Councilor said you may have some work for me.\""""",,,,B
+!EISMegamind eiskimquy ""$EISDoneQuest1""
+EIS_HasModId nexerelin","EIS_DynamicPaginatedOptions addOption EISHartleyVanguardReward ""\""The Councilor said you may have some work for me.\""""",,,"EIS_HasModId nexerelin added: this reward needs Operation World Above, which needs Nexerelin, so the option is not shown without it. Without Nexerelin the duel route (EISHartleyVanguardPrintFallbackNoQuest / ...NoNex) is the way to recruit Hartley.",B
 EISHartleyVanguardPrintSuccess,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisdarren score:1000
 !$EISQuickiesRewardOnce
-EISMegamind eiskimquy ""$EISDoneQuest1Success""","Nex_DynamicPaginatedOptions addOption EISHartleyVanguardReward ""\""The Councilor said you may have some work for me.\""""",,,"Split from EISHartleyVanguardPrint into a not-yet-attempted / succeeded pair (equivalent to !$EISDoneQuest1 OR $EISDoneQuest1Success) so the option no longer shows greyed-out after a failed Operation World Above - conditions column doesn't support OR directly, same reason EISCelesteCourageousPrintDisable/c are two rows. Uses EISMegamind (not bare $ flags) because $EISDoneQuest1/$EISDoneQuest1Success live on eiskimquy's own memory, not the current interaction target's - bare $ checks were silently always-false/always-true here since Hartley/Celeste never have these flags set on their own memory.",B
+EISMegamind eiskimquy ""$EISDoneQuest1Success""
+EIS_HasModId nexerelin","EIS_DynamicPaginatedOptions addOption EISHartleyVanguardReward ""\""The Councilor said you may have some work for me.\""""",,,"Split from EISHartleyVanguardPrint into a not-yet-attempted / succeeded pair (equivalent to !$EISDoneQuest1 OR $EISDoneQuest1Success) so the option no longer shows greyed-out after a failed Operation World Above - conditions column doesn't support OR directly, same reason EISCelesteCourageousPrintDisable/c are two rows. Uses EISMegamind (not bare $ flags) because $EISDoneQuest1/$EISDoneQuest1Success live on eiskimquy's own memory, not the current interaction target's - bare $ checks were silently always-false/always-true here since Hartley/Celeste never have these flags set on their own memory. EIS_HasModId nexerelin added: this reward needs Operation World Above, which needs Nexerelin, so the option is not shown without it. Without Nexerelin the duel route (EISHartleyVanguardPrintFallbackNoQuest / ...NoNex) is the way to recruit Hartley.",B
 EISHartleyVanguardReward,DialogOptionSelected,"$option == EISHartleyVanguardReward
 !$EISQuickiesRewardOnce","$EISQuickiesReward = true 30
 $EISQuickiesRewardOnce = true
@@ -1071,14 +1080,15 @@ $EISHartleyContact = true
 EISAddShip eis_vanguard_xiv_elite2
 FireAll PopulateOptions","$personLastName congratulates you. ""I've heard about your success, Captain. I've been authorized to grant you one of our elite refits of the Vanguard-class. You'll find them to pack quite an interesting punch compared to the standard Vanguard."" $personLastName sends over the specifications as he continues. ""You seem to be a reliable Commander. I can arrange some work for you if you need any.""",,,B
 EISHartleyVanguardPrintDisable,eis_VNSectorDiscussionOptionsCheck,"!EISMegamind eiskimquy ""$EISDoneQuest1Success""
-$id == eisdarren","SetTooltip EISHartleyVanguardReward ""You have not successfully completed Operation World Above.""
+$id == eisdarren
+EIS_HasModId nexerelin","SetTooltip EISHartleyVanguardReward ""You have not successfully completed Operation World Above.""
 SetTooltipHighlights EISHartleyVanguardReward Operation World Above
-SetEnabled EISHartleyVanguardReward false",,,,B
+SetEnabled EISHartleyVanguardReward false",,,EIS_HasModId nexerelin added: EISHartleyVanguardReward is only offered with Nexerelin.,B
 EISHartleyFriendly,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisdarren score:1000
 !$EISQuickies
 $EISHartleyContact
-","Nex_DynamicPaginatedOptions addOption EISHartleyReward ""\""I heard you've been trialing a new hull specification.\""""
+","EIS_DynamicPaginatedOptions addOption EISHartleyReward ""\""I heard you've been trialing a new hull specification.\""""
 ",,,,B
 EISHartleyReward,DialogOptionSelected,"$option == EISHartleyReward
 ","$EISQuickies = true
@@ -1090,7 +1100,7 @@ AddTextSmall ""You have received access to the Vanagloria Ionized Armor modspec"
 HartleyShipSalePrint,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisdarren score:1000
 !$EISHartleyShipUnlocked
-$EISHartleyContact","Nex_DynamicPaginatedOptions addOption HartleyShipSaleOffer ""Request expanded nanoforge production clearance.""",,,,b
+$EISHartleyContact","EIS_DynamicPaginatedOptions addOption HartleyShipSaleOffer ""Request expanded nanoforge production clearance""",,,Changed: removed the trailing period from the option text (options without quotes do not end in a period).,b
 HartleyShipSaleDisable,eis_VNSectorDiscussionOptionsCheck,"!EISVibeCheck 50 100
 $id == eisdarren
 !$EISHartleyShipUnlocked","SetTooltip HartleyShipSaleOffer ""Your relation with Hartley is not on Friendly terms (50 relation).""
@@ -1129,7 +1139,7 @@ FireAll PopulateOptions",,,Closes the ship preview put up by HartleyShipSaleUnlo
 ,,,,,,,n
 EISHartleyXIVConversionPrint,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisdarren score:1000
-$EISHartleyContact","Nex_DynamicPaginatedOptions addOption EISHartleyXIVConversionOffer ""Request XIV hull conversion""",,,,b
+$EISHartleyContact","EIS_DynamicPaginatedOptions addOption EISHartleyXIVConversionOffer ""Request XIV hull conversion""",,,,b
 EISHartleyXIVConversionDisable,eis_VNSectorDiscussionOptionsCheck,"!EISVibeCheck 50 100
 $id == eisdarren","SetTooltip EISHartleyXIVConversionOffer ""Your relation with Hartley is not on Friendly terms (50 relation).""
 SetTooltipHighlightColors hGood
@@ -1206,7 +1216,7 @@ EISHartleyVanguardPrintFallback,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisdarren score:1000
 !$EISQuickiesRewardOnce
 EISMegamind eiskimquy ""$EISDoneQuest1""
-!EISMegamind eiskimquy ""$EISDoneQuest1Success""","Nex_DynamicPaginatedOptions addOption EISHartleyVanguardRewardFallback ""\""Is that enough proof for you?\""""",,,"Fallback recruitment path if Operation World Above was failed, available if the player has also beaten Hartley in a duel at least once ($EISBeatHartleyOnce). Exact copy of EISHartleyVanguardReward's offer/reward for now, gated on failure+duel instead of success. No disable row per request - either both conditions are met and it's fully available, or it's hidden. | Changed: no longer needs $EISBeatHartleyOnce to show, so a failed operation always shows this option; EISHartleyVanguardFallbackDisable greys it out until the player has won a duel. Players who never did the operation use EISHartleyVanguardPrintFallbackNoQuest instead",B
+!EISMegamind eiskimquy ""$EISDoneQuest1Success""","EIS_DynamicPaginatedOptions addOption EISHartleyVanguardRewardFallback ""\""Is that enough proof for you?\""""",,,"Fallback recruitment path if Operation World Above was failed, available if the player has also beaten Hartley in a duel at least once ($EISBeatHartleyOnce). Exact copy of EISHartleyVanguardReward's offer/reward for now, gated on failure+duel instead of success. No disable row per request - either both conditions are met and it's fully available, or it's hidden. | Changed: no longer needs $EISBeatHartleyOnce to show, so a failed operation always shows this option; EISHartleyVanguardFallbackDisable greys it out until the player has won a duel. Players who never did the operation use EISHartleyVanguardPrintFallbackNoQuest instead",B
 EISHartleyVanguardRewardFallback,DialogOptionSelected,"$option == EISHartleyVanguardRewardFallback
 !$EISQuickiesRewardOnce","$EISQuickiesReward = true 30
 $EISQuickiesRewardOnce = true
@@ -1315,7 +1325,7 @@ aiCores_turnInResponseDefaultCeleste,AICoresTurnedInCeleste,,FireAll PopulateOpt
 EISCelestePKDiscussPrint,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisceleste score:1000
 $player.encounteredPKDefenderFleet
-!$EISCelestePKDiscussDone","Nex_DynamicPaginatedOptions addOption EISCelestePKDiscussOffer ""Discuss automated XIV vessels""",,,,b
+!$EISCelestePKDiscussDone","EIS_DynamicPaginatedOptions addOption EISCelestePKDiscussOffer ""Discuss automated XIV vessels""",,,,b
 EISCelestePKDiscussSel,DialogOptionSelected,$option == EISCelestePKDiscussOffer,,"Caeda silently listens to your explanation of the strange encounter with a fully automated 14th Battlegroup warfleet on the fringes of the sector. She seems uninterested in the surrounding details of the curious planet or the contents of the cache the fleet was defending. She interrupts you as you begin to move on from the fleet.
 
 ""As you know, automated warfleets have been prohibited under Domain law since well before the formation of the Hegemony..."" She looks away and ponders for a moment, before meeting your gaze again. ""That being said, if you were able to bring any... wreckage of these vessels to House Celeste, we may be able to salvage some useful components out of them."" She gives a sly grin, clearly eager to probe the minds of her ancestors through their work on these vessels.
@@ -1329,7 +1339,7 @@ EISCelesteXIVSalvagePrint,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisceleste score:1000
 $global.pkCacheDefendersDefeated
 $EISCelestePKDiscussDone
-$EISCelesteContact","Nex_DynamicPaginatedOptions addOption EISCelesteXIVSalvageOffer ""Discuss XIV automated ship \""salvaging\""""",,,,b
+$EISCelesteContact","EIS_DynamicPaginatedOptions addOption EISCelesteXIVSalvageOffer ""Discuss XIV automated ship \""salvaging\""""",,,,b
 EISCelesteXIVSalvageDisable,eis_VNSectorDiscussionOptionsCheck,"!EISVibeCheck 50 100
 $id == eisceleste
 $global.pkCacheDefendersDefeated
@@ -1352,36 +1362,40 @@ FireAll PopulateOptions","Caeda looks dissapointed. ""Very well, but I'm not ret
 EISCelesteVNSectorMenu,DialogOptionSelected,"$option == eis_VNS_Setup
 $id == eisceleste score:100","FireAll eis_PopulateVNSector
 FireBest VNSectorGreetingOptions
-Nex_DynamicPaginatedOptions show
+EIS_DynamicPaginatedOptions show
 FireAll eis_VNSectorDiscussionOptionsCheck",,,,b
 EISCelesteCourageousPrint,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisceleste score:1000
 !$EISQuickiesRewardOnce
 $EISCelesteContact
-!EISMegamind eiskimquy ""$EISDoneQuest1""","Nex_DynamicPaginatedOptions addOption EISCelesteCourageousReward ""\""The Councilor told me you've been trialing a new prototype.\""""",,,,b
+!EISMegamind eiskimquy ""$EISDoneQuest1""
+EIS_HasModId nexerelin","EIS_DynamicPaginatedOptions addOption EISCelesteCourageousReward ""\""The Councilor told me you've been trialing a new prototype.\""""",,,"EIS_HasModId nexerelin added: this reward needs Operation World Above, which needs Nexerelin, so the option is not shown without it.",b
 EISCelesteCourageousPrintSuccess,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisceleste score:1000
 !$EISQuickiesRewardOnce
 $EISCelesteContact
-EISMegamind eiskimquy ""$EISDoneQuest1Success""","Nex_DynamicPaginatedOptions addOption EISCelesteCourageousReward ""\""The Councilor told me you've been trialing a new prototype.\""""",,,"Split from EISCelesteCourageousPrint into a not-yet-attempted / succeeded pair (equivalent to !$EISDoneQuest1 OR $EISDoneQuest1Success) so the option no longer shows greyed-out after a failed Operation World Above. Uses EISMegamind (not bare $ flags) since these flags live on eiskimquy's own memory, not Celeste's.",b
+EISMegamind eiskimquy ""$EISDoneQuest1Success""
+EIS_HasModId nexerelin","EIS_DynamicPaginatedOptions addOption EISCelesteCourageousReward ""\""The Councilor told me you've been trialing a new prototype.\""""",,,"Split from EISCelesteCourageousPrint into a not-yet-attempted / succeeded pair (equivalent to !$EISDoneQuest1 OR $EISDoneQuest1Success) so the option no longer shows greyed-out after a failed Operation World Above. Uses EISMegamind (not bare $ flags) since these flags live on eiskimquy's own memory, not Celeste's. EIS_HasModId nexerelin added: this reward needs Operation World Above, which needs Nexerelin, so the option is not shown without it.",b
 EISCelesteCourageousReward,DialogOptionSelected,"$option == EISCelesteCourageousReward
 !$EISQuickiesRewardOnce","$EISQuickiesReward = true 30
 $EISQuickiesRewardOnce = true
 FireAll PopulateOptions
 EISAddShip eis_courageous_elite","""Has she now?"" $personLastName thinks for a moment. ""I was planning on telling you myself, but... I've been authorized to grant you one of our elite refits of the Courageous-class. You'll find them to be quite interesting compared to the usual Courageous. Please do come back with some flight logs for it, Captain.""",,,b
 EISCelesteCourageousPrintDisablec,eis_VNSectorDiscussionOptionsCheck,"!EISVibeCheck 25 100
-$id == eisceleste","SetTooltip EISCelesteCourageousReward ""You need to be on Welcoming terms (25 relation) with Celeste, and have Councilor Quy's Operation World Above completed, before she'll consider this.""
+$id == eisceleste
+EIS_HasModId nexerelin","SetTooltip EISCelesteCourageousReward ""You need to be on Welcoming terms (25 relation) with Celeste, and have Councilor Quy's Operation World Above completed, before she'll consider this.""
 SetTooltipHighlightColors hGood
 SetTooltipHighlights EISCelesteCourageousReward Welcoming
-SetEnabled EISCelesteCourageousReward false",,,"Compressed into a single combined tooltip (also listing the Operation World Above requirement) shared with EISCelesteCourageousPrintDisable, per request - previously each disable row only mentioned its own condition, so if both were unmet the player would only ever see whichever one fired last.",b
+SetEnabled EISCelesteCourageousReward false",,,"Compressed into a single combined tooltip (also listing the Operation World Above requirement) shared with EISCelesteCourageousPrintDisable, per request - previously each disable row only mentioned its own condition, so if both were unmet the player would only ever see whichever one fired last. EIS_HasModId nexerelin added: EISCelesteCourageousReward is only offered with Nexerelin.",b
 EISCelesteCourageousPrintDisable,eis_VNSectorDiscussionOptionsCheck,"!EISMegamind eiskimquy ""$EISDoneQuest1Success""
-$id == eisceleste","SetTooltip EISCelesteCourageousReward ""You need to be on Welcoming terms (25 relation) with Celeste, and have Councilor Quy's Operation World Above completed, before she'll consider this.""
+$id == eisceleste
+EIS_HasModId nexerelin","SetTooltip EISCelesteCourageousReward ""You need to be on Welcoming terms (25 relation) with Celeste, and have Councilor Quy's Operation World Above completed, before she'll consider this.""
 SetTooltipHighlightColors hGood
 SetTooltipHighlights EISCelesteCourageousReward Welcoming
-SetEnabled EISCelesteCourageousReward false",,,"Compressed into the same combined tooltip as EISCelesteCourageousPrintDisablec, per request.",b
+SetEnabled EISCelesteCourageousReward false",,,"Compressed into the same combined tooltip as EISCelesteCourageousPrintDisablec, per request. EIS_HasModId nexerelin added: EISCelesteCourageousReward is only offered with Nexerelin.",b
 EISCelesteWelcoming,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisceleste score:1000
-!$EISQuickies1","Nex_DynamicPaginatedOptions addOption EISReward1 ""\""I think a more formal business arrangement would benefit us both.\""""",,,,B
+!$EISQuickies1","EIS_DynamicPaginatedOptions addOption EISReward1 ""\""I think a more formal business arrangement would benefit us both.\""""",,,,B
 EISReward1,DialogOptionSelected,$option == EISReward1,"$EISQuickies1 = true
 EISAddShip eis_audacious_special true
 EISAddContact
@@ -1390,7 +1404,7 @@ FireAll PopulateOptions","""I agree."" $personLastName pauses for a moment. ""I'
 EISCelesteFriendly,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisceleste score:1000
 !$EISQuickies2
-$EISCelesteContact","Nex_DynamicPaginatedOptions addOption EISReward2 ""\""About that hullmod spec you mentioned...\""""",,,,B
+$EISCelesteContact","EIS_DynamicPaginatedOptions addOption EISReward2 ""\""About that hullmod spec you mentioned...\""""",,,,B
 EISReward2,DialogOptionSelected,$option == EISReward2,"$EISQuickies2 = true
 FireAll PopulateOptions
 EISAddSpecial modspec eis_avaritia
@@ -1399,13 +1413,13 @@ AddTextSmall ""You have received access to the Avaritia Capacity Overhaul modspe
 EISCelesteCooperative,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisceleste score:1000
 !$EISQuickies3
-$EISCelesteContact","Nex_DynamicPaginatedOptions addOption EISReward3 ""Discuss sharing House Celeste's designs.""",,,,B
+$EISCelesteContact","EIS_DynamicPaginatedOptions addOption EISReward3 ""Discuss sharing House Celeste's designs""",,,Changed: removed the trailing period from the option text (options without quotes do not end in a period).,B
 EISReward3,DialogOptionSelected,$option == EISReward3,"$EISQuickies3 = true
 FireAll PopulateOptions
 EISAddSpecial eisceleste_package
 AddText ""You have received access to the Celeste Family Blueprint Package"" highlight","""You certainly have been integral to my work lately. Maybe I could pull some strings..."" $personLastName hesitates, checking a console before turning back to you. ""As a representative of House Celeste of Eventide, I am extending nanoforge production rights for our designs to you."" She gives you a soft smile. ""I hope that's enough of an incentive for you, Captain.""",,,B
 ,,,,,,,n
-EISCelesteThoughtsPlayer,eisceleste,,"Nex_DynamicPaginatedOptions addOption eis_Player ""Me""",,,,b
+EISCelesteThoughtsPlayer,eisceleste,,"EIS_DynamicPaginatedOptions addOption eis_Player ""Me""",,,,b
 EISCelesteThoughtsPlayerR1,DialogOptionSelected,"$id == eisceleste
 $option == eis_Player
 EISVibeCheck -100 -1",,"""A pest.""",,,b
@@ -1415,13 +1429,13 @@ EISVibeCheck 0 50",,"""I think you have the potential to be useful for my resear
 EISCelesteThoughtsPlayerR2,DialogOptionSelected,"$id == eisceleste
 $option == eis_Player
 EISVibeCheck 50 100",,"""You've been an excellent supporter of my research. I appreciate your help.""",,,B
-EISCelesteThoughtsQuy,eisceleste,$player.metEISQuy,"Nex_DynamicPaginatedOptions addOption eis_KimQuy ""Councilor Quy""",,,,b
+EISCelesteThoughtsQuy,eisceleste,$player.metEISQuy,"EIS_DynamicPaginatedOptions addOption eis_KimQuy ""Councilor Quy""",,,,b
 EISCelesteThoughtsQuyR,DialogOptionSelected,"$id == eisceleste
 $option == eis_KimQuy",,"""I'm glad Kim sees the value in my research. Dealing with inspections was such an annoyance until we reached an understanding.""",,,b
-EISCelesteThoughtsAva,eisceleste,$player.metEISNitia,"Nex_DynamicPaginatedOptions addOption eis_Avanitia ""Ava Nitia""",,,,b
+EISCelesteThoughtsAva,eisceleste,$player.metEISNitia,"EIS_DynamicPaginatedOptions addOption eis_Avanitia ""Ava Nitia""",,,,b
 EISCelesteThoughtsAvaR,DialogOptionSelected,"$id == eisceleste
 $option == eis_Avanitia",,"""Ava and I used to be good friends, once. She was an excellent test pilot, but that all stopped once she took over as the Administrator of Yami. I suppose she didn't like where many of the missing prisoners ended up.""",,,b
-EISCelesteThoughtsBaird,eisceleste,$global.metBaird,"Nex_DynamicPaginatedOptions addOption eis_AnahitaBaird ""Provost Baird""",,,,b
+EISCelesteThoughtsBaird,eisceleste,$global.metBaird,"EIS_DynamicPaginatedOptions addOption eis_AnahitaBaird ""Provost Baird""",,,,b
 EISCelesteThoughtsBairdR,DialogOptionSelected,"$id == eisceleste
 $option == eis_AnahitaBaird
 ",,"""Already a new Provost... I spent a multitude of resources to build an understanding with Provost Kallichore. Hopefully my connections at the Galatia Academy have remained intact.""",,,b
@@ -1474,10 +1488,10 @@ EISRingRingBananaPhone 10
 ","SetShortcut cutCommLinkPolite ""ESCAPE""","After a short wait, your connection request could not be completed. Must be out of range.",0:cutCommLink:Cut the comm link,,B
 ,,,,,,,N
 EISCharlotteHire,eis_VNSectorDiscussionOptions,"$id == eissneed score:1000
-!$DidNotAskCharlotte","Nex_DynamicPaginatedOptions addOption Charlotteome ""Offer to hire $himOrHer""",,,,B
+!$DidNotAskCharlotte","EIS_DynamicPaginatedOptions addOption Charlotteome ""Offer to hire $himOrHer""",,,,B
 EISCharlotteReward,eis_VNSectorDiscussionOptions,"$id == eissneed score:1000
 !$EISQuickies1
-$EISCharlotteContact","Nex_DynamicPaginatedOptions addOption EISCharlotteReward1 ""I recall you had a special hullmod for me?""",,,"Changed: added $EISCharlotteContact so the option (and its greyed-out state) only appears once Charlotte is a contact, matching Ava's $AvaContact reward options",B
+$EISCharlotteContact","EIS_DynamicPaginatedOptions addOption EISCharlotteReward1 ""I recall you had a special hullmod for me?""",,,"Changed: added $EISCharlotteContact so the option (and its greyed-out state) only appears once Charlotte is a contact, matching Ava's $AvaContact reward options",B
 CharlotteHireInquiry,DialogOptionSelected,$option == Charlotteome,"AddText ""You ask $personName some questions to establish where $hisOrHer skills lie.""
 EISPoopyStinky false","""Oh, I suppose my reputation preceeds me. So you want the Witch of Naraka under your command, hmm?""","0:ome_hireYes:""Sounds good.""
 1:ome_hireWitch:""The 'Witch of Naraka'? Really?""
@@ -1502,7 +1516,7 @@ FireAll PopulateOptions
 EISCharlotteRealHirePrint,eis_VNSectorDiscussionOptions,"$id == eissneed score:1000
 $DidNotAskCharlotte
 !$EISCharlotteRecruited
-$EISCharlotteContact","Nex_DynamicPaginatedOptions addOption EISCharlotteRealHireOffer ""\""If you hate it so much here...\""""",,,,B
+$EISCharlotteContact","EIS_DynamicPaginatedOptions addOption EISCharlotteRealHireOffer ""\""If you hate it so much here...\""""",,,,B
 EISCharlotteRealHireDisable,eis_VNSectorDiscussionOptionsCheck,"!EISVibeCheck 50 100
 $id == eissneed
 $DidNotAskCharlotte
@@ -1523,7 +1537,7 @@ EISCharlotteRealHireDecline,DialogOptionSelected,$option == EISCharlotteRealHire
 CharlotteVNSectorMenu,DialogOptionSelected,"$option == eis_VNS_Setup
 $id == eissneed score:100","FireAll eis_PopulateVNSector
 FireBest VNSectorGreetingOptions
-Nex_DynamicPaginatedOptions show
+EIS_DynamicPaginatedOptions show
 FireAll eis_VNSectorDiscussionOptionsCheck",,,,B
 defaultCharlotteHexGreetingUrgent,VNSectorGreetingOptions,"$id == eissneed score:100
 EISVibeCheck 50 100
@@ -1542,24 +1556,24 @@ EISCharlotteVNSectorHaveYouHeardReply1,DialogOptionSelected,"$id == eissneed sco
 $option == eis_VNS_Converse
 !$EISQuickies1 score:0",,"""If we get enough done, I might be able to get you access to a pretty nice hullmod spec. Just between you and me, of course.""",,,B
 ,,,,,,,N
-EISCharlotteThoughtsPlayer,eissneed,,"Nex_DynamicPaginatedOptions addOption eis_Player ""Me""",,,,B
+EISCharlotteThoughtsPlayer,eissneed,,"EIS_DynamicPaginatedOptions addOption eis_Player ""Me""",,,,B
 EISCharlotteThoughtsPlayerR1,DialogOptionSelected,"$id == eissneed
 $option == eis_Player
 EISVibeCheck -100 10",,"""I haven't really given you much thought, Captain.""",,,B
 EISCharlotteThoughtsPlayerR2,DialogOptionSelected,"$id == eissneed
 $option == eis_Player
 EISVibeCheck 10 100",,"""You've been a bit of help so far, Captain. Hope we can fly together some day,""",,,B
-EISCharlotteThoughtsDaud,eissneed,,"Nex_DynamicPaginatedOptions addOption eis_BaikalDaud ""High Hegemon Baikal Daud""",,,,B
+EISCharlotteThoughtsDaud,eissneed,,"EIS_DynamicPaginatedOptions addOption eis_BaikalDaud ""High Hegemon Baikal Daud""",,,,B
 EISCharlotteThoughtsDaudR,DialogOptionSelected,"$id == eissneed
 $option == eis_BaikalDaud
 ",,"""He's certainly earned his position. We need more leaders like him who know the reality of war. I respect him a lot more than those ""officers"" Eventide spits out.""",,,B
-EISCharlotteThoughtsQuy,eissneed,$player.metEISQuy,"Nex_DynamicPaginatedOptions addOption eis_KimQuy ""Councilor Quy""",,,,B
+EISCharlotteThoughtsQuy,eissneed,$player.metEISQuy,"EIS_DynamicPaginatedOptions addOption eis_KimQuy ""Councilor Quy""",,,,B
 EISCharlotteThoughtsQuyR,DialogOptionSelected,"$id == eissneed
 $option == eis_KimQuy",,"""Kim Quy... well I used to serve aboard her Legion, the Hoan Kiem, as a fighter pilot. She was an excellent leader, and treated those under her command fairly. A bit too fairly, I guess. I got grounded after a bit of a tussle with one of her bridge crew. Some guy from Eventide academy, said he was 'surprised someone of my talent came from Jangala'. Commander Quy probably gave me more grace than I deserved, got the charges reduced from assault to disrespect of a superior officer.""",,,B
-EISCharlotteThoughtsCeleste,eissneed,$player.metEISCeleste,"Nex_DynamicPaginatedOptions addOption eis_CaedaCeleste ""Caeda Celeste""",,,,B
+EISCharlotteThoughtsCeleste,eissneed,$player.metEISCeleste,"EIS_DynamicPaginatedOptions addOption eis_CaedaCeleste ""Caeda Celeste""",,,,B
 EISCharlotteThoughtsCelesteR,DialogOptionSelected,"$id == eissneed
 $option == eis_CaedaCeleste",,"""Caeda? Haven't said I've heard too much about her. Just that she's some noblewoman from a House on Eventide. I also heard she has a bad rep with her fellow aristocrats, so maybe she's not so bad.""",,,B
-EISCharlotteThoughtsAva,eissneed,$player.metEISNitia,"Nex_DynamicPaginatedOptions addOption eis_Avanitia ""Ava Nitia""",,,,B
+EISCharlotteThoughtsAva,eissneed,$player.metEISNitia,"EIS_DynamicPaginatedOptions addOption eis_Avanitia ""Ava Nitia""",,,,B
 EISCharlotteThoughtsAvaR,DialogOptionSelected,"$id == eissneed
 $option == eis_Avanitia",,"""Ava treated me a lot better than I deserved when I got assigned to her. Guess she had some sympathy for a fellow pilot.  Never gave me a negative review despite how much I slacked on the job. We don't get much time to chitchat in the office, but she joined me in the simulator one day after some drinks and... that woman is a monster. I wasn't able to land a single hit on her. I wouldn't get in her way if I were you.""",,,B
 #END Charlotte Dialogue,,,,,,,N
@@ -1684,7 +1698,7 @@ $faction.id == ironshell",FireBest TaxesFile,,"11:EISTax_startTurnIn:""I'd like 
 ,,,,,,,N
 AvaHire,eis_VNSectorOpinionOptions,"$id == eisava score:100
 EISVibeCheck -50 100
-!$AvaContactCake","Nex_DynamicPaginatedOptions addOption AvaHireOption ""Try to offer a gift to Ava""",,1:AvaHireOption:Try to offer a gift to Ava,,b
+!$AvaContactCake","EIS_DynamicPaginatedOptions addOption AvaHireOption ""Try to offer a gift to Ava""",,1:AvaHireOption:Try to offer a gift to Ava,,b
 AvaHireResponse,DialogOptionSelected,"$id == eisava
 $option == AvaHireOption
 ","FireAll PopulateAvaOptions
@@ -1709,7 +1723,7 @@ AvaDrink3RWow,DialogOptionSelected,"$option == AvaCoffee
 $AvaContact",FireAll PopulateOptions,"""I couldn't. I might get into a caffeine crash, but thanks for your offer.""",,,b
 ,,,,,,,
 AvaWarStory0,eis_VNSectorDiscussionOptions,"$id == eisava score:100
-!$AvaHeardWarStory","Nex_DynamicPaginatedOptions addOption AvaWarStoryBegin ""\""You're a veteran, aren't you?\""""",,,,
+!$AvaHeardWarStory","EIS_DynamicPaginatedOptions addOption AvaWarStoryBegin ""\""You're a veteran, aren't you?\""""",,,,
 AvaWarStoryCancel1,DialogOptionSelected,$option == AvaWarStoryCancel1,"$AvaHeardWarStory = true
 AdjustRepActivePerson HOSTILE -5
 FireAll PopulateOptions","Ava frowns. ""If you have somewhere else to be, you might as well be there right now.""",,,
@@ -1723,9 +1737,9 @@ EIS_HasMissionScore eis_queens 1",SetOptionColor AvaWarStorySpecial good,"""Yes,
 After thinking for a moment with her eyes closed she starts talking. ""I can tell you about one of my engagements from the Second AI War, when I was still a low-level officer in a patrol fleet."" She looks into your eyes and begins her story.
 
 ""Cycle one hundred and ninety three. May eleventh. Hegemony is stretched thin. Tri-Tachyon tries to take control over Nachiketa in the Naraka system. The fuel production facility made it a high value target - you do the math."" Her face contorts in anger. ""A small force of Tri-Tachies tried to attach a comm sniffer to the communication array in the system, wanted to know what we were planning to do."" She grins, an almost predatory look in her eyes. Was she like that back then? ""High Command orders me to get into their secret prototype frigate and take them down. It worked."" She looks wistfully at her coffee mug. ""I miss that little ship. It was so much fun to fly. Had some weird modifications thrown in there by the techies. Command named the frigate design Valorous after all the testing and, well, the name stuck."" Seems like she used that ship a lot. Most captains get attached to their personal flagships after all.","1:AvaWarStoryBegin2:Continue listening...
-2:AvaWarStoryCancel1:Yawn in front of her.
+2:AvaWarStoryCancel1:Yawn in front of her
 3:AvaWarStoryCancel2:""Get real.""
-4:AvaWarStorySpecial:""I own such a design right now.""",,
+4:AvaWarStorySpecial:""I own such a design right now.""",Changed: removed the trailing period from the option text (options without quotes do not end in a period).,
 AvaWarStory1NoScore,DialogOptionSelected,"$option == AvaWarStoryBegin
 PlayerFleetHasShipWithBaseHull eis_valorous
 !EIS_HasMissionScore eis_queens 1",,"""Yes, I'm a veteran..."" Ava reclines in her chair and gets comfortable. ""So, you want me to tell you about some of my experiences from back before I was..."" She pauses and drinks a bit of her coffee, eyes never leaving the finished paperwork, ""... turned into a desk jockey?""
@@ -1733,66 +1747,66 @@ PlayerFleetHasShipWithBaseHull eis_valorous
 After thinking for a moment with her eyes closed she starts talking. ""I can tell you about one of my engagements from the Second AI War, when I was still a low-level officer in a patrol fleet."" She looks into your eyes and begins her story.
 
 ""Cycle one hundred and ninety three. May eleventh. Hegemony is stretched thin. Tri-Tachyon tries to take control over Nachiketa in the Naraka system. The fuel production facility made it a high value target - you do the math."" Her face contorts in anger. ""A small force of Tri-Tachies tried to attach a comm sniffer to the communication array in the system, wanted to know what we were planning to do."" She grins, an almost predatory look in her eyes. Was she like that back then? ""High Command orders me to get into their secret prototype frigate and take them down. It worked."" She looks wistfully at her coffee mug. ""I miss that little ship. It was so much fun to fly. Had some weird modifications thrown in there by the techies. Command named the frigate design Valorous after all the testing and, well, the name stuck."" Seems like she used that ship a lot. Most captains get attached to their personal flagships after all.","1:AvaWarStoryBegin2:Continue listening...
-2:AvaWarStoryCancel1:Yawn in front of her.
+2:AvaWarStoryCancel1:Yawn in front of her
 3:AvaWarStoryCancel2:""Get real.""
-4:AvaWarStorySpecial:""I own such a design right now.""",,
+4:AvaWarStorySpecial:""I own such a design right now.""",Changed: removed the trailing period from the option text (options without quotes do not end in a period).,
 AvaWarStory1b,DialogOptionSelected,"$option == AvaWarStoryBegin
 !PlayerFleetHasShipWithBaseHull eis_valorous",,"""Yes, I'm a veteran..."" Ava reclines in her chair and gets comfortable. ""So, you want me to tell you about some of my experiences from back before I was..."" She pauses and drinks a bit of her coffee, eyes never leaving the finished paperwork, ""... turned into a desk jockey?""
 
 After thinking for a moment with her eyes closed she starts talking. ""I can tell you about one of my engagements from the Second AI War, when I was still a low-level officer in a patrol fleet."" She looks into your eyes and begins her story.
 
 ""Cycle one hundred and ninety three. May eleventh. Hegemony is stretched thin. Tri-Tachyon tries to take control over Nachiketa in the Naraka system. The fuel production facility made it a high value target - you do the math."" Her face contorts in anger. ""A small force of Tri-Tachies tried to attach a comm sniffer to the communication array in the system, wanted to know what we were planning to do."" She grins, an almost predatory look in her eyes. Was she like that back then? ""High Command orders me to get into their secret prototype frigate and take them down. It worked."" She looks wistfully at her coffee mug. ""I miss that little ship. It was so much fun to fly. Had some weird modifications thrown in there by the techies. Command named the frigate design Valorous after all the testing and, well, the name stuck."" Seems like she used that ship a lot. Most captains get attached to their personal flagships after all.","1:AvaWarStoryBegin2:Continue listening...
-2:AvaWarStoryCancel1:Yawn in front of her.
-3:AvaWarStoryCancel2:""Get real.""",,
+2:AvaWarStoryCancel1:Yawn in front of her
+3:AvaWarStoryCancel2:""Get real.""",Changed: removed the trailing period from the option text (options without quotes do not end in a period).,
 AvaWarStory1c,DialogOptionSelected,$option == AvaWarStorySpecial,AdjustRepActivePerson WELCOMING 3,"""Do you now? She's a dream to pilot. Take good care of her and she'll take good care of you.""","1:AvaWarStoryBegin2:""So about that story...""",,
 AvaWarStory2,DialogOptionSelected,$option == AvaWarStoryBegin2,,"""We get the enemy location from another scout and start pre-combat checks. No, I wasn't alone; I had three crazy bastards in Courageous-class frigates backing me up."" A smile appears on her face as she seems to recall something funny. ""Slippery little bastards. Seen them avoid entire barrages, get behind the enemy, and punish them  with a few good shots to the engines. Instant flameout.""
 
 After a chuckle, she continues. ""I get into the pilot seat, strap in, grab the control sticks, and rush through my pre-flight checks. Enemy has a capital, a few destroyers and a few frigates. Not that much firepower, but also not that easy to take down."" Ava rests her chin on her hand and thinks for a moment. ""Right before we sortie, command gives us a last minute order to kill every bogey. No prisoners. Didn't want survivors talking about our fancy new frigate."" She reclines in her chair again and drinks more of her coffee while maintaining eye contact with you. ""Honestly, I don't remember much from that engagement. I fitted my ship for close range combat. Easier to kill the enemy that way. Yeah, it was risky, but no risk, no reward, right?"" She laughs dryly.","1:AvaWarStoryBegin3:Continue listening...
 2:AvaWarStoryCancel2:""Get real.""
-3:AvaWarStoryCancel1:Yawn in front of her.
-",,
+3:AvaWarStoryCancel1:Yawn in front of her
+",Changed: removed the trailing period from the option text (options without quotes do not end in a period).,
 AvaWarStory2b,DialogOptionSelected,$option == AvaWarStoryBegin2,,"""We get the enemy location from another scout and start pre-combat checks. No, I wasn't alone; I had three crazy bastards in Courageous-class frigates backing me up."" A smile appears on her face as she seems to recall something funny. ""Slippery little bastards. Seen them avoid entire barrages, get behind the enemy, and punish them  with a few good shots to the engines. Instant flameout.""
 
 After a chuckle, she continues. ""I get into the pilot seat, strap in, grab the control sticks, and rush through my pre-flight checks. Enemy has a capital, a few destroyers and a few frigates. Not that much firepower, but also not that easy to take down."" Ava rests her chin on her hand and thinks for a moment. ""Right before we sortie, command gives us a last minute order to kill every bogey. No prisoners. Didn't want survivors talking about our fancy new frigate."" She reclines in her chair again and drinks more of her coffee while maintaining eye contact with you. ""Honestly, I don't remember much from that engagement. I fitted my ship for close range combat. Easier to kill the enemy that way. Yeah, it was risky, but no risk, no reward, right?"" She laughs dryly.","1:AvaWarStoryCancel2:""Get real.""
 2:AvaWarStoryBegin3:Continue listening...
-3:AvaWarStoryCancel1:Yawn in front of her.
-",,
+3:AvaWarStoryCancel1:Yawn in front of her
+",Changed: removed the trailing period from the option text (options without quotes do not end in a period).,
 AvaWarStory2c,DialogOptionSelected,$option == AvaWarStoryBegin2,,"""We get the enemy location from another scout and start pre-combat checks. No, I wasn't alone; I had three crazy bastards in Courageous-class frigates backing me up."" A smile appears on her face as she seems to recall something funny. ""Slippery little bastards. Seen them avoid entire barrages, get behind the enemy, and punish them  with a few good shots to the engines. Instant flameout.""
 
-After a chuckle, she continues. ""I get into the pilot seat, strap in, grab the control sticks, and rush through my pre-flight checks. Enemy has a capital, a few destroyers and a few frigates. Not that much firepower, but also not that easy to take down."" Ava rests her chin on her hand and thinks for a moment. ""Right before we sortie, command gives us a last minute order to kill every bogey. No prisoners. Didn't want survivors talking about our fancy new frigate."" She reclines in her chair again and drinks more of her coffee while maintaining eye contact with you. ""Honestly, I don't remember much from that engagement. I fitted my ship for close range combat. Easier to kill the enemy that way. Yeah, it was risky, but no risk, no reward, right?"" She laughs dryly.","1:AvaWarStoryCancel1:Yawn in front of her.
+After a chuckle, she continues. ""I get into the pilot seat, strap in, grab the control sticks, and rush through my pre-flight checks. Enemy has a capital, a few destroyers and a few frigates. Not that much firepower, but also not that easy to take down."" Ava rests her chin on her hand and thinks for a moment. ""Right before we sortie, command gives us a last minute order to kill every bogey. No prisoners. Didn't want survivors talking about our fancy new frigate."" She reclines in her chair again and drinks more of her coffee while maintaining eye contact with you. ""Honestly, I don't remember much from that engagement. I fitted my ship for close range combat. Easier to kill the enemy that way. Yeah, it was risky, but no risk, no reward, right?"" She laughs dryly.","1:AvaWarStoryCancel1:Yawn in front of her
 2:AvaWarStoryCancel2:""Get real.""
 3:AvaWarStoryBegin3:Continue listening...
-",,
+",Changed: removed the trailing period from the option text (options without quotes do not end in a period).,
 AvaWarStory3,DialogOptionSelected,$option == AvaWarStoryBegin3,,"Ava continues telling her story. She talks somewhat quickly - you can imagine the situation developing as she speaks.
 
-""Adrenaline starts flowing through my veins as the combat drugs kick in. Reaction time shortens. Enemy movements start to stand out, like fog had been cleared from my mind. And then the old loop: Enemy ship in range. Open fire. Frigate down. On to the next one. I grinned like an idiot the whole time."" She claps her hands and you look at her. ""Most of that engagement was baiting the enemy to fight on what they thought were good terms. The moment their frigates realised we'd set a trap, they were in too deep to get out. And then they'd explode!"" She sighs and continues. ""Enemy destroyers and capitals started sticking close together. They noticed how quickly their frigates fell to me and my wingmen. So! What did we do?"" She asks you a question with a smile, but doesn't wait for your answer. ""Of course we went in for the kill, dummy. Divide the enemy force by any means. Even if one of our ships takes damage, it can be fixed in drydock. I only had to take down one destroyer to send the Tachies into a panic. They were being picked on by some small, slippery frigates their weapons couldn't even touch. I wonder how their commander's face looked?"" Another non-question. She takes a deep breath and drinks a bit of her drink.","1:AvaWarStoryCancel1:Yawn in front of her.
+""Adrenaline starts flowing through my veins as the combat drugs kick in. Reaction time shortens. Enemy movements start to stand out, like fog had been cleared from my mind. And then the old loop: Enemy ship in range. Open fire. Frigate down. On to the next one. I grinned like an idiot the whole time."" She claps her hands and you look at her. ""Most of that engagement was baiting the enemy to fight on what they thought were good terms. The moment their frigates realised we'd set a trap, they were in too deep to get out. And then they'd explode!"" She sighs and continues. ""Enemy destroyers and capitals started sticking close together. They noticed how quickly their frigates fell to me and my wingmen. So! What did we do?"" She asks you a question with a smile, but doesn't wait for your answer. ""Of course we went in for the kill, dummy. Divide the enemy force by any means. Even if one of our ships takes damage, it can be fixed in drydock. I only had to take down one destroyer to send the Tachies into a panic. They were being picked on by some small, slippery frigates their weapons couldn't even touch. I wonder how their commander's face looked?"" Another non-question. She takes a deep breath and drinks a bit of her drink.","1:AvaWarStoryCancel1:Yawn in front of her
 2:AvaWarStoryBegin4:Continue listening...
-3:AvaWarStoryCancel2:""Get real.""",,
+3:AvaWarStoryCancel2:""Get real.""",Changed: removed the trailing period from the option text (options without quotes do not end in a period).,
 AvaWarStory3b,DialogOptionSelected,$option == AvaWarStoryBegin3,,"Ava continues telling her story. She talks somewhat quickly - you can imagine the situation developing as she speaks.
 
 ""Adrenaline starts flowing through my veins as the combat drugs kick in. Reaction time shortens. Enemy movements start to stand out, like fog had been cleared from my mind. And then the old loop: Enemy ship in range. Open fire. Frigate down. On to the next one. I grinned like an idiot the whole time."" She claps her hands and you look at her. ""Most of that engagement was baiting the enemy to fight on what they thought were good terms. The moment their frigates realised we'd set a trap, they were in too deep to get out. And then they'd explode!"" She sighs and continues. ""Enemy destroyers and capitals started sticking close together. They noticed how quickly their frigates fell to me and my wingmen. So! What did we do?"" She asks you a question with a smile, but doesn't wait for your answer. ""Of course we went in for the kill, dummy. Divide the enemy force by any means. Even if one of our ships takes damage, it can be fixed in drydock. I only had to take down one destroyer to send the Tachies into a panic. They were being picked on by some small, slippery frigates their weapons couldn't even touch. I wonder how their commander's face looked?"" Another non-question. She takes a deep breath and drinks a bit of her drink.","1:AvaWarStoryBegin4:Continue listening...
-2:AvaWarStoryCancel1:Yawn in front of her.
-3:AvaWarStoryCancel2:""Get real.""",,
+2:AvaWarStoryCancel1:Yawn in front of her
+3:AvaWarStoryCancel2:""Get real.""",Changed: removed the trailing period from the option text (options without quotes do not end in a period).,
 AvaWarStory3c,DialogOptionSelected,$option == AvaWarStoryBegin3,,"Ava continues telling her story. She talks somewhat quickly - you can imagine the situation developing as she speaks.
 
-""Adrenaline starts flowing through my veins as the combat drugs kick in. Reaction time shortens. Enemy movements start to stand out, like fog had been cleared from my mind. And then the old loop: Enemy ship in range. Open fire. Frigate down. On to the next one. I grinned like an idiot the whole time."" She claps her hands and you look at her. ""Most of that engagement was baiting the enemy to fight on what they thought were good terms. The moment their frigates realised we'd set a trap, they were in too deep to get out. And then they'd explode!"" She sighs and continues. ""Enemy destroyers and capitals started sticking close together. They noticed how quickly their frigates fell to me and my wingmen. So! What did we do?"" She asks you a question with a smile, but doesn't wait for your answer. ""Of course we went in for the kill, dummy. Divide the enemy force by any means. Even if one of our ships takes damage, it can be fixed in drydock. I only had to take down one destroyer to send the Tachies into a panic. They were being picked on by some small, slippery frigates their weapons couldn't even touch. I wonder how their commander's face looked?"" Another non-question. She takes a deep breath and drinks a bit of her drink.","1:AvaWarStoryCancel1:Yawn in front of her.
+""Adrenaline starts flowing through my veins as the combat drugs kick in. Reaction time shortens. Enemy movements start to stand out, like fog had been cleared from my mind. And then the old loop: Enemy ship in range. Open fire. Frigate down. On to the next one. I grinned like an idiot the whole time."" She claps her hands and you look at her. ""Most of that engagement was baiting the enemy to fight on what they thought were good terms. The moment their frigates realised we'd set a trap, they were in too deep to get out. And then they'd explode!"" She sighs and continues. ""Enemy destroyers and capitals started sticking close together. They noticed how quickly their frigates fell to me and my wingmen. So! What did we do?"" She asks you a question with a smile, but doesn't wait for your answer. ""Of course we went in for the kill, dummy. Divide the enemy force by any means. Even if one of our ships takes damage, it can be fixed in drydock. I only had to take down one destroyer to send the Tachies into a panic. They were being picked on by some small, slippery frigates their weapons couldn't even touch. I wonder how their commander's face looked?"" Another non-question. She takes a deep breath and drinks a bit of her drink.","1:AvaWarStoryCancel1:Yawn in front of her
 2:AvaWarStoryCancel2:""Get real.""
-3:AvaWarStoryBegin4:Continue listening...",,
+3:AvaWarStoryBegin4:Continue listening...",Changed: removed the trailing period from the option text (options without quotes do not end in a period).,
 AvaWarStory4,DialogOptionSelected,$option == AvaWarStoryBegin4,,"""Two destroyers and a capital ship remained. I think it was two Medusas and an Odyssey with Longbow bombers. I... despise those strikecraft."" She clenches one of her fists. ""Longbows fire their Sabots and overload one of my wingmen. Medusas exploit the opportunity and destroy her ship. That puts the Medusas in front of the Odyssey, so now the big girl can't provide fire support..."" Ava laughs. ""My forces and I decided to finish the battle right then and there. So we go all in, repair bill be damned. It was... surprisingly easy? I honestly expected more of a challenge from that final push. Both Medusa captains wasted their skimmers on the push and couldn't get out before we surrounded them. Moments later, two lovely blue explosions occur. Enemy loses two ships. Only the Odyssey is left, and we both know what happens to large ships when they get surrounded, don't we?"" She giggles a bit and continues.
 
 ""Battle ends with our victory and we look for my wingman's escape pod. Fortunately she was still alive - only suffered some burns and the like, nothing too bad. We head back to base, get debriefed and have a little beer thrown our way. The combat pay that month was pretty good, too. So, once the combat drugs wore off, I hit the sack. Best sleep of my life."" She narrows her eyes and gives you a weird look. ""What? Did you expect me to get wasted in a bar and hop into bed with someone from the engineering team? Hah! Wishful thinking, pilot. Wishful thinking indeed.""","1:AvaWarStoryCancel2:""Get real.""
-2:AvaWarStoryCancel1:Yawn in front of her.
-3:AvaWarStoryBegin5:Continue listening...",,
+2:AvaWarStoryCancel1:Yawn in front of her
+3:AvaWarStoryBegin5:Continue listening...",Changed: removed the trailing period from the option text (options without quotes do not end in a period).,
 AvaWarStory4b,DialogOptionSelected,$option == AvaWarStoryBegin4,,"""Two destroyers and a capital ship remained. I think it was two Medusas and an Odyssey with Longbow bombers. I... despise those strikecraft."" She clenches one of her fists. ""Longbows fire their Sabots and overload one of my wingmen. Medusas exploit the opportunity and destroy her ship. That puts the Medusas in front of the Odyssey, so now the big girl can't provide fire support..."" Ava laughs. ""My forces and I decided to finish the battle right then and there. So we go all in, repair bill be damned. It was... surprisingly easy? I honestly expected more of a challenge from that final push. Both Medusa captains wasted their skimmers on the push and couldn't get out before we surrounded them. Moments later, two lovely blue explosions occur. Enemy loses two ships. Only the Odyssey is left, and we both know what happens to large ships when they get surrounded, don't we?"" She giggles a bit and continues.
 
 ""Battle ends with our victory and we look for my wingman's escape pod. Fortunately she was still alive - only suffered some burns and the like, nothing too bad. We head back to base, get debriefed and have a little beer thrown our way. The combat pay that month was pretty good, too. So, once the combat drugs wore off, I hit the sack. Best sleep of my life."" She narrows her eyes and gives you a weird look. ""What? Did you expect me to get wasted in a bar and hop into bed with someone from the engineering team? Hah! Wishful thinking, pilot. Wishful thinking indeed.""","1:AvaWarStoryBegin5:Continue listening...
-2:AvaWarStoryCancel1:Yawn in front of her.
-3:AvaWarStoryCancel2:""Get real.""",,
+2:AvaWarStoryCancel1:Yawn in front of her
+3:AvaWarStoryCancel2:""Get real.""",Changed: removed the trailing period from the option text (options without quotes do not end in a period).,
 AvaWarStory4c,DialogOptionSelected,$option == AvaWarStoryBegin4,,"""Two destroyers and a capital ship remained. I think it was two Medusas and an Odyssey with Longbow bombers. I... despise those strikecraft."" She clenches one of her fists. ""Longbows fire their Sabots and overload one of my wingmen. Medusas exploit the opportunity and destroy her ship. That puts the Medusas in front of the Odyssey, so now the big girl can't provide fire support..."" Ava laughs. ""My forces and I decided to finish the battle right then and there. So we go all in, repair bill be damned. It was... surprisingly easy? I honestly expected more of a challenge from that final push. Both Medusa captains wasted their skimmers on the push and couldn't get out before we surrounded them. Moments later, two lovely blue explosions occur. Enemy loses two ships. Only the Odyssey is left, and we both know what happens to large ships when they get surrounded, don't we?"" She giggles a bit and continues.
 
 ""Battle ends with our victory and we look for my wingman's escape pod. Fortunately she was still alive - only suffered some burns and the like, nothing too bad. We head back to base, get debriefed and have a little beer thrown our way. The combat pay that month was pretty good, too. So, once the combat drugs wore off, I hit the sack. Best sleep of my life."" She narrows her eyes and gives you a weird look. ""What? Did you expect me to get wasted in a bar and hop into bed with someone from the engineering team? Hah! Wishful thinking, pilot. Wishful thinking indeed.""","1:AvaWarStoryCancel2:""Get real.""
 2:AvaWarStoryBegin5:Continue listening...
-3:AvaWarStoryCancel1:Yawn in front of her.",,
+3:AvaWarStoryCancel1:Yawn in front of her",Changed: removed the trailing period from the option text (options without quotes do not end in a period).,
 AvaWarStory5,DialogOptionSelected,$option == AvaWarStoryBegin5,"$AvaHeardWarStory = true
 FireAll PopulateOptions
 AdjustRepActivePerson WELCOMING 5","Looks like her story ends here. ""Well! I hope the story was at least somewhat interesting."" Ava gives you a questioning look. ""Did you enjoy it? I hope you did."" A gentle smile graces her face. ""Now, go. I have things to do. You do too, right?""",,,
@@ -1800,7 +1814,7 @@ AdjustRepActivePerson WELCOMING 5","Looks like her story ends here. ""Well! I ho
 AvaAquilaReactorPrint,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisava score:1000
 !$EISAvaAquilaReactorReward
-$AvaContact","Nex_DynamicPaginatedOptions addOption AvaAquilaReactorReward ""\""I've seen Iron Shell fielding an interesting reactor hullspec...\""""",,,,b
+$AvaContact","EIS_DynamicPaginatedOptions addOption AvaAquilaReactorReward ""\""I've seen Iron Shell fielding an interesting reactor hullspec...\""""",,,,b
 AvaAquilaReactorReward,DialogOptionSelected,$option == AvaAquilaReactorReward,"$EISAvaAquilaReactorReward = true
 FireAll PopulateOptions
 EISAddSpecial modspec eis_aquila
@@ -1815,12 +1829,12 @@ SetEnabled AvaAquilaReactorReward false",,,,b
 AvaIronHeritage1,eis_VNSectorDiscussionOptions,"$id == eisava score:100
 $AvaHeardWarStory
 !$AlreadyLearnedIronHeritage
-$AvaContact","Nex_DynamicPaginatedOptions addOption AvaIronHeritage ""Request Iron Shell training.""",,,,B
+$AvaContact","EIS_DynamicPaginatedOptions addOption AvaIronHeritage ""Request Iron Shell training""",,,Changed: removed the trailing period from the option text (options without quotes do not end in a period).,B
 AvaIronHeritage2,eis_VNSectorDiscussionOptions,"$id == eisava score:100
 $AvaHeardWarStory
 $AlreadyLearnedIronHeritage
 !$AlreadyLearnedIronHeritageLevel2
-$AvaContact","Nex_DynamicPaginatedOptions addOption AvaIronHeritage2 ""Request additional Iron Shell training.""",,,,B
+$AvaContact","EIS_DynamicPaginatedOptions addOption AvaIronHeritage2 ""Request additional Iron Shell training""",,,Changed: removed the trailing period from the option text (options without quotes do not end in a period).,B
 AvaIronHeritage1e,DialogOptionSelected,"$option == AvaIronHeritage
 !$AlreadyLearnedIronHeritage","$AlreadyLearnedIronHeritage = true
 EISAddSkill eis_xiv true
@@ -1883,7 +1897,7 @@ SetEnabled EISReward3 false",,,,b
 AvaShipSalePrint,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisava score:1000
 !$EISAvaShipUnlocked
-$AvaContact","Nex_DynamicPaginatedOptions addOption AvaShipSaleOffer ""Request expanded nanoforge production clearance.""",,,,b
+$AvaContact","EIS_DynamicPaginatedOptions addOption AvaShipSaleOffer ""Request expanded nanoforge production clearance""",,,Changed: removed the trailing period from the option text (options without quotes do not end in a period).,b
 AvaShipSaleDisable,eis_VNSectorDiscussionOptionsCheck,"!EISVibeCheck 75 100
 $id == eisava
 !$EISAvaShipUnlocked","SetTooltip AvaShipSaleOffer ""Your relation with Ava is not on Cooperative terms (75 relation).""
@@ -1892,7 +1906,7 @@ SetTooltipHighlights AvaShipSaleOffer Cooperative
 SetEnabled AvaShipSaleOffer false",,,,b
 AvaRecruitPrint,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisava score:1000
-!$AvaContact","Nex_DynamicPaginatedOptions addOption AvaRecruitOffer ""\""You wanted to see me?\""""",,,,b
+!$AvaContact","EIS_DynamicPaginatedOptions addOption AvaRecruitOffer ""\""You wanted to see me?\""""",,,,b
 AvaRecruitDisable1,eis_VNSectorDiscussionOptionsCheck,"RepLTE hegemony SUSPICIOUS
 $id == eisava
 !$AvaContact","SetTooltip AvaRecruitOffer ""You need neutral standing (0 reputation) or better with both the Hegemony and Iron Shell.""
@@ -1952,8 +1966,8 @@ FireAll PopulateOptions",,,Closes the ship preview put up by AvaShipSaleUnlockSe
 AvaAquila1,eis_VNSectorDiscussionOptions,"$id == eisava score:100
 !$AlreadyAquilaConsummed
 $AvaContact
-$EISAvaAquilaReactorReward","Nex_DynamicPaginatedOptions addOption AvaAquila1 ""Discuss advancements in hullmod miniaturization.""
-",,,,B
+$EISAvaAquilaReactorReward","EIS_DynamicPaginatedOptions addOption AvaAquila1 ""Discuss advancements in hullmod miniaturization""
+",,,Changed: removed the trailing period from the option text (options without quotes do not end in a period).,B
 AvaAquila2,DialogOptionSelected,"$option == AvaAquila1
 EISVibeCheck 100 100","SetTextHighlightColors good good hColor
 SetTextHighlights special modifications once
@@ -1963,7 +1977,7 @@ EISGainItem eis_aquila_core 1
 EISAddSound technology2
 FireAll PopulateOptions","""Well, you've been very good to me and Iron Shell, which means I can..."" Ava sends few files to your Tri-Pad. ""... give you something fairly interesting. Celeste has sent me few of these experimental Aquila modspecs. It is somewhat different from and needs some special modifications to utilize. The result is that you can integrate Aquila on ships that couldn't use it otherwise, namely frigates and destroyers. Unfortunately, the chip is one-use. Once again, I thank you for your service to the Hegemony.""",,Changed: grants the Advanced Aquila Reactor Core LPC item (eis_aquila_core) instead of adding a use to $EIS_aquila. The chip is now reusable (returned when the hullmod is removed). EISGainItem announces the chip in the same style as the EISLearn unlock line,B
 ,,,,,,,N
-EISAvaThoughtsPlayer,eisava,,"Nex_DynamicPaginatedOptions addOption eis_Player ""Me""",,,,n
+EISAvaThoughtsPlayer,eisava,,"EIS_DynamicPaginatedOptions addOption eis_Player ""Me""",,,,n
 EISAvaThoughtsPlayerR1,DialogOptionSelected,"$id == eisava
 $option == eis_Player
 EISVibeCheck -100 0",,"""A bother.""",,,b
@@ -1979,20 +1993,20 @@ EISVibeCheck 50 75",,"""At this point, one of the best freelancer captains I hav
 EISAvaThoughtsPlayerR6,DialogOptionSelected,"$id == eisava
 $option == eis_Player
 EISVibeCheck 75 100",,"""A loyal friend. I hope to keep seeing you around, Captain""",,,b
-EISAvaThoughtsDaud,eisava,,"Nex_DynamicPaginatedOptions addOption eis_BaikalDaud ""High Hegemon Baikal Daud""",,,,b
+EISAvaThoughtsDaud,eisava,,"EIS_DynamicPaginatedOptions addOption eis_BaikalDaud ""High Hegemon Baikal Daud""",,,,b
 EISAvaThoughtsDaudR,DialogOptionSelected,"$id == eisava
 $option == eis_BaikalDaud
 ",,"""I respect the High Hegemon as an amazing commander and ship captain. He's also someone that many Hegemony soldiers and civilians can relate to - someone born in the hive cities of Chicomoztoc who rose through the ranks, moving up through the military hierarchy all the way to the office of High Hegemon. He's an inspiration to us, you know?""",,,b
-EISAvaThoughtsQuy,eisava,$player.metEISQuy,"Nex_DynamicPaginatedOptions addOption eis_KimQuy ""Councilor Quy""",,,,b
+EISAvaThoughtsQuy,eisava,$player.metEISQuy,"EIS_DynamicPaginatedOptions addOption eis_KimQuy ""Councilor Quy""",,,,b
 EISAvaThoughtsQuyR,DialogOptionSelected,"$id == eisava
 $option == eis_KimQuy",,"""Councilor Quy, hm? Well, she's my superior, as you might have guessed. I haven't had many opportunities to meet her in person, as such my experience with her is quite limited. However, I do carry a high opinion of her. She can be intimidating, but you can tell she cares about her subordinates.""",,,b
-EISAvaThoughtsHartley,eisava,$player.metEISHartley,"Nex_DynamicPaginatedOptions addOption eis_Hartley ""Commissioner Hartley""",,,,b
+EISAvaThoughtsHartley,eisava,$player.metEISHartley,"EIS_DynamicPaginatedOptions addOption eis_Hartley ""Commissioner Hartley""",,,,b
 EISAvaThoughtsHartleyR,DialogOptionSelected,"$id == eisava
 $option == eis_Hartley",,"""While we had fought together, I never really got to know Sir Hartley until we met by chance while I was on a recreational trip to Chitagupta. He's truly a different man off the job, it seems the sea keeps his thoughts off the past. He even mentioned wanting to buy a fishing boat.""",,,b
-EISAvaThoughtsCeleste,eisava,$player.metEISCeleste,"Nex_DynamicPaginatedOptions addOption eis_CaedaCeleste ""Caeda Celeste""",,,,b
+EISAvaThoughtsCeleste,eisava,$player.metEISCeleste,"EIS_DynamicPaginatedOptions addOption eis_CaedaCeleste ""Caeda Celeste""",,,,b
 EISAvaThoughtsCelesteR,DialogOptionSelected,"$id == eisava
 $option == eis_CaedaCeleste",,"""Tsk, we were friends once. I used to be blinded by the effectiveness of her prototypes, but... I can't condone her methods.""",,,b
-EISAvaThoughtsCharlotte,eisava,$player.metEISHex,"Nex_DynamicPaginatedOptions addOption eis_CharlotteHex ""Charlotte Hex""",,,,b
+EISAvaThoughtsCharlotte,eisava,$player.metEISHex,"EIS_DynamicPaginatedOptions addOption eis_CharlotteHex ""Charlotte Hex""",,,,b
 EISAvaThoughtsCharlotteR,DialogOptionSelected,"$id == eisava
 $option == eis_CharlotteHex",,"""Ah, Charlotte. She was assigned to me relatively recently. I do hope her talent isn't wasted too long here. The Hegemony needs all the skilled pilots it can get.""",,,b
 ,,,,,,,b
@@ -2024,7 +2038,7 @@ OR
 AvaVNSectorMenu,DialogOptionSelected,"$id == eisava score:100
 $option == eis_VNS_Setup","FireAll eis_PopulateVNSector
 FireBest VNSectorGreetingOptions
-Nex_DynamicPaginatedOptions show
+EIS_DynamicPaginatedOptions show
 FireAll eis_VNSectorDiscussionOptionsCheck",,,,
 AranitiaGreeting,OpenCommLink,"$id == eisava score:100
 $entity.EIS_YKWYD score:1000
@@ -2042,32 +2056,32 @@ AranitiaGreeting3b,UpdateEngagementChoice,$EIS_YKWYD score:1000,EISCheck,,,,
 ,,,,,,,
 # VNSector Compatibility copied marginally from the VNSector Lib for NPC Leaders and Unique Leaders and Contacts.,,,,,,,
 eis_VNSectorMenu,DialogOptionSelected,$option == eis_VNS_Setup,"FireAll eis_PopulateVNSector
-Nex_DynamicPaginatedOptions show
+EIS_DynamicPaginatedOptions show
 FireAll eis_VNSectorDiscussionOptionsCheck",,,,
 eis_VNSectorDiscussCeleste,PopulateOptions,"$isPerson
 $tag:eis_celeste",,,10:eis_VNS_Setup:Request to speak with $personFirstName,"Replaces the old $tag:VNSector check (too generic - matched other mods' characters sharing that ambient tag, e.g. UAF's Nia Aurora). Scoped by Iron-Shell's own person tags instead of faction, since faction changes on recruitment (Charlotte becomes player-faction once hired) but these tags don't. Split into two rows (Celeste / military) since conditions don't support OR directly.",
 eis_VNSectorDiscussMilitary,PopulateOptions,"$isPerson
 $tag:eis_military
 !$tag:eis_celeste",,,10:eis_VNS_Setup:Request to speak with $personFirstName,"Mutually exclusive with eis_VNSectorDiscussCeleste via the !$tag:eis_celeste guard, so even if some future contact ever carried both tags, only one row would fire - avoids relying on Nex_DynamicPaginatedOptions deduping a double addOption call on the same id.",
-eis_VNSectorHaveYouHeard,eis_PopulateVNSector,,"Nex_DynamicPaginatedOptions addOption eis_VNS_HaveYouReply ""Start a conversation about...""",,,"Player option text changed: was ""Ask $hisOrHer opinion on...""; dropped the now-unneeded $hisOrHer token.",
+eis_VNSectorHaveYouHeard,eis_PopulateVNSector,,"EIS_DynamicPaginatedOptions addOption eis_VNS_HaveYouReply ""Start a conversation about...""",,,"Player option text changed: was ""Ask $hisOrHer opinion on...""; dropped the now-unneeded $hisOrHer token.",
 eis_VNSectorDiscussionOption,eis_PopulateVNSector,,FireAll eis_VNSectorDiscussionOptions,,,,
-eis_VNSectorCancelOut,eis_PopulateVNSector,,"Nex_DynamicPaginatedOptions addOptionAllPages eis_VNSectorCancelMenu ""Talk about something else""
-Nex_DynamicPaginatedOptions addShortcut eis_VNSectorCancelMenu ESCAPE",,,,
+eis_VNSectorCancelOut,eis_PopulateVNSector,,"EIS_DynamicPaginatedOptions addOptionAllPages eis_VNSectorCancelMenu ""Talk about something else""
+EIS_DynamicPaginatedOptions addShortcut eis_VNSectorCancelMenu ESCAPE",,,,
 eis_VNSectorHaveYouHeardReply,DialogOptionSelected,$option == eis_VNS_Converse,FireAll PopulateOptions,"$name wonders what to say, but has come up with nothing.
 OR
 $name gives a blank stare.
 OR
 $name wonders what you're trying to do here.",,,
-eis_VNSectorChatter,DialogOptionSelected,$option == eis_VNS_HaveYouReply,"Nex_DynamicPaginatedOptions addOption eis_VNS_People ""People""
-Nex_DynamicPaginatedOptions addOption eis_VNS_Converse ""Make some small talk""
+eis_VNSectorChatter,DialogOptionSelected,$option == eis_VNS_HaveYouReply,"EIS_DynamicPaginatedOptions addOption eis_VNS_People ""People""
+EIS_DynamicPaginatedOptions addOption eis_VNS_Converse ""Make some small talk""
 FireAll eis_VNSectorOpinionOptions
-Nex_DynamicPaginatedOptions addOptionAllPages eis_VNS_Setup Back
-Nex_DynamicPaginatedOptions addShortcut eis_VNS_Setup ESCAPE
-Nex_DynamicPaginatedOptions show",,,"Added FireAll eis_VNSectorOpinionOptions after the Make some small talk option, as a new extensibility hook so per-character options (currently just AvaHire) can live in this submenu instead of the top-level menu.",
+EIS_DynamicPaginatedOptions addOptionAllPages eis_VNS_Setup Back
+EIS_DynamicPaginatedOptions addShortcut eis_VNS_Setup ESCAPE
+EIS_DynamicPaginatedOptions show",,,"Added FireAll eis_VNSectorOpinionOptions after the Make some small talk option, as a new extensibility hook so per-character options (currently just AvaHire) can live in this submenu instead of the top-level menu.",
 eis_VNSectorPeopleMenu,DialogOptionSelected,$option == eis_VNS_People,"FireAll $id
-Nex_DynamicPaginatedOptions addOptionAllPages eis_VNS_HaveYouReply Back
-Nex_DynamicPaginatedOptions addShortcut eis_VNS_HaveYouReply ESCAPE
-Nex_DynamicPaginatedOptions show",,,,
+EIS_DynamicPaginatedOptions addOptionAllPages eis_VNS_HaveYouReply Back
+EIS_DynamicPaginatedOptions addShortcut eis_VNS_HaveYouReply ESCAPE
+EIS_DynamicPaginatedOptions show",,,,
 ,,,,,,,
 eis_VNSectorCancel,DialogOptionSelected,$option == eis_VNSectorCancelMenu,FireAll PopulateOptions,,,,
 eis_VNSectorFlirt_disableOption,DisableFlirtOptionIfNeeded,EISVibeCheck -100 50,"SetTooltip EISCelesteFlirt ""You do not have enough relations to do that action yet!""
@@ -2090,8 +2104,7 @@ nexual_factionDirectoryb ,DialogOptionSelected,"$option == nexual_marketEncounte
 ","$nexual_encounter = false 0
 FireAll ExerelinFactionMusic
 ",This will set music for the market theme of your faction.,,,idk what this does tbh
-nexual_factionDirectoryByTrigger,ExerelinFactionMusic,,"Nex_VisualCustomPanel clear
-Nexual_Connection listGroups",Which faction do you want to vibe to?,,,idk what this does tbh
+nexual_factionDirectoryByTrigger,ExerelinFactionMusic,,Nexual_Connection listGroups,Which faction do you want to vibe to?,,Nex_VisualCustomPanel clear removed from the script: a row cannot name a Nexerelin command now that Nexerelin is optional. Nexual_Connection listGroups clears the panel itself.,idk what this does tbh
 ,,,,,,,idk what this does tbh
 nexual_factionDirectoryList1,DialogOptionSelected,$option == nexual_factionDirectoryList1,Nexual_Connection listFactions 1,,,,idk what this does tbh
 nexual_factionDirectoryList2,DialogOptionSelected,$option == nexual_factionDirectoryList2,Nexual_Connection listFactions 2,,,,idk what this does tbh
@@ -2112,10 +2125,10 @@ nexual_setMusic5,DialogOptionSelected,$option == nexual_encounter_friendly,Nexua
 nexual_setMusic6,DialogOptionSelected,$option == nexual_encounter_neutral,Nexual_Connection setMusic,,,,idk what this does tbh
 nexual_setMusic7,DialogOptionSelected,$option == nexual_encounter_hostile,Nexual_Connection setMusic,,,,idk what this does tbh
 ,,,,,,,idk what this does tbh
-nexual_factionDirectoryPrint,DialogOptionSelected,"Nex_OptionStartsWith ""nex_printFactionMusic_""",Nexual_Connection printMusic,,,,idk what this does tbh
+nexual_factionDirectoryPrint,DialogOptionSelected,"EIS_OptionStartsWith ""nex_printFactionMusic_""",Nexual_Connection printMusic,,,,idk what this does tbh
 ,,,,,,,idk what this does tbh
 eis_cpcBlurb,eis_cpc_blurb,,,"""Due to a shift in procurement priorities, the navy has been left with some cancelled nanoforge production slots- and a hole to fill in the budget. We could arrange a custom order of military-grade products, provided you cover the fees.""",,,idk what this does tbh
-eis_cpcOfferOption,eis_cpc_option,,,,eis_cpc_start:Ask about the surplus nanoforge production opportunity.,,idk what this does tbh
+eis_cpcOfferOption,eis_cpc_option,,,,eis_cpc_start:Ask about the surplus nanoforge production opportunity,Changed: removed the trailing period from the option text (options without quotes do not end in a period).,idk what this does tbh
 eis_cpcOfferTextContact,DialogOptionSelected,"$faction.id == ironshell score:5
 $option == eis_cpc_start","$missionId = eis_cpc
 SetTextHighlights $cpc_maxCapacity $cpc_costPercent $cpc_days
@@ -2212,7 +2225,7 @@ $extr_variation == COLONY
 FireBest GenericMissionReturn","ShowPersonVisual
 $extr_completed = true
 Call $extr_ref updateStage","""Impressive work, captain,"" the $faction $rank says. ""I'm told that you've helped us gather quite a lot of intel here.""","contact_pickAnotherGreeting:Continue
-eis_letmehirethem:Allow me to hire them.",hire option tooltip removed,idk what this does tbh
+eis_letmehirethem:""Allow me to hire them.""",hire option tooltip removed Changed: option text is now a quoted line ending in a period.,idk what this does tbh
 #eis_extrOfferTextContactHiringProcess,DialogOptionSelected,"$option == eis_letmehirethem
 !EISOneOfUs score:5",,"""I'm afraid the Councilor would not approve of letting go one of her vital assets.""",contact_pickAnotherGreeting:Understandable.,disabled - the rep check on Processa was removed so this refusal would tie with it,idk what this does tbh
 eis_extrOfferTextContactHiringProcessa,DialogOptionSelected,"$option == eis_letmehirethem
@@ -2404,11 +2417,11 @@ EISOneOfUs hegemony",,"In moments, the crest disappears and you speak with a rea
 #eis_GAPZHegHub1,GAPZHegHub,$player.fcm_faction == ironshell,,,0:gaPZ_hegHub1:Appeal on the basis of your Iron Shell commission,commented out - duplicate of eis_GAPZISHub1 (both showed for an Iron Shell commission),
 eis_GAPZHegHubAlliance,GAPZHegHub,"$player.fcm_faction != hegemony
 $player.fcm_faction != ironshell
-EISOneOfUs hegemony",,,0:gaPZ_hegHub1:Appeal on the basis of your alliance membership,,
+EISOneOfUs hegemony",,,0:gaPZ_hegHub1:Appeal on the basis of your alliance membership,"Suggestion: without Nexerelin, EISOneOfUs is now also true at 75+ reputation with both the Hegemony and Iron Shell (there are no alliances), so this alliance wording can show to a player who is in no alliance. Consider neutral wording or a separate row gated on !EIS_HasModId nexerelin.",
 #eis_gaATGhegFleetDialogHub1,GAATGhegFleetDialogHub,$player.fcm_faction == ironshell,,,"gaATG_hegFleetCom1:""I bear an Iron Shell commission, $rank""",commented out - duplicate of eis_gaATGisFleetDialogHub1 (both showed for an Iron Shell commission),
 eis_gaATGhegFleetDialogHub1Alliance,GAATGhegFleetDialogHub,"$player.fcm_faction != hegemony
 $player.fcm_faction != ironshell
-EISOneOfUs hegemony",,,"gaATG_hegFleetCom1:""I belong to a shared alliance, $rank""",,B
+EISOneOfUs hegemony",,,"gaATG_hegFleetCom1:""I belong to a shared alliance, $rank""","Suggestion: without Nexerelin, EISOneOfUs is now also true at 75+ reputation with both the Hegemony and Iron Shell (there are no alliances), so this alliance wording can show to a player who is in no alliance. Consider neutral wording or a separate row gated on !EIS_HasModId nexerelin.",B
 eis_gaATGdaudMeeting3a,GAATGdaudMeetingFirearm,$player.fcm_faction == ironshell score:2,"$option = gaATG_daudMeeting4 0
 FireBest DialogOptionSelected","The chief of security examines your sidearm as if it were his own. With a light touch he slips the cellmag out, checks its status, then reloads it. He hands the weapon back to you.
 
@@ -2443,7 +2456,7 @@ FireBest DialogOptionSelected","""Perhaps, you could check out the planets of Ya
 #SotF Addition - (lol),,,,"#sotf_sierra is the updated id, to-do later whenever raccoon updates",,,have to review all this later manually
 #eis_celeste_sierra,eis_VNSectorDiscussionOptions,"$id == eisceleste score:100
 EISSierraMadre
-!$AlreadySierraInteracted","Nex_DynamicPaginatedOptions addOption Sierra_EISInteraction ""\""Might I introduce you to a friend of mine?\""""
+!$AlreadySierraInteracted","EIS_DynamicPaginatedOptions addOption Sierra_EISInteraction ""\""Might I introduce you to a friend of mine?\""""
 ",,,,have to review all this later manually
 #eis_celeste_sierra_no,DialogOptionSelected,"$option == Sierra_EISInteraction
 EISVibeCheck -100 10
@@ -2722,7 +2735,8 @@ EISCharlotteHireHighlight,eis_VNSectorDiscussionOptionsCheck,"$id == eissneed
 !$DidNotAskCharlotte",SetOptionColor Charlotteome highlight,,,,b
 EISHartleyVanguardHighlight,eis_VNSectorDiscussionOptionsCheck,"$id == eisdarren
 EISMegamind eiskimquy ""$EISDoneQuest1Success""
-!$EISQuickiesRewardOnce",SetOptionColor EISHartleyVanguardReward highlight,,,,b
+!$EISQuickiesRewardOnce
+EIS_HasModId nexerelin",SetOptionColor EISHartleyVanguardReward highlight,,,EIS_HasModId nexerelin added: EISHartleyVanguardReward is only offered with Nexerelin.,b
 AvaRecruitHighlight,eis_VNSectorDiscussionOptionsCheck,"$id == eisava
 !$AvaContact
 RepGTE hegemony NEUTRAL
@@ -2742,7 +2756,7 @@ SetTooltipHighlights EISCharlotteReward1 Welcoming
 SetEnabled EISCharlotteReward1 false",,,,b
 HartleyCPCPrint,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisdarren score:1000
-$EISHartleyContact","Nex_DynamicPaginatedOptions addOption HartleyCPCOffer ""Ask about surplus nanoforge production.""",,,"Hartley's version of the old eis_cpc hub mission (production contract), same wording as the generic Iron Shell eis_cpc rows - the old blurb is the first paragraph of the offer text. Only needs $EISHartleyContact (already a contact); no relation gate. Relies on the eis_cpc row staying in person_missions.csv (BeginMission eis_cpc), which is at freq 0 so the hub never offers it.",b
+$EISHartleyContact","EIS_DynamicPaginatedOptions addOption HartleyCPCOffer ""Ask about surplus nanoforge production""",,,"Hartley's version of the old eis_cpc hub mission (production contract), same wording as the generic Iron Shell eis_cpc rows - the old blurb is the first paragraph of the offer text. Only needs $EISHartleyContact (already a contact); no relation gate. Relies on the eis_cpc row staying in person_missions.csv (BeginMission eis_cpc), which is at freq 0 so the hub never offers it. Changed: removed the trailing period from the option text (options without quotes do not end in a period).",b
 HartleyCPCDisable,eis_VNSectorDiscussionOptionsCheck,"$EISHartleyCPCRecently
 $id == eisdarren","SetTooltip HartleyCPCOffer ""You have recently placed a production order.""
 SetEnabled HartleyCPCOffer false",,,"60-day lockout, same mechanism as the duel option ($DueledRecently, 30 days): $EISHartleyCPCRecently is set for 60 days when an order is accepted (HartleyCPCPicked).",b
@@ -2773,14 +2787,14 @@ ShowPersonVisual
 FireAll PopulateOptions",,,"Fired by EISCustomProductionContract after the production picker is confirmed. Replaces the generic cpcBPPicked flow, which accepts through the contact hub ($mHub) and would do nothing here: AcceptMission accepts the BeginMission mission (charges the cost, applies rep, starts the 60 day delivery) and the 60 day lockout starts.",b
 ,,,,,,,n
 # new lines - conversation topics (Kim x2 and Hartley x1),,,,,,,n
-EISQuyThoughtsInspections,eis_VNSectorOpinionOptions,$id == eiskimquy,"Nex_DynamicPaginatedOptions addOption eis_HegInspections ""Hegemony AI inspections""",,,"New Kim conversation topic (Hegemony AI inspections). Added through the eis_VNSectorOpinionOptions hook (fired by eis_VNSectorChatter), so it sits directly under Start a conversation about... instead of under People (People only fires the contact id trigger, eiskimquy). Always listed for Kim.",b
+EISQuyThoughtsInspections,eis_VNSectorOpinionOptions,$id == eiskimquy,"EIS_DynamicPaginatedOptions addOption eis_HegInspections ""Hegemony AI inspections""",,,"New Kim conversation topic (Hegemony AI inspections). Added through the eis_VNSectorOpinionOptions hook (fired by eis_VNSectorChatter), so it sits directly under Start a conversation about... instead of under People (People only fires the contact id trigger, eiskimquy). Always listed for Kim.",b
 EISQuyThoughtsInspectionsR,DialogOptionSelected,"$id == eiskimquy
 $option == eis_HegInspections","SetTextHighlights ""commissioned forces""","""Due to our position within the Hegemony, Iron Shell and our commissioned forces self-audit rather than being subjected to formal inspection. As you know, AI use under the Domain government is heavily restricted, and we closely monitor contracted parties. Any violation of commission terms will result in penalties, including reinstated formal inspections.",,"Reply to the topic above. Describes Iron Shell inspecting itself and commissioned parties, which matches EISHegemonyInspectionGuard (Hegemony AI inspections are averted while the player is commissioned to Iron Shell only). SetTextHighlights highlights the word commissioned in this paragraph.",b
 EISQuyThoughtsNachiketa,eis_VNSectorOpinionOptions,"$id == eiskimquy
-EIS_HasModId PAGSM","Nex_DynamicPaginatedOptions addOption eis_Nachiketa ""Nachiketa""",,,"New Kim conversation topic. Only listed when the mod PAGSM (Phillip Andrada: Gas Station Manager, mod id PAGSM) is enabled (EIS_HasModId PAGSM). Added through the eis_VNSectorOpinionOptions hook (fired by eis_VNSectorChatter), so it sits directly under Start a conversation about... instead of under People (People only fires the contact id trigger, eiskimquy).",b
+EIS_HasModId PAGSM","EIS_DynamicPaginatedOptions addOption eis_Nachiketa ""Nachiketa""",,,"New Kim conversation topic. Only listed when the mod PAGSM (Phillip Andrada: Gas Station Manager, mod id PAGSM) is enabled (EIS_HasModId PAGSM). Added through the eis_VNSectorOpinionOptions hook (fired by eis_VNSectorChatter), so it sits directly under Start a conversation about... instead of under People (People only fires the contact id trigger, eiskimquy).",b
 EISQuyThoughtsNachiketaR,DialogOptionSelected,"$id == eiskimquy
 $option == eis_Nachiketa",,"""Nachiketa? Despite the rumors, they lie outside Iron Shell's jurisdiction, Captain. The fuel traders run their own affairs, and their quarrel with the Sindrian Fuel Company is not ours to settle.""",,Reply to the Nachiketa topic: Nachiketa operates outside Iron Shell jurisdiction. The fuel trader and Sindrian Fuel Company rivalry comes from the PAGSM mod's own rules.,b
-EISHartleyThoughtsLogistics,eis_VNSectorOpinionOptions,$id == eisdarren,"Nex_DynamicPaginatedOptions addOption eis_HegLogistics ""Hegemony production logistics""",,,"New Hartley conversation topic (Hegemony production logistics). Added through the eis_VNSectorOpinionOptions hook (fired by eis_VNSectorChatter), so it sits directly under Start a conversation about... instead of under People (People only fires the contact id trigger, eisdarren). Always listed for Hartley.",b
+EISHartleyThoughtsLogistics,eis_VNSectorOpinionOptions,$id == eisdarren,"EIS_DynamicPaginatedOptions addOption eis_HegLogistics ""Hegemony production logistics""",,,"New Hartley conversation topic (Hegemony production logistics). Added through the eis_VNSectorOpinionOptions hook (fired by eis_VNSectorChatter), so it sits directly under Start a conversation about... instead of under People (People only fires the contact id trigger, eisdarren). Always listed for Hartley.",b
 EISHartleyThoughtsLogisticsR,DialogOptionSelected,"$id == eisdarren
 $option == eis_HegLogistics","SetTextHighlights ""Nanoforge quality""","""As a division of the Hegemony military, our production naturally benefits from the Nanoforge quality of our largest orbital dockyards. Components requiring the most precision are delivered on a regular basis, and it keeps everything running smoothly.""",,"Reply to the topic above. Matches the eis_NanoforgeQualityShare script, which tops Iron Shell markets up to the best nanoforge quality bonus found in any Hegemony market.",b
 # new lines - tax filing guards,,,,,,,n
@@ -2798,13 +2812,13 @@ EISTax_EntryHartley,DialogOptionSelected,"$option == EISTax_startTurnIn
 $id == eisdarren score:2000",FireAll PopulateOptions,"""Does it look like I want to do your taxes? Bother someone else.""",,"Hartley never files taxes (HartleyTax_disableTurnInOption greys the option out unconditionally). If the option is selected anyway, he refuses with his tooltip line. Score 2000 outranks the paid-flag guard and the ten entry rows. Never reached in normal play.",b
 # new lines,,,,,,,
 EISHartleyVanguardFallbackDisable,eis_VNSectorDiscussionOptionsCheck,"$id == eisdarren
-!$EISBeatHartleyOnce","SetTooltip EISHartleyVanguardRewardFallback ""You have not beaten Hartley in a duel.""
-SetEnabled EISHartleyVanguardRewardFallback false",,,Greys out the failed-operation duel option (EISHartleyVanguardRewardFallback) until the player has won a duel.,
+!$EISBeatHartleyOnce","SetTooltip EISHartleyVanguardRewardFallback ""You must best Hartley in a duel.""
+SetEnabled EISHartleyVanguardRewardFallback false",,,"Greys out the failed-operation duel option (EISHartleyVanguardRewardFallback) until the player has won a duel. Tooltip reworded from ""You have not beaten Hartley in a duel."" to ""You must best Hartley in a duel.""",
 EISHartleyVanguardPrintFallbackNoQuest,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisdarren score:1000
 !$EISQuickiesRewardOnce
 $EISBeatHartleyOnce
-!EISMegamind eiskimquy ""$EISDoneQuest1""","Nex_DynamicPaginatedOptions addOption EISHartleyVanguardRewardFallbackNoQuest ""\""I think I have proven myself.\""""",,,"Duel recruit route for players who never did Operation World Above: copy of EISHartleyVanguardPrintFallback with the quest check inverted, with its own option label.",
+!EISMegamind eiskimquy ""$EISDoneQuest1""","EIS_DynamicPaginatedOptions addOption EISHartleyVanguardRewardFallbackNoQuest ""\""I think I have proven myself.\""""",,,"Duel recruit route for players who never did Operation World Above: copy of EISHartleyVanguardPrintFallback with the quest check inverted, with its own option label.",
 EISHartleyVanguardRewardFallbackNoQuest,DialogOptionSelected,"$option == EISHartleyVanguardRewardFallbackNoQuest
 !$EISQuickiesRewardOnce","$EISQuickiesReward = true 30
 $EISQuickiesRewardOnce = true
@@ -2817,9 +2831,25 @@ $EISBeatHartleyOnce
 !$EISQuickiesRewardOnce",SetOptionColor EISHartleyVanguardRewardFallbackNoQuest highlight,,,"Highlight for EISHartleyVanguardPrintFallbackNoQuest, copied from EISHartleyVanguardHighlightFallback.",
 EISCharlotteRetaliatorCompatPrint,eis_VNSectorDiscussionOptions,"$id == eissneed score:1000
 $EISCharlotteRecruited
-!$EISCharlotteRetaliator","Nex_DynamicPaginatedOptions addOption EISCharlotteRetaliatorCompat ""About your ship...""",,,"Mid-save compat only: shows for saves where Charlotte was recruited before her recruit ship changed to eis_retaliator_Custom (recruited, but no $EISCharlotteRetaliator). No disable/tooltip row on purpose, so it is never greyed out or shown otherwise.",
+!$EISCharlotteRetaliator","EIS_DynamicPaginatedOptions addOption EISCharlotteRetaliatorCompat ""About your ship...""",,,"Mid-save compat only: shows for saves where Charlotte was recruited before her recruit ship changed to eis_retaliator_Custom (recruited, but no $EISCharlotteRetaliator). No disable/tooltip row on purpose, so it is never greyed out or shown otherwise.",
 EISCharlotteRetaliatorCompatSel,DialogOptionSelected,"$option == EISCharlotteRetaliatorCompat
 !$EISCharlotteRetaliator","$EISCharlotteRetaliator = true
 EISAddShip eis_retaliator_Custom
 AddTextSmall ""[mid-save compat only, you shouldn't see this unless you updated!]""
 FireAll PopulateOptions","""Fresh out of drydock. Let's give it a spin shall we?""",,"Reply for EISCharlotteRetaliatorCompatPrint. Gives the same eis_retaliator_Custom variant as EISCharlotteRealHireAccept, without recruiting her again, and sets $EISCharlotteRetaliator so it only happens once.",
+EISHartleyChallengeTutorial,DialogOptionSelected,$option == eis_duelTutorial,EISFencingDuel tutorial $player.bladeSkill,,,Practice duel before facing Hartley. Replaces the Nexerelin row that handled nex_duelTutorialCheckSkill so the tutorial works without Nexerelin. No text or options on purpose: the options from EISHartleyChallengeAcceptedSkilled stay up when the practice ends.,
+QuyQuestDisableNoNex,PopulateQuyOptions,"$id == eiskimquy
+!EIS_HasModId nexerelin","SetTooltip QuyYmaQuest1 ""Requires Nexerelin""
+SetEnabled QuyYmaQuest1 false
+SetTooltip QuyKanniQuest1 ""Requires Nexerelin""
+SetEnabled QuyKanniQuest1 false",,,"Both operations run on Nexerelin colony expeditions, invasions and market transfers. Without Nexerelin they are listed but greyed out with this tooltip.",
+EISHartleyVanguardPrintFallbackNoQuestNoNex,eis_VNSectorDiscussionOptions,"$isPerson
+$id == eisdarren score:1000
+!$EISQuickiesRewardOnce
+!$EISBeatHartleyOnce
+!EISMegamind eiskimquy ""$EISDoneQuest1""
+!EIS_HasModId nexerelin","EIS_DynamicPaginatedOptions addOption EISHartleyVanguardRewardFallbackNoQuest ""\""I think I have proven myself.\""""",,,"Without Nexerelin the duel is the only way to recruit Hartley, so the duel route option is listed before the player has won (greyed out by EISHartleyVanguardFallbackNoQuestDisableNoNex). Once a duel is won, EISHartleyVanguardPrintFallbackNoQuest prints the same option as usual. With Nexerelin nothing changes: the option stays hidden until a duel is won.",
+EISHartleyVanguardFallbackNoQuestDisableNoNex,eis_VNSectorDiscussionOptionsCheck,"$id == eisdarren
+!$EISBeatHartleyOnce
+!EIS_HasModId nexerelin","SetTooltip EISHartleyVanguardRewardFallbackNoQuest ""You must best Hartley in a duel.""
+SetEnabled EISHartleyVanguardRewardFallbackNoQuest false",,,Greys out the duel route option printed by EISHartleyVanguardPrintFallbackNoQuestNoNex until the player has won a duel. Same tooltip as EISHartleyVanguardFallbackDisable.,

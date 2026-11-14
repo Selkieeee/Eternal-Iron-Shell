@@ -5,14 +5,8 @@ import com.fs.starfarer.api.campaign.SectorAPI;
 import com.fs.starfarer.api.campaign.SectorGeneratorPlugin;
 import com.fs.starfarer.api.campaign.FactionAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
+import data.scripts.eis_nex;
 import static data.scripts.eis_modPlugin.IRONSTANDSETERNAL;
-import exerelin.campaign.AllianceManager;
-import exerelin.campaign.DiplomacyManager;
-import exerelin.campaign.alliances.Alliance;
-import exerelin.campaign.PlayerFactionStore;
-import exerelin.utilities.NexConfig;
-import exerelin.utilities.NexFactionConfig;
-import java.util.Map;
 
 public class Seriouslywhatisthewholepointofthisisweartoluddiwillmakethispersoneattheirshoe implements SectorGeneratorPlugin {
     @Override
@@ -26,21 +20,10 @@ public class Seriouslywhatisthewholepointofthisisweartoluddiwillmakethispersonea
         //sector.getFaction(Factions.PLAYER).setRelationship(iron.getId(), RepLevel.COOPERATIVE);
         iron.setRelationship(Factions.HEGEMONY, 1.00f); //Tax-exempted.
         if (data.scripts.eis_modPlugin.getEISBooleanSetting("GreaterHegemony", true)) {
-            Alliance hegemonyAlliance = AllianceManager.createAlliance(IRONSTANDSETERNAL, Factions.HEGEMONY, AllianceManager.getBestAlignment(IRONSTANDSETERNAL, Factions.HEGEMONY));
-            hegemonyAlliance.setName(Global.getSettings().getString("eis_ironshell", "eis_greaterhegemony"));
-            hegemonyAlliance.addPermaMember(IRONSTANDSETERNAL);
-            hegemonyAlliance.addPermaMember("hegemony");
+            eis_nex.createGreaterHegemony(true); // Nexerelin alliance; without Nexerelin the two are simply treated as allied
         }
         iron.setRelationship(Factions.PLAYER, Global.getSector().getPlayerFaction().getRelationship(Factions.HEGEMONY)); //Be a good little taxpayer.
-        if (Global.getSettings().getModManager().isModEnabled("nexerelin")) {
-            NexFactionConfig factionConfig = NexConfig.getFactionConfig(IRONSTANDSETERNAL);if (!DiplomacyManager.isRandomFactionRelationships()) {factionConfig.minRelationships.clear();factionConfig.minRelationships.put("hegemony", 0.251f);}
-            for (Map.Entry<String, Float> entry : factionConfig.startRelationships.entrySet()){
-                if (IRONSTANDSETERNAL.equals(entry.getKey())) continue;
-                iron.setRelationship(entry.getKey(), entry.getValue());
-            }
-            if (IRONSTANDSETERNAL.equals(PlayerFactionStore.getPlayerFactionIdNGC()) || "hegemony".equals(PlayerFactionStore.getPlayerFactionIdNGC())) {
-                iron.setRelationship(Factions.HEGEMONY, 0.75f); //Prevents you from instantly gaining 1 story point repping up to 100...
-            }
-        }
+        // Starting relationships: from Nexerelin's faction config, or the same table read directly when Nexerelin isn't installed.
+        eis_nex.applyStartRelationships(iron);
     }
 }

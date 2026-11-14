@@ -17,8 +17,7 @@ import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
-import exerelin.utilities.NexConfig;
-import exerelin.utilities.NexFactionConfig.StartFleetType;
+import data.scripts.eis_nex;
 import java.util.ArrayList;
 import java.util.List;
 import org.lazywizard.lazylib.combat.AIUtils;
@@ -155,17 +154,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
                                 }
 								
 								if (finished) {
-									for (int i=1; i <= NexConfig.getFactionConfig("ironshell").getStartFleetSet(StartFleetType.SUPER.name()).getNumFleets(); i++) {
-                                        if ("eis_indomitable_missile".equals(NexConfig.getFactionConfig("ironshell").getStartFleetSet(StartFleetType.SUPER.name()).getFleet(i).get(0))) {break;}
-                                        if ((i) == NexConfig.getFactionConfig("ironshell").getStartFleetSet(StartFleetType.SUPER.name()).getNumFleets()) {
-                                            List<String> indomitableFleet = new ArrayList<String>();
-                                            indomitableFleet.add("eis_indomitable_missile");
-                                            indomitableFleet.add("eis_flagellator_standard");
-                                            indomitableFleet.add("eis_vanguard_xiv_elite2");
-                                            NexConfig.getFactionConfig("ironshell").getStartFleetSet(StartFleetType.SUPER.name()).addFleet(indomitableFleet);
-                                            break;
-                                        }
-                                    }
+									eis_nex.unlockSuperStartFleet("eis_indomitable_missile", "eis_flagellator_standard", "eis_vanguard_xiv_elite2"); // Nexerelin start fleet; nothing to unlock without it
 								}
 								
                                 for (ShipAPI ship : AIUtils.getNearbyEnemies(Global.getCombatEngine().getPlayerShip(), 2000f)) {

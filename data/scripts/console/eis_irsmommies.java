@@ -1,7 +1,7 @@
 package data.scripts.console;
 
 import com.fs.starfarer.api.Global;
-import exerelin.campaign.SectorManager;
+import data.scripts.eis_nex;
 import org.lazywizard.console.BaseCommand;
 import org.lazywizard.console.CommonStrings;
 import org.lazywizard.console.Console;
@@ -13,7 +13,7 @@ public class eis_irsmommies implements BaseCommand {
             Console.showMessage(CommonStrings.ERROR_CAMPAIGN_ONLY);
             return CommandResult.WRONG_CONTEXT;
         }
-        if (Global.getSettings().getModManager().isModEnabled("nexerelin") && !SectorManager.getManager().isCorvusMode()) {
+        if (!eis_nex.isCorvusMode()) {
             Console.showMessage("Error: Random Core Mode... they should have spawned no?!");
             return CommandResult.ERROR;
         }

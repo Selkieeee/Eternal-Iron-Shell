@@ -20,10 +20,6 @@
       "version": "1.6.1"
     },
     {
-      "id": "nexerelin",
-      "name": "Nexerelin"
-    },
-    {
       "id": "shaderLib",
       "name": "GraphicsLib"
     }

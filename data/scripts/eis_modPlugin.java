@@ -40,16 +40,7 @@ import com.fs.starfarer.api.loading.PersonMissionSpec;
 import com.fs.starfarer.api.loading.VariantSource;
 import com.fs.starfarer.api.util.Misc;
 import java.awt.Color;
-import exerelin.campaign.ExerelinSetupData;
-import exerelin.campaign.SectorManager;
-import exerelin.campaign.intel.rebellion.RebellionIntel;
 import data.scripts.world.Seriouslywhatisthewholepointofthisisweartoluddiwillmakethispersoneattheirshoe;
-import exerelin.campaign.AllianceManager;
-import exerelin.campaign.DiplomacyManager;
-import exerelin.campaign.PlayerFactionStore;
-import exerelin.campaign.alliances.Alliance;
-import exerelin.utilities.NexConfig;
-import exerelin.utilities.NexFactionConfig;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +54,8 @@ import org.lazywizard.lazylib.MathUtils;
 
 
 public class eis_modPlugin extends BaseModPlugin {
-    public static boolean haveNex = Global.getSettings().getModManager().isModEnabled("nexerelin");
+    // Nexerelin is optional. Never call it directly: everything goes through eis_nex.
+    public static boolean haveNex = eis_nex.HAVE_NEX;
     public static boolean haveSWP = Global.getSettings().getModManager().isModEnabled("swp");
     public static boolean haveNia = Global.getSettings().getModManager().isModEnabled("tahlan");
     public static boolean hasTart = Global.getSettings().getModManager().isModEnabled("TORCHSHIPS");
@@ -71,6 +63,8 @@ public class eis_modPlugin extends BaseModPlugin {
     public static boolean haveArma = Global.getSettings().getModManager().isModEnabled("armaa");
 
     public static final String IRONSTANDSETERNAL = "ironshell";
+    // The Hegemony and Iron Shell never drop below this with each other (75 = Cooperative). See enforceHegemonyMinRel.
+    public static final float HEGEMONY_MIN_REL = 0.75f;
     private static final String MOD_ID = "selkie_eis";
     // TEMPORARILY DISABLED: Leviathan system generation on game load. Set back to true to re-enable it.
     // While off, the system can still be generated for testing with the eis_generatelevi console command.
@@ -85,9 +79,21 @@ public class eis_modPlugin extends BaseModPlugin {
         return fallback;
     }
     
+    // Forces the Hegemony - Iron Shell relationship back up to HEGEMONY_MIN_REL whenever something has pushed it lower.
+    // Runs on game load and every economy tick. Left alone under Nexerelin's random starting relationships, like the
+    // rest of the Greater Hegemony handling. (With Nexerelin the same minimum is also in its faction config.)
+    public static void enforceHegemonyMinRel() {
+        if (eis_nex.isRandomRelationships()) return;
+        com.fs.starfarer.api.campaign.FactionAPI iron = Global.getSector().getFaction(IRONSTANDSETERNAL);
+        if (iron == null) return;
+        if (iron.getRelationship(Factions.HEGEMONY) < HEGEMONY_MIN_REL - 0.001f) {
+            iron.setRelationship(Factions.HEGEMONY, HEGEMONY_MIN_REL);
+        }
+    }
+
     @Override
     public void onNewGame() {
-        if (haveNex && SectorManager.getCorvusMode()) {
+        if (eis_nex.isCorvusMode()) {
             StarSystemAPI system = Global.getSector().getStarSystem("Naraka");
             for (SectorEntityToken stable_location_finder : system.getEntitiesWithTag(Tags.STABLE_LOCATION)) {
                 if (stable_location_finder.getOrbitFocus().equals(system.getEntityById("naraka")) && !stable_location_finder.getId().equals("naraka_relay")) {
@@ -174,7 +180,7 @@ public class eis_modPlugin extends BaseModPlugin {
         eis_SpecialItemEffectsRepo.addItemEffectsToVanillaRepo();
         addHullmodIncompatibilities();
         if (haveLuna) {
-            lunalib.lunaSettings.LunaSettings.SettingsCreator.addBoolean(MOD_ID, "GreaterHegemony", "Greater Hegemony Alliance",
+            lunalib.lunaSettings.LunaSettings.SettingsCreator.addBoolean(MOD_ID, "GreaterHegemony", "Greater Hegemony Alliance (Nexerelin)",
                     "Creates the Greater Hegemony Alliance at the start of the game. (Default: True)", true);
             lunalib.lunaSettings.LunaSettings.SettingsCreator.addBoolean(MOD_ID, "NoEISPlayer", "Disable Iron Shell Portraits For Player Faction",
                     "Prevents the player faction from generating new Iron Shell portraits when the player did not start as Iron Shell or Hegemony. True = NO PORTRAITS. (Default: False)", false);
@@ -355,32 +361,12 @@ public class eis_modPlugin extends BaseModPlugin {
                 //} 
             //}
             Global.getSettings().resetCached();
+            // Finishing these missions unlocks extra Iron Shell super ship starts in Nexerelin (nothing to unlock without it).
             if (Global.getSettings().getMissionScore("eis_traitors") > 0) {
-                for (int i=1; i <= NexConfig.getFactionConfig("ironshell").getStartFleetSet(NexFactionConfig.StartFleetType.SUPER.name()).getNumFleets(); i++) {
-                    if ("eis_indomitable_missile".equals(NexConfig.getFactionConfig("ironshell").getStartFleetSet(NexFactionConfig.StartFleetType.SUPER.name()).getFleet(i).get(0))) {break;}
-                    if ((i) == NexConfig.getFactionConfig("ironshell").getStartFleetSet(NexFactionConfig.StartFleetType.SUPER.name()).getNumFleets()) {
-                        List<String> indomitableFleet = new ArrayList<>(1);
-                        indomitableFleet.add("eis_indomitable_missile");
-                        indomitableFleet.add("eis_flagellator_standard");
-                        indomitableFleet.add("eis_vanguard_xiv_elite2");
-                        NexConfig.getFactionConfig("ironshell").getStartFleetSet(NexFactionConfig.StartFleetType.SUPER.name()).addFleet(indomitableFleet);
-                        break;
-                    }
-                }
+                eis_nex.unlockSuperStartFleet("eis_indomitable_missile", "eis_flagellator_standard", "eis_vanguard_xiv_elite2");
             }
             if (Global.getSettings().getMissionScore("eis_blanks") > 0) {
-                for (int i=1; i <= NexConfig.getFactionConfig("ironshell").getStartFleetSet(NexFactionConfig.StartFleetType.SUPER.name()).getNumFleets(); i++) {
-                    if ("eis_wolf_avaritia".equals(NexConfig.getFactionConfig("ironshell").getStartFleetSet(NexFactionConfig.StartFleetType.SUPER.name()).getFleet(i).get(0))) {break;}
-                    if ((i) == NexConfig.getFactionConfig("ironshell").getStartFleetSet(NexFactionConfig.StartFleetType.SUPER.name()).getNumFleets()) {
-                        List<String> wolfFleet = new ArrayList<String>();
-                        wolfFleet.add("eis_wolf_avaritia");
-                        wolfFleet.add("eis_wolf_avaritia");
-                        wolfFleet.add("eis_wolf_avaritia");
-			wolfFleet.add("eis_wolf_avaritia");
-                        NexConfig.getFactionConfig("ironshell").getStartFleetSet(NexFactionConfig.StartFleetType.SUPER.name()).addFleet(wolfFleet);
-                        break;
-                    }
-                }
+                eis_nex.unlockSuperStartFleet("eis_wolf_avaritia", "eis_wolf_avaritia", "eis_wolf_avaritia", "eis_wolf_avaritia");
             }
     }
 
@@ -449,7 +435,7 @@ public class eis_modPlugin extends BaseModPlugin {
         // Lets a nanoforge in a Hegemony colony raise Iron Shell production quality when it beats the best one in Iron Shell markets.
         Global.getSector().addTransientScript(new data.scripts.campaign.econ.eis_NanoforgeQualityShare());
         if (newGame) {
-            if (IRONSTANDSETERNAL.equals(PlayerFactionStore.getPlayerFactionIdNGC())) {
+            if (IRONSTANDSETERNAL.equals(eis_nex.getPlayerFactionIdNGC())) {
                 for (int i = 0; i < Global.getSector().getPlayerFleet().getFleetData().getOfficersCopy().size(); i++) {
                     for (int u = 0; u < Global.getSector().getPlayerFleet().getFleetData().getOfficersCopy().get(i).getPerson().getStats().getSkillsCopy().size(); u++) {
                         if (u==0) {Global.getSector().getPlayerFleet().getFleetData().getOfficersCopy().get(i).getPerson().getStats().setSkillLevel(Global.getSector().getPlayerFleet().getFleetData().getOfficersCopy().get(i).getPerson().getStats().getSkillsCopy().get(u).getSkill().getId(), 1);}
@@ -483,7 +469,7 @@ public class eis_modPlugin extends BaseModPlugin {
                 }
                 if (Global.getSettings().getMissionScore("eis_traitors") > 0
                         && "eis_indomitable".equals(Global.getSector().getPlayerFleet().getFlagship().getHullSpec().getBaseHullId())
-                        && NexFactionConfig.StartFleetType.SUPER == ExerelinSetupData.getInstance().startFleetType) {
+                        && eis_nex.isSuperStart()) {
                     for (FleetMemberAPI membersWithFightersCopy : Global.getSector().getPlayerFleet().getMembersWithFightersCopy()) {
                         if ("eis_flagellator".equals(membersWithFightersCopy.getHullId())) {membersWithFightersCopy.getVariant().addPermaMod("eis_damperhull", true);membersWithFightersCopy.getVariant().setSource(VariantSource.REFIT);}
                     }
@@ -578,7 +564,7 @@ public class eis_modPlugin extends BaseModPlugin {
         if (Global.getSector().getPlayerFaction().getMusicMap().get("encounter_friendly") == null && Global.getSector().getMemoryWithoutUpdate().get("$Nexual_Encounter") != null) {Global.getSector().getPlayerFaction().getMusicMap().put("encounter_friendly", Global.getSector().getMemoryWithoutUpdate().getString("$Nexual_Encounter"));}
         
         //For Random Sector stuff
-        if (!SectorManager.getCorvusMode()) {
+        if (!eis_nex.isCorvusMode()) {
             Global.getSector().getFaction(IRONSTANDSETERNAL).addKnownHullMod("eis_avaritia");
             Global.getSector().getFaction(IRONSTANDSETERNAL).addKnownHullMod("eis_damperhull");
             Global.getSector().getFaction(IRONSTANDSETERNAL).addKnownHullMod("eis_justatip");
@@ -590,7 +576,7 @@ public class eis_modPlugin extends BaseModPlugin {
             Global.getSettings().getHullModSpec("eis_justatip").setRarity(1f);
         }
         
-        if (SectorManager.getCorvusMode()) {
+        if (eis_nex.isCorvusMode()) {
             if (Global.getSector().getEntityById("hanan_pacha") != null && Global.getSector().getEntityById("hanan_pacha").getMarket() != null && !Global.getSector().getEntityById("hanan_pacha").getMarket().hasCondition(Conditions.IRRADIATED)) {Global.getSector().getEntityById("hanan_pacha").getMarket().addCondition(Conditions.IRRADIATED);}
             Global.getSector().getFaction(IRONSTANDSETERNAL).removeKnownHullMod("eis_avaritia");
             Global.getSector().getFaction(IRONSTANDSETERNAL).removeKnownHullMod("eis_damperhull");
@@ -603,17 +589,15 @@ public class eis_modPlugin extends BaseModPlugin {
             Global.getSettings().getHullModSpec("eis_justatip").setRarity(0f);
         }
         
-        /*remove in 1.2*/if (SectorManager.getCorvusMode() && Global.getSector().getEntityById("eis_yami") != null && Global.getSector().getEntityById("eis_yami").getOrbitFocus() != Global.getSector().getEntityById("yama")) {
+        /*remove in 1.2*/if (eis_nex.isCorvusMode() && Global.getSector().getEntityById("eis_yami") != null && Global.getSector().getEntityById("eis_yami").getOrbitFocus() != Global.getSector().getEntityById("yama")) {
             Global.getSector().getEntityById("eis_yami").setCircularOrbit(Global.getSector().getEntityById("yama"), 0, 600f, 40f);
-            if (getEISBooleanSetting("GreaterHegemony", true)) {Alliance hegemonyAlliance = AllianceManager.getFactionAlliance(IRONSTANDSETERNAL);
-            hegemonyAlliance.addPermaMember(IRONSTANDSETERNAL);
-            hegemonyAlliance.addPermaMember("hegemony");}
+            if (getEISBooleanSetting("GreaterHegemony", true)) {eis_nex.addGreaterHegemonyPermaMembers();}
             if (Global.getSector().getEconomy().getMarket("eis_chitagupta") != null && IRONSTANDSETERNAL.equals(Global.getSector().getEconomy().getMarket("eis_chitagupta"))) {Global.getSector().getEconomy().getMarket("eis_chitagupta").getMemoryWithoutUpdate().set("$nex_colony_growth_limit", 6);
             Global.getSector().getEconomy().getMarket("eis_chitagupta").setImmigrationIncentivesOn(true);}
             if (Global.getSector().getEconomy().getMarket("eis_yami") != null && IRONSTANDSETERNAL.equals(Global.getSector().getEconomy().getMarket("eis_yami").getFactionId())) {Global.getSector().getEconomy().getMarket("eis_yami").getMemoryWithoutUpdate().set("$nex_colony_growth_limit", 5);
             Global.getSector().getEconomy().getMarket("eis_yami").setImmigrationIncentivesOn(true);}
         }
-        if (SectorManager.getCorvusMode() && Global.getSector().getImportantPeople().getPerson("eiskimquy") != null && !Global.getSector().getImportantPeople().getPerson("eiskimquy").getMemoryWithoutUpdate().getBoolean("$EISDoneQuest1Success") && ((Global.getSector().getEntityById("hanan_pacha") != null && Global.getSector().getEntityById("hanan_pacha").getMarket().getFactionId().equals(IRONSTANDSETERNAL)) || (Global.getSector().getEntityById("udana_stations") != null && Global.getSector().getEntityById("udana_stations").getMarket().getFactionId().equals(IRONSTANDSETERNAL)))) {
+        if (eis_nex.isCorvusMode() && Global.getSector().getImportantPeople().getPerson("eiskimquy") != null && !Global.getSector().getImportantPeople().getPerson("eiskimquy").getMemoryWithoutUpdate().getBoolean("$EISDoneQuest1Success") && ((Global.getSector().getEntityById("hanan_pacha") != null && Global.getSector().getEntityById("hanan_pacha").getMarket().getFactionId().equals(IRONSTANDSETERNAL)) || (Global.getSector().getEntityById("udana_stations") != null && Global.getSector().getEntityById("udana_stations").getMarket().getFactionId().equals(IRONSTANDSETERNAL)))) {
             Global.getSector().getImportantPeople().getPerson("eiskimquy").getMemoryWithoutUpdate().set("$EISDoneQuest1Success", true);
         }
         EISHegemonyInspectionGuard inspectionGuard = new EISHegemonyInspectionGuard();
@@ -680,8 +664,9 @@ public class eis_modPlugin extends BaseModPlugin {
             }
             
             Global.getSector().addTransientListener(new MarketCheckTariffs());
-            if (getEISBooleanSetting("GreaterHegemony", true) && !DiplomacyManager.isRandomFactionRelationships()) {
-                Global.getSector().getListenerManager().addListener(new MarketshipChange(), true);
+            enforceHegemonyMinRel();
+            if (getEISBooleanSetting("GreaterHegemony", true) && !eis_nex.isRandomRelationships()) {
+                eis_nex.registerMarketTransferListener();
             }
             
             Global.getSector().addTransientListener(new MarketCheckTariffs3());
@@ -696,11 +681,11 @@ public class eis_modPlugin extends BaseModPlugin {
                 Global.getSector().getMemoryWithoutUpdate().set("$EIS_taxespaid", true, 45f); //What's this about April 15th?
             }
             //if (Global.getSettings().getModManager().isModEnabled("capturecrew")) {Global.getSector().addTransientListener(new MarketCheckTariffs2());}
-            if (haveNex && SectorManager.getCorvusMode()) {
+            if (eis_nex.isCorvusMode()) {
                 //Global.getSector().addTransientListener(new MarketCheckTariffs4());
                 Global.getSector().getListenerManager().addListener(new Amongus(), true);
             }
-            if (getEISBooleanSetting("NoEISPlayer", false) && !(IRONSTANDSETERNAL.equals(PlayerFactionStore.getPlayerFactionId()) || "hegemony".equals(PlayerFactionStore.getPlayerFactionId()))) {
+            if (getEISBooleanSetting("NoEISPlayer", false) && !(IRONSTANDSETERNAL.equals(eis_nex.getPlayerFactionId()) || "hegemony".equals(eis_nex.getPlayerFactionId()))) {
                 /*Global.getSector().getFaction(Factions.HEGEMONY).getPortraits(FullName.Gender.FEMALE).remove("graphics/portraits/eis_elsa.png");
                 Global.getSector().getFaction(Factions.HEGEMONY).getPortraits(FullName.Gender.FEMALE).remove("graphics/portraits/eis_judy.png");
                 Global.getSector().getFaction(Factions.HEGEMONY).getPortraits(FullName.Gender.FEMALE).remove("graphics/portraits/eis_trinh.png");
@@ -797,13 +782,13 @@ public class eis_modPlugin extends BaseModPlugin {
         public void reportPlayerMarketTransaction(PlayerMarketTransaction transaction) {
            if (Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_taxburden") <= 40000000 && transaction.getSubmarket().getPlugin().isParticipatesInEconomy()) {
                if (transaction.getSubmarket().getSpecId().equals(Submarkets.GENERIC_MILITARY)|| transaction.getSubmarket().getSpecId().equals(Submarkets.SUBMARKET_OPEN)) {
-                   Global.getSector().getMemoryWithoutUpdate().set("$EIS_taxburden", Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_taxburden")-(Math.abs(transaction.getCreditValue()*0.04f*(SectorManager.getManager().isHardMode() ? 0.5f : 1f)*transaction.getSubmarket().getTariff())));
-                   Global.getSector().getMemoryWithoutUpdate().set("$EIS_OMTax", Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_OMTax")-(Math.abs(transaction.getCreditValue()*0.04f*(SectorManager.getManager().isHardMode() ? 0.5f : 1f)*transaction.getSubmarket().getTariff())));
+                   Global.getSector().getMemoryWithoutUpdate().set("$EIS_taxburden", Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_taxburden")-(Math.abs(transaction.getCreditValue()*0.04f*(eis_nex.isHardMode() ? 0.5f : 1f)*transaction.getSubmarket().getTariff())));
+                   Global.getSector().getMemoryWithoutUpdate().set("$EIS_OMTax", Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_OMTax")-(Math.abs(transaction.getCreditValue()*0.04f*(eis_nex.isHardMode() ? 0.5f : 1f)*transaction.getSubmarket().getTariff())));
                }
                if (transaction.getSubmarket().getPlugin().isBlackMarket() || transaction.getSubmarket().getSpecId().equals(Submarkets.SUBMARKET_BLACK)) {
-                   if (transaction.getMarket().hasCondition("nex_rebellion_condition") && ("hegemony".equals(RebellionIntel.getOngoingEvent(transaction.getMarket()).getRebelFaction().getId()) || IRONSTANDSETERNAL.equals(RebellionIntel.getOngoingEvent(transaction.getMarket()).getRebelFaction().getId()))) {
-                            Global.getSector().getMemoryWithoutUpdate().set("$EIS_taxburden", Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_taxburden")-(Math.abs(transaction.getCreditValue()*0.08f*(SectorManager.getManager().isHardMode() ? 0.5f : 1f))));
-                            Global.getSector().getMemoryWithoutUpdate().set("$EIS_BMHISTax", Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_BMHISTax")-(Math.abs(transaction.getCreditValue()*0.08f*(SectorManager.getManager().isHardMode() ? 0.5f : 1f))));
+                   if (eis_nex.isLoyalistRebellion(transaction.getMarket())) {
+                            Global.getSector().getMemoryWithoutUpdate().set("$EIS_taxburden", Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_taxburden")-(Math.abs(transaction.getCreditValue()*0.08f*(eis_nex.isHardMode() ? 0.5f : 1f))));
+                            Global.getSector().getMemoryWithoutUpdate().set("$EIS_BMHISTax", Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_BMHISTax")-(Math.abs(transaction.getCreditValue()*0.08f*(eis_nex.isHardMode() ? 0.5f : 1f))));
                     } else {
                         Global.getSector().getMemoryWithoutUpdate().set("$EIS_taxburden", Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_taxburden")+(Math.abs(transaction.getCreditValue()*0.1f)));
                         Global.getSector().getMemoryWithoutUpdate().set("$EIS_BMTax", Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_BMTax")+(Math.abs(transaction.getCreditValue()*0.1f)));
@@ -814,6 +799,7 @@ public class eis_modPlugin extends BaseModPlugin {
         
         @Override
 	public void reportEconomyTick(int iterIndex) { //Calculate all the taxation
+            enforceHegemonyMinRel();
             if (Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_taxburden") <= 40000000) {
                 float f = 1f / Global.getSettings().getFloat("economyIterPerMonth");
                 CampaignFleetAPI playerFleet = Global.getSector().getPlayerFleet();
@@ -831,20 +817,20 @@ public class eis_modPlugin extends BaseModPlugin {
                     if (salary2 <= 0) continue;
                     adminsalary += salary2 * 0.1f * f;
                 }
-                float taxrefund = crewCost+marineCost+officersalary+adminsalary*(SectorManager.getManager().isHardMode() ? 0.5f : 1f);
-                if (Global.getSector().getPlayerFleet().getCargo().getCredits().get() >= (SectorManager.getManager().isHardMode() ? 2500000f : 5000000f) && MathUtils.getRandomNumberInRange(1, 5) <= 3) {
+                float taxrefund = crewCost+marineCost+officersalary+adminsalary*(eis_nex.isHardMode() ? 0.5f : 1f);
+                if (Global.getSector().getPlayerFleet().getCargo().getCredits().get() >= (eis_nex.isHardMode() ? 2500000f : 5000000f) && MathUtils.getRandomNumberInRange(1, 5) <= 3) {
                     float wealthcredit = 0.000154f*Math.round(Global.getSector().getPlayerFleet().getCargo().getCredits().get())*f;
                     Global.getSector().getMemoryWithoutUpdate().set("$EIS_taxburden", Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_taxburden")+wealthcredit);
                     Global.getSector().getMemoryWithoutUpdate().set("$EIS_WealthTax", Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_WealthTax")+wealthcredit);
-                    if ("hegemony".equals(Misc.getCommissionFactionId()) || "ironshell".equals(Misc.getCommissionFactionId()) || AllianceManager.getPlayerAlliance(true) == AllianceManager.getFactionAlliance("ironshell")) {
-                        if (Math.abs(Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_PayrollTax")) <= Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_WealthTax")+(SectorManager.getManager().isHardMode() ? 25000f : 50000f)) {
+                    if ("hegemony".equals(Misc.getCommissionFactionId()) || "ironshell".equals(Misc.getCommissionFactionId()) || eis_nex.playerIsAlly()) {
+                        if (Math.abs(Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_PayrollTax")) <= Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_WealthTax")+(eis_nex.isHardMode() ? 25000f : 50000f)) {
                             Global.getSector().getMemoryWithoutUpdate().set("$EIS_taxburden", Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_taxburden")-taxrefund);
                             Global.getSector().getMemoryWithoutUpdate().set("$EIS_PayrollTax", Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_PayrollTax")-taxrefund);
                         }
                     }
                 } else {
-                    if ("hegemony".equals(Misc.getCommissionFactionId()) || "ironshell".equals(Misc.getCommissionFactionId()) || AllianceManager.getPlayerAlliance(true) == AllianceManager.getFactionAlliance("ironshell")) {
-                        if (Math.abs(Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_PayrollTax")) <= Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_WealthTax")+(SectorManager.getManager().isHardMode() ? 25000f : 50000f)) {
+                    if ("hegemony".equals(Misc.getCommissionFactionId()) || "ironshell".equals(Misc.getCommissionFactionId()) || eis_nex.playerIsAlly()) {
+                        if (Math.abs(Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_PayrollTax")) <= Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_WealthTax")+(eis_nex.isHardMode() ? 25000f : 50000f)) {
                             Global.getSector().getMemoryWithoutUpdate().set("$EIS_taxburden", Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_taxburden")-taxrefund);
                             Global.getSector().getMemoryWithoutUpdate().set("$EIS_PayrollTax", Global.getSector().getMemoryWithoutUpdate().getFloat("$EIS_PayrollTax")-taxrefund);
                         }
@@ -859,7 +845,7 @@ public class eis_modPlugin extends BaseModPlugin {
         
         @Override
         public void reportPlayerReputationChange(String factionId, float delta) {
-            if (("hegemony".equals(factionId) || IRONSTANDSETERNAL.equals(factionId)) && (Misc.getCommissionFactionId() != null && (Misc.getCommissionFactionId().equals(IRONSTANDSETERNAL) || Misc.getCommissionFactionId().equals("hegemony"))) && !DiplomacyManager.isRandomFactionRelationships()) {
+            if (("hegemony".equals(factionId) || IRONSTANDSETERNAL.equals(factionId)) && (Misc.getCommissionFactionId() != null && (Misc.getCommissionFactionId().equals(IRONSTANDSETERNAL) || Misc.getCommissionFactionId().equals("hegemony"))) && !eis_nex.isRandomRelationships()) {
                 if ((Global.getSector().getFaction("hegemony").getRelToPlayer().getRel() <= 0.251f || Global.getSector().getFaction("ironshell").getRelToPlayer().getRel() <= 0.251f) && delta <= -0.36f) {
                     List<IntelInfoPlugin> intels =  Global.getSector().getIntelManager().getIntel(FactionCommissionIntel.class);
                     for (IntelInfoPlugin intel : intels) {
@@ -880,18 +866,15 @@ public class eis_modPlugin extends BaseModPlugin {
                                 Global.getSector().getFaction("hegemony").adjustRelationship(IRONSTANDSETERNAL, -delta);
                             }
                             
-                            if (AllianceManager.getFactionAlliance(IRONSTANDSETERNAL) == null && AllianceManager.getFactionAlliance("hegemony") == null) {
-                                if (getEISBooleanSetting("GreaterHegemony", true)) {
-                                    Alliance hegemonyAlliance = AllianceManager.createAlliance(IRONSTANDSETERNAL, Factions.HEGEMONY, AllianceManager.getBestAlignment(IRONSTANDSETERNAL, Factions.HEGEMONY));
-                                    hegemonyAlliance.setName(Global.getSettings().getString("eis_ironshell", "eis_greaterhegemony"));
-                                }
+                            if (getEISBooleanSetting("GreaterHegemony", true)) {
+                                eis_nex.createGreaterHegemonyIfNone();
                             }
                         }                          
                     }
                 }
             }
-            if (("hegemony".equals(factionId) || IRONSTANDSETERNAL.equals(factionId)) && !(Misc.getCommissionFactionId() != null && (Misc.getCommissionFactionId().equals(IRONSTANDSETERNAL) || Misc.getCommissionFactionId().equals("hegemony"))) && !DiplomacyManager.isRandomFactionRelationships()) {
-                if (AllianceManager.getFactionAlliance(IRONSTANDSETERNAL) == AllianceManager.getFactionAlliance("hegemony") && delta < 0) {
+            if (("hegemony".equals(factionId) || IRONSTANDSETERNAL.equals(factionId)) && !(Misc.getCommissionFactionId() != null && (Misc.getCommissionFactionId().equals(IRONSTANDSETERNAL) || Misc.getCommissionFactionId().equals("hegemony"))) && !eis_nex.isRandomRelationships()) {
+                if (eis_nex.hegemonyAndIronShellAllied() && delta < 0) {
                     if (Global.getSector().getFaction("hegemony").getRelToPlayer().getRel() <= -0.5f) {
                         //Global.getSector().getFaction(IRONSTANDSETERNAL).setRelationship("player", Global.getSector().getFaction("hegemony").getRelToPlayer().getRel());
                         Global.getSector().getFaction(IRONSTANDSETERNAL).adjustRelationship("player", delta, RepLevel.HOSTILE);
@@ -914,7 +897,7 @@ public class eis_modPlugin extends BaseModPlugin {
     
     @Override
     public void onNewGameAfterTimePass() {
-        if (!DiplomacyManager.isRandomFactionRelationships() && Global.getSector().getPlayerFaction().getRelationship(IRONSTANDSETERNAL) >= -0.05f && Global.getSector().getPlayerFaction().getRelationship(IRONSTANDSETERNAL) <= 0.05f) {
+        if (!eis_nex.isRandomRelationships() && Global.getSector().getPlayerFaction().getRelationship(IRONSTANDSETERNAL) >= -0.05f && Global.getSector().getPlayerFaction().getRelationship(IRONSTANDSETERNAL) <= 0.05f) {
             Global.getSector().getFaction(IRONSTANDSETERNAL).setRelationship(Factions.PLAYER, Global.getSector().getPlayerFaction().getRelationship(Factions.HEGEMONY));
             if (Misc.getCommissionFactionId() != null && !"player".equals(Misc.getCommissionFactionId())) {Global.getSector().getFaction(IRONSTANDSETERNAL).setRelationship(Misc.getCommissionFactionId(), Global.getSector().getPlayerFaction().getRelationship(Factions.HEGEMONY));}
         }
