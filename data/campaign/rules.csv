@@ -1157,47 +1157,43 @@ SetStoryOption EISHartleyXIVCastigatorAuthorize 1 eis_xivConversionNoBonusXP tec
 FireBest EISHartleyXIVCastigatorBuyCheck","""I-Is this a joke?"" Hartley mutes his comms, and you see him shouting at what appears to be his chief engineer, who had slipped you a tip when your fleet docked. He audibly sighs. ""So it's possible, although it's going to take some all-nighters from the team.""
 
 He sends over the conversion cost. The itemized invoice contains 57 pages of custom-forged components, and suspiciously doesn't include a labor fee.","EISHartleyXIVCastigatorAuthorize:Authorize XIV battlegroup conversion (280,000 credits)
-EISHartleyXIVConversionPreviewBack:""Sorry, I wasn't serious.""",,b
+EISHartleyXIVConversionPreviewBack:""Sorry, I wasn't serious.""","Changed: the Authorize price in the options column is only a fallback; EISXIVConversion SHOW relabels it with 2x the XIV hull base value (times ext_shipBuyPriceMult in extended mode).",b
 EISHartleyXIVLegionPreview,DialogOptionSelected,$option == EISHartleyXIVLegionPreview,"EISXIVConversion SHOW
 SetStoryOption EISHartleyXIVLegionAuthorize 1 eis_xivConversionNoBonusXP technology ""Authorized an XIV battlegroup conversion""
 FireBest EISHartleyXIVLegionBuyCheck","""I-Is this a joke?"" Hartley mutes his comms, and you see him shouting at what appears to be his chief engineer, who had slipped you a tip when your fleet docked. He audibly sighs. ""So it's possible, although it's going to take some all-nighters from the team.""
 
-He sends over the conversion cost. The itemized invoice contains 57 pages of custom-forged components, and suspiciously doesn't include a labor fee.","EISHartleyXIVLegionAuthorize:Authorize XIV battlegroup conversion (1,300,000 credits)
-EISHartleyXIVConversionPreviewBack:""Sorry, it was a joke.""",,b
+He sends over the conversion cost. The itemized invoice contains 57 pages of custom-forged components, and suspiciously doesn't include a labor fee.","EISHartleyXIVLegionAuthorize:Authorize XIV battlegroup conversion (1,312,500 credits)
+EISHartleyXIVConversionPreviewBack:""Sorry, it was a joke.""","Changed: the Authorize price in the options column is only a fallback; EISXIVConversion SHOW relabels it with 2x the XIV hull base value (times ext_shipBuyPriceMult in extended mode).",b
 EISHartleyXIVChampionPreview,DialogOptionSelected,$option == EISHartleyXIVChampionPreview,"EISXIVConversion SHOW
-FireBest EISHartleyXIVChampionBuyCheck","""Our Fourteenth Battlegroup spec adjusts the ammo feeds and power rails. It's quite a versatile hull.""","EISHartleyXIVChampionAuthorize:Authorize XIV battlegroup conversion (150,000 credits)
-EISHartleyXIVConversionPreviewBack:""I need to think it over.""",,b
+FireBest EISHartleyXIVChampionBuyCheck","""Our Fourteenth Battlegroup spec adjusts the ammo feeds and power rails. It's quite a versatile hull.""","EISHartleyXIVChampionAuthorize:Authorize XIV battlegroup conversion (187,500 credits)
+EISHartleyXIVConversionPreviewBack:""I need to think it over.""","Changed: the Authorize price in the options column is only a fallback; EISXIVConversion SHOW relabels it with 1x the XIV hull base value (times ext_shipBuyPriceMult in extended mode).",b
 EISHartleyXIVEradicatorPreview,DialogOptionSelected,$option == EISHartleyXIVEradicatorPreview,"EISXIVConversion SHOW
-FireBest EISHartleyXIVEradicatorBuyCheck","""The Fourteenth Battlegroup refit includes our standard 'missile microforge' built into the hull. Packs quite a punch, but it's a bit of a logistical nightmare to maintain.""","EISHartleyXIVEradicatorAuthorize:Authorize XIV battlegroup conversion (125,000 credits)
-EISHartleyXIVConversionPreviewBack:""I need to think it over.""",,b
-EISHartleyXIVCastigatorBuyCheckCredits,EISHartleyXIVCastigatorBuyCheck,$player.credits < 280000,"SetTooltip EISHartleyXIVCastigatorAuthorize ""You do not have enough credits for this conversion.""
-SetEnabled EISHartleyXIVCastigatorAuthorize false",,,,b
+FireBest EISHartleyXIVEradicatorBuyCheck","""The Fourteenth Battlegroup refit includes our standard 'missile microforge' built into the hull. Packs quite a punch, but it's a bit of a logistical nightmare to maintain.""","EISHartleyXIVEradicatorAuthorize:Authorize XIV battlegroup conversion (175,000 credits)
+EISHartleyXIVConversionPreviewBack:""I need to think it over.""","Changed: the Authorize price in the options column is only a fallback; EISXIVConversion SHOW relabels it with 1x the XIV hull base value (times ext_shipBuyPriceMult in extended mode).",b
+EISHartleyXIVCastigatorBuyCheckCredits,EISHartleyXIVCastigatorBuyCheck,$player.credits < $global.eis_xivConversionPrice,"SetTooltip EISHartleyXIVCastigatorAuthorize ""You do not have enough credits for this conversion.""
+SetEnabled EISHartleyXIVCastigatorAuthorize false",,,"Changed: compares against $global.eis_xivConversionPrice (set by EISXIVConversion SHOW; base price times ext_shipBuyPriceMult in extended mode) instead of a fixed number.",b
 #EISHartleyXIVCastigatorBuyCheckSP,EISHartleyXIVCastigatorBuyCheck,!EISXIVConversion hasSP 1,"SetTooltip EISHartleyXIVCastigatorAuthorize ""You do not have a Story Point to spend on this conversion.""
 SetEnabled EISHartleyXIVCastigatorAuthorize false",,,,b
-EISHartleyXIVLegionBuyCheckCredits,EISHartleyXIVLegionBuyCheck,$player.credits < 1300000,"SetTooltip EISHartleyXIVLegionAuthorize ""You do not have enough credits for this conversion.""
-SetEnabled EISHartleyXIVLegionAuthorize false",,,,b
+EISHartleyXIVLegionBuyCheckCredits,EISHartleyXIVLegionBuyCheck,$player.credits < $global.eis_xivConversionPrice,"SetTooltip EISHartleyXIVLegionAuthorize ""You do not have enough credits for this conversion.""
+SetEnabled EISHartleyXIVLegionAuthorize false",,,"Changed: compares against $global.eis_xivConversionPrice (set by EISXIVConversion SHOW; base price times ext_shipBuyPriceMult in extended mode) instead of a fixed number.",b
 #EISHartleyXIVLegionBuyCheckSP,EISHartleyXIVLegionBuyCheck,!EISXIVConversion hasSP 1,"SetTooltip EISHartleyXIVLegionAuthorize ""You do not have a Story Point to spend on this conversion.""
 SetEnabled EISHartleyXIVLegionAuthorize false",,,,b
-EISHartleyXIVChampionBuyCheckCredits,EISHartleyXIVChampionBuyCheck,$player.credits < 150000,"SetTooltip EISHartleyXIVChampionAuthorize ""You do not have enough credits for this conversion.""
-SetEnabled EISHartleyXIVChampionAuthorize false",,,,b
-EISHartleyXIVEradicatorBuyCheckCredits,EISHartleyXIVEradicatorBuyCheck,$player.credits < 125000,"SetTooltip EISHartleyXIVEradicatorAuthorize ""You do not have enough credits for this conversion.""
-SetEnabled EISHartleyXIVEradicatorAuthorize false",,,,b
-EISHartleyXIVCastigatorAuthorizeSel,DialogOptionSelected,$option == EISHartleyXIVCastigatorAuthorize,"AddRemoveCommodity credits -280000
-EISXIVConversion BUY
+EISHartleyXIVChampionBuyCheckCredits,EISHartleyXIVChampionBuyCheck,$player.credits < $global.eis_xivConversionPrice,"SetTooltip EISHartleyXIVChampionAuthorize ""You do not have enough credits for this conversion.""
+SetEnabled EISHartleyXIVChampionAuthorize false",,,"Changed: compares against $global.eis_xivConversionPrice (set by EISXIVConversion SHOW; base price times ext_shipBuyPriceMult in extended mode) instead of a fixed number.",b
+EISHartleyXIVEradicatorBuyCheckCredits,EISHartleyXIVEradicatorBuyCheck,$player.credits < $global.eis_xivConversionPrice,"SetTooltip EISHartleyXIVEradicatorAuthorize ""You do not have enough credits for this conversion.""
+SetEnabled EISHartleyXIVEradicatorAuthorize false",,,"Changed: compares against $global.eis_xivConversionPrice (set by EISXIVConversion SHOW; base price times ext_shipBuyPriceMult in extended mode) instead of a fixed number.",b
+EISHartleyXIVCastigatorAuthorizeSel,DialogOptionSelected,$option == EISHartleyXIVCastigatorAuthorize,"EISXIVConversion BUY
 ShowPersonVisual
-FireAll PopulateOptions","Hartley hands the order off to his team. Shocked he finally greenlit such a preposterous project, they get to work on the hull.",,,b
-EISHartleyXIVLegionAuthorizeSel,DialogOptionSelected,$option == EISHartleyXIVLegionAuthorize,"AddRemoveCommodity credits -1300000
-EISXIVConversion BUY
+FireAll PopulateOptions","Hartley hands the order off to his team. Shocked he finally greenlit such a preposterous project, they get to work on the hull.",,"Changed: AddRemoveCommodity removed; EISXIVConversion BUY charges the price (base price times ext_shipBuyPriceMult in extended mode). SHOW rewrites the Authorize label with that price.",b
+EISHartleyXIVLegionAuthorizeSel,DialogOptionSelected,$option == EISHartleyXIVLegionAuthorize,"EISXIVConversion BUY
 ShowPersonVisual
-FireAll PopulateOptions","Hartley hands the order off to his team. Shocked he finally greenlit such a preposterous project, they get to work on the hull.",,,b
-EISHartleyXIVChampionAuthorizeSel,DialogOptionSelected,$option == EISHartleyXIVChampionAuthorize,"AddRemoveCommodity credits -150000
-EISXIVConversion BUY
+FireAll PopulateOptions","Hartley hands the order off to his team. Shocked he finally greenlit such a preposterous project, they get to work on the hull.",,"Changed: AddRemoveCommodity removed; EISXIVConversion BUY charges the price (base price times ext_shipBuyPriceMult in extended mode). SHOW rewrites the Authorize label with that price.",b
+EISHartleyXIVChampionAuthorizeSel,DialogOptionSelected,$option == EISHartleyXIVChampionAuthorize,"EISXIVConversion BUY
 ShowPersonVisual
-FireAll PopulateOptions","Hartley hands the order off to his team, and the hull is returned once the conversion is complete.",,,b
-EISHartleyXIVEradicatorAuthorizeSel,DialogOptionSelected,$option == EISHartleyXIVEradicatorAuthorize,"AddRemoveCommodity credits -125000
-EISXIVConversion BUY
+FireAll PopulateOptions","Hartley hands the order off to his team, and the hull is returned once the conversion is complete.",,"Changed: AddRemoveCommodity removed; EISXIVConversion BUY charges the price (base price times ext_shipBuyPriceMult in extended mode). SHOW rewrites the Authorize label with that price.",b
+EISHartleyXIVEradicatorAuthorizeSel,DialogOptionSelected,$option == EISHartleyXIVEradicatorAuthorize,"EISXIVConversion BUY
 ShowPersonVisual
-FireAll PopulateOptions","Hartley hands the order off to his team, and the hull is returned once the conversion is complete.",,,b
+FireAll PopulateOptions","Hartley hands the order off to his team, and the hull is returned once the conversion is complete.",,"Changed: AddRemoveCommodity removed; EISXIVConversion BUY charges the price (base price times ext_shipBuyPriceMult in extended mode). SHOW rewrites the Authorize label with that price.",b
 EISHartleyXIVConversionPreviewBack,DialogOptionSelected,$option == EISHartleyXIVConversionPreviewBack,"EISXIVConversion CANCEL
 ShowPersonVisual",,"EISHartleyXIVConversionPick:Select ship for XIV conversion
 EISHartleyXIVConversionBack:Back",,b
@@ -1296,10 +1292,11 @@ $option == eis_cpc_pickContactBP score:100",Call $cpc_ref pickContactBP,,,,
 ,,,,,,,
 eis_CelestesShipBlurb,eis_sShip_blurb,$id == eisceleste score:10,,"""$sShip_hullSize has been made available for my wonderful assistant. Interested?""",,,
 eis_CelestesShipOfferTextContact,DialogOptionSelected,"$option == eis_sShip_start
-$id == eisceleste score:10","$missionId = eis_sShip
+$id == eisceleste score:10
+$sShip_aquila","$missionId = eis_sShip
 SetTextHighlights $sShip_price
 SetTextHighlights Aquila Reactor Protocol","""It's a $sShip_hullClass $sShip_hullSize with my Aquila Reactor Protocol modification. I could give it to you for $sShip_price credits.""","eis_sShip_look:Ask for detailed info on the ship
-contact_decline:Decline",,
+contact_decline:Decline",Changed: added $sShip_aquila so Celeste only names the Aquila Reactor when the ship has it (extended mode offers ships without it; those use eis_sShipOfferTextContact).,
 eis_CelestesShipOfferTextContactInfo,DialogOptionSelected,"$option == eis_sSship_Aquila
 $id == eisceleste",SetEnabled eis_sSship_Aquila false,"Celeste loosens up, ""Yes, Aquila Reactor Protocol, a trademark secret in our House. Makes the ship brawl better at a cost. We have tried to put it inside frigates and destroyers, but they are often  too fragile..."" Celeste pauses for a bit. ""...but there are promising results with our experiments done so far.""",,,
 ,,,,,,,

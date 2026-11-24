@@ -24,6 +24,7 @@ import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.fleet.FleetMemberType;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
+import com.fs.starfarer.api.impl.campaign.missions.SurplusShipHull;
 import com.fs.starfarer.api.impl.campaign.missions.hub.HubMissionWithSearch;
 import com.fs.starfarer.api.loading.VariantSource;
 import com.fs.starfarer.api.util.Misc;
@@ -32,7 +33,8 @@ import com.fs.starfarer.api.util.WeightedRandomPicker;
 
 public class EISSurplusShipHull extends HubMissionWithSearch {
 
-	public static final float BASE_PRICE_MULT = 0.4f;
+	// Vanilla's surplus hull price multiplier (0.5 in 0.98.5)
+	public static final float BASE_PRICE_MULT = SurplusShipHull.BASE_PRICE_MULT;
 	// Weight of a hull that is not tagged eis_bp, relative to 1 for an eis_bp hull.
 	public static final float NON_BP_WEIGHT = 0.5f;
 	// Hulls tagged no_sell that this mission may still offer.
@@ -68,6 +70,9 @@ public class EISSurplusShipHull extends HubMissionWithSearch {
 		//genRandom = Misc.random;
 		
 		
+		// Extended mode skips the Aquila Reactor S-mod refit (hulls that have it built in can still be offered)
+		boolean addAquila = !Misc.isExtended();
+
 		// Every hull the contact's faction knows is a candidate. The pick ignores contact importance, campaign age, reputation and fleet doctrine.
 		// Hulls tagged eis_bp have full weight; every other hull (vanilla and cross-mod alike) has NON_BP_WEIGHT.
 		FactionAPI pickFaction = EISContactFaction.get(person);
@@ -103,8 +108,8 @@ public class EISSurplusShipHull extends HubMissionWithSearch {
 			} catch (Throwable t) {
 				continue;
 			}
-			// eis_aquila can't be installed on top of Safety Overrides, and every ship sold here must have it
-			if (candidate.hasHullMod(HullMods.SAFETYOVERRIDES)) continue;
+			// eis_aquila can't be installed on top of Safety Overrides, and every ship sold here outside extended mode must have it
+			if (addAquila && candidate.hasHullMod(HullMods.SAFETYOVERRIDES)) continue;
 			variant = candidate;
 			break;
 		}
@@ -112,9 +117,9 @@ public class EISSurplusShipHull extends HubMissionWithSearch {
 			
 		member = Global.getFactory().createFleetMember(FleetMemberType.SHIP, variant.clone());
 		//assignShipName(member, Factions.INDEPENDENT);
-                // Every ship is an Iron Shell refit with the built-in Aquila Reactor (hulls with Safety Overrides are rejected in the pick loop above)
+                // Outside extended mode every ship is an Iron Shell refit with the built-in Aquila Reactor (hulls with Safety Overrides are rejected in the pick loop above)
                 assignShipName(member, "ironshell");
-                if (!member.getVariant().hasHullMod("eis_aquila")) {
+                if (addAquila && !member.getVariant().hasHullMod("eis_aquila")) {
                     member.getVariant().addPermaMod("eis_aquila", true);
                     member.getVariant().setSource(VariantSource.REFIT);
                     member.getVariant().addTag(Tags.VARIANT_ALWAYS_RETAIN_SMODS_ON_SALVAGE);
@@ -134,7 +139,7 @@ public class EISSurplusShipHull extends HubMissionWithSearch {
 		/*if (BASE_PRICE_MULT == 1f) {
 			price = (int) Math.round(variant.getHullSpec().getBaseValue());
 		} else {*/
-			price = getRoundNumber(variant.getHullSpec().getBaseValue() * BASE_PRICE_MULT);
+			price = getRoundNumber(variant.getHullSpec().getBaseValue() * BASE_PRICE_MULT * getExtendedPriceMult(variant));
 		//}
 		
 		// reputation on purchase: person +5 / faction +3 (penalties unchanged: person -1 / faction 0)
@@ -143,12 +148,21 @@ public class EISSurplusShipHull extends HubMissionWithSearch {
 		return true;
 	}
 	
+	// Extended mode only: the same multipliers vanilla's surplus hulls use, the hull-size ship buy price multiplier
+	// (ext_shipBuyPriceMult) and the surplus hull multiplier (ext_surplusHullPriceMult). 1 outside extended mode.
+	protected static float getExtendedPriceMult(ShipVariantAPI variant) {
+		if (!Misc.isExtended()) return 1f;
+		float mult = Global.getSettings().optFloatFromArray("ext_shipBuyPriceMult", variant.getHullSpec().getHullSize().ordinal() - 2, 1f);
+		return mult * Global.getSettings().getFloat("ext_surplusHullPriceMult");
+	}
+
 	protected void updateInteractionDataImpl() {
 		// this is weird - in the accept() method, the mission is aborted, which unsets
 		// $sShip_ref. So: we use $sShip_ref2 in the ContactPostAccept rule
 		// and $sShip_ref2 has an expiration of 0, so it'll get unset on its own later.
 		set("$sShip_ref2", this);
-                set("$sShip_aquila", true);
+                // picks the Aquila or the plain dialogue rows in rules.csv
+                set("$sShip_aquila", member.getVariant().hasHullMod("eis_aquila"));
 		set("$sShip_hullSize", member.getHullSpec().getDesignation().toLowerCase());
 		set("$sShip_hullClass", member.getHullSpec().getHullNameWithDashClass());
 		set("$sShip_price", Misc.getWithDGS(price));

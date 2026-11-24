@@ -15,6 +15,7 @@ import data.scripts.EISContactFaction;
 import com.fs.starfarer.api.impl.campaign.CoreReputationPlugin.RepRewards;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
+import com.fs.starfarer.api.impl.campaign.missions.DeadDropMission;
 import com.fs.starfarer.api.impl.campaign.missions.DelayedFleetEncounter;
 import com.fs.starfarer.api.impl.campaign.missions.hub.HubMissionWithSearch;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
@@ -22,8 +23,9 @@ import com.fs.starfarer.api.util.Misc;
 
 public class EISDeadDropMission extends HubMissionWithSearch {
 
-	public static float PROB_COMPLICATIONS = 0.9f; //0.5f to both
-	public static float PROB_PATROL_AFTER = 0.9f;
+	// Vanilla's Dead Drop values (0.5 each in 0.98.5)
+	public static float PROB_COMPLICATIONS = DeadDropMission.PROB_COMPLICATIONS;
+	public static float PROB_PATROL_AFTER = DeadDropMission.PROB_PATROL_AFTER;
 	public static float MISSION_DAYS = 120f;
 	
 	public static enum Stage {

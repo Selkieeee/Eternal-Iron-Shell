@@ -27,6 +27,7 @@ import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.impl.campaign.intel.bases.PirateBaseIntel;
+import com.fs.starfarer.api.impl.campaign.missions.PirateSystemBounty;
 import com.fs.starfarer.api.impl.campaign.missions.hub.HubMissionWithSearch;
 import com.fs.starfarer.api.impl.campaign.missions.hub.ReqMode;
 import com.fs.starfarer.api.ui.SectorMapAPI;
@@ -35,8 +36,9 @@ import com.fs.starfarer.api.util.Misc;
 
 public class EISPirateSystemBounty extends HubMissionWithSearch implements FleetEventListener {
 
-	public static float BOUNTY_DAYS = 120f;
-	public static float BASE_BOUNTY = 1000f;
+	// Taken from vanilla's Pirate System Bounty so they follow its balance (180 days / 2500 in 0.98.5)
+	public static float BOUNTY_DAYS = PirateSystemBounty.BOUNTY_DAYS;
+	public static float BASE_BOUNTY = PirateSystemBounty.BASE_BOUNTY;
 	//public static float VS_STATION_BONUS = 50000f;
 	
 	public static class BountyResult {

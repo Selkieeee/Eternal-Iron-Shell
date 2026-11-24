@@ -38,6 +38,8 @@ public class EISCustomProductionContract extends CustomProductionContract {
 	public static final float COST_MULT_HARTLEY = 1.2f; // Hartley's starting cost, before the ship clearance discounts below
 	// Hartley's contract costs this much less per ship clearance unlocked ($global.eisIllustriousUnlocked from Hartley, $global.eisDauntlessUnlocked from Ava), so 50% off with both.
 	public static final float CLEARANCE_DISCOUNT = 0.25f;
+	// Order limit multiplier in extended mode (vanilla uses 3)
+	public static final float EXTENDED_CAPACITY_MULT = 5f;
 	// Reputation for placing an order scales with the credits spent: 1 contact rep per REP_PERSON_PER_CREDITS and 1 faction rep per REP_FACTION_PER_CREDITS (whole blocks only).
 	public static final float REP_PERSON_PER_CREDITS = 100000f;
 	public static final float REP_FACTION_PER_CREDITS = 200000f;
@@ -94,6 +96,11 @@ public class EISCustomProductionContract extends CustomProductionContract {
 			maxCapacity = getRoundNumber(mult * 0.75f *
 						(DEALER_MIN_CAPACITY + (DEALER_MAX_CAPACITY - DEALER_MIN_CAPACITY) * getQuality()));
 		}
+		// Extended mode: a larger order limit, x5 rather than vanilla's x3 (ext_barCustomProductionMaxValueMult), so the
+		// clearance capitals stay orderable. Ship costs already rise in extended mode on their own, since the production
+		// picker prices ships with the extended ship price multiplier.
+		float extendedMult = Misc.isExtended() ? EXTENDED_CAPACITY_MULT : 1f;
+		maxCapacity *= extendedMult;
 				
 			//1f - MILITARY_MAX_COST_DECREASE * getRewardMultFraction();
                 if (person.getTags().contains("eis_celeste")) {

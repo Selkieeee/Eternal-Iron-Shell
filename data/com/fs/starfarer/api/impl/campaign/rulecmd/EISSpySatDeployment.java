@@ -12,13 +12,14 @@ import data.scripts.EISContactFaction;
 import com.fs.starfarer.api.impl.campaign.CoreReputationPlugin.RepRewards;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
+import com.fs.starfarer.api.impl.campaign.missions.SpySatDeployment;
 import com.fs.starfarer.api.impl.campaign.missions.hub.HubMissionWithSearch;
 import com.fs.starfarer.api.impl.campaign.missions.hub.ReqMode;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
 public class EISSpySatDeployment extends HubMissionWithSearch {
-	public static float PROB_PATROL_AROUND_TARGET = 0.1f; //from 0.5f
+	public static float PROB_PATROL_AROUND_TARGET = SpySatDeployment.PROB_PATROL_AROUND_TARGET; // vanilla's value (0.2 in 0.98.5)
 	
 	public static float MISSION_DAYS = 120f;
 	

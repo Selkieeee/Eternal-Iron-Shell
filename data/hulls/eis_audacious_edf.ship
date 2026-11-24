@@ -13,7 +13,7 @@
   "shieldRadius": 128.5,
   "viewOffset": 0,
   "builtInMods": [
-    "fourteenth",
+    "automated",
     "eis_vengeance2"
   ],
   "builtInWeapons": {

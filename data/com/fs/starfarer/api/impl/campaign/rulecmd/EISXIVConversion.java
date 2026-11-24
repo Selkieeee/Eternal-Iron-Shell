@@ -19,12 +19,13 @@ import com.fs.starfarer.api.fleet.FleetMemberType;
 import com.fs.starfarer.api.loading.VariantSource;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Misc.Token;
+import com.fs.starfarer.api.util.MutableValue;
 
 /**
  * EISXIVConversion PICK   - shows the fleet member picker for eligible source hulls
  * EISXIVConversion SHOW   - previews the resulting XIV hull in the dialog's visual panel
- * EISXIVConversion BUY    - performs the conversion (credits are deducted separately via
- *                           AddRemoveCommodity in rules.csv; the Story Point cost of the one-time
+ * EISXIVConversion BUY    - performs the conversion and deducts its credit price (target hull base value
+ *                           times valueMult, times ext_shipBuyPriceMult for the hull size in extended mode); the Story Point cost of the one-time
  *                           conversions is charged by the game itself, via SetStoryOption on the
  *                           Authorize option in the preview rows - this command never spends SP)
  * EISXIVConversion CANCEL - discards the pending picked ship without converting it
@@ -54,14 +55,20 @@ public class EISXIVConversion extends BaseCommandPlugin {
          *  for the Castigator (XIV) blueprint elsewhere, so this offer can't appear, be picked,
          *  previewed, or completed for players who don't have that mod installed. */
         final String requiredHullSpecId;
+        final String authorizeOptionId;
+        /** Multiplier on the converted (target) hull's base value; see getPrice(). */
+        final float valueMult;
 
-        ConversionInfo(String sourceHullId, String targetHullId, boolean oneTime, String doneFlagKey, String previewOptionId, String requiredHullSpecId) {
+        ConversionInfo(String sourceHullId, String targetHullId, boolean oneTime, String doneFlagKey, String previewOptionId, String requiredHullSpecId,
+                       String authorizeOptionId, float valueMult) {
             this.sourceHullId = sourceHullId;
             this.targetHullId = targetHullId;
             this.oneTime = oneTime;
             this.doneFlagKey = doneFlagKey;
             this.previewOptionId = previewOptionId;
             this.requiredHullSpecId = requiredHullSpecId;
+            this.authorizeOptionId = authorizeOptionId;
+            this.valueMult = valueMult;
         }
 
         boolean isAvailable() {
@@ -70,11 +77,31 @@ public class EISXIVConversion extends BaseCommandPlugin {
     }
 
     private static final ConversionInfo[] ALL = {
-        new ConversionInfo("tahlan_Castigator", "tahlan_Castigator_xiv", true, "$EISHartleyXIVCastigatorDone", "EISHartleyXIVCastigatorPreview", "tahlan_Castigator_xiv"),
-        new ConversionInfo("legion", "legion_xiv", true, "$EISHartleyXIVLegionDone", "EISHartleyXIVLegionPreview", null),
-        new ConversionInfo("champion", "eis_champion", false, null, "EISHartleyXIVChampionPreview", null),
-        new ConversionInfo("eradicator", "eis_eradicator", false, null, "EISHartleyXIVEradicatorPreview", null),
+        new ConversionInfo("tahlan_Castigator", "tahlan_Castigator_xiv", true, "$EISHartleyXIVCastigatorDone", "EISHartleyXIVCastigatorPreview", "tahlan_Castigator_xiv",
+                "EISHartleyXIVCastigatorAuthorize", 2f),
+        new ConversionInfo("legion", "legion_xiv", true, "$EISHartleyXIVLegionDone", "EISHartleyXIVLegionPreview", null,
+                "EISHartleyXIVLegionAuthorize", 2f),
+        new ConversionInfo("champion", "eis_champion", false, null, "EISHartleyXIVChampionPreview", null,
+                "EISHartleyXIVChampionAuthorize", 1f),
+        new ConversionInfo("eradicator", "eis_eradicator", false, null, "EISHartleyXIVEradicatorPreview", null,
+                "EISHartleyXIVEradicatorAuthorize", 1f),
     };
+
+    /** Set by SHOW for the BuyCheck rows in rules.csv ($global.eis_xivConversionPrice). */
+    private static final String MEM_PRICE_KEY = "$eis_xivConversionPrice";
+
+    /**
+     * The converted hull's base value (skin baseValueMult included) times the conversion's valueMult, multiplied
+     * in extended mode by vanilla's ext_shipBuyPriceMult for the target hull's size (frigate, destroyer, cruiser,
+     * capital), the same multiplier extended mode applies to buying ships.
+     */
+    private static int getPrice(ConversionInfo info, ShipHullSpecAPI targetSpec) {
+        float mult = 1f;
+        if (Misc.isExtended()) {
+            mult = Global.getSettings().optFloatFromArray("ext_shipBuyPriceMult", targetSpec.getHullSize().ordinal() - 2, 1f);
+        }
+        return Math.round(targetSpec.getBaseValue() * info.valueMult * mult);
+    }
 
     private static ConversionInfo infoForTarget(String targetHullId) {
         for (ConversionInfo info : ALL) {
@@ -102,6 +129,7 @@ public class EISXIVConversion extends BaseCommandPlugin {
         if ("CANCEL".equals(action)) {
             mem.unset(MEM_OLD_KEY);
             mem.unset(MEM_TYPE_KEY);
+            mem.unset(MEM_PRICE_KEY);
             return true;
         }
         if ("hasSP".equals(action)) {
@@ -174,8 +202,19 @@ public class EISXIVConversion extends BaseCommandPlugin {
         String targetHullId = (String) mem.get(MEM_TYPE_KEY);
         if (targetHullId == null) return false;
 
+        ConversionInfo info = infoForTarget(targetHullId);
+        if (info == null) return false;
+
         ShipHullSpecAPI hullSpec = Global.getSettings().getHullSpec(targetHullId);
         if (hullSpec == null) return false;
+
+        // The Authorize option comes from this row's options column (added before the script runs),
+        // so its label is rewritten here with the actual price; the BuyCheck rows compare against MEM_PRICE_KEY.
+        int price = getPrice(info, hullSpec);
+        mem.set(MEM_PRICE_KEY, price);
+        if (dialog.getOptionPanel().hasOption(info.authorizeOptionId)) {
+            dialog.getOptionPanel().setOptionText("Authorize XIV battlegroup conversion (" + Misc.getWithDGS(price) + " credits)", info.authorizeOptionId);
+        }
 
         ShipVariantAPI variant = Global.getSettings().createEmptyVariant(targetHullId + "_xivConversionPreview", hullSpec);
         FleetMemberAPI preview = Global.getFactory().createFleetMember(FleetMemberType.SHIP, variant);
@@ -201,6 +240,13 @@ public class EISXIVConversion extends BaseCommandPlugin {
 
         ShipHullSpecAPI hullSpec = Global.getSettings().getHullSpec(targetHullId);
         if (hullSpec == null) return false;
+
+        // Credits are charged here (not by AddRemoveCommodity in rules.csv) so the extended-mode price applies.
+        int price = getPrice(info, hullSpec);
+        MutableValue credits = Global.getSector().getPlayerFleet().getCargo().getCredits();
+        credits.subtract(price);
+        if (credits.get() < 0) credits.set(0);
+        AddRemoveCommodity.addCreditsLossText(price, dialog.getTextPanel());
 
         ShipVariantAPI oldVariant = oldMember.getVariant().clone();
         ShipVariantAPI newVariant = Global.getSettings().createEmptyVariant(targetHullId + "_xivConversion", hullSpec);
@@ -273,6 +319,7 @@ public class EISXIVConversion extends BaseCommandPlugin {
 
         mem.unset(MEM_OLD_KEY);
         mem.unset(MEM_TYPE_KEY);
+        mem.unset(MEM_PRICE_KEY);
 
         return true;
     }
