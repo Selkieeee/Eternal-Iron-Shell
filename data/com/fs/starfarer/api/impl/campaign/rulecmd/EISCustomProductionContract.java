@@ -35,7 +35,7 @@ public class EISCustomProductionContract extends CustomProductionContract {
 	
 	public static final float COST_MULT = 1.3f;
         public static final float COST_MULT_CELESTE = 1.0f;
-	public static final float COST_MULT_HARTLEY = 1.2f; // Hartley's starting cost, before the ship clearance discounts below
+	public static final float COST_MULT_HARTLEY = 1.4f; // Hartley's starting cost, before the ship clearance discounts below
 	// Hartley's contract costs this much less per ship clearance unlocked ($global.eisIllustriousUnlocked from Hartley, $global.eisDauntlessUnlocked from Ava), so 50% off with both.
 	public static final float CLEARANCE_DISCOUNT = 0.25f;
 	// Order limit multiplier in extended mode (vanilla uses 3)

@@ -23,14 +23,16 @@ import org.lazywizard.lazylib.MathUtils;
 public class EISPoopyStinky extends BaseCommandPlugin {
         public boolean execute(String ruleId, InteractionDialogAPI dialog, List<Misc.Token> params, Map<String, MemoryAPI> memoryMap) {
             if (params.get(0).getBoolean(memoryMap)) {
-                final PersonAPI person = OfficerManagerEvent.createOfficer(Global.getSector().getFaction("ironshell"), 5, OfficerManagerEvent.SkillPickPreference.GENERIC, MathUtils.getRandom());
+                // Level 2 (2 level-up skills) with no elite skills; Iron Heritage below makes it a level 3 officer with 3 skills.
+                final PersonAPI person = OfficerManagerEvent.createOfficer(Global.getSector().getFaction("ironshell"), 2, OfficerManagerEvent.SkillPickPreference.GENERIC,
+                        false, null, false, false, 0, MathUtils.getRandom());
                 person.setPersonality(Personalities.AGGRESSIVE);
                 MutableCharacterStatsAPI stats = person.getStats();
                 stats.setSkillLevel("eis_xiv", 1);
-                // Generated at level 5 (5 level-up skills), then shown and gained as level 6 to count the eis_xiv skill. Only the level and XP are set here; no skill is added.
-                stats.setLevel(6);
+                // Generated at level 2 (2 level-up skills), then shown and gained as level 3 to count the eis_xiv skill (non-elite, level 1). Only the level and XP are set here; no skill is added.
+                stats.setLevel(3);
                 OfficerLevelupPlugin levelup = (OfficerLevelupPlugin) Global.getSettings().getPlugin("officerLevelUp");
-                if (levelup != null) {stats.setXP(levelup.getXPForLevel(6));}
+                if (levelup != null) {stats.setXP(levelup.getXPForLevel(3));}
 		TextPanelAPI text = dialog.getTextPanel();
 		Color hl = Misc.getHighlightColor();
 		text.addSkillPanel(person, false);

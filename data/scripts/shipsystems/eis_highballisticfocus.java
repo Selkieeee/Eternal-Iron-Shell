@@ -43,7 +43,9 @@ public class eis_highballisticfocus extends BaseShipSystemScript {
                 stats.getBallisticWeaponFluxCostMod().modifyMult(id, 1f - FLUX_REDUCTION);
                 ship.setWeaponGlow(effectLevel, energyGlowColor, EnumSet.of(WeaponType.ENERGY));
                 ship.setWeaponGlow(effectLevel, ballisticGlowColor, EnumSet.of(WeaponType.BALLISTIC));
-		if (state == ShipSystemStatsScript.State.OUT) {
+                // Speed and maneuverability buff disabled (weapon buffs only). Uncomment this block, the status line in
+                // getStatusData() and the engineGlow lines in eis_highballisticfocus.system to restore it.
+		/*if (state == ShipSystemStatsScript.State.OUT) {
                     // the speed and turn rate caps drop as soon as the charge down starts, like vanilla Maneuvering Jets
                     stats.getMaxSpeed().unmodify(id);
                     stats.getMaxTurnRate().unmodify(id);
@@ -55,7 +57,7 @@ public class eis_highballisticfocus extends BaseShipSystemScript {
                     stats.getTurnAcceleration().modifyPercent(id, TURN_ACCELERATION_BONUS_PERCENT * effectLevel);
                     stats.getMaxTurnRate().modifyFlat(id, MAX_TURN_RATE_BONUS_FLAT);
                     stats.getMaxTurnRate().modifyPercent(id, MAX_TURN_RATE_BONUS_PERCENT);
-		}
+		}*/
                 
 		/*if (stats.getEntity() instanceof ShipAPI) {
 			ship.getEngineController().fadeToOtherColor(this, new Color(100,255,100,255), new Color(0,0,0,0), effectLevel, 0.67f);
@@ -86,9 +88,9 @@ public class eis_highballisticfocus extends BaseShipSystemScript {
 			return new StatusData("+" + Math.round(ROF_BONUS * 100f * effectLevel) + "% " + eis_highballisticfocus2, false);
 		} else if (index == 2) {
 			return new StatusData("-" + Math.round(FLUX_REDUCTION * 100f) + "% " + eis_highballisticfocus3, false);
-		} else if (index == 3) {
+		} /*else if (index == 3) { // speed buff status, disabled with the buff in apply()
 			return new StatusData("+" + Math.round(TOP_SPEED_BONUS) + " " + eis_highballisticfocus4, false);
-		}
+		}*/
 		return null;
 	}
 }

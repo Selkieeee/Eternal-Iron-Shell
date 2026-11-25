@@ -5,9 +5,10 @@
 	
 	"statsScript":"data.scripts.shipsystems.eis_highballisticfocus",
 
-	"engineGlowLengthMult":1.2,
-	"engineGlowWidthMult":1.2,
-	"engineGlowGlowMult":2,
+	# engine glow disabled with the speed/maneuverability buff (see eis_highballisticfocus.java); uncomment to restore
+	#"engineGlowLengthMult":1.2,
+	#"engineGlowWidthMult":1.2,
+	#"engineGlowGlowMult":2,
 	
 	#"flameoutOnImpactChance":0,
 
