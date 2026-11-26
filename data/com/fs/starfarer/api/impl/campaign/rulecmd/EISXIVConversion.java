@@ -213,7 +213,7 @@ public class EISXIVConversion extends BaseCommandPlugin {
         int price = getPrice(info, hullSpec);
         mem.set(MEM_PRICE_KEY, price);
         if (dialog.getOptionPanel().hasOption(info.authorizeOptionId)) {
-            dialog.getOptionPanel().setOptionText("Authorize XIV battlegroup conversion (" + Misc.getWithDGS(price) + " credits)", info.authorizeOptionId);
+            dialog.getOptionPanel().setOptionText("Authorize XIV Battlegroup conversion (" + Misc.getWithDGS(price) + " credits)", info.authorizeOptionId);
         }
 
         ShipVariantAPI variant = Global.getSettings().createEmptyVariant(targetHullId + "_xivConversionPreview", hullSpec);
@@ -313,8 +313,8 @@ public class EISXIVConversion extends BaseCommandPlugin {
 
         TextPanelAPI text = dialog.getTextPanel();
         text.setFontSmallInsignia();
-        text.addParagraph("XIV battlegroup conversion complete", Misc.getPositiveHighlightColor());
-        text.highlightInLastPara(Misc.getHighlightColor(), "XIV battlegroup conversion complete");
+        text.addParagraph("XIV Battlegroup conversion complete", Misc.getPositiveHighlightColor());
+        text.highlightInLastPara(Misc.getHighlightColor(), "XIV Battlegroup conversion complete");
         text.setFontInsignia();
 
         mem.unset(MEM_OLD_KEY);

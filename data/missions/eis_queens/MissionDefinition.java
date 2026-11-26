@@ -32,8 +32,8 @@ public class MissionDefinition implements MissionDefinitionPlugin {
 		
 		// These show up as items in the bulleted list under 
 		// "Tactical Objectives" on the mission detail screen
-		api.addBriefingItem("Ava has the following skills: Combat Endurance (Elite), Helmsmanship, Iron Heritage, and Support");
-		api.addBriefingItem("Doctrine. The HSS Bond has Zandatsu which gains a buff when reflecting a missile.");
+		api.addBriefingItem("Ava has the following skills: Combat Endurance (Elite), Helmsmanship, Iron Heritage, and Support Doctrine.");
+		api.addBriefingItem("The HSS Bond has Zandatsu which gains a buff when reflecting a missile.");
 		api.addBriefingItem("Defeat all enemy forces. HSS Bond must survive.");
 		
 			// Set up the player's fleet

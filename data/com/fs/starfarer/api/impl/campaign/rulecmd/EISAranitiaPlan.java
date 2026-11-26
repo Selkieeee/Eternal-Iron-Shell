@@ -48,7 +48,7 @@ public class EISAranitiaPlan extends BaseCommandPlugin {
                 String optionId = params.get(1).getString(memoryMap);
                 if (Global.getSector().getPlayerStats().getStoryPoints() < 1) {
                     dialog.getOptionPanel().setEnabled(optionId, false);
-                    dialog.getOptionPanel().setTooltip(optionId, "Requires 1 Story Point, which you don't currently have.");
+                    dialog.getOptionPanel().setTooltip(optionId, "Requires 1 story point, which you don't currently have.");
                 }
             } else if ("remove".equals(mode)) {
                 String itemId = params.get(1).getString(memoryMap);

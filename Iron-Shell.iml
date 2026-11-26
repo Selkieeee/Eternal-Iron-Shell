@@ -22,5 +22,6 @@
     <orderEntry type="library" name="MagicLib" level="project" />
     <orderEntry type="library" name="ExerelinCore" level="project" />
     <orderEntry type="library" name="lw_Console" level="project" />
+    <orderEntry type="library" name="PatchLibAPI" level="project" />
   </component>
 </module>

@@ -10,15 +10,18 @@ $id == eis_yami",ShowImageVisual hegemony_bar,"You enter the drinking establishm
 AvaRecruitAdBarAddHegemony,AddBarEvents,"$faction.id == hegemony
 $locationId != galatia
 !$global.eisAvaContact
-!$global.eisAvaRecruitAdSeen","AddBarEvent AvaRecruitAdBar_open ""View the Tri-Pad message."" ""Your Tri-Pad pings with a message from the Hegemony military."" highlight",,,Added a locationId != galatia check so the Tri-Pad message no longer appears at any market in the Galatia star system (a star system's id is its lowercased name).,B
+!$global.eisAvaRecruitAdSeen","AddBarEvent AvaRecruitAdBar_open ""View the TriPad message."" ""Your TriPad pings with a message from the Hegemony military."" highlight",,,"Added a locationId != galatia check so the Tri-Pad message no longer appears at any market in the Galatia star system (a star system's id is its lowercased name).
+Terminology fix (vanilla terminology pass): Tri-Pad -> TriPad.",B
 AvaRecruitAdBarAddIronShell,AddBarEvents,"$faction.id == ironshell
 $locationId != galatia
 !$global.eisAvaContact
-!$global.eisAvaRecruitAdSeen","AddBarEvent AvaRecruitAdBar_open ""View the Tri-Pad message."" ""Your Tri-Pad pings with a message from the Hegemony military."" highlight",,,Added a locationId != galatia check so the Tri-Pad message no longer appears at any market in the Galatia star system (a star system's id is its lowercased name).,B
+!$global.eisAvaRecruitAdSeen","AddBarEvent AvaRecruitAdBar_open ""View the TriPad message."" ""Your TriPad pings with a message from the Hegemony military."" highlight",,,"Added a locationId != galatia check so the Tri-Pad message no longer appears at any market in the Galatia star system (a star system's id is its lowercased name).
+Terminology fix (vanilla terminology pass): Tri-Pad -> TriPad.",B
 AvaRecruitAdBarSel,DialogOptionSelected,$option == AvaRecruitAdBar_open,"$global.eisAvaRecruitAdSeen = true
-SetTextHighlights ""Chief Administrator Ava Nitia"" Yami Naraka","Drowned in the usual formal pleasentries, the message is an invitation to speak with Chief Administrator Ava Nitia of Iron Shell, stationed on Yami, in the Naraka system.
+SetTextHighlights ""Chief Administrator Ava Nitia"" Yami Naraka","Drowned in the usual formal pleasantries, the message is an invitation to speak with Chief Administrator Ava Nitia of Iron Shell, stationed on Yami, in the Naraka system.
 
-Apparently your exploits in the Galatia system have garnered you some attention.",backToBar:Close the message,Changed: removed the trailing period from the option text (options without quotes do not end in a period).,B
+Apparently your exploits in the Galatia system have garnered you some attention.",backToBar:Close the message,"Changed: removed the trailing period from the option text (options without quotes do not end in a period).
+Typo fix (vanilla terminology pass): pleasentries -> pleasantries.",B
 ,,,,,,,N
 aiCores_turnInOptionSellIronshell,DialogOptionSelected,"$option == aiCores_startTurnIn
 $faction.id == ironshell",FireAll PopulateCoresTurnInOptions,"""We don't generally like the public to be aware that these are still out there, but the Hegemony is treaty-bound to take possession of any such objects and ensure they're destroyed.""",,,B
@@ -88,9 +91,9 @@ $faction.friendlyToPlayer
 Commission hasFactionCommission","$menuState = fleetConvMain 0
 FireAll PopulateOptions","""Greetings $firstName, all is well?""
 OR
-""You know $firstName, patrolling the sector almost makes you wish for another Collapse.""
+""You know $firstName, patrolling the Sector almost makes you wish for another Collapse.""
 OR
-""You know, if you were serving with us, you'd probably be halfway onto the executive council by now.""",,,B
+""You know, if you were serving with us, you'd probably be halfway onto the executive council by now.""",,Terminology fix (vanilla terminology pass): the sector -> the Sector.,B
 greetingEISHostileWeaker,OpenCommLink,"$faction.id == ironshell
 $entity.isHostile
 $entity.relativeStrength < 0",$entity.ignorePlayerCommRequests = true 1,"""Hostile vessel, be advised. System patrol craft have already been dispatched and reinforcements are en route. You are advised to power down weapon systems and disengage. Over.""
@@ -304,9 +307,10 @@ SetTextHighlights $EIS_WealthTaxes
 AddTextSmall ""- $EIS_MiscTaxes is from miscellaneous sources.""
 SetTextHighlights $EIS_MiscTaxes
 AddText ""You owe approximately $EIS_taxesDGS, give or take a credit.""
-SetTextHighlights $EIS_taxesDGS","""Hmm.. There's quite a bit you owe. Hope you've been conducting honest business, Commander."" says $PersonRank $personLastName as $heOrShe begins printing out your tax records.","0:EISGoodBoy:""You know, I was just about to pay that. Thanks for the reminder!""
+SetTextHighlights $EIS_taxesDGS","""Hmm... There's quite a bit you owe. Hope you've been conducting honest business, commander."" says $PersonRank $personLastName as $heOrShe begins printing out your tax records.","0:EISGoodBoy:""You know, I was just about to pay that. Thanks for the reminder!""
 1:EISTaxHelp:""How are my taxes calculated?""
-2:cutCommLink:""Thank, I only needed to see what I owed.""",,B
+2:cutCommLink:""Thank, I only needed to see what I owed.""","Typo fix (vanilla terminology pass): Hmm.. -> Hmm....
+Terminology fix (vanilla terminology pass): Commander -> commander (direct address, vanilla lowercase).",B
 EISTax_turnInOptionPlayer2,DialogOptionSelected,"$option == EISTax_startTurnIn
 $faction.id == player
 !EISTaxes","AddTextSmall ""- $EIS_OMTaxes is your refund from your declared market transactions."" good
@@ -779,16 +783,16 @@ QuyYmaQuest,PopulateQuyOptions,"$id == eiskimquy
 !$EISQuyYma",,,1:QuyYmaQuest1:Operation World Above,,
 QuyYmaQuestColonize,DialogOptionSelected,"$id == eiskimquy score:100
 $option == QuyYmaQuest1
-!EISKillaOwned hanan_pacha player",,"""Consistent with the terms of the Treaty of the Second AI War, the Yma System's demilitarized status is expiring and our first priority is to investigate what happened on Hanan Pacha. We have responsibility over the investigation, so I am putting together a task force to establish an outpost there on Hanan Pacha."" 
+!EISKillaOwned hanan_pacha player",,"""Consistent with the terms of the Treaty of the Second AI War, the Yma system's demilitarized status is expiring and our first priority is to investigate what happened on Hanan Pacha. We have responsibility over the investigation, so I am putting together a task force to establish an outpost there on Hanan Pacha."" 
 
 Quy pauses for a moment. ""...and I suppose if there are any personnel that aren't supposed to be there, we'll have to make them disappear. If you'd like to assist the task force, we would be glad to have your support. However, we're not expecting any serious complications. Should the expedition fail, the blame will be placed squarely on your shoulders. So, with that said: Can we count on your help?""","0:QuyYmaQuest1Agree:Agree
 1:QuyDisagreeQuest:Disagree
-",,
+",Terminology fix (vanilla terminology pass): Yma System -> system.,
 QuyYmaQuestTransfer,DialogOptionSelected,"$id == eiskimquy score:100
 $option == QuyYmaQuest1
-EISKillaOwned hanan_pacha player","SetTextHighlights 150,000 50,000","""So, it seems you have a foothold inside the Yma System. Iron Shell is authorized to offer you 150,000 credits for ownership of Hanan Pacha. We'll even throw in a 50,000 credit tax rebate in your next quarterly tax filing. Interested?""","0:QuyYmaQuest1AgreeTransfer:Agree
+EISKillaOwned hanan_pacha player","SetTextHighlights 150,000 50,000","""So, it seems you have a foothold inside the Yma system. Iron Shell is authorized to offer you 150,000 credits for ownership of Hanan Pacha. We'll even throw in a 50,000 credit tax rebate in your next quarterly tax filing. Interested?""","0:QuyYmaQuest1AgreeTransfer:Agree
 1:QuyDisagreeQuest:Disagree
-",,
+",Terminology fix (vanilla terminology pass): Yma System -> system.,
 QuyYmaQuest1,DialogOptionSelected,"$id == eiskimquy score:100
 $option == QuyYmaQuest1Agree
 ","$EISQuyYma = true
@@ -813,9 +817,9 @@ $EISQuyYma
 !$EISQuyYmaBusy
 !$EISDoneQuest1",SetOptionColor QuyYmaQuest2 highlight,,12:QuyYmaQuest2:Hand her the report on Operation World Above,Changed: removed the trailing period from the option text (options without quotes do not end in a period).,
 QuyYmaQuest1PlayerColonize,DialogOptionSelected,"$option == QuyYmaQuest2
-EISKillaOwned hanan_pacha player score:3","SetTextHighlights 150,000 50,000","""So, it seems you have a foothold inside the Yma System. Iron Shell is authorized to offer you 150,000 credits for ownership of Hanan Pacha. We'll even throw in a 50,000 credit tax rebate in your next quarterly tax filing. Interested?""","0:QuyYmaQuest1AgreeTransfer:Agree
+EISKillaOwned hanan_pacha player score:3","SetTextHighlights 150,000 50,000","""So, it seems you have a foothold inside the Yma system. Iron Shell is authorized to offer you 150,000 credits for ownership of Hanan Pacha. We'll even throw in a 50,000 credit tax rebate in your next quarterly tax filing. Interested?""","0:QuyYmaQuest1AgreeTransfer:Agree
 1:QuyYmaQuest2:Disagree
-",,
+",Terminology fix (vanilla terminology pass): Yma System -> system.,
 QuyYmaQuest1SuccessReply,DialogOptionSelected,"$option == QuyYmaQuest2
 EISKillaOwned hanan_pacha ironshell","AddXP 5000
 $EISDoneQuest1 = true
@@ -879,9 +883,9 @@ ShowDefaultVisual
 EndConversation","""Return back to me when Kanni has been liberated. Do not fail me, $firstName. Good luck.""",,,
 QuyKanniQuestTransfer,DialogOptionSelected,"$id == eiskimquy score:100
 $option == QuyKanniQuest1
-EISKillaOwned kanni player","SetTextHighlights 250,000 100,000","""So, it seems you have a foothold inside the Kumari Kandam System. Iron Shell is authorized to offer you 250,000 credits for ownership of Kanni. We'll even throw in a 100,000 credit tax rebate in your next quarterly tax filing. Interested?""","0:QuyKanniQuest1AgreeTransfer:Agree
+EISKillaOwned kanni player","SetTextHighlights 250,000 100,000","""So, it seems you have a foothold inside the Kumari Kandam system. Iron Shell is authorized to offer you 250,000 credits for ownership of Kanni. We'll even throw in a 100,000 credit tax rebate in your next quarterly tax filing. Interested?""","0:QuyKanniQuest1AgreeTransfer:Agree
 1:QuyDisagreeQuest:Disagree
-",,
+",Terminology fix (vanilla terminology pass): Kandam System -> system.,
 QuyKanniQuestTransfer1,DialogOptionSelected,"$id == eiskimquy score:100
 $option == QuyKanniQuest1AgreeTransfer
 EISTransferFast kanni ironshell","SetTextHighlights 250,000
@@ -892,10 +896,11 @@ AddRemoveCommodity credits 250000 true
 EISTaxesFiled 100000 true","""Done. The 250,000 credits will be transferred to your account immediately. Your quarterly tax report will also state the tax rebate stated in our agreement.""",1:QuyKanniQuest2:Continue,,
 QuyKanniQuestColonize,DialogOptionSelected,"$id == eiskimquy score:100
 $option == QuyKanniQuest1
-EISKillaOwned kanni neutral",,"""I have been authorized by the Hegemony executive council to re-establish the outpost in the Kumari Kandam System.""
+EISKillaOwned kanni neutral",,"""I have been authorized by the Hegemony executive council to re-establish the outpost in the Kumari Kandam system.""
 
 Councilor Quy taps a few buttons on her datapad. ""The Hegemony military court has been indecisive and slow in its operations to reclaim what is rightfully Domain. I am entrusting you the protection of the task force. I expect a light resistance, but I would be wary of the League and Pather presence in the area. Can I count on you to complete this as swiftly as possible?""","0:QuyKanniQuest1AgreeColony:Agree
-1:QuyDisagreeQuest:Disagree","Grammar: ""taps a few button"" -> ""taps a few buttons"". Suggestion: ""I am entrusting you the protection"" is missing ""with"" (""entrusting you with the protection"") - left as a suggestion since it's part of a longer sentence.",
+1:QuyDisagreeQuest:Disagree","Grammar: ""taps a few button"" -> ""taps a few buttons"". Suggestion: ""I am entrusting you the protection"" is missing ""with"" (""entrusting you with the protection"") - left as a suggestion since it's part of a longer sentence.
+Terminology fix (vanilla terminology pass): Kandam System -> system.",
 QuyKanniQuest1,DialogOptionSelected,"$id == eiskimquy score:100
 $option == QuyKanniQuest1AgreeColony
 ","$EISQuyKanni = true
@@ -974,9 +979,10 @@ FireAll PopulateOptions
 $player.metEISHartley = true
 AddText ""You schedule an appointment with the Commissioner's office. As you wait, you review the publically available information on Darren Hartley.""
 AddTextSmall ""Before he was the Commissioner of Iron Shell, Darren Hartley had earned himself a fierce reputation within the Persean Sector. To the Hegemony, he is a war hero. He commanded Hegemony loyalists within the Askonia system against Andrada during the Askonia Crisis, and as a commodore brought ruin to Tri-Tachyon during the Second AI War. His unshakeable loyalty to the cause of the Domain brought him great accolades, but the war-torn decades have affected him. Today, many claim he is a shadow of the man he once was, fatigued by years of conflict and scarred by personal tragedy."" highlight
-AddText ""After a short wait spent watching propaganda blurbs scroll past the crest of the Hegemony navy, the comm-link connects you with the office of Darren Hartley\n\n\""So you're the so-called hero of Galatia. Fleet Intelligence has quite the file on you, Captain. My name is Darren Hartley, I handle the logistical operations of Iron Shell. I look forward to being able to work together.\""""
+AddText ""After a short wait spent watching propaganda blurbs scroll past the crest of the Hegemony Navy, the comm-link connects you with the office of Darren Hartley\n\n\""So you're the so-called hero of Galatia. Fleet Intelligence has quite the file on you, captain. My name is Darren Hartley, I handle the logistical operations of Iron Shell. I look forward to being able to work together.\""""
 SetShortcut cutCommLinkPolite ""ESCAPE""
-",,0:cutCommLinkPolite:Cut the comm link,Fixed spelling: Comissioner to Commissioner (two places in the AddText lines).,B
+",,0:cutCommLinkPolite:Cut the comm link,"Fixed spelling: Comissioner to Commissioner (two places in the AddText lines).
+Terminology fix (vanilla terminology pass): Hegemony navy -> Hegemony Navy; Captain -> captain (direct address, vanilla lowercase).",B
 defaultHartleyGreeting,PickGreeting,"$id == eisdarren score:100
 $player.metEISHartley
 EISIsMarketFaction ironshell","ShowPersonVisual
@@ -997,7 +1003,7 @@ EISRingRingBananaPhone 10
 ,,,,,,,N
 EISHartleyThoughtsPlayer,eisdarren,,"EIS_DynamicPaginatedOptions addOption eis_Player ""Me""",,,,B
 EISHartleyThoughtsPlayerR1,DialogOptionSelected,"$id == eisdarren
-$option == eis_Player",,"""I don't have the time to be chit-chatting, Captain.""",,,B
+$option == eis_Player",,"""I don't have the time to be chit-chatting, captain.""",,"Terminology fix (vanilla terminology pass): Captain -> captain (direct address, vanilla lowercase).",B
 EISHartleyThoughtsPlayerR2,DialogOptionSelected,"$id == eisdarren
 $option == eis_Player
 $DuelScore < 0 score:0",,"""A bad duelist I would say.""",,,B
@@ -1015,7 +1021,7 @@ EISHartleyThoughtsAvaR,DialogOptionSelected,"$id == eisdarren
 $option == eis_Avanitia",,"""Administrator Nitia? She earned her reputation as a skilled pilot due to her accomplishments during the Second AI War. Nowadays she mostly works from behind a desk instead of the cockpit. I don't have time to regale you with the tale myself, but I'm sure she would be willing to humor you, if you're interested.""",,,
 EISHartleyThoughtsAndrada,eisdarren,$player.gotAndradaBook,"EIS_DynamicPaginatedOptions addOption eis_Andrada ""Phillip Andrada""",,,,
 EISHartleyThoughtsAndradaR,DialogOptionSelected,"$id == eisdarren
-$option == eis_Andrada",,"Hartley's expression immediately hardens as he scoffs. ""Oh. Yes. The 'Lion of Sindria'? Little more than a despot who refused to follow orders and instead chose to rebel. I lead Hegemony forces against him and his little band of traitors myself during the Askonian Crisis. Opis... a lot of good people died that day."" The Chief Commissioner stops speaking, looking off to the side as a silent rage boils over him; moments later he seems to remember you are still on the line. ""Was there anything else you needed, or can I get back to work?""",,,
+$option == eis_Andrada",,"Hartley's expression immediately hardens as he scoffs. ""Oh. Yes. The 'Lion of Sindria'? Little more than a despot who refused to follow orders and instead chose to rebel. I led Hegemony forces against him and his little band of traitors myself during the Askonian Crisis. Opis... a lot of good people died that day."" The Chief Commissioner stops speaking, looking off to the side as a silent rage boils over him; moments later he seems to remember you are still on the line. ""Was there anything else you needed, or can I get back to work?""",,,
 EISHartleyVNSectorHaveYouHeardReply,DialogOptionSelected,"$id == eisdarren score:100
 $option == eis_VNS_Converse",,"""If we let ourselves stay in the past, we'll never move on.""
 OR
@@ -1025,7 +1031,7 @@ OR
 EISHartleyVNSectorHaveYouHeardReplyLucky,DialogOptionSelected,"$id == eisdarren score:100
 $option == eis_VNS_Converse
 !$LearnedtoDuel score:0","$LearnedtoDuel = true
-FireAll PopulateOptions","""Have you any experience with a sword, Captain? I'd be up for a sparring match if you catch me at the right time.""",,,B
+FireAll PopulateOptions","""Have you any experience with a sword, captain? I'd be up for a sparring match if you catch me at the right time.""",,"Terminology fix (vanilla terminology pass): Captain -> captain (direct address, vanilla lowercase).",B
 ,,,,,,,N
 EISHartleyChallenge,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisdarren score:1000
@@ -1078,7 +1084,7 @@ $EISQuickiesRewardOnce = true
 EISAddContact
 $EISHartleyContact = true
 EISAddShip eis_vanguard_xiv_elite2
-FireAll PopulateOptions","$personLastName congratulates you. ""I've heard about your success, Captain. I've been authorized to grant you one of our elite refits of the Vanguard-class. You'll find them to pack quite an interesting punch compared to the standard Vanguard."" $personLastName sends over the specifications as he continues. ""You seem to be a reliable Commander. I can arrange some work for you if you need any.""",,,B
+FireAll PopulateOptions","$personLastName congratulates you. ""I've heard about your success, captain. I've been authorized to grant you one of our elite refits of the Vanguard-class. You'll find them to pack quite an interesting punch compared to the standard Vanguard."" $personLastName sends over the specifications as he continues. ""You seem to be a reliable commander. I can arrange some work for you if you need any.""",,"Terminology fix (vanilla terminology pass): Captain -> captain (direct address, vanilla lowercase); Commander -> commander (direct address, vanilla lowercase).",B
 EISHartleyVanguardPrintDisable,eis_VNSectorDiscussionOptionsCheck,"!EISMegamind eiskimquy ""$EISDoneQuest1Success""
 $id == eisdarren
 EIS_HasModId nexerelin","SetTooltip EISHartleyVanguardReward ""You have not successfully completed Operation World Above.""
@@ -1095,7 +1101,7 @@ EISHartleyReward,DialogOptionSelected,"$option == EISHartleyReward
 FireAll PopulateOptions
 EISAddSpecial modspec eis_damperhull
 EISAddSound technology2
-AddTextSmall ""You have received access to the Vanagloria Ionized Armor modspec"" highlight","""Iron Shell has been testing an armor modification using a prototype damper system from the pre-Collapse days. I've received authorization to grant you access, Captain.""",,,B
+AddTextSmall ""You have received access to the Vanagloria Ionized Armor modspec"" highlight","""Iron Shell has been testing an armor modification using a prototype damper system from the pre-Collapse days. I've received authorization to grant you access, captain.""",,"Terminology fix (vanilla terminology pass): Captain -> captain (direct address, vanilla lowercase).",B
 ,,,,,,,
 HartleyShipSalePrint,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisdarren score:1000
@@ -1131,9 +1137,10 @@ EISAddSound technology2
 AddTextSmall ""You have may now produce and purchase Illustrious (XIV) from Iron Shell"" highlight
 AddTextSmall ""Custom production through Commissioner Hartley is now 25% cheaper"" highlight","After receiving an intel report from your senior staff of a rare Fourteenth Battlegroup capital-class carrier, you put in a formal authorization request with Commissioner Hartley. You are given a rare invitation to his personal office in orbit of Chitagupta, within the dockyards and production facilities of Iron Shell.
 
-Hartley is buried in his work as you arrive. He sets down his Tri-Pad before addressing you. ""Capital ships don't just grow on trees, Captain."" He lets out a sigh, before sending you the requested specifications. ""They won't be factory new, but I can arrange a sale. Running these things isn't particularly cheap, and it's been rather quiet lately thanks to you. I'll arrange raising your production clearance.""
+Hartley is buried in his work as you arrive. He sets down his TriPad before addressing you. ""Capital ships don't just grow on trees, captain."" He lets out a sigh, before sending you the requested specifications. ""They won't be factory new, but I can arrange a sale. Running these things isn't particularly cheap, and it's been rather quiet lately thanks to you. I'll arrange raising your production clearance.""
 
-Your logistics officers notify you that a new hull has been added to your production procurement catalogue.",HartleyShipSaleAccept:Accept,"Replaces the four sale rows above (HartleyShipSaleSel, BuyCheckRow, BuySel, DeclineSel - commented out, old text kept in them). No price or decline any more: the option only previews the Illustrious and unlocks it, like the hullmod modspec rewards, then a single Accept option (HartleyShipSaleAcceptSel) closes the preview. EISPrepareShipSale SHOW previews the ship (CANCEL just clears the stashed ship, not the preview; ShowPersonVisual in the Accept row removes it). EISUnlockShipSale strips the no_sell hull tag (saved per game, re-applied on every load by eis_modPlugin.onGameLoad). EISAddSound + AddTextSmall give the unlock sound and the small highlighted line. $EISHartleyShipUnlocked is a new flag that replaces the old $EISHartleyShipSaleDone in this row and in the Print/Disable rows, so saves that already used the old sale still see this option once; it hides the option afterwards. $global.eisIllustriousUnlocked is also set here and read by EISCustomProductionContract: Hartley's production contract costs 25% less per unlocked clearance ($global.eisIllustriousUnlocked / $global.eisDauntlessUnlocked), 50% with both; the second AddTextSmall line tells the player. Dialogue is still the old sale offer text, to be rewritten by hand.",b
+Your logistics officers notify you that a new hull has been added to your production procurement catalogue.",HartleyShipSaleAccept:Accept,"Replaces the four sale rows above (HartleyShipSaleSel, BuyCheckRow, BuySel, DeclineSel - commented out, old text kept in them). No price or decline any more: the option only previews the Illustrious and unlocks it, like the hullmod modspec rewards, then a single Accept option (HartleyShipSaleAcceptSel) closes the preview. EISPrepareShipSale SHOW previews the ship (CANCEL just clears the stashed ship, not the preview; ShowPersonVisual in the Accept row removes it). EISUnlockShipSale strips the no_sell hull tag (saved per game, re-applied on every load by eis_modPlugin.onGameLoad). EISAddSound + AddTextSmall give the unlock sound and the small highlighted line. $EISHartleyShipUnlocked is a new flag that replaces the old $EISHartleyShipSaleDone in this row and in the Print/Disable rows, so saves that already used the old sale still see this option once; it hides the option afterwards. $global.eisIllustriousUnlocked is also set here and read by EISCustomProductionContract: Hartley's production contract costs 25% less per unlocked clearance ($global.eisIllustriousUnlocked / $global.eisDauntlessUnlocked), 50% with both; the second AddTextSmall line tells the player. Dialogue is still the old sale offer text, to be rewritten by hand.
+Terminology fix (vanilla terminology pass): Tri-Pad -> TriPad; Captain -> captain (direct address, vanilla lowercase).",b
 HartleyShipSaleAcceptSel,DialogOptionSelected,$option == HartleyShipSaleAccept,"ShowPersonVisual
 FireAll PopulateOptions",,,Closes the ship preview put up by HartleyShipSaleUnlockSel (ShowPersonVisual restores the contact's portrait) and returns to the contact's options.,b
 ,,,,,,,n
@@ -1153,23 +1160,27 @@ EISHartleyXIVConversionBack:""Not right now.""","Champion (XIV) and Eradicator (
 EISHartleyXIVConversionPick,DialogOptionSelected,$option == EISHartleyXIVConversionPick,EISXIVConversion PICK,,,,b
 EISHartleyXIVConversionBack,DialogOptionSelected,$option == EISHartleyXIVConversionBack,FireAll PopulateOptions,"""Saves me some headache. The only reason I even accept these jobs is that my lead engineer just loves this conversion work for some reason.""",,,b
 EISHartleyXIVCastigatorPreview,DialogOptionSelected,$option == EISHartleyXIVCastigatorPreview,"EISXIVConversion SHOW
-SetStoryOption EISHartleyXIVCastigatorAuthorize 1 eis_xivConversionNoBonusXP technology ""Authorized an XIV battlegroup conversion""
+SetStoryOption EISHartleyXIVCastigatorAuthorize 1 eis_xivConversionNoBonusXP technology ""Authorized an XIV Battlegroup conversion""
 FireBest EISHartleyXIVCastigatorBuyCheck","""I-Is this a joke?"" Hartley mutes his comms, and you see him shouting at what appears to be his chief engineer, who had slipped you a tip when your fleet docked. He audibly sighs. ""So it's possible, although it's going to take some all-nighters from the team.""
 
-He sends over the conversion cost. The itemized invoice contains 57 pages of custom-forged components, and suspiciously doesn't include a labor fee.","EISHartleyXIVCastigatorAuthorize:Authorize XIV battlegroup conversion (280,000 credits)
-EISHartleyXIVConversionPreviewBack:""Sorry, I wasn't serious.""","Changed: the Authorize price in the options column is only a fallback; EISXIVConversion SHOW relabels it with 2x the XIV hull base value (times ext_shipBuyPriceMult in extended mode).",b
+He sends over the conversion cost. The itemized invoice contains 57 pages of custom-forged components, and suspiciously doesn't include a labor fee.","EISHartleyXIVCastigatorAuthorize:Authorize XIV Battlegroup conversion (280,000 credits)
+EISHartleyXIVConversionPreviewBack:""Sorry, I wasn't serious.""","Changed: the Authorize price in the options column is only a fallback; EISXIVConversion SHOW relabels it with 2x the XIV hull base value (times ext_shipBuyPriceMult in extended mode).
+Terminology fix (vanilla terminology pass): XIV battlegroup -> XIV Battlegroup.",b
 EISHartleyXIVLegionPreview,DialogOptionSelected,$option == EISHartleyXIVLegionPreview,"EISXIVConversion SHOW
-SetStoryOption EISHartleyXIVLegionAuthorize 1 eis_xivConversionNoBonusXP technology ""Authorized an XIV battlegroup conversion""
+SetStoryOption EISHartleyXIVLegionAuthorize 1 eis_xivConversionNoBonusXP technology ""Authorized an XIV Battlegroup conversion""
 FireBest EISHartleyXIVLegionBuyCheck","""I-Is this a joke?"" Hartley mutes his comms, and you see him shouting at what appears to be his chief engineer, who had slipped you a tip when your fleet docked. He audibly sighs. ""So it's possible, although it's going to take some all-nighters from the team.""
 
-He sends over the conversion cost. The itemized invoice contains 57 pages of custom-forged components, and suspiciously doesn't include a labor fee.","EISHartleyXIVLegionAuthorize:Authorize XIV battlegroup conversion (1,312,500 credits)
-EISHartleyXIVConversionPreviewBack:""Sorry, it was a joke.""","Changed: the Authorize price in the options column is only a fallback; EISXIVConversion SHOW relabels it with 2x the XIV hull base value (times ext_shipBuyPriceMult in extended mode).",b
+He sends over the conversion cost. The itemized invoice contains 57 pages of custom-forged components, and suspiciously doesn't include a labor fee.","EISHartleyXIVLegionAuthorize:Authorize XIV Battlegroup conversion (1,312,500 credits)
+EISHartleyXIVConversionPreviewBack:""Sorry, it was a joke.""","Changed: the Authorize price in the options column is only a fallback; EISXIVConversion SHOW relabels it with 2x the XIV hull base value (times ext_shipBuyPriceMult in extended mode).
+Terminology fix (vanilla terminology pass): XIV battlegroup -> XIV Battlegroup.",b
 EISHartleyXIVChampionPreview,DialogOptionSelected,$option == EISHartleyXIVChampionPreview,"EISXIVConversion SHOW
-FireBest EISHartleyXIVChampionBuyCheck","""Our Fourteenth Battlegroup spec adjusts the ammo feeds and power rails. It's quite a versatile hull.""","EISHartleyXIVChampionAuthorize:Authorize XIV battlegroup conversion (187,500 credits)
-EISHartleyXIVConversionPreviewBack:""I need to think it over.""","Changed: the Authorize price in the options column is only a fallback; EISXIVConversion SHOW relabels it with 1x the XIV hull base value (times ext_shipBuyPriceMult in extended mode).",b
+FireBest EISHartleyXIVChampionBuyCheck","""Our Fourteenth Battlegroup spec adjusts the ammo feeds and power rails. It's quite a versatile hull.""","EISHartleyXIVChampionAuthorize:Authorize XIV Battlegroup conversion (187,500 credits)
+EISHartleyXIVConversionPreviewBack:""I need to think it over.""","Changed: the Authorize price in the options column is only a fallback; EISXIVConversion SHOW relabels it with 1x the XIV hull base value (times ext_shipBuyPriceMult in extended mode).
+Terminology fix (vanilla terminology pass): XIV battlegroup -> XIV Battlegroup.",b
 EISHartleyXIVEradicatorPreview,DialogOptionSelected,$option == EISHartleyXIVEradicatorPreview,"EISXIVConversion SHOW
-FireBest EISHartleyXIVEradicatorBuyCheck","""The Fourteenth Battlegroup refit includes our standard 'missile microforge' built into the hull. Packs quite a punch, but it's a bit of a logistical nightmare to maintain.""","EISHartleyXIVEradicatorAuthorize:Authorize XIV battlegroup conversion (175,000 credits)
-EISHartleyXIVConversionPreviewBack:""I need to think it over.""","Changed: the Authorize price in the options column is only a fallback; EISXIVConversion SHOW relabels it with 1x the XIV hull base value (times ext_shipBuyPriceMult in extended mode).",b
+FireBest EISHartleyXIVEradicatorBuyCheck","""The Fourteenth Battlegroup refit includes our standard 'missile microforge' built into the hull. Packs quite a punch, but it's a bit of a logistical nightmare to maintain.""","EISHartleyXIVEradicatorAuthorize:Authorize XIV Battlegroup conversion (175,000 credits)
+EISHartleyXIVConversionPreviewBack:""I need to think it over.""","Changed: the Authorize price in the options column is only a fallback; EISXIVConversion SHOW relabels it with 1x the XIV hull base value (times ext_shipBuyPriceMult in extended mode).
+Terminology fix (vanilla terminology pass): XIV battlegroup -> XIV Battlegroup.",b
 EISHartleyXIVCastigatorBuyCheckCredits,EISHartleyXIVCastigatorBuyCheck,$player.credits < $global.eis_xivConversionPrice,"SetTooltip EISHartleyXIVCastigatorAuthorize ""You do not have enough credits for this conversion.""
 SetEnabled EISHartleyXIVCastigatorAuthorize false",,,"Changed: compares against $global.eis_xivConversionPrice (set by EISXIVConversion SHOW; base price times ext_shipBuyPriceMult in extended mode) instead of a fixed number.",b
 #EISHartleyXIVCastigatorBuyCheckSP,EISHartleyXIVCastigatorBuyCheck,!EISXIVConversion hasSP 1,"SetTooltip EISHartleyXIVCastigatorAuthorize ""You do not have a Story Point to spend on this conversion.""
@@ -1233,9 +1244,9 @@ EISIsMarketFaction ironshell","ShowPersonVisual
 FireAll PopulateOptions
 $player.metEISCeleste = true
 AddText ""Tracking down accurate information on Caeda Celeste proves to be a challenge for your intelligence officers, much being shrouded in rumors or hearsay from disgruntled bureaucrats, former employees, and smugglers. You read the briefing as you wait for the comm connection.""
-AddTextSmall ""As an heir to Eventide's House Celeste, Caeda Celeste was chosen by her family as their liaison to Iron Shell. A brilliant scientist, she directs Iron Shell's investigations into AI and weapons development as their Head Researcher. Her House's efforts have single-handedly modernized the Fourteenth Battlegroup design philosophy for the post-Collapse environment. Despite her eccentricities, her talent in pushing the boundaries of starship engineering has earned her a great deal of respect within the Hegemony."" highlight
+AddTextSmall ""As an heir to Eventide's House Celeste, Caeda Celeste was chosen by her family as their liaison to Iron Shell. A brilliant scientist, she directs Iron Shell's investigations into AI and weapons development as their head researcher. Her House's efforts have single-handedly modernized the Fourteenth Battlegroup design philosophy for the post-Collapse environment. Despite her eccentricities, her talent in pushing the boundaries of starship engineering has earned her a great deal of respect within the Hegemony."" highlight
 AddText ""After a short wait spent staring at an elaborate family crest, the comm-link connects you with the desk of Caeda Celeste.\n\n\""Oh, hello. I suppose I could spare a moment. What do you want? I'm an extremely busy woman, so make it quick.\""""
-SetShortcut cutCommLinkPolite ""ESCAPE""",,0:cutCommLink:Cut the comm link,,B
+SetShortcut cutCommLinkPolite ""ESCAPE""",,0:cutCommLink:Cut the comm link,Terminology fix (vanilla terminology pass): Head Researcher -> head researcher (no name follows).,B
 defaultCelesteGreetingPogchamp,PickGreeting,"$id == eisceleste score:100
 EISVibeCheck 100 100
 $player.metEISCeleste
@@ -1311,7 +1322,7 @@ aiCores_disableTurnInOptionCeleste,DisableTurnInCoresOptionIfNeeded,"$id == eisc
 SetEnabled aiCores_startTurnInCeleste false",,,,b
 aiCores_turnInOptionCeleste,PopulateOptions,"$isPerson
 $id == eisceleste score:1000
-EISVibeCheck -25 100",FireBest DisableTurnInCoresOptionIfNeeded,,"15:aiCores_startTurnInCeleste:""I heard you might be interested in these AI Cores?""",,b
+EISVibeCheck -25 100",FireBest DisableTurnInCoresOptionIfNeeded,,"15:aiCores_startTurnInCeleste:""I heard you might be interested in these AI cores?""",Terminology fix (vanilla terminology pass): AI Cores -> AI cores.,b
 aiCores_turnInOptionSelCeleste,DialogOptionSelected,$option == aiCores_startTurnInCeleste,FireAll PopulateCoresTurnInOptionsCeleste,"""An excellent find. Please do inform me if you find more.""",,,b
 aiCores_playerHasOptionCeleste,PopulateCoresTurnInOptionsCeleste,,,,0:aiCores_selectCoresCeleste:Select AI cores to turn in,,b
 aiCores_neverMindOptionCeleste,PopulateCoresTurnInOptionsCeleste,,,,"100:aiCores_neverMindCeleste:""Oh I'm sorry, I don't actually have any.""",,b
@@ -1323,11 +1334,11 @@ EISCelestePKDiscussPrint,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisceleste score:1000
 $player.encounteredPKDefenderFleet
 !$EISCelestePKDiscussDone","EIS_DynamicPaginatedOptions addOption EISCelestePKDiscussOffer ""Discuss automated XIV vessels""",,,,b
-EISCelestePKDiscussSel,DialogOptionSelected,$option == EISCelestePKDiscussOffer,,"Caeda silently listens to your explanation of the strange encounter with a fully automated 14th Battlegroup warfleet on the fringes of the sector. She seems uninterested in the surrounding details of the curious planet or the contents of the cache the fleet was defending. She interrupts you as you begin to move on from the fleet.
+EISCelestePKDiscussSel,DialogOptionSelected,$option == EISCelestePKDiscussOffer,,"Caeda silently listens to your explanation of the strange encounter with a fully automated 14th Battlegroup warfleet on the fringes of the Sector. She seems uninterested in the surrounding details of the curious planet or the contents of the cache the fleet was defending. She interrupts you as you begin to move on from the fleet.
 
 ""As you know, automated warfleets have been prohibited under Domain law since well before the formation of the Hegemony..."" She looks away and ponders for a moment, before meeting your gaze again. ""That being said, if you were able to bring any... wreckage of these vessels to House Celeste, we may be able to salvage some useful components out of them."" She gives a sly grin, clearly eager to probe the minds of her ancestors through their work on these vessels.
 
-""I thank you for your continued service for the Hegemony, Captain. I look forward to our continued partnership.""","EISCelestePKDiscussAccept:""I'll see what I can do""",,b
+""I thank you for your continued service for the Hegemony, captain. I look forward to our continued partnership.""","EISCelestePKDiscussAccept:""I'll see what I can do""","Terminology fix (vanilla terminology pass): the sector -> the Sector; Captain -> captain (direct address, vanilla lowercase).",b
 EISCelestePKDiscussAcceptSel,DialogOptionSelected,$option == EISCelestePKDiscussAccept,"$EISCelestePKDiscussDone = true
 AdjustRepActivePerson 10
 FireAll PopulateOptions",Caeda gives a small nod and returns her attention to the console.,,,b
@@ -1354,7 +1365,7 @@ SetEnabled EISCelesteXIVSalvageApprove false",,,,b
 EISCelesteXIVSalvageApproveSel,DialogOptionSelected,$option == EISCelesteXIVSalvageApprove,"EISCelesteXIVRestore REPAIR
 FireAll PopulateOptions","""Excellent."" Caeda appears giddy to begin the restoration work, having already mobilized a small fleet of repair drones. She directs them via what appears to be a combination of cybernetics and miniaturized analog controls within her usual attire.",,,b
 EISCelesteXIVSalvageBackSel,DialogOptionSelected,$option == EISCelesteXIVSalvageBack,"EISCelesteXIVRestore CANCEL
-FireAll PopulateOptions","Caeda looks dissapointed. ""Very well, but I'm not returning the scan data.""",,,b
+FireAll PopulateOptions","Caeda looks disappointed. ""Very well, but I'm not returning the scan data.""",,Typo fix (vanilla terminology pass): dissapointed -> disappointed.,b
 ,,,,,,,n
 EISCelesteVNSectorMenu,DialogOptionSelected,"$option == eis_VNS_Setup
 $id == eisceleste score:100","FireAll eis_PopulateVNSector
@@ -1377,7 +1388,7 @@ EISCelesteCourageousReward,DialogOptionSelected,"$option == EISCelesteCourageous
 !$EISQuickiesRewardOnce","$EISQuickiesReward = true 30
 $EISQuickiesRewardOnce = true
 FireAll PopulateOptions
-EISAddShip eis_courageous_elite","""Has she now?"" $personLastName thinks for a moment. ""I was planning on telling you myself, but... I've been authorized to grant you one of our elite refits of the Courageous-class. You'll find them to be quite interesting compared to the usual Courageous. Please do come back with some flight logs for it, Captain.""",,,b
+EISAddShip eis_courageous_elite","""Has she now?"" $personLastName thinks for a moment. ""I was planning on telling you myself, but... I've been authorized to grant you one of our elite refits of the Courageous-class. You'll find them to be quite interesting compared to the usual Courageous. Please do come back with some flight logs for it, captain.""",,"Terminology fix (vanilla terminology pass): Captain -> captain (direct address, vanilla lowercase).",b
 EISCelesteCourageousPrintDisablec,eis_VNSectorDiscussionOptionsCheck,"!EISVibeCheck 25 100
 $id == eisceleste
 EIS_HasModId nexerelin","SetTooltip EISCelesteCourageousReward ""You need to be on Welcoming terms (25 relation) with Celeste, and have Councilor Quy's Operation World Above completed, before she'll consider this.""
@@ -1414,7 +1425,7 @@ $EISCelesteContact","EIS_DynamicPaginatedOptions addOption EISReward3 ""Discuss 
 EISReward3,DialogOptionSelected,$option == EISReward3,"$EISQuickies3 = true
 FireAll PopulateOptions
 EISAddSpecial eisceleste_package
-AddText ""You have received access to the Celeste Family Blueprint Package"" highlight","""You certainly have been integral to my work lately. Maybe I could pull some strings..."" $personLastName hesitates, checking a console before turning back to you. ""As a representative of House Celeste of Eventide, I am extending nanoforge production rights for our designs to you."" She gives you a soft smile. ""I hope that's enough of an incentive for you, Captain.""",,,B
+AddText ""You have received access to the Celeste Family Blueprint Package"" highlight","""You certainly have been integral to my work lately. Maybe I could pull some strings..."" $personLastName hesitates, checking a console before turning back to you. ""As a representative of House Celeste of Eventide, I am extending nanoforge production rights for our designs to you."" She gives you a soft smile. ""I hope that's enough of an incentive for you, captain.""",,"Terminology fix (vanilla terminology pass): Captain -> captain (direct address, vanilla lowercase).",B
 ,,,,,,,n
 EISCelesteThoughtsPlayer,eisceleste,,"EIS_DynamicPaginatedOptions addOption eis_Player ""Me""",,,,b
 EISCelesteThoughtsPlayerR1,DialogOptionSelected,"$id == eisceleste
@@ -1431,11 +1442,11 @@ EISCelesteThoughtsQuyR,DialogOptionSelected,"$id == eisceleste
 $option == eis_KimQuy",,"""I'm glad Kim sees the value in my research. Dealing with inspections was such an annoyance until we reached an understanding.""",,,b
 EISCelesteThoughtsAva,eisceleste,$player.metEISNitia,"EIS_DynamicPaginatedOptions addOption eis_Avanitia ""Ava Nitia""",,,,b
 EISCelesteThoughtsAvaR,DialogOptionSelected,"$id == eisceleste
-$option == eis_Avanitia",,"""Ava and I used to be good friends, once. She was an excellent test pilot, but that all stopped once she took over as the Administrator of Yami. I suppose she didn't like where many of the missing prisoners ended up.""",,,b
+$option == eis_Avanitia",,"""Ava and I used to be good friends, once. She was an excellent test pilot, but that all stopped once she took over as the administrator of Yami. I suppose she didn't like where many of the missing prisoners ended up.""",,Terminology fix (vanilla terminology pass): Administrator -> administrator (no name follows).,b
 EISCelesteThoughtsBaird,eisceleste,$global.metBaird,"EIS_DynamicPaginatedOptions addOption eis_AnahitaBaird ""Provost Baird""",,,,b
 EISCelesteThoughtsBairdR,DialogOptionSelected,"$id == eisceleste
 $option == eis_AnahitaBaird
-",,"""Already a new Provost... I spent a multitude of resources to build an understanding with Provost Kallichore. Hopefully my connections at the Galatia Academy have remained intact.""",,,b
+",,"""Already a new provost... I spent a multitude of resources to build an understanding with Provost Kallichore. Hopefully my connections at the Galatia Academy have remained intact.""",,Terminology fix (vanilla terminology pass): Provost -> provost (no name follows).,b
 #END Celeste Dialogue,,,,,,,N
 ,,,,,,,N
 # Charlotte Dialogue,,,,,,,N
@@ -1445,26 +1456,27 @@ EISIsMarketFaction ironshell","ShowPersonVisual
 FireAll PopulateOptions
 $player.metEISHex = true
 SetShortcut cutCommLinkPolite ""ESCAPE""
-AddText ""Information regarding Charlotte Hex reaches you through the personal testimony of your crews. Apparently she has quite a reputation, and has come up while conversing with the local Hegemony military personell over some drinks. You read over your notes before sending a comms request.""
-AddTextSmall ""Charlotte Hex distinguished herself as an ace fighter pilot within the Hegemony navy, quickly rising through the ranks to serve under the direct command of Councillor Quy aboard her flagship. Apparently she was slated to recieve a command assignment, until she was demoted following an altercation with a superior officer. Refusing to make a formal apology, she has served in a secretorial position under Ava Nitia on the prison moon of Yami."" highlight
+AddText ""Information regarding Charlotte Hex reaches you through the personal testimony of your crews. Apparently she has quite a reputation, and has come up while conversing with the local Hegemony military personnel over some drinks. You read over your notes before sending a comms request.""
+AddTextSmall ""Charlotte Hex distinguished herself as an ace fighter pilot within the Hegemony Navy, quickly rising through the ranks to serve under the direct command of Councilor Quy aboard her flagship. Apparently she was slated to receive a command assignment, until she was demoted following an altercation with a superior officer. Refusing to make a formal apology, she has served in a secretarial position under Ava Nitia on the prison moon of Yami."" highlight
 AddText ""The comm-link quickly connects you with Charlotte Hex, moments after you send the call. She responds in an almost bored tone, clearly going through the motions.\n\n\""Administrator Nitia's office, Charlotte speaking. How may I help you?\""""
-SetShortcut cutCommLinkPolite ""ESCAPE""",,0:cutCommLinkPolite:Cut the comm link,,B
+SetShortcut cutCommLinkPolite ""ESCAPE""",,0:cutCommLinkPolite:Cut the comm link,"Typo fix (vanilla terminology pass): personell -> personnel; recieve -> receive; secretorial -> secretarial; Councillor -> Councilor.
+Terminology fix (vanilla terminology pass): Hegemony navy -> Hegemony Navy.",B
 defaultCharlotteHexFriendlyGreeting,PickGreeting,"$id == eissneed score:100
 $player.metEISHex
 EISVibeCheck 25 100
 EISIsMarketFaction ironshell","ShowPersonVisual
 FireAll PopulateOptions
-SetShortcut cutCommLinkPolite ""ESCAPE""","""Hey Captain, work's been moving a lot smoother with your help. Still have a lot to do, you ready?""
+SetShortcut cutCommLinkPolite ""ESCAPE""","""Hey captain, work's been moving a lot smoother with your help. Still have a lot to do, you ready?""
 OR
-""Good to see you again Captain, I'm glad we've been making good progress on those jobs. Ready for more?""",0:cutCommLinkPolite:Cut the comm link,,B
+""Good to see you again captain, I'm glad we've been making good progress on those jobs. Ready for more?""",0:cutCommLinkPolite:Cut the comm link,"Terminology fix (vanilla terminology pass): Captain -> captain (direct address, vanilla lowercase).",B
 defaultCharlotteHexGreeting,PickGreeting,"$id == eissneed score:100
 $player.metEISHex
 EISVibeCheck 0 100
 EISIsMarketFaction ironshell","ShowPersonVisual
 FireAll PopulateOptions
-SetShortcut cutCommLinkPolite ""ESCAPE""","""Administrator Nitia's office, Charlotte speaking. How may I help you? Ah, it's you Captain, looking for some work?""
+SetShortcut cutCommLinkPolite ""ESCAPE""","""Administrator Nitia's office, Charlotte speaking. How may I help you? Ah, it's you captain, looking for some work?""
 OR
-""Administrator Nitia's office, Charlotte speaking. How may I help you? Oh, Captain, let's get to work then shall we?""",0:cutCommLinkPolite:Cut the comm link,,B
+""Administrator Nitia's office, Charlotte speaking. How may I help you? Oh, captain, let's get to work then shall we?""",0:cutCommLinkPolite:Cut the comm link,"Terminology fix (vanilla terminology pass): Captain -> captain (direct address, vanilla lowercase).",B
 defaultCharlotteHexHostileGreeting,PickGreeting,"$id == eissneed score:100
 $player.metEISHex
 EISVibeCheck -100 0
@@ -1490,9 +1502,9 @@ EISCharlotteReward,eis_VNSectorDiscussionOptions,"$id == eissneed score:1000
 !$EISQuickies1
 $EISCharlotteContact","EIS_DynamicPaginatedOptions addOption EISCharlotteReward1 ""I recall you had a special hullmod for me?""",,,"Changed: added $EISCharlotteContact so the option (and its greyed-out state) only appears once Charlotte is a contact, matching Ava's $AvaContact reward options",B
 CharlotteHireInquiry,DialogOptionSelected,$option == Charlotteome,"AddText ""You ask $personName some questions to establish where $hisOrHer skills lie.""
-EISPoopyStinky false","""Oh, I suppose my reputation preceeds me. So you want the Witch of Naraka under your command, hmm?""","0:ome_hireYes:""Sounds good.""
+EISPoopyStinky false","""Oh, I suppose my reputation precedes me. So you want the Witch of Naraka under your command, hmm?""","0:ome_hireYes:""Sounds good.""
 1:ome_hireWitch:""The 'Witch of Naraka'? Really?""
-2:eis_VNS_Setup:""I've changed my mind.""",,B
+2:eis_VNS_Setup:""I've changed my mind.""",Typo fix (vanilla terminology pass): preceeds -> precedes.,B
 EISCharlotteReward1,DialogOptionSelected,$option == EISCharlotteReward1,"$EISQuickies1 = true
 FireAll PopulateOptions
 EISAddSpecial modspec eis_justatip
@@ -1509,7 +1521,7 @@ $option == ome_hireWitch","$DidNotAskCharlotte = true
 EISAddContact
 $EISCharlotteContact = true
 FireAll PopulateOptions
-","Charlotte clicks her tongue in annoyance. ""Look, I earned that title, I haven't spent my whole life in a cushy office you know. Maybe If you can help me out a bit, I can show you properly. But you better hope it's in a simulator and not as an enemy.""",,,B
+","Charlotte clicks her tongue in annoyance. ""Look, I earned that title, I haven't spent my whole life in a cushy office you know. Maybe if you can help me out a bit, I can show you properly. But you better hope it's in a simulator and not as an enemy.""",,Typo fix (vanilla terminology pass): If -> if.,B
 EISCharlotteRealHirePrint,eis_VNSectorDiscussionOptions,"$id == eissneed score:1000
 $DidNotAskCharlotte
 !$EISCharlotteRecruited
@@ -1521,14 +1533,16 @@ $DidNotAskCharlotte
 SetTooltipHighlightColors hGood
 SetTooltipHighlights EISCharlotteRealHireOffer Friendly
 SetEnabled EISCharlotteRealHireOffer false",,,,B
-EISCharlotteRealHireSel,DialogOptionSelected,$option == EISCharlotteRealHireOffer,EISShowOfficerSkills eissneed,"Charlotte taps on her desk before responding. ""Ah, well since you've been helping so much, It's actually got me in good graces with my superiors. So much so that Ava even floated restoring my command and letting my old ship out of the dock.""
+EISCharlotteRealHireSel,DialogOptionSelected,$option == EISCharlotteRealHireOffer,EISShowOfficerSkills eissneed,"Charlotte taps on her desk before responding. ""Ah, well since you've been helping so much, it's actually got me in good graces with my superiors. So much so that Ava even floated restoring my command and letting my old ship out of the dock.""
 
-She pauses a bit before continuing, looking off into space. ""I actually applied for a position as a liason for your fleet. I don't really fancy the idea of being made to work under another Eventide prick again. So what do you think, want to fly together after all, Captain?"" She gives you a smirk.","EISCharlotteRealHireAccept:""Sounds good, miss 'Witch of Naraka'.""
-EISCharlotteRealHireDecline:""Maybe another time.""",,B
+She pauses a bit before continuing, looking off into space. ""I actually applied for a position as a liaison for your fleet. I don't really fancy the idea of being made to work under another Eventide prick again. So what do you think, want to fly together after all, captain?"" She gives you a smirk.","EISCharlotteRealHireAccept:""Sounds good, miss 'Witch of Naraka'.""
+EISCharlotteRealHireDecline:""Maybe another time.""","Typo fix (vanilla terminology pass): liason -> liaison; It's -> it's.
+Terminology fix (vanilla terminology pass): Captain -> captain (direct address, vanilla lowercase).",B
 EISCharlotteRealHireAccept,DialogOptionSelected,$option == EISCharlotteRealHireAccept,"$EISCharlotteRecruited = true
 $EISCharlotteRetaliator = true
 EISHireOfficerWithShip eissneed eis_retaliator_Custom
-FireAll PopulateOptions","You hear her hold back a snicker. ""If you still doubt me, we can make some time to go one on one in the simulator. Loser buys the first round?"" She gives a brief salute. ""Won't let you down, Captain. I'll gather my things.""",,Changed: recruit ship is now eis_retaliator_Custom (was eis_flagellator_elite_hex). Added $EISCharlotteRetaliator so EISCharlotteRetaliatorCompatPrint can tell saves that recruited her before this change.,B
+FireAll PopulateOptions","You hear her hold back a snicker. ""If you still doubt me, we can make some time to go one on one in the simulator. Loser buys the first round?"" She gives a brief salute. ""Won't let you down, captain. I'll gather my things.""",,"Changed: recruit ship is now eis_retaliator_Custom (was eis_flagellator_elite_hex). Added $EISCharlotteRetaliator so EISCharlotteRetaliatorCompatPrint can tell saves that recruited her before this change.
+Terminology fix (vanilla terminology pass): Captain -> captain (direct address, vanilla lowercase).",B
 EISCharlotteRealHireDecline,DialogOptionSelected,$option == EISCharlotteRealHireDecline,FireAll PopulateOptions,"""Well, I won't wait for you forever. I'm getting off this rock one way or another.""",,,B
 ,,,,,,,N
 CharlotteVNSectorMenu,DialogOptionSelected,"$option == eis_VNS_Setup
@@ -1542,13 +1556,14 @@ EISVibeCheck 50 100
 EISCharlotteVNSectorHaveYouHeardReply,DialogOptionSelected,"$id == eissneed score:100
 $option == eis_VNS_Converse",,"""I miss the skies back home. Jangala is beautiful from space, but in-atmo flight is a whole different story.""
 OR
-""Since I've been grounded, the only way I'm able to spread my wings is in the simulator. They let me keep my ship at least, still have my old 'flagship' in the fighter hanger too. She's a beaut, I aught to show you some time.""
+""Since I've been grounded, the only way I'm able to spread my wings is in the simulator. They let me keep my ship at least, still have my old 'flagship' in the fighter hangar too. She's a beaut, I ought to show you some time.""
 OR
 ""Processing mission reports is a bit harder than the usual permits or claims, but it's a lot less dry at least.""
 OR
-""Administrator Nitia's office, Charlotte- ah, was zoning out again, sorry Captain.""
+""Administrator Nitia's office, Charlotte- ah, was zoning out again, sorry captain.""
 OR
-""Taxes? I may be a pencil-pusher but that system is automated you know.""",,,B
+""Taxes? I may be a pencil-pusher but that system is automated you know.""",,"Typo fix (vanilla terminology pass): aught -> ought; hanger -> hangar.
+Terminology fix (vanilla terminology pass): Captain -> captain (direct address, vanilla lowercase).",B
 EISCharlotteVNSectorHaveYouHeardReply1,DialogOptionSelected,"$id == eissneed score:100
 $option == eis_VNS_Converse
 !$EISQuickies1 score:0",,"""If we get enough done, I might be able to get you access to a pretty nice hullmod spec. Just between you and me, of course.""",,,B
@@ -1556,10 +1571,10 @@ $option == eis_VNS_Converse
 EISCharlotteThoughtsPlayer,eissneed,,"EIS_DynamicPaginatedOptions addOption eis_Player ""Me""",,,,B
 EISCharlotteThoughtsPlayerR1,DialogOptionSelected,"$id == eissneed
 $option == eis_Player
-EISVibeCheck -100 10",,"""I haven't really given you much thought, Captain.""",,,B
+EISVibeCheck -100 10",,"""I haven't really given you much thought, captain.""",,"Terminology fix (vanilla terminology pass): Captain -> captain (direct address, vanilla lowercase).",B
 EISCharlotteThoughtsPlayerR2,DialogOptionSelected,"$id == eissneed
 $option == eis_Player
-EISVibeCheck 10 100",,"""You've been a bit of help so far, Captain. Hope we can fly together some day,""",,,B
+EISVibeCheck 10 100",,"""You've been a bit of help so far, captain. Hope we can fly together some day,""",,"Terminology fix (vanilla terminology pass): Captain -> captain (direct address, vanilla lowercase).",B
 EISCharlotteThoughtsDaud,eissneed,,"EIS_DynamicPaginatedOptions addOption eis_BaikalDaud ""High Hegemon Baikal Daud""",,,,B
 EISCharlotteThoughtsDaudR,DialogOptionSelected,"$id == eissneed
 $option == eis_BaikalDaud
@@ -1583,10 +1598,10 @@ FireAll PopulateOptions
 $player.metEISNitia = true
 AddText ""After a lengthy screening process, you schedule a meeting with the administrator of Yami. As you're kept on hold awaiting a connection, you spend some time reviewing the publically available information on Ava Nitia.""
 
-AddTextSmall ""In her role as the planetary administrator of Yami, Ava Nitia is often seen in military attire, more akin to a frontline infantry commander than a government bureaucrat. Having distinguished herself within the Hegemony navy, a series of promotions landed her in a leadership position within Iron Shell. Many consider her position rather unenviable however, due to the harsh conditions of the prison moon. Despite the challenge, she's well known for taking her position seriously, acting as a fair, but firm leader."" highlight
+AddTextSmall ""In her role as the planetary administrator of Yami, Ava Nitia is often seen in military attire, more akin to a frontline infantry commander than a government bureaucrat. Having distinguished herself within the Hegemony Navy, a series of promotions landed her in a leadership position within Iron Shell. Many consider her position rather unenviable however, due to the harsh conditions of the prison moon. Despite the challenge, she's well known for taking her position seriously, acting as a fair, but firm leader."" highlight
 
-AddText ""After a short wait, the comm-link connects you with the office of Ava Nitia. She finishes some business on another display before turning to you.\n\n\""Welcome to Yami, are you here looking for work? I can't imagine why else a Captain such as yourself would be here. What can I do for you?\""""
-SetShortcut cutCommLinkPolite ""ESCAPE""",,0:cutCommLinkPolite:Cut the comm link,,B
+AddText ""After a short wait, the comm-link connects you with the office of Ava Nitia. She finishes some business on another display before turning to you.\n\n\""Welcome to Yami, are you here looking for work? I can't imagine why else a captain such as yourself would be here. What can I do for you?\""""
+SetShortcut cutCommLinkPolite ""ESCAPE""",,0:cutCommLinkPolite:Cut the comm link,"Terminology fix (vanilla terminology pass): Hegemony navy -> Hegemony Navy; Captain -> captain (direct address, vanilla lowercase).",B
 defaultAvaGreeting,PickGreeting,"$id == eisava score:100
 EISVibeCheck 0 50
 $player.metEISNitia
@@ -1664,17 +1679,17 @@ AvacontactPrintAcceptText,ContactPrintAcceptText,$id == eisava score:100,,"She g
 OR
 ""Burn bright,"" says Ava.
 OR
-She looks pleased with your choice. ""Burn bright, Captain.""
+She looks pleased with your choice. ""Burn bright, captain.""
 OR
 Ava nods, ""Good luck.""
 OR
-""Glad to see you accepting this,"" She has a slight smile on her face.
+""Glad to see you accepting this."" She has a slight smile on her face.
 OR
 ""You won't disappoint me. Is that right?"" Ava asks.
 OR
 ""Well, the operation is approved. Good luck out there,"" Ava gives you a small salute.
 OR
-""Thank you for taking on this task, Captain,"" Ava says curtly.
+""Thank you for taking on this task, captain,"" Ava says curtly.
 OR
 ""Good luck."" Her demeanor doesn't change.
 OR
@@ -1682,9 +1697,10 @@ OR
 OR
 ""Hm, maybe we should share a drink after this? Assuming you come back alive.""
 OR
-""Good choice, Captain,"" She says.
+""Good choice, captain,"" she says.
 OR
-She gives a small salute, ""Captain.""",,,B
+She gives a small salute, ""Captain.""",,"Typo fix (vanilla terminology pass): She says -> she says; comma -> period before ""She has"".
+Terminology fix (vanilla terminology pass): Captain -> captain (direct address, vanilla lowercase).",B
 ,,,,,,,N
 Ava_askForCommissionOpt,PopulateOptions,"$id == eisava score:100
 !Commission hasFactionCommission",,,"20:cmsn_askCommission:""I'd like to be commissioned by $theFaction""",,B
@@ -1733,28 +1749,31 @@ EIS_HasMissionScore eis_queens 1",SetOptionColor AvaWarStorySpecial good,"""Yes,
 
 After thinking for a moment with her eyes closed she starts talking. ""I can tell you about one of my engagements from the Second AI War, when I was still a low-level officer in a patrol fleet."" She looks into your eyes and begins her story.
 
-""Cycle one hundred and ninety three. May eleventh. Hegemony is stretched thin. Tri-Tachyon tries to take control over Nachiketa in the Naraka system. The fuel production facility made it a high value target - you do the math."" Her face contorts in anger. ""A small force of Tri-Tachies tried to attach a comm sniffer to the communication array in the system, wanted to know what we were planning to do."" She grins, an almost predatory look in her eyes. Was she like that back then? ""High Command orders me to get into their secret prototype frigate and take them down. It worked."" She looks wistfully at her coffee mug. ""I miss that little ship. It was so much fun to fly. Had some weird modifications thrown in there by the techies. Command named the frigate design Valorous after all the testing and, well, the name stuck."" Seems like she used that ship a lot. Most captains get attached to their personal flagships after all.","1:AvaWarStoryBegin2:Continue listening...
+""Cycle one hundred and ninety-three. May eleventh. Hegemony is stretched thin. Tri-Tachyon tries to take control over Nachiketa in the Naraka system. The fuel production facility made it a high value target - you do the math."" Her face contorts in anger. ""A small force of Tri-Tachies tried to attach a comm sniffer to the communication array in the system, wanted to know what we were planning to do."" She grins, an almost predatory look in her eyes. Was she like that back then? ""High Command orders me to get into their secret prototype frigate and take them down. It worked."" She looks wistfully at her coffee mug. ""I miss that little ship. It was so much fun to fly. Had some weird modifications thrown in there by the techies. Command named the frigate design Valorous after all the testing and, well, the name stuck."" Seems like she used that ship a lot. Most captains get attached to their personal flagships after all.","1:AvaWarStoryBegin2:Continue listening...
 2:AvaWarStoryCancel1:Yawn in front of her
 3:AvaWarStoryCancel2:""Get real.""
-4:AvaWarStorySpecial:""I own such a design right now.""",Changed: removed the trailing period from the option text (options without quotes do not end in a period).,
+4:AvaWarStorySpecial:""I own such a design right now.""","Changed: removed the trailing period from the option text (options without quotes do not end in a period).
+Typo fix (vanilla terminology pass): ninety three -> ninety-three.",
 AvaWarStory1NoScore,DialogOptionSelected,"$option == AvaWarStoryBegin
 PlayerFleetHasShipWithBaseHull eis_valorous
 !EIS_HasMissionScore eis_queens 1",,"""Yes, I'm a veteran..."" Ava reclines in her chair and gets comfortable. ""So, you want me to tell you about some of my experiences from back before I was..."" She pauses and drinks a bit of her coffee, eyes never leaving the finished paperwork, ""... turned into a desk jockey?""
 
 After thinking for a moment with her eyes closed she starts talking. ""I can tell you about one of my engagements from the Second AI War, when I was still a low-level officer in a patrol fleet."" She looks into your eyes and begins her story.
 
-""Cycle one hundred and ninety three. May eleventh. Hegemony is stretched thin. Tri-Tachyon tries to take control over Nachiketa in the Naraka system. The fuel production facility made it a high value target - you do the math."" Her face contorts in anger. ""A small force of Tri-Tachies tried to attach a comm sniffer to the communication array in the system, wanted to know what we were planning to do."" She grins, an almost predatory look in her eyes. Was she like that back then? ""High Command orders me to get into their secret prototype frigate and take them down. It worked."" She looks wistfully at her coffee mug. ""I miss that little ship. It was so much fun to fly. Had some weird modifications thrown in there by the techies. Command named the frigate design Valorous after all the testing and, well, the name stuck."" Seems like she used that ship a lot. Most captains get attached to their personal flagships after all.","1:AvaWarStoryBegin2:Continue listening...
+""Cycle one hundred and ninety-three. May eleventh. Hegemony is stretched thin. Tri-Tachyon tries to take control over Nachiketa in the Naraka system. The fuel production facility made it a high value target - you do the math."" Her face contorts in anger. ""A small force of Tri-Tachies tried to attach a comm sniffer to the communication array in the system, wanted to know what we were planning to do."" She grins, an almost predatory look in her eyes. Was she like that back then? ""High Command orders me to get into their secret prototype frigate and take them down. It worked."" She looks wistfully at her coffee mug. ""I miss that little ship. It was so much fun to fly. Had some weird modifications thrown in there by the techies. Command named the frigate design Valorous after all the testing and, well, the name stuck."" Seems like she used that ship a lot. Most captains get attached to their personal flagships after all.","1:AvaWarStoryBegin2:Continue listening...
 2:AvaWarStoryCancel1:Yawn in front of her
 3:AvaWarStoryCancel2:""Get real.""
-4:AvaWarStorySpecial:""I own such a design right now.""",Changed: removed the trailing period from the option text (options without quotes do not end in a period).,
+4:AvaWarStorySpecial:""I own such a design right now.""","Changed: removed the trailing period from the option text (options without quotes do not end in a period).
+Typo fix (vanilla terminology pass): ninety three -> ninety-three.",
 AvaWarStory1b,DialogOptionSelected,"$option == AvaWarStoryBegin
 !PlayerFleetHasShipWithBaseHull eis_valorous",,"""Yes, I'm a veteran..."" Ava reclines in her chair and gets comfortable. ""So, you want me to tell you about some of my experiences from back before I was..."" She pauses and drinks a bit of her coffee, eyes never leaving the finished paperwork, ""... turned into a desk jockey?""
 
 After thinking for a moment with her eyes closed she starts talking. ""I can tell you about one of my engagements from the Second AI War, when I was still a low-level officer in a patrol fleet."" She looks into your eyes and begins her story.
 
-""Cycle one hundred and ninety three. May eleventh. Hegemony is stretched thin. Tri-Tachyon tries to take control over Nachiketa in the Naraka system. The fuel production facility made it a high value target - you do the math."" Her face contorts in anger. ""A small force of Tri-Tachies tried to attach a comm sniffer to the communication array in the system, wanted to know what we were planning to do."" She grins, an almost predatory look in her eyes. Was she like that back then? ""High Command orders me to get into their secret prototype frigate and take them down. It worked."" She looks wistfully at her coffee mug. ""I miss that little ship. It was so much fun to fly. Had some weird modifications thrown in there by the techies. Command named the frigate design Valorous after all the testing and, well, the name stuck."" Seems like she used that ship a lot. Most captains get attached to their personal flagships after all.","1:AvaWarStoryBegin2:Continue listening...
+""Cycle one hundred and ninety-three. May eleventh. Hegemony is stretched thin. Tri-Tachyon tries to take control over Nachiketa in the Naraka system. The fuel production facility made it a high value target - you do the math."" Her face contorts in anger. ""A small force of Tri-Tachies tried to attach a comm sniffer to the communication array in the system, wanted to know what we were planning to do."" She grins, an almost predatory look in her eyes. Was she like that back then? ""High Command orders me to get into their secret prototype frigate and take them down. It worked."" She looks wistfully at her coffee mug. ""I miss that little ship. It was so much fun to fly. Had some weird modifications thrown in there by the techies. Command named the frigate design Valorous after all the testing and, well, the name stuck."" Seems like she used that ship a lot. Most captains get attached to their personal flagships after all.","1:AvaWarStoryBegin2:Continue listening...
 2:AvaWarStoryCancel1:Yawn in front of her
-3:AvaWarStoryCancel2:""Get real.""",Changed: removed the trailing period from the option text (options without quotes do not end in a period).,
+3:AvaWarStoryCancel2:""Get real.""","Changed: removed the trailing period from the option text (options without quotes do not end in a period).
+Typo fix (vanilla terminology pass): ninety three -> ninety-three.",
 AvaWarStory1c,DialogOptionSelected,$option == AvaWarStorySpecial,AdjustRepActivePerson WELCOMING 3,"""Do you now? She's a dream to pilot. Take good care of her and she'll take good care of you.""","1:AvaWarStoryBegin2:""So about that story...""",,
 AvaWarStory2,DialogOptionSelected,$option == AvaWarStoryBegin2,,"""We get the enemy location from another scout and start pre-combat checks. No, I wasn't alone; I had three crazy bastards in Courageous-class frigates backing me up."" A smile appears on her face as she seems to recall something funny. ""Slippery little bastards. Seen them avoid entire barrages, get behind the enemy, and punish them  with a few good shots to the engines. Instant flameout.""
 
@@ -1776,19 +1795,22 @@ After a chuckle, she continues. ""I get into the pilot seat, strap in, grab the 
 ",Changed: removed the trailing period from the option text (options without quotes do not end in a period).,
 AvaWarStory3,DialogOptionSelected,$option == AvaWarStoryBegin3,,"Ava continues telling her story. She talks somewhat quickly - you can imagine the situation developing as she speaks.
 
-""Adrenaline starts flowing through my veins as the combat drugs kick in. Reaction time shortens. Enemy movements start to stand out, like fog had been cleared from my mind. And then the old loop: Enemy ship in range. Open fire. Frigate down. On to the next one. I grinned like an idiot the whole time."" She claps her hands and you look at her. ""Most of that engagement was baiting the enemy to fight on what they thought were good terms. The moment their frigates realised we'd set a trap, they were in too deep to get out. And then they'd explode!"" She sighs and continues. ""Enemy destroyers and capitals started sticking close together. They noticed how quickly their frigates fell to me and my wingmen. So! What did we do?"" She asks you a question with a smile, but doesn't wait for your answer. ""Of course we went in for the kill, dummy. Divide the enemy force by any means. Even if one of our ships takes damage, it can be fixed in drydock. I only had to take down one destroyer to send the Tachies into a panic. They were being picked on by some small, slippery frigates their weapons couldn't even touch. I wonder how their commander's face looked?"" Another non-question. She takes a deep breath and drinks a bit of her drink.","1:AvaWarStoryCancel1:Yawn in front of her
+""Adrenaline starts flowing through my veins as the combat drugs kick in. Reaction time shortens. Enemy movements start to stand out, like fog had been cleared from my mind. And then the old loop: Enemy ship in range. Open fire. Frigate down. On to the next one. I grinned like an idiot the whole time."" She claps her hands and you look at her. ""Most of that engagement was baiting the enemy to fight on what they thought were good terms. The moment their frigates realized we'd set a trap, they were in too deep to get out. And then they'd explode!"" She sighs and continues. ""Enemy destroyers and capitals started sticking close together. They noticed how quickly their frigates fell to me and my wingmen. So! What did we do?"" She asks you a question with a smile, but doesn't wait for your answer. ""Of course we went in for the kill, dummy. Divide the enemy force by any means. Even if one of our ships takes damage, it can be fixed in drydock. I only had to take down one destroyer to send the Tachies into a panic. They were being picked on by some small, slippery frigates their weapons couldn't even touch. I wonder how their commander's face looked?"" Another non-question. She takes a deep breath and drinks a bit of her drink.","1:AvaWarStoryCancel1:Yawn in front of her
 2:AvaWarStoryBegin4:Continue listening...
-3:AvaWarStoryCancel2:""Get real.""",Changed: removed the trailing period from the option text (options without quotes do not end in a period).,
+3:AvaWarStoryCancel2:""Get real.""","Changed: removed the trailing period from the option text (options without quotes do not end in a period).
+Typo fix (vanilla terminology pass): realised -> realized.",
 AvaWarStory3b,DialogOptionSelected,$option == AvaWarStoryBegin3,,"Ava continues telling her story. She talks somewhat quickly - you can imagine the situation developing as she speaks.
 
-""Adrenaline starts flowing through my veins as the combat drugs kick in. Reaction time shortens. Enemy movements start to stand out, like fog had been cleared from my mind. And then the old loop: Enemy ship in range. Open fire. Frigate down. On to the next one. I grinned like an idiot the whole time."" She claps her hands and you look at her. ""Most of that engagement was baiting the enemy to fight on what they thought were good terms. The moment their frigates realised we'd set a trap, they were in too deep to get out. And then they'd explode!"" She sighs and continues. ""Enemy destroyers and capitals started sticking close together. They noticed how quickly their frigates fell to me and my wingmen. So! What did we do?"" She asks you a question with a smile, but doesn't wait for your answer. ""Of course we went in for the kill, dummy. Divide the enemy force by any means. Even if one of our ships takes damage, it can be fixed in drydock. I only had to take down one destroyer to send the Tachies into a panic. They were being picked on by some small, slippery frigates their weapons couldn't even touch. I wonder how their commander's face looked?"" Another non-question. She takes a deep breath and drinks a bit of her drink.","1:AvaWarStoryBegin4:Continue listening...
+""Adrenaline starts flowing through my veins as the combat drugs kick in. Reaction time shortens. Enemy movements start to stand out, like fog had been cleared from my mind. And then the old loop: Enemy ship in range. Open fire. Frigate down. On to the next one. I grinned like an idiot the whole time."" She claps her hands and you look at her. ""Most of that engagement was baiting the enemy to fight on what they thought were good terms. The moment their frigates realized we'd set a trap, they were in too deep to get out. And then they'd explode!"" She sighs and continues. ""Enemy destroyers and capitals started sticking close together. They noticed how quickly their frigates fell to me and my wingmen. So! What did we do?"" She asks you a question with a smile, but doesn't wait for your answer. ""Of course we went in for the kill, dummy. Divide the enemy force by any means. Even if one of our ships takes damage, it can be fixed in drydock. I only had to take down one destroyer to send the Tachies into a panic. They were being picked on by some small, slippery frigates their weapons couldn't even touch. I wonder how their commander's face looked?"" Another non-question. She takes a deep breath and drinks a bit of her drink.","1:AvaWarStoryBegin4:Continue listening...
 2:AvaWarStoryCancel1:Yawn in front of her
-3:AvaWarStoryCancel2:""Get real.""",Changed: removed the trailing period from the option text (options without quotes do not end in a period).,
+3:AvaWarStoryCancel2:""Get real.""","Changed: removed the trailing period from the option text (options without quotes do not end in a period).
+Typo fix (vanilla terminology pass): realised -> realized.",
 AvaWarStory3c,DialogOptionSelected,$option == AvaWarStoryBegin3,,"Ava continues telling her story. She talks somewhat quickly - you can imagine the situation developing as she speaks.
 
-""Adrenaline starts flowing through my veins as the combat drugs kick in. Reaction time shortens. Enemy movements start to stand out, like fog had been cleared from my mind. And then the old loop: Enemy ship in range. Open fire. Frigate down. On to the next one. I grinned like an idiot the whole time."" She claps her hands and you look at her. ""Most of that engagement was baiting the enemy to fight on what they thought were good terms. The moment their frigates realised we'd set a trap, they were in too deep to get out. And then they'd explode!"" She sighs and continues. ""Enemy destroyers and capitals started sticking close together. They noticed how quickly their frigates fell to me and my wingmen. So! What did we do?"" She asks you a question with a smile, but doesn't wait for your answer. ""Of course we went in for the kill, dummy. Divide the enemy force by any means. Even if one of our ships takes damage, it can be fixed in drydock. I only had to take down one destroyer to send the Tachies into a panic. They were being picked on by some small, slippery frigates their weapons couldn't even touch. I wonder how their commander's face looked?"" Another non-question. She takes a deep breath and drinks a bit of her drink.","1:AvaWarStoryCancel1:Yawn in front of her
+""Adrenaline starts flowing through my veins as the combat drugs kick in. Reaction time shortens. Enemy movements start to stand out, like fog had been cleared from my mind. And then the old loop: Enemy ship in range. Open fire. Frigate down. On to the next one. I grinned like an idiot the whole time."" She claps her hands and you look at her. ""Most of that engagement was baiting the enemy to fight on what they thought were good terms. The moment their frigates realized we'd set a trap, they were in too deep to get out. And then they'd explode!"" She sighs and continues. ""Enemy destroyers and capitals started sticking close together. They noticed how quickly their frigates fell to me and my wingmen. So! What did we do?"" She asks you a question with a smile, but doesn't wait for your answer. ""Of course we went in for the kill, dummy. Divide the enemy force by any means. Even if one of our ships takes damage, it can be fixed in drydock. I only had to take down one destroyer to send the Tachies into a panic. They were being picked on by some small, slippery frigates their weapons couldn't even touch. I wonder how their commander's face looked?"" Another non-question. She takes a deep breath and drinks a bit of her drink.","1:AvaWarStoryCancel1:Yawn in front of her
 2:AvaWarStoryCancel2:""Get real.""
-3:AvaWarStoryBegin4:Continue listening...",Changed: removed the trailing period from the option text (options without quotes do not end in a period).,
+3:AvaWarStoryBegin4:Continue listening...","Changed: removed the trailing period from the option text (options without quotes do not end in a period).
+Typo fix (vanilla terminology pass): realised -> realized.",
 AvaWarStory4,DialogOptionSelected,$option == AvaWarStoryBegin4,,"""Two destroyers and a capital ship remained. I think it was two Medusas and an Odyssey with Longbow bombers. I... despise those strikecraft."" She clenches one of her fists. ""Longbows fire their Sabots and overload one of my wingmen. Medusas exploit the opportunity and destroy her ship. That puts the Medusas in front of the Odyssey, so now the big girl can't provide fire support..."" Ava laughs. ""My forces and I decided to finish the battle right then and there. So we go all in, repair bill be damned. It was... surprisingly easy? I honestly expected more of a challenge from that final push. Both Medusa captains wasted their skimmers on the push and couldn't get out before we surrounded them. Moments later, two lovely blue explosions occur. Enemy loses two ships. Only the Odyssey is left, and we both know what happens to large ships when they get surrounded, don't we?"" She giggles a bit and continues.
 
 ""Battle ends with our victory and we look for my wingman's escape pod. Fortunately she was still alive - only suffered some burns and the like, nothing too bad. We head back to base, get debriefed and have a little beer thrown our way. The combat pay that month was pretty good, too. So, once the combat drugs wore off, I hit the sack. Best sleep of my life."" She narrows her eyes and gives you a weird look. ""What? Did you expect me to get wasted in a bar and hop into bed with someone from the engineering team? Hah! Wishful thinking, pilot. Wishful thinking indeed.""","1:AvaWarStoryCancel2:""Get real.""
@@ -1816,7 +1838,7 @@ AvaAquilaReactorReward,DialogOptionSelected,$option == AvaAquilaReactorReward,"$
 FireAll PopulateOptions
 EISAddSpecial modspec eis_aquila
 EISAddSound technology2
-AddTextSmall ""You have received access to the Aquila Reactor Protocol modspec"" highlight","Ava gives a slight smile. ""It's one of the finest reactor designs in the sector. I can arrange sharing a copy of the modspec with your fleet."" Ava completes the transfer on her console before signing off.",,,b
+AddTextSmall ""You have received access to the Aquila Reactor Protocol modspec"" highlight","Ava gives a slight smile. ""It's one of the finest reactor designs in the Sector. I can arrange sharing a copy of the modspec with your fleet."" Ava completes the transfer on her console before signing off.",,Terminology fix (vanilla terminology pass): the sector -> the Sector.,b
 AvaAquilaReactorRewardDisable,eis_VNSectorDiscussionOptionsCheck,"!EISVibeCheck 25 100
 $id == eisava","SetTooltip AvaAquilaReactorReward ""Your relation with Ava is not on Welcoming terms (25 relation).""
 SetTooltipHighlightColors hGood
@@ -1836,27 +1858,31 @@ AvaIronHeritage1e,DialogOptionSelected,"$option == AvaIronHeritage
 !$AlreadyLearnedIronHeritage","$AlreadyLearnedIronHeritage = true
 EISAddSkill eis_xiv true
 EISAddSound combat2
-FireAll PopulateOptions","Ava checks her Tri-Pad and smiles softly. ""I see you are eligible for the Iron Shell training program. I wish you luck, Captain."" You and the members of your bridge crew join a course alongside several Hegemony officers, learning about the finer details of Fourteenth Battlegroup vessels. The training includes both maintinence quirks, and how to use their technological advantages more effectively during combat.
+FireAll PopulateOptions","Ava checks her TriPad and smiles softly. ""I see you are eligible for the Iron Shell training program. I wish you luck, captain."" You and the members of your bridge crew join a course alongside several Hegemony officers, learning about the finer details of Fourteenth Battlegroup vessels. The training includes both maintenance quirks, and how to use their technological advantages more effectively during combat.
 
-Ava congratulates you personally after the training is finished. You now feel fully capable of commanding and maintaining XIV vessels.",,,B
+Ava congratulates you personally after the training is finished. You now feel fully capable of commanding and maintaining XIV vessels.",,"Typo fix (vanilla terminology pass): maintinence -> maintenance.
+Terminology fix (vanilla terminology pass): Tri-Pad -> TriPad; Captain -> captain (direct address, vanilla lowercase).",B
 AvaIronHeritage1f,DialogOptionSelected,"$option == AvaIronHeritage2
 $AlreadyLearnedIronHeritage
 $global.eis_xiv_legion
 !$AlreadyLearnedIronHeritageLevel2","$AlreadyLearnedIronHeritageLevel2 = true
 EISAddSkill eis_xiv true
 EISAddSound combat4
-FireAll PopulateOptions","Ava checks her Tri-Pad. ""I see you put in a request for further training. Unfortunately, your skill already exceeds the typical officer cirriculum. Why don't we spend some time in the simulator? I think there are some things that can't be taught in a classroom."" You spend several hours sparring, helming various vessels of the Fourteenth Battlegroup. While at first you were completely outmatched, you pick up several techniques utilizing the quirks of each vessel, and manage to meet her on nearly equal terms. Ava bids you farewell with a smile, clearly enjoying the diversion.
+FireAll PopulateOptions","Ava checks her TriPad. ""I see you put in a request for further training. Unfortunately, your skill already exceeds the typical officer curriculum. Why don't we spend some time in the simulator? I think there are some things that can't be taught in a classroom."" You spend several hours sparring, helming various vessels of the Fourteenth Battlegroup. While at first you were completely outmatched, you pick up several techniques utilizing the quirks of each vessel, and manage to meet her on nearly equal terms. Ava bids you farewell with a smile, clearly enjoying the diversion.
 
-You feel capable of commanding and maintaining XIV vessels even better than before.",,"Was $eis_xiv_legion, which read Ava's own memory (the flag is set on Kim), so sharing the Legion (XIV) blueprint never unlocked this. Now checks $global.eis_xiv_legion.",B
+You feel capable of commanding and maintaining XIV vessels even better than before.",,"Was $eis_xiv_legion, which read Ava's own memory (the flag is set on Kim), so sharing the Legion (XIV) blueprint never unlocked this. Now checks $global.eis_xiv_legion.
+Typo fix (vanilla terminology pass): cirriculum -> curriculum.
+Terminology fix (vanilla terminology pass): Tri-Pad -> TriPad.",B
 AvaIronHeritage1f2,DialogOptionSelected,"$option == AvaIronHeritage2
 $AlreadyLearnedIronHeritage
 $global.toldAboutSentinel
 !$AlreadyLearnedIronHeritageLevel2","$AlreadyLearnedIronHeritageLevel2 = true
 EISAddSkill eis_xiv true
 EISAddSound combat4
-FireAll PopulateOptions","Ava checks her Tri-Pad. ""I see you put in a request for further training. Unfortunately, your skill already exceeds the typical officer cirriculum. Why don't we spend some time in the simulator? I think there are some things that can't be taught in a classroom."" You spend several hours sparring, helming various vessels of the Fourteenth Battlegroup. While at first you were completely outmatched, you pick up several techniques utilizing the quirks of each vessel, and manage to meet her on nearly equal terms. Ava bids you farewell with a smile, clearly enjoying the diversion.
+FireAll PopulateOptions","Ava checks her TriPad. ""I see you put in a request for further training. Unfortunately, your skill already exceeds the typical officer curriculum. Why don't we spend some time in the simulator? I think there are some things that can't be taught in a classroom."" You spend several hours sparring, helming various vessels of the Fourteenth Battlegroup. While at first you were completely outmatched, you pick up several techniques utilizing the quirks of each vessel, and manage to meet her on nearly equal terms. Ava bids you farewell with a smile, clearly enjoying the diversion.
 
-You feel capable of commanding and maintaining XIV vessels even better than before.",,,B
+You feel capable of commanding and maintaining XIV vessels even better than before.",,"Typo fix (vanilla terminology pass): cirriculum -> curriculum.
+Terminology fix (vanilla terminology pass): Tri-Pad -> TriPad.",B
 ,,,,,,,N
 AvaIronHeritageLvl1Disable1,eis_VNSectorDiscussionOptionsCheck,"!$AvaContact
 $id == eisava
@@ -1913,17 +1939,19 @@ $id == eisava
 !$AvaContact","SetTooltip AvaRecruitOffer ""You need neutral standing (0 reputation) or better with both the Hegemony and Iron Shell.""
 SetEnabled AvaRecruitOffer false",,,,b
 AvaRecruitSel,DialogOptionSelected,$option == AvaRecruitOffer,"AddText ""Ava requests you visit her administrative office in person. As you enter the modest room, you notice a wall of military accolades above a small table with a Domain-standard coffee maker. She appears to be reviewing your file as you enter.""
-AddText ""\""Captain $playername, I'm glad you could make it. I'd like to extend my gratitude on behalf of the Hegemony for your work restoring access to the Galatia system. My superior, Councillor Kim Quy, has authorized your fleet to act semi-autonomously as an auxiliary force of the Iron Shell division of the Hegemony navy, and assign you work if you so choose.""
+AddText ""\""Captain $playername, I'm glad you could make it. I'd like to extend my gratitude on behalf of the Hegemony for your work restoring access to the Galatia system. My superior, Councilor Kim Quy, has authorized your fleet to act semi-autonomously as an auxiliary force of the Iron Shell division of the Hegemony Navy, and assign you work if you so choose.""
 SetTextHighlights ""Kim Quy""
-AddText ""You may report to either myself or my subordinate Charlotte Hex here on Yami through the standard Hegemony comm-channels.\"" She flips to the next page of the file on her Tri-Pad, clearly a bit skeptical.""
+AddText ""You may report to either myself or my subordinate Charlotte Hex here on Yami through the standard Hegemony comm-channels.\"" She flips to the next page of the file on her TriPad, clearly a bit skeptical.""
 SetTextHighlights ""Charlotte Hex"" Yami
-AddText ""\""Councillor Quy also mentioned she'd like to contact you on Chitagupta within this system. I've additionally sent over the contact information for Commissioner Darren Hartley and our head researcher Caeda Celeste at their request. Your name has come up quite a few times on internal reports.\"" She finally looks up at you directly, with a rather serious stare.""
+AddText ""\""Councilor Quy also mentioned she'd like to contact you on Chitagupta within this system. I've additionally sent over the contact information for Commissioner Darren Hartley and our head researcher Caeda Celeste at their request. Your name has come up quite a few times on internal reports.\"" She finally looks up at you directly, with a rather serious stare.""
 SetTextHighlights Chitagupta ""Darren Hartley"" ""Caeda Celeste""
 AddText ""\""Regardless of your decision, I've notified our patrol fleets of your status. Dismissed.\""""
 EISAddContact
 $AvaContact = true
 $global.eisAvaContact = true
-FireAll PopulateOptions",,,"Dialogue moved from the text column into one AddText per paragraph, with SetTextHighlights straight after the paragraph it applies to. SetTextHighlights only highlights the last paragraph already in the text panel (highlightInLastPara), so highlight calls placed after the text field could only reach its final paragraph, which contains none of these terms (the likely reason the earlier attempt did not highlight). Terms per paragraph: Kim Quy and Iron Shell (paragraph 2), Charlotte Hex and Yami (3), Chitagupta and Darren Hartley and Caeda Celeste (4). EISAddContact now runs after the dialogue so its contact-added message still prints below it. Wording is unchanged except the spelling of Commissioner (was Comissioner), which has been corrected.",b
+FireAll PopulateOptions",,,"Dialogue moved from the text column into one AddText per paragraph, with SetTextHighlights straight after the paragraph it applies to. SetTextHighlights only highlights the last paragraph already in the text panel (highlightInLastPara), so highlight calls placed after the text field could only reach its final paragraph, which contains none of these terms (the likely reason the earlier attempt did not highlight). Terms per paragraph: Kim Quy and Iron Shell (paragraph 2), Charlotte Hex and Yami (3), Chitagupta and Darren Hartley and Caeda Celeste (4). EISAddContact now runs after the dialogue so its contact-added message still prints below it. Wording is unchanged except the spelling of Commissioner (was Comissioner), which has been corrected.
+Typo fix (vanilla terminology pass): Councillor -> Councilor.
+Terminology fix (vanilla terminology pass): Tri-Pad -> TriPad; Hegemony navy -> Hegemony Navy.",b
 #AvaShipSaleSel,DialogOptionSelected,$option == AvaShipSaleOffer,"EISPrepareShipSale eis_dauntless_Standard
 EISPrepareShipSale SHOW
 FireBest AvaShipSaleBuyCheck","""Apologies for making you come in person, $playername."" Ava puts down her Tri-Pad after reviewing your request. ""It's true we have had some nanoforge capacity free up on Chitagupta, but..."" She trails off and taps her desk, lost in thought. Soon she turns to a secure terminal, enters her codes, and sends over the specifications of an advanced dreadnought hull.
@@ -1952,11 +1980,12 @@ EISAddSound technology2
 AddTextSmall ""You have may now produce and purchase Dauntless (XIV) from Iron Shell"" highlight
 AddTextSmall ""Custom production through Commissioner Hartley is now 25% cheaper"" highlight","You place a personal request with Administrator Nitia, regarding sightings of a massive dreadnought-sized ship coming to and from Yami. Your request is confirmed on a secure channel, and you travel to the Yami administrative office to meet Ava in person.
 
-""Apologies for making you come in person, $playername."" Ava puts down her Tri-Pad after reviewing your request. ""It's true we have had some nanoforge capacity free up on Chitagupta, but..."" She trails off and taps her desk, lost in thought. Soon she turns to a secure terminal, enters her codes, and sends over the specifications of an advanced dreadnought hull.
+""Apologies for making you come in person, $playername."" Ava puts down her TriPad after reviewing your request. ""It's true we have had some nanoforge capacity free up on Chitagupta, but..."" She trails off and taps her desk, lost in thought. Soon she turns to a secure terminal, enters her codes, and sends over the specifications of an advanced dreadnought hull.
 
-""From your description, it can only be this, right? Iron Shell's Dauntless-class isn't a part of the public record, and I won't pry on where you spotted one. We typically don't authorize production outside of Iron Sentinel, but you've done enough that I can pull some strings, Captain. I'll forward the details to Commissioner Hartley.""
+""From your description, it can only be this, right? Iron Shell's Dauntless-class isn't a part of the public record, and I won't pry on where you spotted one. We typically don't authorize production outside of Iron Sentinel, but you've done enough that I can pull some strings, captain. I'll forward the details to Commissioner Hartley.""
 
-Your logistics officers notify you that a new hull has been added to your production procurement catalogue.",AvaShipSaleAccept:Accept,"Replaces the four sale rows above (AvaShipSaleSel, BuyCheckRow, BuySel, DeclineSel - commented out, old text kept in them). No price or decline any more: the option only previews the Dauntless and unlocks it, like the hullmod modspec rewards, then a single Accept option (AvaShipSaleAcceptSel) closes the preview. EISPrepareShipSale SHOW previews the ship (CANCEL just clears the stashed ship, not the preview; ShowPersonVisual in the Accept row removes it). EISUnlockShipSale strips the no_sell hull tag (saved per game, re-applied on every load by eis_modPlugin.onGameLoad). EISAddSound + AddTextSmall give the unlock sound and the small highlighted line. $EISAvaShipUnlocked is a new flag that replaces the old $EISAvaShipSaleDone in this row and in the Print/Disable rows, so saves that already used the old sale still see this option once; it hides the option afterwards. $global.eisDauntlessUnlocked is also set here and read by EISCustomProductionContract: Hartley's production contract costs 25% less per unlocked clearance ($global.eisIllustriousUnlocked / $global.eisDauntlessUnlocked), 50% with both; the second AddTextSmall line tells the player. Dialogue is still the old sale offer text, to be rewritten by hand.",b
+Your logistics officers notify you that a new hull has been added to your production procurement catalogue.",AvaShipSaleAccept:Accept,"Replaces the four sale rows above (AvaShipSaleSel, BuyCheckRow, BuySel, DeclineSel - commented out, old text kept in them). No price or decline any more: the option only previews the Dauntless and unlocks it, like the hullmod modspec rewards, then a single Accept option (AvaShipSaleAcceptSel) closes the preview. EISPrepareShipSale SHOW previews the ship (CANCEL just clears the stashed ship, not the preview; ShowPersonVisual in the Accept row removes it). EISUnlockShipSale strips the no_sell hull tag (saved per game, re-applied on every load by eis_modPlugin.onGameLoad). EISAddSound + AddTextSmall give the unlock sound and the small highlighted line. $EISAvaShipUnlocked is a new flag that replaces the old $EISAvaShipSaleDone in this row and in the Print/Disable rows, so saves that already used the old sale still see this option once; it hides the option afterwards. $global.eisDauntlessUnlocked is also set here and read by EISCustomProductionContract: Hartley's production contract costs 25% less per unlocked clearance ($global.eisIllustriousUnlocked / $global.eisDauntlessUnlocked), 50% with both; the second AddTextSmall line tells the player. Dialogue is still the old sale offer text, to be rewritten by hand.
+Terminology fix (vanilla terminology pass): Tri-Pad -> TriPad; Captain -> captain (direct address, vanilla lowercase).",b
 AvaShipSaleAcceptSel,DialogOptionSelected,$option == AvaShipSaleAccept,"ShowPersonVisual
 FireAll PopulateOptions",,,Closes the ship preview put up by AvaShipSaleUnlockSel (ShowPersonVisual restores the contact's portrait) and returns to the contact's options.,b
 ,,,,,,,
@@ -1972,7 +2001,8 @@ $AlreadyAquilaConsummed = true
 EISLearn eis_aquila_1time
 EISGainItem eis_aquila_core 1
 EISAddSound technology2
-FireAll PopulateOptions","""Well, you've been very good to me and Iron Shell, which means I can..."" Ava sends few files to your Tri-Pad. ""... give you something fairly interesting. Celeste has sent me few of these experimental Aquila modspecs. It is somewhat different from and needs some special modifications to utilize. The result is that you can integrate Aquila on ships that couldn't use it otherwise, namely frigates and destroyers. Unfortunately, the chip is one-use. Once again, I thank you for your service to the Hegemony.""",,Changed: grants the Advanced Aquila Reactor Core LPC item (eis_aquila_core) instead of adding a use to $EIS_aquila. The chip is now reusable (returned when the hullmod is removed). EISGainItem announces the chip in the same style as the EISLearn unlock line,B
+FireAll PopulateOptions","""Well, you've been very good to me and Iron Shell, which means I can..."" Ava sends few files to your TriPad. ""... give you something fairly interesting. Celeste has sent me few of these experimental Aquila modspecs. It is somewhat different from and needs some special modifications to utilize. The result is that you can integrate Aquila on ships that couldn't use it otherwise, namely frigates and destroyers. Unfortunately, the chip is one-use. Once again, I thank you for your service to the Hegemony.""",,"Changed: grants the Advanced Aquila Reactor Core LPC item (eis_aquila_core) instead of adding a use to $EIS_aquila. The chip is now reusable (returned when the hullmod is removed). EISGainItem announces the chip in the same style as the EISLearn unlock line
+Terminology fix (vanilla terminology pass): Tri-Pad -> TriPad.",B
 ,,,,,,,N
 EISAvaThoughtsPlayer,eisava,,"EIS_DynamicPaginatedOptions addOption eis_Player ""Me""",,,,n
 EISAvaThoughtsPlayerR1,DialogOptionSelected,"$id == eisava
@@ -1983,13 +2013,15 @@ $option == eis_Player
 EISVibeCheck 0 25",,"""I hope we can develop a good working relationship.""",,,B
 EISAvaThoughtsPlayerR4,DialogOptionSelected,"$id == eisava
 $option == eis_Player
-EISVibeCheck 25 50",,"""How about 'one of my better freelancers'? I hope you'll stay that way, Captain""",,,b
+EISVibeCheck 25 50",,"""How about 'one of my better freelancers'? I hope you'll stay that way, captain.""",,"Terminology fix (vanilla terminology pass): Captain -> captain (direct address, vanilla lowercase).
+Punctuation fix: added closing period.",b
 EISAvaThoughtsPlayerR5,DialogOptionSelected,"$id == eisava
 $option == eis_Player
 EISVibeCheck 50 75",,"""At this point, one of the best freelancer captains I have ever had the pleasure of working with. I might even call you a friend.""",,,b
 EISAvaThoughtsPlayerR6,DialogOptionSelected,"$id == eisava
 $option == eis_Player
-EISVibeCheck 75 100",,"""A loyal friend. I hope to keep seeing you around, Captain""",,,b
+EISVibeCheck 75 100",,"""A loyal friend. I hope to keep seeing you around, captain.""",,"Terminology fix (vanilla terminology pass): Captain -> captain (direct address, vanilla lowercase).
+Punctuation fix: added closing period.",b
 EISAvaThoughtsDaud,eisava,,"EIS_DynamicPaginatedOptions addOption eis_BaikalDaud ""High Hegemon Baikal Daud""",,,,b
 EISAvaThoughtsDaudR,DialogOptionSelected,"$id == eisava
 $option == eis_BaikalDaud
@@ -2191,8 +2223,8 @@ OR
 eis_psbOfferOption,eis_psb_option,,,,eis_psb_start:Ask about the special pirate fleet bounty,,idk what this does tbh
 eis_psbOfferTextContact,DialogOptionSelected,$option == eis_psb_start,"$missionId = eis_psb
 SetTextHighlights $psb_dist $psb_baseBounty $psb_days
-Call $psb_ref showMap ""Target: $psb_systemNameShort""         ","""The terms are this,"" $heOrShe says, ""A bounty shall be paid for destruction of pirate fleets in or near $psb_systemName, $psb_dist light-years away. The base rate is $psb_baseBounty credits per frigate destroyed or disabled, on an increasing scale for larger hulls - please review addendum A in the terms I've forwarded. The period of the bounty shall last for $psb_days days.""","contact_accept:Accept
-contact_decline:Decline",,idk what this does tbh
+Call $psb_ref showMap ""Target: $psb_systemNameShort""         ","""The terms are this,"" $heOrShe says, ""a bounty shall be paid for destruction of pirate fleets in or near $psb_systemName, $psb_dist light-years away. The base rate is $psb_baseBounty credits per frigate destroyed or disabled, on an increasing scale for larger hulls - please review addendum A in the terms I've forwarded. The period of the bounty shall last for $psb_days days.""","contact_accept:Accept
+contact_decline:Decline",Typo fix (vanilla terminology pass): A bounty -> a bounty.,idk what this does tbh
 ,,,,,,,idk what this does tbh
 eis_ssatBlurb,eis_ssat_blurb,,,"""Fleet intel has requested discrete deployment of an observation package to $ssat_marketName orbit. You could fulfill the mission parameters.""
 OR
@@ -2228,13 +2260,13 @@ eis_letmehirethem:""Allow me to hire them.""",hire option tooltip removed Change
 eis_extrOfferTextContactHiringProcessa,DialogOptionSelected,"$option == eis_letmehirethem
 !EISOneOfUs score:5","EISPoopyStinky true
 ShowSecondPerson $global.EISWowOfficer
-SetStoryOption eisome_hireYes 1 0 leadership","""Although the Councilor would not approve of letting go one of her vital assets, I can make an exception on your behalf seeing the work you've done for me. Here is the case file. Still interested in hiring them?""","0:eisome_hireYes:""Sounds good.""
-1:cutCommLink:""Actually, I've changed my mind.""",rep check (EISVibeCheck 75 100) removed - applies to everyone who is not EISOneOfUs,idk what this does tbh
+SetStoryOption eisome_hireYes 1 eis_hireExtractedOperative leadership","""Although the Councilor would not approve of letting go one of her vital assets, I can make an exception on your behalf seeing the work you've done for me. Here is the case file. Still interested in hiring them?""","0:eisome_hireYes:""Sounds good.""
+1:cutCommLink:""Actually, I've changed my mind.""","rep check (EISVibeCheck 75 100) removed - applies to everyone who is not EISOneOfUs | Changed: story point option now gives 100% bonus XP (bonus XP key eis_hireExtractedOperative in settings.json, was 0%).",idk what this does tbh
 eis_extrOfferTextContactHiringProcessb,DialogOptionSelected,"$option == eis_letmehirethem
 EISOneOfUs","EISPoopyStinky true
 ShowSecondPerson $global.EISWowOfficer
-SetStoryOption eisome_hireYes 1 0 leadership","""Seeing the work you've done for Iron Shell and the fact you're one of us, I don't see why not. Here is the case file. Still interested in hiring them?""","0:eisome_hireYes:""Sounds good.""
-1:cutCommLink:""Actually, I've changed my mind.""",,idk what this does tbh
+SetStoryOption eisome_hireYes 1 eis_hireExtractedOperative leadership","""Seeing the work you've done for Iron Shell and the fact you're one of us, I don't see why not. Here is the case file. Still interested in hiring them?""","0:eisome_hireYes:""Sounds good.""
+1:cutCommLink:""Actually, I've changed my mind.""","Changed: story point option now gives 100% bonus XP (bonus XP key eis_hireExtractedOperative in settings.json, was 0%).",idk what this does tbh
 eis_extrOfferTextContactHiredFailed,DialogOptionSelected,"$option == eisome_hireYes
 CallEvent $ome_eventRef atLimit $global.EISWowOfficer","EISUhOhStinky $global.EISWowOfficer false
 FireAll PopulateOptions","""I'm afraid you can't hire on any more officers at the moment...""",,,idk what this does tbh
@@ -2419,24 +2451,24 @@ EISOneOfUs hegemony",,,0:gaPZ_hegHub1:Appeal on the basis of your alliance membe
 eis_gaATGhegFleetDialogHub1Alliance,GAATGhegFleetDialogHub,"$player.fcm_faction != hegemony
 $player.fcm_faction != ironshell
 EISOneOfUs hegemony",,,"gaATG_hegFleetCom1:""I belong to a shared alliance, $rank""","Suggestion: without Nexerelin, EISOneOfUs is now also true at 75+ reputation with both the Hegemony and Iron Shell (there are no alliances), so this alliance wording can show to a player who is in no alliance. Consider neutral wording or a separate row gated on !EIS_HasModId nexerelin.",B
-eis_gaATGdaudMeeting3a,GAATGdaudMeetingFirearm,$player.fcm_faction == ironshell score:2,"$option = gaATG_daudMeeting4 0
+#eis_gaATGdaudMeeting3a,GAATGdaudMeetingFirearm,$player.fcm_faction == ironshell score:2,"$option = gaATG_daudMeeting4 0
 FireBest DialogOptionSelected","The chief of security examines your sidearm as if it were his own. With a light touch he slips the cellmag out, checks its status, then reloads it. He hands the weapon back to you.
 
-""Captain,"" he says. ""It is the High Hegemon's opinion that if you have earned yourself a reputation from one of the Hegemony executive council members, you may bear your weapon in his presence.""",gaATG_daudMeeting4:Continue,condition now has score:2 like vanilla gaATGdaudMeeting3a so it beats the neutral row instead of tying,
+""Captain,"" he says. ""It is the High Hegemon's opinion that if you have earned yourself a reputation from one of the Hegemony executive council members, you may bear your weapon in his presence.""",gaATG_daudMeeting4:Continue,"condition now has score:2 like vanilla gaATGdaudMeeting3a so it beats the neutral row instead of tying | Retired: vanilla gaATGdaudMeeting3a now fires for an Iron Shell commission (EISHegemonyCommissionRulesPatch). This row had custom wording.",
 eis_gaATGdaudMeeting3aAlliance,GAATGdaudMeetingFirearm,"$player.fcm_faction != hegemony
 $player.fcm_faction != ironshell
 EISOneOfUs hegemony","$option = gaATG_daudMeeting4 0
 FireBest DialogOptionSelected","The chief of security examines your sidearm as if it were his own. With a light touch he slips the cellmag out, checks its status, then reloads it. He hands the weapon back to you.
 
 ""Captain,"" he says. ""It is the High Hegemon's opinion that if you have earned yourself an ally with the Hegemony, you may bear your weapon in his presence.""",gaATG_daudMeeting4:Continue,,
-eis_soeMeetCaspianStart0,DialogOptionSelected,"!$global.didEventideRaoBall
+#eis_soeMeetCaspianStart0,DialogOptionSelected,"!$global.didEventideRaoBall
 $faction.id == hegemony
 $option == marketVisitBar
 $player.metDaud
 $player.fcm_faction == ironshell
 RollProbability 0.2","FireBest BarShuttleDownPrintDesc
 FireBest BarPrintDesc
-BarCMD playAmbience",,soe_meetCaspianStart:Continue,,
+BarCMD playAmbience",,soe_meetCaspianStart:Continue,"Retired: identical to vanilla soeMeetCaspianStart0, which now fires for an Iron Shell commission (EISHegemonyCommissionRulesPatch).",
 eis_soeMeetCaspianStart0Alliance,DialogOptionSelected,"!$global.didEventideRaoBall
 $faction.id == ironshell
 $option == marketVisitBar
@@ -2447,7 +2479,7 @@ FireBest BarPrintDesc
 BarCMD playAmbience",,soe_meetCaspianStart:Continue,,
 eis_tut_janContactReport3,DialogOptionSelected,"$option == tutReport3
 !$eis_tut_test score:2","$eis_tut_test = true 0
-FireBest DialogOptionSelected","""Perhaps, you could check out the planets of Yami and Chitagupta in the Naraka Star System just east of us. The officials there could use some help.""",,,
+FireBest DialogOptionSelected","""Perhaps, you could check out the planets of Yami and Chitagupta in the Naraka system just east of us. The officials there could use some help.""",,Terminology fix (vanilla terminology pass): Naraka Star System -> Naraka system.,
 #END Vanilla Addition,,,,,,,
 ,,,,,,,
 #SotF Addition - (lol),,,,"#sotf_sierra is the updated id, to-do later whenever raccoon updates",,,have to review all this later manually
@@ -2572,27 +2604,27 @@ $global.soldSierraToCeleste = true","The hairs on your neck suddenly stand up of
 # new lines,,,,,,,n
 ,,,,,,,n
 #Vanilla Hege Comm stuff,,,,,,,n
-eis_lppJangalaProtestRespIS,PPJangalaProtestResponses,$player.fcm_faction == ironshell,,,lpp_jangalaProtestInfoHegCom:Use your commission with the Hegemony to pass,option id changed from eis_lppJangalaProtestInfoISCom to the vanilla lpp_jangalaProtestInfoHegCom so the vanilla Accept/Wait follow-up runs,b
+#eis_lppJangalaProtestRespIS,PPJangalaProtestResponses,$player.fcm_faction == ironshell,,,lpp_jangalaProtestInfoHegCom:Use your commission with the Hegemony to pass,"option id changed from eis_lppJangalaProtestInfoISCom to the vanilla lpp_jangalaProtestInfoHegCom so the vanilla Accept/Wait follow-up runs | Retired: identical to vanilla lppJangalaProtestRespHeg, which now fires for an Iron Shell commission (EISHegemonyCommissionRulesPatch).",b
 #eis_lppJangalaProtestInfoISCom,DialogOptionSelected,$option == eis_lppJangalaProtestInfoISCom,EndConversation DO_NOT_FIRE,"""Look, sorry about all of this,"" $heOrShe indicates the protest. ""Tell you what- I can route you and your crew through secure access so you don't have to wait on the circus.""",,commented out - orphaned by the option id change on eis_lppJangalaProtestRespIS (vanilla lpp_jangalaProtestInfoHegCom continues instead),b
-eis_sdtuMacReasonIronshell,SDTUMacIntroReasoning,$player.commissionFactionId == ironshell,,"""Why, it is because you work for the enemy, the Hegemony!""
+#eis_sdtuMacReasonIronshell,SDTUMacIntroReasoning,$player.commissionFactionId == ironshell,,"""Why, it is because you work for the enemy, the Hegemony!""
 
 ""The Diktat has always been a knife to their throat. Small, yes, but with a keen edge, a ruthlessness that the best of the officer corps could recognize, and those too craven to commit to Philip's vision look upon with jealousy. The children of Eventide wish they could dispense with the cloying ideology of the Domain and exercise a power truer and purer.""
 
-""And among us, there are now cowards who cringe from heroic destiny. You will sniff them out because you look like the possibility of defection."" ",,,b
-eis_ttArroyoProblems5honorISopt,TTArroyoProblems5honorOpts,$player.fcm_faction == ironshell,,,"ttArroyoProblems6hegCom:""... I do have a Hegemony commission, you know.""",,b
-eis_PKSentinelHubShowISCommission,PKSentinelHubOptions,"$player.fcm_faction == ironshell
-!$showedHegCommission",,,eis_pk_sentinelShowISCom:Show them your Hegemony commission credentials,,b
-eis_pk_sentinelShowISCom,DialogOptionSelected,$option == eis_pk_sentinelShowISCom,,"You pull up your Hegemony credentials on your TriPad and offer them to Skiron for confirmation.
+""And among us, there are now cowards who cringe from heroic destiny. You will sniff them out because you look like the possibility of defection."" ",,"Retired: identical to vanilla sdtuMacReasonHegemony, which now fires for an Iron Shell commission (EISHegemonyCommissionRulesPatch).",b
+#eis_ttArroyoProblems5honorISopt,TTArroyoProblems5honorOpts,$player.fcm_faction == ironshell,,,"ttArroyoProblems6hegCom:""... I do have a Hegemony commission, you know.""","Retired: identical to vanilla ttArroyoProblems5honorCopt, which now fires for an Iron Shell commission (EISHegemonyCommissionRulesPatch).",b
+#eis_PKSentinelHubShowISCommission,PKSentinelHubOptions,"$player.fcm_faction == ironshell
+!$showedHegCommission",,,eis_pk_sentinelShowISCom:Show them your Hegemony commission credentials,"Retired: vanilla PKSentinelHubShowHegCommission now fires for an Iron Shell commission (EISHegemonyCommissionRulesPatch).",b
+#eis_pk_sentinelShowISCom,DialogOptionSelected,$option == eis_pk_sentinelShowISCom,,"You pull up your Hegemony credentials on your TriPad and offer them to Skiron for confirmation.
 
-She gives you a deliberate look, then turns her gaze to the screen. She taps in some codewords and mutters passphrases which your credentials respond to approvingly. Skiron pauses for a moment, then coming to a decision passes your TriPad back to you with the care one would give to an irreplaceable artifact.",eis_pk_sentinelShowISCom2:Continue,,b
-eis_pk_sentinelShowISCom2,DialogOptionSelected,$option == eis_pk_sentinelShowISCom2,"$gainedSomeTrust = true
+She gives you a deliberate look, then turns her gaze to the screen. She taps in some codewords and mutters passphrases which your credentials respond to approvingly. Skiron pauses for a moment, then coming to a decision passes your TriPad back to you with the care one would give to an irreplaceable artifact.",eis_pk_sentinelShowISCom2:Continue,"Retired with eis_PKSentinelHubShowISCommission (vanilla pk_sentinelShowHegCom follow-up runs instead).",b
+#eis_pk_sentinelShowISCom2,DialogOptionSelected,$option == eis_pk_sentinelShowISCom2,"$gainedSomeTrust = true
 $showedHegCommission = true
 AdjustRepPerson skiron FRIENDLY 10
 FireAll PKSentinelHubOptions","""It is not unimaginable that Tri-Tachyon, or some AI, has broken our security. But. I believe you to be who you say you are, Captain $PlayerName, Auxiliary to the Hegemony Navy.""
 
 She doesn't quite smile, but a moment of tension has broken. Her guards relax slightly at her words, and her lieutenants exchange a grin.
 
-(""Praise Command,"" you hear someone say.)",,,b
+(""Praise Command,"" you hear someone say.)",,"Retired with eis_PKSentinelHubShowISCommission (vanilla pk_sentinelShowHegCom2 follow-up runs instead).",b
 eis_GAPZISHub1,GAPZHegHub,$player.commissionFactionId == ironshell,,,0:gaPZ_hegHub1:Appeal on the basis of your Hegemony commission,option id changed from eis_gaPZ_isHub1 to the vanilla gaPZ_hegHub1 (and order 4 to 0) so the vanilla follow-up runs,b
 eis_gaPZ_isHub1,DialogOptionSelected,$option == eis_gaPZ_isHub1,,"You take the comm-link with the Hegemony $personRank off hold, and explain that you bear a commission from the Hegemony. You fight for the same cause, you hold the same loyalties. If the Hegemony wishes to access your technology, let them ask properly.
 
@@ -2607,7 +2639,7 @@ You do, and they are confirmed.
 The Hegemony $rank's demeanor changes dramatically.
 
 ""I apologize for the harsh tone, captain,"" $heOrShe says, ""Command is really breathing down my neck on this one. It's all strictly need-to-know from those egg-heads in the tech ministry."" $HeOrShe shakes $hisOrHer head, and the meaning is clear: those meddling scientists clearly don't appreciate the grit and operational flexibility required by true military officers.",cutCommLink:Cut the comm link,,b
-eis_pkCacheDefenderPreEmptIS,TriggerAutomatedDefenses,"$core_pkCache score:100
+#eis_pkCacheDefenderPreEmptIS,TriggerAutomatedDefenses,"$core_pkCache score:100
 $player.commissionFactionId == ironshell
 !$pk_triedCommLink
 !$pk_detectedCommLink","$pk_triedCommLink = true 0
@@ -2616,14 +2648,14 @@ $pk_detectedCommLink = true","""$PlayerSirOrMadam!""
 Your comms officer calls for your attention with an excited look, ""I'm picking up an anomalous signal, it's an open channel. Just a carrier signal, a low-grade military fallback standard. Very faint and lossy. We're really only picking this up because of the MILAUX package installed in our comms system to help integrate with Hegemony fleet actions.""
 
 ""Shall I open a link?"" Their hands don't quite tremble over the controls. Whatever is using this frequency is either Hegemony or has some of their less secure emergency codes.","pk_investigate:Try to open a comm link on this channel
-pk_ignore:Ignore it and close in on the asteroid",,b
-eis_pkCacheDefenderPreEmptIS2,TriggerAutomatedDefenses,"$core_pkCache score:100
+pk_ignore:Ignore it and close in on the asteroid","Retired: same as vanilla pkCacheDefenderPreEmpt, which now fires for an Iron Shell commission (EISHegemonyCommissionRulesPatch).",b
+#eis_pkCacheDefenderPreEmptIS2,TriggerAutomatedDefenses,"$core_pkCache score:100
 $player.commissionFactionId == ironshell
 !$pk_triedCommLink
 $pk_detectedCommLink",$pk_triedCommLink = true 0,"Your comms officer tags the faint carrier wave which is using an obscure Hegemony signal standard. Someone - or perhaps no one - has been waiting for a response for quite some time.
 
 ""Shall I open a link?"" your comms officer asks, mostly keeping their excitement over a mystery signal under control. Mostly.","pk_investigate:Try to open a comm link on this channel
-pk_ignore:Ignore it and close in on the asteroid",,b
+pk_ignore:Ignore it and close in on the asteroid","Retired: same as vanilla pkCacheDefenderPreEmpt2, which now fires for an Iron Shell commission (EISHegemonyCommissionRulesPatch).",b
 ,,,,,,,n
 eis_PKTellAboutSentinelIS,PopulateOptions,"$isPerson
 $global.discoveredSentinel
@@ -2769,7 +2801,8 @@ SetShortcut HartleyCPCDecline ""ESCAPE""","""Due to a shift in procurement prior
 HartleyCPCPickContactBP:See what blueprints they have available
 HartleyCPCDecline:Decline","Creates the eis_cpc mission without the contact hub (BeginMission ... false) and fills $cpc_maxCapacity / $cpc_costPercent / $cpc_days via updateData. BeginMission is in the conditions so that if the mission can't be created (earlier order still in production, no storage on the market, no blueprints) HartleyCPCOfferUnavailableSel fires instead. The cost percent shown here already includes the ship clearance discount (EISCustomProductionContract.create: 25% off per $global.eisIllustriousUnlocked / $global.eisDauntlessUnlocked, Hartley only). Hartley's base cost is 120% (COST_MULT_HARTLEY; 90% with one clearance, 60% with both) and his contact blueprint pool is every ship, weapon and wing Iron Shell knows with no _bp tag filter (still excluded: no_sell, station and unboardable hulls, no_drop weapons and wings). Changed: Escape now selects Decline (SetShortcut HartleyCPCDecline ""ESCAPE""), like the other Iron Shell back-out options.",b
 HartleyCPCOfferUnavailableSel,DialogOptionSelected,"$option == HartleyCPCOffer
-$id == eisdarren",FireAll PopulateOptions,"Hartley checks the production schedule and shakes his head. ""Nothing available at the moment, Captain. The slots are already committed.""",,Fallback only (new wording): the success row above scores higher whenever BeginMission eis_cpc works.,b
+$id == eisdarren",FireAll PopulateOptions,"Hartley checks the production schedule and shakes his head. ""Nothing available at the moment, captain. The slots are already committed.""",,"Fallback only (new wording): the success row above scores higher whenever BeginMission eis_cpc works.
+Terminology fix (vanilla terminology pass): Captain -> captain (direct address, vanilla lowercase).",b
 HartleyCPCPickPlayerBPSel,DialogOptionSelected,$option == HartleyCPCPickPlayerBP,Call $cpc_ref pickPlayerBP,,,,b
 HartleyCPCPickContactBPSel,DialogOptionSelected,$option == HartleyCPCPickContactBP,Call $cpc_ref pickContactBP,,,,b
 HartleyCPCDeclineSel,DialogOptionSelected,$option == HartleyCPCDecline,"ShowPersonVisual
@@ -2790,7 +2823,8 @@ $option == eis_HegInspections","SetTextHighlights ""commissioned forces""","""Du
 EISQuyThoughtsNachiketa,eis_VNSectorOpinionOptions,"$id == eiskimquy
 EIS_HasModId PAGSM","EIS_DynamicPaginatedOptions addOption eis_Nachiketa ""Nachiketa""",,,"New Kim conversation topic. Only listed when the mod PAGSM (Phillip Andrada: Gas Station Manager, mod id PAGSM) is enabled (EIS_HasModId PAGSM). Added through the eis_VNSectorOpinionOptions hook (fired by eis_VNSectorChatter), so it sits directly under Start a conversation about... instead of under People (People only fires the contact id trigger, eiskimquy).",b
 EISQuyThoughtsNachiketaR,DialogOptionSelected,"$id == eiskimquy
-$option == eis_Nachiketa",,"""Nachiketa? Despite the rumors, they lie outside Iron Shell's jurisdiction, Captain. The fuel traders run their own affairs, and their quarrel with the Sindrian Fuel Company is not ours to settle.""",,Reply to the Nachiketa topic: Nachiketa operates outside Iron Shell jurisdiction. The fuel trader and Sindrian Fuel Company rivalry comes from the PAGSM mod's own rules.,b
+$option == eis_Nachiketa",,"""Nachiketa? Despite the rumors, they lie outside Iron Shell's jurisdiction, captain. The fuel traders run their own affairs, and their quarrel with the Sindrian Fuel Company is not ours to settle.""",,"Reply to the Nachiketa topic: Nachiketa operates outside Iron Shell jurisdiction. The fuel trader and Sindrian Fuel Company rivalry comes from the PAGSM mod's own rules.
+Terminology fix (vanilla terminology pass): Captain -> captain (direct address, vanilla lowercase).",b
 EISHartleyThoughtsLogistics,eis_VNSectorOpinionOptions,$id == eisdarren,"EIS_DynamicPaginatedOptions addOption eis_HegLogistics ""Hegemony production logistics""",,,"New Hartley conversation topic (Hegemony production logistics). Added through the eis_VNSectorOpinionOptions hook (fired by eis_VNSectorChatter), so it sits directly under Start a conversation about... instead of under People (People only fires the contact id trigger, eisdarren). Always listed for Hartley.",b
 EISHartleyThoughtsLogisticsR,DialogOptionSelected,"$id == eisdarren
 $option == eis_HegLogistics","SetTextHighlights ""Nanoforge quality""","""As a division of the Hegemony military, our production naturally benefits from the Nanoforge quality of our largest orbital dockyards. Components requiring the most precision are delivered on a regular basis, and it keeps everything running smoothly.""",,"Reply to the topic above. Matches the eis_NanoforgeQualityShare script, which tops Iron Shell markets up to the best nanoforge quality bonus found in any Hegemony market.",b
@@ -2850,3 +2884,48 @@ EISHartleyVanguardFallbackNoQuestDisableNoNex,eis_VNSectorDiscussionOptionsCheck
 !$EISBeatHartleyOnce
 !EIS_HasModId nexerelin","SetTooltip EISHartleyVanguardRewardFallbackNoQuest ""You must best Hartley in a duel.""
 SetEnabled EISHartleyVanguardRewardFallbackNoQuest false",,,Greys out the duel route option printed by EISHartleyVanguardPrintFallbackNoQuestNoNex until the player has won a duel. Same tooltip as EISHartleyVanguardFallbackDisable.,
+EISCharlotteOfficersPrint,eis_VNSectorDiscussionOptions,"$id == eissneed score:1000
+$EISCharlotteContact","EIS_DynamicPaginatedOptions addOption EISCharlotteOfficers ""\""Do you know any officers looking for work?\""""",,,"Charlotte 75 rep reward: officer search copied from the vanilla personnel officer (rules personnelOfficer*, OfficerManagerEvent showSkillPicker), backed by EISCharlotteOfficers. Kept after Charlotte is recruited (the no-market row greys it out when there is no market).",
+EISCharlotteOfficersDisableRep,eis_VNSectorDiscussionOptionsCheck,"!EISVibeCheck 75 100
+$id == eissneed","SetTooltip EISCharlotteOfficers ""Your relation with Charlotte is not on Cooperative terms (75 relation).""
+SetTooltipHighlightColors hGood
+SetTooltipHighlights EISCharlotteOfficers Cooperative
+SetEnabled EISCharlotteOfficers false",,,Greys out the officer search below 75 relation (same wording as the other 75 relation tooltips).,
+EISCharlotteOfficersDisableTimeout,eis_VNSectorDiscussionOptionsCheck,"$EISCharlotteOfficerTimeout
+$id == eissneed","SetTooltip EISCharlotteOfficers ""Charlotte has recently sent you officer candidates.""
+SetEnabled EISCharlotteOfficers false",,,"Greys out the officer search during the 30-60 day cooldown set by EISCharlotteOfficers (vanilla uses $personnelOfficerTimeout the same way).
+INVENTED: tooltip wording.",
+EISCharlotteOfficersDisableNoMarket,eis_VNSectorDiscussionOptionsCheck,"!EISCharlotteOfficers hasMarket
+$id == eissneed","SetTooltip EISCharlotteOfficers ""Charlotte can only list candidates in the comm directory of a market you are docked at.""
+SetEnabled EISCharlotteOfficers false",,,"Greys out the officer search when the dialog has no market to list candidates in (e.g. after Charlotte is recruited).
+INVENTED: tooltip wording.",
+EISCharlotteOfficersSel,DialogOptionSelected,$option == EISCharlotteOfficers,,"Charlotte perks up a bit. ""Of course, you don't get far on this rock without connections. I can get you in contact with some old friends, we still keep in touch.""
+
+She takes out her personal TriPad and begins scrolling through her contact list. ""I've got quite a few in mind fit for command, do you have a disposition in mind?""","eis_chOff_timid:Timid
+eis_chOff_cautious:Cautious
+eis_chOff_steady:Steady
+eis_chOff_aggressive:Aggressive
+eis_chOff_reckless:Reckless",Text from the user. Option labels copied from vanilla.,
+eis_chOff_timidSel,DialogOptionSelected,$option == eis_chOff_timid,"$EISCharlottePickedPersonality = timid 0
+FireBest EISCharlotteOfficersPersonalityPicked",,,Stores the picked personality for EISCharlotteOfficers (vanilla perOff_timidSel equivalent).,
+eis_chOff_cautiousSel,DialogOptionSelected,$option == eis_chOff_cautious,"$EISCharlottePickedPersonality = cautious 0
+FireBest EISCharlotteOfficersPersonalityPicked",,,Stores the picked personality for EISCharlotteOfficers (vanilla perOff_cautiousSel equivalent).,
+eis_chOff_steadySel,DialogOptionSelected,$option == eis_chOff_steady,"$EISCharlottePickedPersonality = steady 0
+FireBest EISCharlotteOfficersPersonalityPicked",,,Stores the picked personality for EISCharlotteOfficers (vanilla perOff_steadySel equivalent).,
+eis_chOff_aggressiveSel,DialogOptionSelected,$option == eis_chOff_aggressive,"$EISCharlottePickedPersonality = aggressive 0
+FireBest EISCharlotteOfficersPersonalityPicked",,,Stores the picked personality for EISCharlotteOfficers (vanilla perOff_aggressiveSel equivalent).,
+eis_chOff_recklessSel,DialogOptionSelected,$option == eis_chOff_reckless,"$EISCharlottePickedPersonality = reckless 0
+FireBest EISCharlotteOfficersPersonalityPicked",,,Stores the picked personality for EISCharlotteOfficers (vanilla perOff_recklessSel equivalent).,
+EISCharlotteOfficersPersonalityPicked,EISCharlotteOfficersPersonalityPicked,,SetStoryOption eis_chOff_xiv 1 eis_charlotteXIVOfficer leadership,"She taps a few times, swiping between what you can only assume are her many acquaintances from her time serving in the Hegemony Navy and later on Yami.
+
+""If you have any skill requirements, forward them my way and I can send you their contact info within the shift.""","eis_chOff_skill:Forward Charlotte your skill requirements
+eis_chOff_xiv:""I'm looking for an officer trained on 14th Battlegroup vessels.""
+cutCommLink:Cut the comm link","Text and the skill option label from the user.
+The 14th Battlegroup option costs 1 Story Point with 0% bonus XP (bonus XP key eis_charlotteXIVOfficer = 0 in settings.json).
+Terminology fix (vanilla terminology pass): Hegemony navy -> Hegemony Navy.",
+EISCharlotteOfficersSkillSel,DialogOptionSelected,$option == eis_chOff_skill,EISCharlotteOfficers PICK,,,"Skill picker limited to one skill; generates 2-3 level 1 Iron Shell officers (female) with that skill and fires EISCharlotteOfficersPicked. Cancelling the picker leaves this menu up, like vanilla.",
+EISCharlotteOfficersXIVSel,DialogOptionSelected,$option == eis_chOff_xiv,EISCharlotteOfficers XIV,,,Generates one level 1 Iron Shell officer (female) whose only skill is Iron Heritage and fires EISCharlotteOfficersPicked. The Story Point is spent by SetStoryOption.,
+EISCharlotteOfficersPicked,EISCharlotteOfficersPicked,,"AddTextSmall ""Comm directory updated"" highlight
+FireAll PopulateOptions","""Sure thing, and hey, if you end up hiring any I better get a finder's fee. If they like you we can get a round together.""
+
+Charlotte flashes you a smile. ""You'll buy, of course.""",,Text from the user. Shown after either route. Returns to her options instead of cutting the comm link.,

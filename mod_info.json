@@ -22,6 +22,10 @@
     {
       "id": "shaderLib",
       "name": "GraphicsLib"
+    },
+    {
+      "id": "patchlib",
+      "name": "! PatchLib !"
     }
   ],
   "modPlugin": "data.scripts.eis_modPlugin",

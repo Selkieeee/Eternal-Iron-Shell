@@ -7,7 +7,7 @@ Kopis (XIV),eis_kopis,,Iron Shell,ammofeed,,500,75,230,,55,0,,200,320,280,110,22
 Dagger (XIV),eis_dagger,,Iron Shell,,,350,25,250,,75,0,,175,350,250,90,180,10,FRONT,,240,0,1,,,1,1,,,,,,,,,,,,,,,,,,0,,,,
 Gunblade (XIV),eis_gunblade,,Iron Shell,,,500,150,250,,105,0,,250,330,300,200,300,25,NONE,,360,0,1,,,0,0,,,,,,,,,,,,,,,,,,0,,,,
 Gunshield (XIV),eis_gunshield,,Iron Shell,,,650,150,200,,50,0,,160,300,250,200,300,30,FRONT,,160,0,1,,,0,0,,,,,,,,,,,,,,,,,,0,,,,
-Piranha (XlV),eis_piranha,,Iron Shell,,,500,100,270,,105,0,,150,200,200,40,120,30,NONE,,0,0,0,,,2,2,,,,,,,,,,,,,,,,,,1,4,4,,
+Piranha (XIV),eis_piranha,,Iron Shell,,,500,100,270,,105,0,,150,200,200,40,120,30,NONE,,0,0,0,,,2,2,,,,,,,,,,,,,,,,,,1,4,4,,
 Thunder Mk. II (XIV),eis_thunder_mk2,,Iron Shell,,,500,120,750,,100,0,,450,1000,750,225,500,30,NONE,,0,0,0,,,0,0,,,,,,,,,,,,,,,,,,0,,,,
 Peacekeeper (XIV),eis_peacekeeper,,Iron Shell,eis_secondwind,,600,135,600,,70,0,,255,310,275,180,180,60,FRONT,,360,0,1,,,1,1,,,,,,,,,,,,,,,,,,0,,,,
 Amity (XIV),eis_amity,,Iron Shell,eis_secondwind,,700,105,700,,70,0,,175,140,140,140,140,70,OMNI,,140,0,1,,,0,0,,,,,,,,,,,,,,,,,,0,,,,

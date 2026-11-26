@@ -173,8 +173,15 @@ public class eis_modPlugin extends BaseModPlugin {
         MagicIncompatibleHullmods.addIncompatibility(HullMods.HEAVYARMOR, "eis_damperhull");
     }
 
+    public static final String OLD_IRON_SHELL_MOD_ID = "timid_xiv";
+
     @Override
     public void onApplicationLoad() throws JSONException, IOException {
+        // The original Iron Shell (mod id timid_xiv, also this mod's id before the rename to selkie_eis) shares this mod's content and ids,
+        // so running both breaks the game. Stop at startup with a clear message instead.
+        if (Global.getSettings().getModManager().isModEnabled(OLD_IRON_SHELL_MOD_ID)) {
+            throw new RuntimeException("Eternal Iron Shell is not compatible with Iron Shell. Please disable one or the other.");
+        }
         // The codex links every "colony_item" item to its effect while the title screen loads, before any onGameLoad,
         // so Iron Shell's item effects have to be registered here too (onGameLoad registers them again; putAll is harmless)
         eis_SpecialItemEffectsRepo.addItemEffectsToVanillaRepo();
@@ -434,6 +441,8 @@ public class eis_modPlugin extends BaseModPlugin {
         eis_SpecialItemEffectsRepo.addItemEffectsToVanillaRepo();
         // Lets a nanoforge in a Hegemony colony raise Iron Shell production quality when it beats the best one in Iron Shell markets.
         Global.getSector().addTransientScript(new data.scripts.campaign.econ.eis_NanoforgeQualityShare());
+        // While commissioned with Iron Shell or the Hegemony, the other one sends no punitive expeditions (vanilla already skips the commission faction).
+        Global.getSector().addTransientScript(new data.scripts.campaign.eis_PartnerPunitiveExpeditionBlock());
         if (newGame) {
             if (IRONSTANDSETERNAL.equals(eis_nex.getPlayerFactionIdNGC())) {
                 for (int i = 0; i < Global.getSector().getPlayerFleet().getFleetData().getOfficersCopy().size(); i++) {

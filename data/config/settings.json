@@ -7,6 +7,11 @@
       "House Celeste":[252,173,60,255],
       "XlV Battlegroup":[200,0,0,255],
   },
+  "bonusXP":{
+      # story point bonus XP fractions for SetStoryOption (third parameter)
+      "eis_hireExtractedOperative":1,
+      "eis_charlotteXIVOfficer":0,
+  },
 	"graphics":{
 		"characters":{
 			"eis_hegemommy":"graphics/portraits/eis_hegemomy.png",

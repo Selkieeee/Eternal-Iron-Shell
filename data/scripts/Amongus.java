@@ -54,6 +54,8 @@ public class Amongus implements ColonyPlayerHostileActListener {
     
     @Override
     public void reportRaidForValuablesFinishedBeforeCargoShown(InteractionDialogAPI dialog, MarketAPI market, TempData actionData, CargoAPI cargo) {
+            // Raids on entities without a market (e.g. Diktat questline raid targets) pass a null market.
+            if (market == null || cargo == null) return;
             if ("chicomoztoc".equals(market.getId()) || "eis_chitagupta".equals(market.getId()) || "eventide".equals(market.getId()) || "nachiketa".equals(market.getId())) {
                 if ("hegemony".equals(market.getFactionId()) || "ironshell".equals(market.getFactionId())) {
                     if (cargo.getQuantity(CargoAPI.CargoItemType.SPECIAL, new SpecialItemData(Items.PRISTINE_NANOFORGE, null)) > 0 || cargo.getQuantity(CargoAPI.CargoItemType.SPECIAL, new SpecialItemData(Items.CORRUPTED_NANOFORGE, null)) > 0 || cargo.getQuantity(CargoAPI.CargoItemType.SPECIAL, new SpecialItemData(Items.FULLERENE_SPOOL, null)) > 0 || cargo.getQuantity(CargoAPI.CargoItemType.SPECIAL, new SpecialItemData(Items.SYNCHROTRON, null)) > 0) {

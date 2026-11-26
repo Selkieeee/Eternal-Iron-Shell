@@ -1,7 +1,7 @@
 {
 	"eis_ironshell":{
 		"eis_greaterhegemony":"Greater Hegemony",
-		"eis_greaterhegemony_annul":"Your actions have consequences. Recent hostilities against the Greater Hegemony has caused your commissioned to be annulled.",
+		"eis_greaterhegemony_annul":"Your actions have consequences. Recent hostilities against the Greater Hegemony have caused your commission to be annulled.",
 		
 		"eis_RAFTitle":"Rapid Ammo Feeder",
 		"eis_RAFText1":"%s Increases rate of fire and reload speed of non-missile weapons by %s",
@@ -14,7 +14,7 @@
 		"eis_lungeText3":"%s Built-in AI assist activates for %s second, allowing the ship to dodge through other ships and weapon fire",
 		"eis_lungeText4":"%s Maneuverability boosted by %s for %s second after lunge ends",
 		"eis_parryTitle":"Zandatsu Parry",
-		"eis_parryText1":"%s Range of %s SU extending from this ship's shield radius",
+		"eis_parryText1":"%s Range of %s su extending from this ship's shield radius",
 		"eis_parryText2":"%s Increases shield efficiency by %s for %s seconds",
 		"eis_parryText3b":"%s Doubles effect of %s for %s seconds",
 		#"eis_parryText3":"Increases rate of fire of ballistic weapons by an additional %s for %s seconds",
@@ -29,7 +29,7 @@
 		"eis_vengeanceParagraph":"When activated, the ship system unleashes a powerful concussive blast that reflects nearby missiles. Successfully reflecting a missile supercharges the ship's Vengeance Core, boosting weapon performance.",
 		"eis_vengeanceParagraphShunted":"When activated, the ship system unleashes a powerful concussive blast that reflects nearby missiles.",
 		"eis_vengeanceSuccessTitle":"Parry Buff",
-		"eis_vengeanceSuccessText1":"%s Range of %s SU extending from this ship's shield radius",
+		"eis_vengeanceSuccessText1":"%s Range of %s su extending from this ship's shield radius",
 		"eis_vengeanceSuccessText2":"%s Increases rate of fire and reload speed of non-missile weapons by %s for %s seconds",
 		"eis_vengeanceSuccessText3":"%s Decreases flux generation of non-missile weapons by %s for %s seconds",
 		"eis_vengeanceCoreBuffActiveText":"VENGEANCE CORE SUPERCHARGED",
@@ -39,7 +39,7 @@
 		"eis_vengeanceFailText2":"%s Increases shield arc by %s degrees for %s seconds",
 		"eis_vengeanceFailText3":"%s Increases shield unfold rate by %s for %s seconds",
 		"eis_vengeanceRelayTitle":"Vengeance Relay",
-		"eis_vengeanceRelayText1":"Specialized hardware in the core can also be utilized to boost the combat performance of %s-class destroyers within %s SU.",
+		"eis_vengeanceRelayText1":"Specialized hardware in the core can also be utilized to boost the combat performance of %s-class destroyers within %s su.",
 		"eis_vengeanceRelayText2":"%s Installing %s will add %s flux capacity",
 		"eis_vengeanceRelayText3":"Takes %s more crew casualties from hull damage sustained in combat.",
 		"eis_vengeanceRelayText4":"%s explosion radius and damage upon destruction.", #there is already an + in front of the %s
@@ -48,11 +48,11 @@
 		"eis_vengeanceDauntlessSectionTitle":"Perfect Revengeance Subsystem",
 		"eis_vengeanceDauntlessActivatedText":"%s Activated with %s",
 		"eis_vengeanceDauntlessCooldownText":"%s Can be activated every %s seconds",
-		"eis_vengeanceDauntlessRangeText":"%s Range of %s SU extending from the ship's shield radius",
+		"eis_vengeanceDauntlessRangeText":"%s Range of %s su extending from the ship's shield radius",
 		"eis_vengeanceDauntlessReflectText":"%s Reflects all missiles in radius when activated",
 		"eis_vengeanceDauntlessChainText":"%s Effect %s to allies affected by Perfect Vengeance Relay",
 		"eis_vengeanceDauntlessRelayTitle":"Perfect Vengeance Relay",
-		"eis_vengeanceDauntlessRelayText1":"Specialized hardware in the core can also be utilized to boost the combat performance of %s and %s-class ships within %s SU.",
+		"eis_vengeanceDauntlessRelayText1":"Specialized hardware in the core can also be utilized to boost the combat performance of %s and %s-class ships within %s su.",
 
 		"eis_xiv1":"+5% flux dissipation and capacity when piloting XIV Ships.",
 		"eis_xiv2":"+10% speed and maneuverability when piloting XIV Ships.",
@@ -116,7 +116,7 @@
 		"eis_vanagloriaStatusTextUI4":"Charge",
 		
 		"eis_avaritiarelayTitle":"Vengeance Receiver",
-		"eis_avaritiarelayText1":"%s %s SU radius",
+		"eis_avaritiarelayText1":"%s %s su radius",
 		"eis_avaritiarelayText2":"%s Increases speed by %s",
 		"eis_avaritiarelayText3":"%s Increases shield efficiency by %s",
 		"eis_avaritiarelayText4":"%s Refreshes %s seconds of this ship's peak performance time every %s seconds",
@@ -230,7 +230,7 @@
 		
 		"CHM_ironshell1":"\"Stand inside yourself for an impenetrable shield.\"", #these \ are what makes quotes go in
 		"CHM_ironshell1a":"         — Charlotte Hex",
-		"CHM_ironshell2":"\"Nothing smells fresher and more delightful than a couple of roasted ship in the early mornings.\"",
+		"CHM_ironshell2":"\"Nothing smells fresher and more delightful than a couple of roasted ships in the early mornings.\"",
 		"CHM_ironshell2a":"         — Ava Nitia",
 		"CHM_ironshell3":"\"A laser is made with energy and beams; a weapon is built with ingenuity and fear.\"",
 		"CHM_ironshell3a":"         — Darren Hartley",
@@ -250,7 +250,7 @@
 		"eis_modPlugin2":"Sensor Array", # a CustomEntity in StarSystem
 		"eis_modPlugin3":"Naraka Gate", # a CustomEntity in StarSystem
 		
-		"EIS_CBRemnantStation1":"%s taps a data pad, and an intel assessment shows up on your tripad.", # [HeOrShe] taps a data pad, and an intel assessment shows up on your tripad.
+		"EIS_CBRemnantStation1":"%s taps a datapad, and an intel assessment shows up on your TriPad.", # [HeOrShe] taps a datapad, and an intel assessment shows up on your TriPad.
 		"EIS_CBRemnantStation2":"The station is assessed to be fully functional and extremely dangerous.",
 		"EIS_CBRemnantStation3":"The station is assessed to be damaged, but still highly dangerous.",
 		"EIS_CBRemnantStation4":"The bounty posting contains partial intel about the station.",
@@ -329,7 +329,7 @@
 		"EISAICores3":"Cancel",
 		"EISAICores4":"House Celeste",
 		"EISAICores5":"Compared to dealing with others, turning AI cores in to Caeda Celeste will result in: ",
-		"EISAICores6":"Gratituity value",
+		"EISAICores6":"Gratuity value",
 		"EISAICores7":"Relation gain",
 		"EISAICores8":"If you turn in the selected AI cores, you will receive a %s donation and your standing with Caeda Celeste will improve by %s points.",
 		
@@ -360,7 +360,7 @@
 		"EISNexMusic5":"Neutral Encounter:",
 		"EISNexMusic6":"Hostile Encounter:",
 		
-		"tahlan_Castigator_xiv_update":"When in trials with the Domain Navy, a number of Castigator-class vessels were manufactured to alternate specifications suiting the needs of the various battlegroups' combat doctrines. For the Fourteenth Battlegroup, a variant equipped with a pair of standard TPCs was developed and although it was dismissed by Domain Navy for impracticality due to requiring the sacrifice of two of its medium-sized weapon mounts to make room for the additional hardware and supplementary power generators, it was well-loved by some of the battlegroup's higher-ups. The constructions plans were finally recovered in the Persean Sector and returned to its rightful owner, its variants went into production to strike fear into the enemies of its owner.\n\n Presumably a precursor design to the modern Eagle, the Castigator was, for its time, an overengineered assault cruiser that never made it into large-scale production due to numerous issues. Not only was it overpriced, but the downscaled TPCs in its forward prongs suffered from reliability issues with their magnetic containment systems. These issues aside, however, the performance of the Castigator is without question impressive. Combining heavy armor, numerous weapon mounts and adequate maneuverability in a heavy cruiser package designed to fight at the frontlines of any battle. Charging into combat with its visually spectacular Assault Burn, the Castigator is an awe-inspiring sight to behold and an enemy most would prefer to avoid facing head-on.", #if castigator xiv is found and returned, hegemony and iron shell will access this ship now
+		"tahlan_Castigator_xiv_update":"When in trials with the Domain Navy, a number of Castigator-class vessels were manufactured to alternate specifications suiting the needs of the various battlegroups' combat doctrines. For the Fourteenth Battlegroup, a variant equipped with a pair of standard TPCs was developed and although it was dismissed by Domain Navy for impracticality due to requiring the sacrifice of two of its medium-sized weapon mounts to make room for the additional hardware and supplementary power generators, it was well-loved by some of the battlegroup's higher-ups. The construction plans were finally recovered in the Persean Sector and returned to its rightful owner, its variants went into production to strike fear into the enemies of its owner.\n\n Presumably a precursor design to the modern Eagle, the Castigator was, for its time, an overengineered assault cruiser that never made it into large-scale production due to numerous issues. Not only was it overpriced, but the downscaled TPCs in its forward prongs suffered from reliability issues with their magnetic containment systems. These issues aside, however, the performance of the Castigator is without question impressive. Combining heavy armor, numerous weapon mounts and adequate maneuverability in a heavy cruiser package designed to fight at the frontlines of any battle. Charging into combat with its visually spectacular Assault Burn, the Castigator is an awe-inspiring sight to behold and an enemy most would prefer to avoid facing head-on.", #if castigator xiv is found and returned, hegemony and iron shell will access this ship now
 
 		"EISRenownMount":"%s weapons in %s slots grant %s flux dissipation per ordnance point spent.", #Ballistic weapons in Composite slots grant +3 flux dissipation per ordnance point spent. #See eis_ballistic for 1st %s, 2nd %s is below here, 3rd one will be +3.
 		"eis_composite":"Composite",
