@@ -11,6 +11,7 @@ import com.fs.starfarer.api.campaign.econ.CommodityOnMarketAPI;
 import com.fs.starfarer.api.campaign.econ.Industry;
 import com.fs.starfarer.api.campaign.listeners.FleetEventListener;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
+import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.fleet.FleetMemberType;
 import com.fs.starfarer.api.impl.campaign.econ.impl.MilitaryBase.PatrolFleetData;
@@ -26,6 +27,7 @@ import com.fs.starfarer.api.impl.campaign.fleets.RouteManager.RouteSegment;
 import com.fs.starfarer.api.impl.campaign.ids.Commodities;
 import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
+import com.fs.starfarer.api.impl.campaign.rulecmd.EISHellOfOurOwnMaking;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.MarketCMD.RaidDangerLevel;
 import com.fs.starfarer.api.loading.VariantSource;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
@@ -387,6 +389,11 @@ public class IronShellHQ extends BaseIndustry implements RouteFleetSpawner, Flee
                 }
                 if (type == PatrolType.COMBAT) {
                     if (!"eisdarren".equals(fleet.getCommander().getId())) {
+                        // Hartley leads combat patrols, except while he serves in the player's fleet (Hell of Our Own Making):
+                        // then the patrol keeps the Tyrant flagship under its own generated commander.
+                        PersonAPI patrolCommander = EISHellOfOurOwnMaking.isHartleyInPlayerFleet()
+                                ? fleet.getCommander()
+                                : Global.getSector().getImportantPeople().getPerson("eisdarren");
                         FleetMemberAPI currFlag = fleet.getFlagship();
                         currFlag.setFlagship(false);
                         FleetMemberAPI newFlagship = Global.getFactory().createFleetMember(FleetMemberType.SHIP, Global.getSettings().getVariant("eis_tyrant_standard").clone());
@@ -396,8 +403,8 @@ public class IronShellHQ extends BaseIndustry implements RouteFleetSpawner, Flee
                         newFlagship.setFlagship(true);
                         fleet.getFlagship().getVariant().setSource(VariantSource.REFIT);
                         //fleet.getFlagship().getVariant().addTag("no_autofit");
-                        newFlagship.setCaptain(Global.getSector().getImportantPeople().getPerson("eisdarren"));
-                        fleet.setCommander(Global.getSector().getImportantPeople().getPerson("eisdarren"));
+                        newFlagship.setCaptain(patrolCommander);
+                        fleet.setCommander(patrolCommander);
                         newFlagship.getRepairTracker().setCR(newFlagship.getRepairTracker().getMaxCR());
                         fleet.getFleetData().sort();
                         fleet.forceSync();

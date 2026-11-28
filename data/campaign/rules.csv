@@ -1147,6 +1147,58 @@ FireAll PopulateOptions",,,Closes the ship preview put up by HartleyShipSaleUnlo
 EISHartleyXIVConversionPrint,eis_VNSectorDiscussionOptions,"$isPerson
 $id == eisdarren score:1000
 $EISHartleyContact","EIS_DynamicPaginatedOptions addOption EISHartleyXIVConversionOffer ""Request XIV hull conversion""",,,,b
+EISHoomPrint,eis_VNSectorDiscussionOptions,"$isPerson
+$id == eisdarren score:1000
+$EISHartleyContact
+!$global.eis_hoom_accepted
+!$global.sdse_achillesDeclared
+!$global.eis_hoom_closed","EIS_DynamicPaginatedOptions addOption eis_hoom_discuss ""Discuss the Sindrian Diktat""",,,"Hell of Our Own Making: Hartley 75 relation reward that starts the mini-quest. Option label from the user.
+Before the civil war only; hidden once the quest is accepted (Report mission progress, EISHoomReportPrint, takes over).
+The same option is printed by EISHoomPrintWar during the war and EISHoomPrintPostWar after it; the three rows never match together.
+Placed right after EISHartleyXIVConversionPrint, not in the Hell of Our Own Making block at the bottom: EIS_DynamicPaginatedOptions lists options in file order, so this keeps it between Request XIV hull conversion and Ask about surplus nanoforge production.
+Hidden for good once the player declared loyalty to Andrada or the Diktat to Hartley ($global.eis_hoom_closed, EISHoomDcVisionSel / EISHoomDcGlorySel).",
+EISHoomPrintWar,eis_VNSectorDiscussionOptions,"$isPerson
+$id == eisdarren score:1000
+$EISHartleyContact
+$global.sdse_achillesDeclared
+!$global.askoniaStandoffCompleted
+!$global.eis_hoom_warResolved
+!EISHellOfOurOwnMaking hartleyInFleet
+!$global.eis_hoom_closed","EIS_DynamicPaginatedOptions addOption eis_hoom_discuss ""Discuss the Sindrian Diktat""",,,"During the civil war (Case B), whether or not the quest was accepted, as long as Hartley is not in the fleet and the war conversation is not settled. War started = $global.sdse_achillesDeclared (Achilles declares after Hector; vanilla starts the standoff in the same conversation). War over = $global.askoniaStandoffCompleted.
+Placed right after EISHartleyXIVConversionPrint, not in the Hell of Our Own Making block at the bottom: EIS_DynamicPaginatedOptions lists options in file order, so this keeps it between Request XIV hull conversion and Ask about surplus nanoforge production.
+Hidden for good once the player declared loyalty to Andrada or the Diktat to Hartley ($global.eis_hoom_closed, EISHoomDcVisionSel / EISHoomDcGlorySel).",
+EISHoomPrintPostWar,eis_VNSectorDiscussionOptions,"$isPerson
+$id == eisdarren score:1000
+$EISHartleyContact
+$global.askoniaStandoffCompleted
+!$global.eis_hoom_postWarResolved
+!EISHellOfOurOwnMaking hartleyInFleet
+!$global.eis_hoom_closed","EIS_DynamicPaginatedOptions addOption eis_hoom_discuss ""Discuss the Sindrian Diktat""",,,"After the civil war, as long as Hartley is not in the fleet and the post-war conversation is not settled ($global.eis_hoom_postWarResolved).
+Placed right after EISHartleyXIVConversionPrint, not in the Hell of Our Own Making block at the bottom: EIS_DynamicPaginatedOptions lists options in file order, so this keeps it between Request XIV hull conversion and Ask about surplus nanoforge production.
+Hidden for good once the player declared loyalty to Andrada or the Diktat to Hartley ($global.eis_hoom_closed, EISHoomDcVisionSel / EISHoomDcGlorySel).",
+EISHoomReportPrint,eis_VNSectorDiscussionOptions,"$isPerson
+$id == eisdarren score:1000
+$EISHartleyContact
+$global.eis_hoom_accepted
+!$global.eis_hoom_intelDelivered
+!$global.sdse_achillesDeclared","EIS_DynamicPaginatedOptions addOption eis_hoom_report ""Report mission progress""",,,"Shown after Hell of Our Own Making is accepted, until the intel is handed over or the civil war starts (then Discuss the Sindrian Diktat takes over). Option label from the user.
+TODO: what Hartley offers after the intel is delivered (next part of the quest).
+Placed right after EISHartleyXIVConversionPrint, not in the Hell of Our Own Making block at the bottom: EIS_DynamicPaginatedOptions lists options in file order, so this keeps it between Request XIV hull conversion and Ask about surplus nanoforge production.",
+EISHoomReconsiderPrint,eis_VNSectorDiscussionOptions,"$isPerson
+$id == eisdarren score:1000
+$EISHartleyContact
+$global.eis_hoom_joinDeclined
+!$global.eis_hoom_hartleyJoined
+!$global.sdse_achillesDeclared
+!EISHellOfOurOwnMaking hartleyInFleet","EIS_DynamicPaginatedOptions addOption eis_hoom_reconsider ""\""I have reconsidered your offer.\""""",,,"Hell of Our Own Making: after the player declined Hartley's offer to join (EISHoomJoinDeclineSel), they can take it up again from his Request to speak with list. Brings up his offer with Accept / Decline (EISHoomReconsiderSel). Option label from the user. Before the civil war only: once both heirs have claimed, Discuss the Sindrian Diktat (EISHoomPrintWar) leads to his war-time offer instead.
+Placed right after EISHoomReportPrint: EIS_DynamicPaginatedOptions lists options in file order, so this keeps it between Request XIV hull conversion and Ask about surplus nanoforge production.",
+EISHoomFlagshipPrint,eis_VNSectorDiscussionOptions,"$isPerson
+$id == eisdarren score:1000
+$EISHartleyContact
+$global.eis_hoom_acheronDeclined
+!$global.eis_hoom_gotAcheron
+EISHellOfOurOwnMaking hartleyInFleet","EIS_DynamicPaginatedOptions addOption eis_hoom_flagship ""\""Are you bringing your flagship?\""""",,,"Hell of Our Own Making: after Hartley joined without the Acheron (declined in EISHoomAcheronDeclineSel, or never asked about with Continue in EISHoomJoinContinueSel), the player can ask about it from his Request to speak with list, as long as he is still in the fleet and the Acheron has not been taken since. Option label from the user. Leads to EISHoomFlagshipSel, the same Acheron offer as when he joined.
+Placed right after EISHoomReportPrint: EIS_DynamicPaginatedOptions lists options in file order, so this keeps it between Request XIV hull conversion and Ask about surplus nanoforge production.",
 EISHartleyXIVConversionDisable,eis_VNSectorDiscussionOptionsCheck,"!EISVibeCheck 50 100
 $id == eisdarren","SetTooltip EISHartleyXIVConversionOffer ""Your relation with Hartley is not on Friendly terms (50 relation).""
 SetTooltipHighlightColors hGood
@@ -2929,3 +2981,386 @@ EISCharlotteOfficersPicked,EISCharlotteOfficersPicked,,"AddTextSmall ""Comm dire
 FireAll PopulateOptions","""Sure thing, and hey, if you end up hiring any I better get a finder's fee. If they like you we can get a round together.""
 
 Charlotte flashes you a smile. ""You'll buy, of course.""",,Text from the user. Shown after either route. Returns to her options instead of cutting the comm link.,
+# new lines - Hell of Our Own Making (Hartley mini-quest - Sindrian Diktat),,,,,,,
+# The menu option rows (EISHoomPrint / EISHoomPrintWar / EISHoomPrintPostWar / EISHoomReportPrint) sit right after EISHartleyXIVConversionPrint - menu options show in file order,,,,,,,
+EISHoomReportSel,DialogOptionSelected,$option == eis_hoom_report,FireAll EISHoomProgressOptions,"Hartley accepts your comm request on a secure channel. ""Any progress, Captain?""",,"Opens the progress report menu over the comm link (no shuttle).
+Text from the author (batch 1, pre-war).",
+EISHoomDisableRep,eis_VNSectorDiscussionOptionsCheck,"!EISVibeCheck 75 100
+$id == eisdarren
+!$global.eis_hoom_accepted","SetTooltip eis_hoom_discuss ""Your relation with Hartley is not on Cooperative terms (75 relation).""
+SetTooltipHighlightColors hGood
+SetTooltipHighlights eis_hoom_discuss Cooperative
+SetEnabled eis_hoom_discuss false",,,"Greys out Discuss the Sindrian Diktat below 75 relation (same wording as the other 75 relation tooltips).
+Only before the quest is accepted, so a later relation drop does not lock the player out of reporting back.",
+EISHoomDiscussSel,DialogOptionSelected,"$option == eis_hoom_discuss
+!$global.sdse_achillesDeclared
+!$global.askoniaStandoffCompleted","SetShortcut eis_hoom_declineVisit ""ESCAPE""","You broach a difficult topic with the Iron Shell Commissioner. It is no secret Hartley bears a heavy grudge against Philip Andrada and his mutiny against the Hegemony. A world destroyed, the Askonia system turned traitor, and a love lost. Rumors have circulated of unrest in the system, and you send a request to Hartley to discuss appropriate responses.
+
+Your request is accepted, on the condition you meet in person at his office.","eis_hoom_shuttle:Board a shuttle to Chitagupta's Orbital Works
+eis_hoom_declineVisit:Decline","Option labels from the user.
+Text from the author (batch 1, pre-war). Grammar pass: Comissioner -> Commissioner; bridge a difficult topic -> broach a difficult topic.
+Before the civil war only; EISHoomDiscussSelWar covers the war and post-war phases, where this text does not fit.",
+EISHoomDiscussSelWar,DialogOptionSelected,$option == eis_hoom_discuss,"SetShortcut eis_hoom_declineVisit ""ESCAPE""",[todo] Hartley says he needs you to visit in person.,"eis_hoom_shuttle:Board a shuttle to Chitagupta's Orbital Works
+eis_hoom_declineVisit:Decline","Option labels from the user.
+War and post-war phases (EISHoomDiscussSel covers the pre-war phase). TODO: text for these phases.",
+EISHoomDeclineVisitSel,DialogOptionSelected,$option == eis_hoom_declineVisit,FireAll PopulateOptions,,,Declining the visit returns to his options. Nothing is recorded.,
+EISHoomShuttleSelOffer,DialogOptionSelected,"$option == eis_hoom_shuttle
+!$global.eis_hoom_accepted
+!$global.sdse_achillesDeclared
+!$global.askoniaStandoffCompleted","PlayCustomMusic music_ironshell_market_neutral
+$player.eis_hoom_music = true 0
+ShowImageVisual is_station_illustration","The flight is uneventful, assembly drones visible among the vast gantries of the planet's orbital driveyards. You dock and make your way to the Commissioner under the typical security detail. An orderly military office awaits you, decorated with medals and accolades, exactly what you'd expect from a senior officer in the Hegemony Navy. There is a strange emptiness to it, a lack of personal touch.
+
+Hartley is standing, contemplating, while staring out of a viewport at the end of the room.",eis_hoom_offerCont:Continue,"Case A (before the civil war), quest not accepted yet: the offer, split in two with a Continue between.
+Before the civil war = $global.sdse_achillesDeclared not set yet.
+Text from the author (batch 1, pre-war). Grammar pass: Comissioner -> Commissioner; emptyness -> emptiness.
+Requested (user): boarding the shuttle switches the music to ShellInteraction_Neutral (music_ironshell_market_neutral) and shows is_station_illustration. Continue returns to Hartley's portrait; the music returns to normal when the quest conversation ends (FireAll EISHoomMusicEnd).",
+EISHoomOfferContSel,DialogOptionSelected,$option == eis_hoom_offerCont,"ShowPersonVisual
+FireAll EISHoomOfferOptions","""Andrada."" He gives the name its space. A name that has brought death to so many. ""A man that should have died by my hand dozens of cycles ago."" His tone is heavy, tired, and angry. He finally turns to face you, his gaze a mix of regret and determination. ""Captain, I have spent half my life without the ability to erase this failure. I need your help, off the books.""
+
+Hartley speaks calmly, regaining his composure and outlining what needs to be done. ""I am sure you are aware of the current instability of the Askonia system. I want to make sure the spark that ignites that instability comes sooner rather than later."" His gaze drifts along the ground as he continues, ""I am not so naive as to believe one man's death is enough to pay for all he's done. I want to ensure everything he has built crumbles.""
+
+""For that we need information, from the inside. Play their internal politics against each other. I am sure you will find many of his cubs with loose lips. A sinking ship leaves many out for their own survival."" He grins. ""Or looking to patch whatever leaky holes with anything that will fit.""",,"Text from the author (batch 1, pre-war). Grammar pass: ""Andrada"" -> ""Andrada."" (period); comma after ""as he continues""; so naive to believe -> so naive as to believe.
+Shows Hartley's portrait again after the station illustration (requested by the user).",
+EISHoomShuttleSelWar,DialogOptionSelected,"$option == eis_hoom_shuttle
+$global.sdse_achillesDeclared
+!$global.askoniaStandoffCompleted","PlayCustomMusic music_ironshell_market_neutral
+$player.eis_hoom_music = true 0
+ShowImageVisual is_station_illustration",[todo] You take a shuttle to Chitagupta's Orbital Works to meet Hartley in person.,eis_hoom_warCont:Continue,"Case B: the civil war is under way. Same conversation as the in-fleet one (EISHoomWarSuss).
+War started = $global.sdse_achillesDeclared (Achilles declares after Hector; vanilla starts the standoff in the same conversation). War over = $global.askoniaStandoffCompleted.
+Requested (user): boarding the shuttle switches the music to ShellInteraction_Neutral (music_ironshell_market_neutral) and shows is_station_illustration. Continue returns to Hartley's portrait; the music returns to normal when the quest conversation ends (FireAll EISHoomMusicEnd). A Continue was added (EISHoomWarContSel) so the illustration has a step to show on; it used to go straight to Hartley's text.
+TODO: arrival text for the shuttle visit (placeholder).",
+EISHoomShuttleSelPostWar,DialogOptionSelected,"$option == eis_hoom_shuttle
+$global.askoniaStandoffCompleted","PlayCustomMusic music_ironshell_market_neutral
+$player.eis_hoom_music = true 0
+ShowImageVisual is_station_illustration",[todo] You take a shuttle to Chitagupta's Orbital Works to meet Hartley in person.,eis_hoom_pwCont:Continue,"After the civil war: same conversation as the in-fleet one (EISHoomPostWarTalk).
+Requested (user): boarding the shuttle switches the music to ShellInteraction_Neutral (music_ironshell_market_neutral) and shows is_station_illustration. Continue returns to Hartley's portrait; the music returns to normal when the quest conversation ends (FireAll EISHoomMusicEnd). A Continue was added (EISHoomPwContSel) so the illustration has a step to show on; it used to go straight to Hartley's text.
+TODO: arrival text for the shuttle visit (placeholder).",
+EISHoomOfferOptWhy,EISHoomOfferOptions,!$eis_hoom_askedWhy,,,"1:eis_hoom_why:""Why do you need me? Doesn't the Hegemony have its own spy network?""","Offer menu. Option labels from the user.
+INVENTED: each question hides after it is asked (flag lasts until the dialog closes).",
+EISHoomOfferOptOffBooks,EISHoomOfferOptions,!$eis_hoom_askedOffBooks,,,"2:eis_hoom_offBooks:""Off the books?""",,
+EISHoomOfferOptDiktatComm,EISHoomOfferOptions,"$player.fcm_faction == sindrian_diktat
+!$eis_hoom_askedDiktatComm",,,"3:eis_hoom_diktatComm:""Are you aware I hold a commission to the Sindrian Diktat?""",Only with a Sindrian Diktat commission.,
+EISHoomOfferOptProgress,EISHoomOfferOptions,EISHellOfOurOwnMaking sdtuReached MEET_RAM,,,"4:eis_hoom_progress:""I have already made some progress, they approached me.""","Shown once Ram has contacted the player (vanilla The Usurpers at MEET_RAM or later, or completed).",
+EISHoomOfferOptAccept,EISHoomOfferOptions,$player.fcm_faction == hegemony,,,"5:eis_hoom_accept:""I accept, the Sindrian Mutiny must end.""",Only with a Hegemony or Iron Shell commission (EISHegemonyCommissionRulesPatch makes == hegemony pass for an Iron Shell commission).,
+EISHoomOfferOptRest,EISHoomOfferOptions,,"SetShortcut eis_hoom_later ""ESCAPE""",,"6:eis_hoom_maybe:""I will see what I can do. No promises.""
+7:eis_hoom_refuse:""I want no involvement with this scheme.""
+8:eis_hoom_later:""Give me more time to think it over.""",,
+EISHoomWhySel,DialogOptionSelected,$option == eis_hoom_why,"$eis_hoom_askedWhy = true 0
+FireAll EISHoomOfferOptions","""Of course it does. The Strategic Assembly has a strategy. They're putting their chips on that bastard Rao. Something about funding rebels, as if the Hegemony can't clean up its own messes."" Hartley scowls. ""And of course Kim agrees. We have no authority to act independently. Politics above honor.""",,"Text from the author (batch 1, pre-war). Grammar pass: couse -> course (x2); scowels -> scowls; independantly -> independently; comma splices after ""strategy"" and ""independently"" made into full stops.",
+EISHoomOffBooksSel,DialogOptionSelected,$option == eis_hoom_offBooks,"$eis_hoom_askedOffBooks = true 0
+FireAll EISHoomOfferOptions","""I can't issue an order that could compromise the chain of command. Mutiny is how this mess started. This is my battle, and I cannot fly alone against a polity, even if they are a band of traitors and cultists.""",,"Text from the author (batch 1, pre-war).",
+EISHoomDiktatCommSel,DialogOptionSelected,$option == eis_hoom_diktatComm,$eis_hoom_askedDiktatComm = true 0,"""And does that make you loyal to Andrada? Or just a spacer doing a job?""","1:eis_hoom_dcNoLoyalty:""No, I have no loyalty to Sindria itself.""
+2:eis_hoom_dcBills:""I'd rather not oppose who pays the bills.""
+3:eis_hoom_dcVision:""I believe in Andrada's vision.""
+4:eis_hoom_dcGlory:""Glory to the Sindrian Diktat!""","Secondary dialog for a Diktat commission holder: Hartley questions the player, then it loops back to the offer menu.
+Text and option labels from the author (batch 2). The first two answers return to the offer; the last two close the questline ($global.eis_hoom_closed).",
+EISHoomProgressSel,DialogOptionSelected,$option == eis_hoom_progress,"$global.eis_hoom_accepted = true
+EISHellOfOurOwnMaking start
+FireAll EISHoomProgressOptions","Hartley raises an eyebrow. ""My read on the situation was right, then. Well, if you are in agreement, what have you found?""",,"Counts as accepting: starts the intel, then shows the progress report options.
+Text from the author (batch 1, pre-war).",
+EISHoomAcceptSel,DialogOptionSelected,$option == eis_hoom_accept,"$global.eis_hoom_accepted = true
+EISHellOfOurOwnMaking start
+FireBest EISHoomVisitEnd","Hartley lets out a sigh. ""Thank you. Burn bright, Captain.""",,"Accepts: starts the Hell of Our Own Making intel and returns to his options.
+Text from the author (batch 1, pre-war). Grammar pass: ""Thank you, burn bright Captain."" -> ""Thank you. Burn bright, Captain."".
+Ends the quest conversation with FireBest EISHoomVisitEnd: after a shuttle visit it resumes the normal music and returns to the planet interaction (EISHoomVisitEndShuttle); reached over the comm it returns to Hartley's options (EISHoomVisitEndComm).",
+EISHoomMaybeSel,DialogOptionSelected,$option == eis_hoom_maybe,"$global.eis_hoom_accepted = true
+EISHellOfOurOwnMaking start
+FireBest EISHoomVisitEnd","Hartley lets out a sigh. ""Thank you. Burn bright, Captain.""",,"Accepts: starts the Hell of Our Own Making intel and returns to his options.
+Text from the author (batch 1, pre-war). Grammar pass: ""Thank you, burn bright Captain."" -> ""Thank you. Burn bright, Captain."".
+Ends the quest conversation with FireBest EISHoomVisitEnd: after a shuttle visit it resumes the normal music and returns to the planet interaction (EISHoomVisitEndShuttle); reached over the comm it returns to Hartley's options (EISHoomVisitEndComm).",
+EISHoomRefuseSel,DialogOptionSelected,$option == eis_hoom_refuse,"$global.eis_hoom_refused = true
+FireBest EISHoomVisitEnd","""I understand. I only ask you keep this between us, then. Things may have a way of catching up to us, one way or another.""",,"Refuses. Sets $global.eis_hoom_refused for later use but does not lock the offer: the player can still accept on a later visit.
+Text from the author (batch 1, pre-war).
+Decided (user): refusing keeps the offer open. Discuss the Sindrian Diktat stays in his list (EISHoomPrint does not check $global.eis_hoom_refused), so the offer can be heard again.
+Ends the quest conversation with FireBest EISHoomVisitEnd: after a shuttle visit it resumes the normal music and returns to the planet interaction (EISHoomVisitEndShuttle); reached over the comm it returns to Hartley's options (EISHoomVisitEndComm).",
+EISHoomLaterSel,DialogOptionSelected,$option == eis_hoom_later,FireBest EISHoomVisitEnd,"""Things may move faster than you realize. You know where to find me, Captain.""",,"Text from the author (batch 1, pre-war).
+Ends the quest conversation with FireBest EISHoomVisitEnd: after a shuttle visit it resumes the normal music and returns to the planet interaction (EISHoomVisitEndShuttle); reached over the comm it returns to Hartley's options (EISHoomVisitEndComm).",
+EISHoomProgOptRam,EISHoomProgressOptions,"EISHellOfOurOwnMaking sdtuReached MEET_RAM
+!$global.eis_hoom_toldRam",,,"1:eis_hoom_progRam:""I was approached by a Diktat officer, INTSEC, asked to meet in person""","Progress report menu, reused from the offer (already made some progress) and Report mission progress. Option labels from the user.
+Options appear once the player has passed that point of vanilla The Usurpers and are not shown before, so nothing is spoiled.
+After Ram contacted the player (MEET_RAM or later). By then the player knows him as Captain Yannick Ram, the INTSEC officer who led the bar raid.",
+EISHoomProgRamSel,DialogOptionSelected,$option == eis_hoom_progRam,"$global.eis_hoom_toldRam = true
+FireAll EISHoomProgressOptions","He gives you a grin as you recite your several meetings with Yannick Ram. ""So even their internal security force is compromised. I suggest you meet them, Captain. If it truly was a trap, they'd need far less justification to declare you an enemy of the state and have you killed on the spot.""",,"One reply, then the option is gone for good ($global.eis_hoom_toldRam).
+Text from the author (batch 1, pre-war). Grammar pass: Yannik -> Yannick (vanilla spelling, People.java).",
+EISHoomProgOptMacario,EISHoomProgressOptions,"EISHellOfOurOwnMaking sdtuReached INTERCEPT_FLEET
+!$global.eis_hoom_toldMacario",,,"2:eis_hoom_progMacario:""The Chief High Inspector-General of the Sindrian Diktat approached me, he is planning something.""","After the safehouse meeting where Macario shows up (INTERCEPT_FLEET or later).
+INVENTED: [title] filled with Macario's vanilla title, Chief High Inspector-General (sdtuRamSafehouse6).",
+EISHoomProgMacarioSel,DialogOptionSelected,$option == eis_hoom_progMacario,"$global.eis_hoom_toldMacario = true
+FireAll EISHoomProgressOptions","Hartley's expression sombers as you explain the meeting on Volturn and the scale of Macario's plan. ""That pest Dolos was always going to be the biggest obstacle to any clandestine activity in Askonia. I never thought he'd get involved personally."" He turns and drums his fingers on his desk. ""There's not much we can do besides play into his hand.""",,"One reply, then the option is gone for good ($global.eis_hoom_toldMacario).
+Text from the author (batch 1, pre-war).",
+EISHoomProgOptHyder,EISHoomProgressOptions,"EISHellOfOurOwnMaking sdtuReached RETURN_TO_MACARIO
+!$global.eis_hoom_toldHyder",,,"3:eis_hoom_progHyder:""I spoke with Hyder, the current head of the Sindrian system defense armada.""",After the Hyder meeting (RETURN_TO_MACARIO or later).,
+EISHoomProgHyderSel,DialogOptionSelected,$option == eis_hoom_progHyder,"$global.eis_hoom_toldHyder = true
+FireAll EISHoomProgressOptions","""It's hard to feel bad for a traitor. I have no interest in seeing her lot brought back into the Hegemony, damned if Command or Rao think it might aid the cause. She made her choice long ago.""
+
+Hartley pauses, briefly recollecting better times.",,"One reply, then the option is gone for good ($global.eis_hoom_toldHyder).
+Text from the author (batch 1, pre-war). Grammar pass: no interest to see -> no interest in seeing.",
+EISHoomProgOptCaden,EISHoomProgressOptions,"EISHellOfOurOwnMaking sdtuReached AGAIN_WTH_MACARIO
+!$global.eis_hoom_toldCaden",,,"4:eis_hoom_progCaden:""I spoke with Caden, the head of the Lion's Guard.""",After the Caden meeting (AGAIN_WTH_MACARIO or later).,
+EISHoomProgCadenSel,DialogOptionSelected,$option == eis_hoom_progCaden,"$global.eis_hoom_toldCaden = true
+FireAll EISHoomProgressOptions","You recount your brief exchange with Horacio Caden, and his fervent commitment to Andradism.
+
+Hartley looks unamused. ""So he's gotten worse than Andrada himself. He truly believes he can continue what that monster started. What a fool.""",,"One reply, then the option is gone for good ($global.eis_hoom_toldCaden).
+Text from the author (batch 1, pre-war). Grammar pass: feverant -> fervent; andradism -> Andradism.",
+EISHoomProgOptIntel,EISHoomProgressOptions,"EISHellOfOurOwnMaking sdtuReached DELIVER_NEWS
+!$global.eis_hoom_intelDelivered",,,"5:eis_hoom_progIntel:""Macario seemed to let me find some strange intel.""",After the ANDRADA files are found in the debris field (DELIVER_NEWS or later). This one advances the quest.,
+EISHoomProgIntelSel,DialogOptionSelected,$option == eis_hoom_progIntel,FireAll EISHoomIntelCheck,"You describe the circumstances that led you to recover encrypted data from a debris field around the Askonian jump point.
+
+Hartley questions you on the contents.","eis_hoom_intelAndradas:""It seems to have to do with Andrada. Or, Andradas.""
+eis_hoom_intelDigging:""I don't know, I need to do some digging first.""","Option labels from the user.
+Text from the author (batch 1, pre-war). Grammar pass: led you to recovering -> led you to recover.
+Requested (user): ""It seems to have to do with Andrada"" needs the ANDRADA files decrypted (vanilla $global.sd7s_decryptedAndradaFiles, set by The Seven Sons); FireAll EISHoomIntelCheck greys it out until then.",
+EISHoomIntelDiggingSel,DialogOptionSelected,$option == eis_hoom_intelDigging,FireAll EISHoomProgressOptions,"Hartley pauses, letting out a sigh. ""I believe this may be the lead we need, Captain. I trust you to take the time you need to dig into it. Just don't let that pest get you in over your head.""",,"No progress: the strange intel option stays, so the player can come back later. Returns to the progress report menu.
+Text from the author (batch 1, pre-war). Grammar pass: added the missing closing quote.",
+EISHoomIntelAndradasSel,DialogOptionSelected,$option == eis_hoom_intelAndradas,"$global.eis_hoom_intelDelivered = true
+EISHellOfOurOwnMaking deliver
+EISShowOfficerSkills eisdarren","You transfer Hartley a copy of the ANDRADA files. Seven souls bearing the name of his sworn enemy. He silently scrolls through the reports one by one, keeping you on the line.
+
+""So this was his grand plan? He wants his clone-sons to take over his little slice of the Sector?"" He slams his fist on his desk. ""I'm not going to allow it. Captain, now is the time to act. I request a position within your fleet. When this ignites, I want to be on the front lines with you.""","eis_hoom_joinAccept:Accept
+eis_hoom_joinDecline:Decline","Transfers the intel (progress). Report mission progress is hidden from here on. Option labels from the user.
+Text from the author (batch 1, pre-war). Grammar pass: the sector -> the Sector (vanilla capitalization).
+EISShowOfficerSkills eisdarren prints his skill panel under the text (scripts run after the text), as Charlotte's hire offer does.",
+EISHoomJoinDeclineSel,DialogOptionSelected,$option == eis_hoom_joinDecline,"$global.eis_hoom_joinDeclined = true
+EISHellOfOurOwnMaking complete
+FireBest EISHoomVisitEnd","""I see. I hope you reconsider, Captain.""",,"Hartley stays behind. The quest ends (intel completed).
+Text from the author (batch 1, pre-war).
+Ends the quest conversation with FireBest EISHoomVisitEnd: after a shuttle visit it resumes the normal music and returns to the planet interaction (EISHoomVisitEndShuttle); reached over the comm it returns to Hartley's options (EISHoomVisitEndComm).",
+EISHoomJoinAcceptSel,DialogOptionSelected,$option == eis_hoom_joinAccept,"$global.eis_hoom_hartleyJoined = true
+EISHellOfOurOwnMaking join","""Thank you, Captain. I will arrange a transfer of my bridge personnel. Let's end this together.""","eis_hoom_joinContinue:Continue
+eis_hoom_flagship:""Are you bringing your flagship?""","Hartley joins the player fleet as an officer, without a ship. Same approach as Charlotte (EISHireOfficerWithShip): the important person himself joins, and his comm directory entry and contact options stay.
+Option labels from the user.
+Text from the author (batch 1, pre-war). Grammar pass: Thank you Captain -> Thank you, Captain; personell -> personnel.",
+EISHoomJoinContinueSel,DialogOptionSelected,$option == eis_hoom_joinContinue,"$global.eis_hoom_acheronDeclined = true
+EISHellOfOurOwnMaking complete
+FireBest EISHoomVisitEnd","You arrange the transfer, granting Hartley a command within your fleet.",,"Hartley joins without the Acheron. The quest ends (intel completed).
+Text from the author (batch 1, pre-war).
+$global.eis_hoom_acheronDeclined shows ""Are you bringing your flagship?"" in his Request to speak with list (EISHoomFlagshipPrint) while he serves in the fleet.
+Ends the quest conversation with FireBest EISHoomVisitEnd: after a shuttle visit it resumes the normal music and returns to the planet interaction (EISHoomVisitEndShuttle); reached over the comm it returns to Hartley's options (EISHoomVisitEndComm).",
+EISHoomFlagshipSel,DialogOptionSelected,$option == eis_hoom_flagship,"EISHellOfOurOwnMaking showAcheron
+FireAll EISHoomAcheronOptions
+EISHellOfOurOwnMaking acheronCosts","""Ah, the Acheron. It has served me well, but there would be a bit of an incident if such a notable Hegemony vessel were seen in the skies of Sindria.""",,"Shows the Acheron (eis_acheron_Vengeance) in the visual panel. acheronCosts runs after the options are added and makes them story point options:
+Use your connections within the Hegemony: free; in survival mode half the capital ship story point cost (ext_recoveryNonOwnSPCost, vanilla 4), rounded down, at least 1.
+We can manage: 1 story point; in survival mode the full capital ship story point cost, at least 1.
+Bonus XP for both is 0 (eis_hoomAcheronConnections / eis_hoomAcheronManage in settings.json).
+Text from the author (batch 1, pre-war). Grammar pass: Sindra -> Sindria; is seen -> were seen.",
+EISHoomAcheronOptConnections,EISHoomAcheronOptions,$player.fcm_faction == hegemony,,,"1:eis_hoom_acheronConnections:""Use your connections within the Hegemony.""",Only with a Hegemony or Iron Shell commission (EISHegemonyCommissionRulesPatch makes == hegemony pass for an Iron Shell commission). Option label from the user.,
+EISHoomAcheronOptRest,EISHoomAcheronOptions,,"SetShortcut eis_hoom_acheronDecline ""ESCAPE""",,"2:eis_hoom_acheronManage:""We can manage. If all else fails you can blame me.""
+3:eis_hoom_acheronDecline:Decline",Option labels from the user.,
+EISHoomAcheronConnectionsSel,DialogOptionSelected,$option == eis_hoom_acheronConnections,"$global.eis_hoom_gotAcheron = true
+EISHellOfOurOwnMaking giveAcheron
+EISHellOfOurOwnMaking complete
+ShowPersonVisual
+FireBest EISHoomVisitEnd","Using your diplomatic position, you make arrangements for the transfer of the vessel to your fleet under the pretext of crew training exercises, alongside a promise that any undesirable activity will mean declaring the ship stolen.",,"Adds the Acheron with Hartley as captain. The quest ends (intel completed).
+Text from the author (batch 1, pre-war). Grammar pass: joined the fragment ""Alongside a promise..."" to the previous sentence.
+Ends the quest conversation with FireBest EISHoomVisitEnd: after a shuttle visit it resumes the normal music and returns to the planet interaction (EISHoomVisitEndShuttle); reached over the comm it returns to Hartley's options (EISHoomVisitEndComm).",
+EISHoomAcheronManageSel,DialogOptionSelected,$option == eis_hoom_acheronManage,"$global.eis_hoom_gotAcheron = true
+EISHellOfOurOwnMaking giveAcheron
+EISHellOfOurOwnMaking complete
+ShowPersonVisual
+FireBest EISHoomVisitEnd","While a long shot, you manage to coordinate a security breach with local pirates to make the transfer of the Acheron appear to be a theft. Hartley ensures that local port authorities won't be pursuing you.",,"Story point option (cost set by acheronCosts). Adds the Acheron with Hartley as captain. The quest ends (intel completed).
+Text from the author (batch 1, pre-war).
+Ends the quest conversation with FireBest EISHoomVisitEnd: after a shuttle visit it resumes the normal music and returns to the planet interaction (EISHoomVisitEndShuttle); reached over the comm it returns to Hartley's options (EISHoomVisitEndComm).",
+EISHoomAcheronDeclineSel,DialogOptionSelected,$option == eis_hoom_acheronDecline,"$global.eis_hoom_acheronDeclined = true
+EISHellOfOurOwnMaking complete
+ShowPersonVisual
+FireBest EISHoomVisitEnd",You agree that the vessel is best left within Naraka. Hartley assures you that you may come back for it at any time.,,"Hartley stays in the fleet without the Acheron. The quest ends (intel completed).
+Text from the author (batch 1, pre-war). Grammar pass: ensures you -> assures you.
+$global.eis_hoom_acheronDeclined shows ""Are you bringing your flagship?"" in his Request to speak with list (EISHoomFlagshipPrint) while he serves in the fleet.
+Ends the quest conversation with FireBest EISHoomVisitEnd: after a shuttle visit it resumes the normal music and returns to the planet interaction (EISHoomVisitEndShuttle); reached over the comm it returns to Hartley's options (EISHoomVisitEndComm).",
+EISHoomProgOptDone,EISHoomProgressOptions,,"SetShortcut eis_hoom_progDone ""ESCAPE""",,"9:eis_hoom_progDone:""I have nothing further to report.""","Always present so the menu can be left when there is nothing (left) to report.
+Option label from the author (batch 1, pre-war).",
+EISHoomProgDoneSel,DialogOptionSelected,$option == eis_hoom_progDone,FireBest EISHoomVisitEnd,,,"Returns to his options.
+Ends the quest conversation with FireBest EISHoomVisitEnd: after a shuttle visit it resumes the normal music and returns to the planet interaction (EISHoomVisitEndShuttle); reached over the comm it returns to Hartley's options (EISHoomVisitEndComm).",
+EISHoomWarTalkStart,EISHoomWarTalkStart,,"BeginConversation eisdarren
+$player.eis_hoom_forcedTalk = true 0
+FireBest EISHoomWarSuss","[todo] A day after both heirs make their claims, Hartley asks to speak with you in private.",,"Opened by EISHellOfOurOwnMakingWarTalk one in-game day after both heirs have claimed, if Hartley is in the player fleet then. Shown once.
+$player.eis_hoom_forcedTalk marks this dialog (lasts until it closes) so the endings close the dialog instead of returning to his contact options.
+TODO: replace the [todo] placeholder text.",
+EISHoomWarSussText,EISHoomWarSuss,,FireAll EISHoomWarOptions,[todo] Hartley tries to suss out your motives.,,"Shared by the shuttle visit during the war (Case B) and the in-fleet conversation.
+TODO: replace the [todo] placeholder text.",
+EISHoomWarOpts,EISHoomWarOptions,,,,"1:eis_hoom_warRao:""I will support neither Heir, I plan to work with Rao.""
+2:eis_hoom_warNeither:""I will support neither Heir.""
+3:eis_hoom_warMacario:""I just want to see Macario dead.""
+4:eis_hoom_warAchilles:""I will support Achilles.""
+5:eis_hoom_warHector:""I will support Hector.""",Option labels from the user.,
+EISHoomWarOptStayOutFleet,EISHoomWarOptions,EISHellOfOurOwnMaking hartleyInFleet,"EIS_AddOptionConfirmation eis_hoom_warStayOut ""This will have consequences..."" ""Confirm"" ""Never mind""",,"6:eis_hoom_warStayOut:""I am trying to stay out of the situation.""","Hartley in the fleet: confirmation first, because he leaves.
+INVENTED: confirm button labels Confirm / Never mind (copied from EISQuyTurnInLegionXIV3).",
+EISHoomWarOptStayOut,EISHoomWarOptions,!EISHellOfOurOwnMaking hartleyInFleet,,,"6:eis_hoom_warStayOut:""I am trying to stay out of the situation.""","Hartley not in the fleet: no confirmation, and the conversation can be had again later.",
+EISHoomWarRaoSel,DialogOptionSelected,$option == eis_hoom_warRao,"$global.eis_hoom_warStance = rao
+$global.eis_hoom_warResolved = true
+FireAll EISHoomWarJoinOrAgree",[todo] Hartley's response to working with Rao.,,"Leads to his offer to join (Hartley not in the fleet) or to him agreeing with you (in the fleet).
+TODO: replace the [todo] placeholder text.",
+EISHoomWarNeitherSel,DialogOptionSelected,$option == eis_hoom_warNeither,"$global.eis_hoom_warStance = neither
+$global.eis_hoom_warResolved = true
+FireAll EISHoomWarJoinOrAgree",[todo] Hartley's response to supporting neither heir.,,"Leads to his offer to join (Hartley not in the fleet) or to him agreeing with you (in the fleet).
+TODO: replace the [todo] placeholder text.",
+EISHoomWarMacarioSel,DialogOptionSelected,$option == eis_hoom_warMacario,"$global.eis_hoom_warStance = macario
+$global.eis_hoom_warResolved = true
+FireAll EISHoomWarJoinOrAgree",[todo] Hartley's response to wanting Macario dead.,,"Leads to his offer to join (Hartley not in the fleet) or to him agreeing with you (in the fleet).
+TODO: replace the [todo] placeholder text.",
+EISHoomWarOfferJoin,EISHoomWarJoinOrAgree,!EISHellOfOurOwnMaking hartleyInFleet,EISShowOfficerSkills eisdarren,[todo] Hartley offers to join you.,"eis_hoom_joinAccept:Accept
+eis_hoom_joinDecline:Decline","Hartley not in the fleet: his offer to join, then the same recruitment tree as before the war (EISHoomJoinAcceptSel and on).
+TODO: replace the [todo] placeholder text.
+EISShowOfficerSkills eisdarren prints his skill panel under the text (scripts run after the text), as Charlotte's hire offer does.",
+EISHoomWarAgree,EISHoomWarJoinOrAgree,EISHellOfOurOwnMaking hartleyInFleet,FireBest EISHoomWarEnd,[todo] Hartley agrees with you.,,"Hartley already in the fleet: he agrees with you instead of offering to join.
+TODO: replace the [todo] placeholder text.
+TODO: expand into its own tree if wanted.",
+EISHoomWarAchillesSel,DialogOptionSelected,$option == eis_hoom_warAchilles,,[todo] Hartley questions you further about Achilles.,"1:eis_hoom_warAchLeader:""The Sindrian Diktat falling will kill thousands. It needs a leader.""
+2:eis_hoom_warAchLeague:""The League will bring stability to Askonia.""
+3:eis_hoom_warAchMacario:""I am using him to ensure Macario falls.""","Option labels from the user.
+TODO: replace the [todo] placeholder text.",
+EISHoomWarAchLeaderSel,DialogOptionSelected,$option == eis_hoom_warAchLeader,"$global.eis_hoom_achillesReason = leader
+FireBest EISHoomWarAchillesReply",,,Hartley gives the same reply to all three reasons; the reason is kept in $global.eis_hoom_achillesReason for later reactions.,
+EISHoomWarAchLeagueSel,DialogOptionSelected,$option == eis_hoom_warAchLeague,"$global.eis_hoom_achillesReason = league
+FireBest EISHoomWarAchillesReply",,,Hartley gives the same reply to all three reasons; the reason is kept in $global.eis_hoom_achillesReason for later reactions.,
+EISHoomWarAchMacarioSel,DialogOptionSelected,$option == eis_hoom_warAchMacario,"$global.eis_hoom_achillesReason = macario
+FireBest EISHoomWarAchillesReply",,,Hartley gives the same reply to all three reasons; the reason is kept in $global.eis_hoom_achillesReason for later reactions.,
+EISHoomWarAchillesReply,EISHoomWarAchillesReply,,"SetStoryOption eis_hoom_warAchNotPhilip 1 eis_hoomNotPhilip general
+EIS_AddOptionConfirmation eis_hoom_warAchBest ""This will have consequences..."" ""Confirm"" ""Never mind""",[todo] Hartley's response to your reasons for supporting Achilles.,"1:eis_hoom_warAchNotPhilip:""He is not Philip. His victory will still mark the end of that bastard's legacy.""
+2:eis_hoom_warAchBest:""I believe he is the best choice.""
+3:eis_hoom_warReconsider:Reconsider...","He is not Philip: 1 story point, 100% bonus XP (eis_hoomNotPhilip = 1 in settings.json).
+Option labels from the user.
+TODO: replace the [todo] placeholder text.",
+EISHoomWarAchNotPhilipSel,DialogOptionSelected,$option == eis_hoom_warAchNotPhilip,"AddTextSmall ""Convinced Hartley that Achilles' victory is acceptable"" highlight
+$global.eis_hoom_achillesAcceptable = true
+$global.eis_hoom_warStance = achillesNotPhilip
+$global.eis_hoom_warResolved = true
+FireAll EISHoomWarJoinOrAgree",,,"Story point spent: leads to his offer to join (or, in the fleet, him agreeing with you).
+Highlighted line from the user, in the style of vanilla SDSEtalkToFortunaPledgeYes. $global.eis_hoom_achillesAcceptable is permanent, for later reactions.",
+EISHoomWarAchBestSel,DialogOptionSelected,$option == eis_hoom_warAchBest,"$global.eis_hoom_warStance = achilles
+$global.eis_hoom_warResolved = true
+EISHellOfOurOwnMaking leave
+FireBest EISHoomWarEnd","[todo] Hartley's response to your support for Achilles. If he is in your fleet, he leaves it.",,"Confirmed: Hartley leaves the fleet if he is in it (EISHellOfOurOwnMaking leave), and the matter is settled.
+TODO: replace the [todo] placeholder text.",
+EISHoomWarHectorSel,DialogOptionSelected,$option == eis_hoom_warHector,"EIS_AddOptionConfirmation eis_hoom_warHecDecision ""This will have consequences..."" ""Confirm"" ""Never mind""",[todo] Hartley questions you further about Hector.,"1:eis_hoom_warHecDecision:""I have made my decision, Hartley.""
+2:eis_hoom_warReconsider:Reconsider...","Option labels from the user.
+TODO: replace the [todo] placeholder text.",
+EISHoomWarHecDecisionSel,DialogOptionSelected,$option == eis_hoom_warHecDecision,"$global.eis_hoom_warStance = hector
+$global.eis_hoom_warResolved = true
+EISHellOfOurOwnMaking leave
+FireBest EISHoomWarEnd","[todo] Hartley's response to your support for Hector. If he is in your fleet, he leaves it.",,"Confirmed: Hartley leaves the fleet if he is in it, and the matter is settled.
+TODO: replace the [todo] placeholder text.",
+EISHoomWarReconsiderSel,DialogOptionSelected,$option == eis_hoom_warReconsider,FireAll EISHoomWarOptions,,,Back to the base options where he is sussing out your intentions.,
+EISHoomWarStayOutFleetSel,DialogOptionSelected,"$option == eis_hoom_warStayOut
+EISHellOfOurOwnMaking hartleyInFleet","$global.eis_hoom_warStance = stayOut
+$global.eis_hoom_warResolved = true
+EISHellOfOurOwnMaking leave
+FireBest EISHoomWarEnd",[todo] Hartley's response as he leaves your fleet.,,"Hartley in the fleet (confirmed): he leaves it.
+TODO: replace the [todo] placeholder text.",
+EISHoomWarStayOutSel,DialogOptionSelected,$option == eis_hoom_warStayOut,FireBest EISHoomWarEnd,[todo] Hartley's response to you staying out of it.,,"Hartley not in the fleet: the conversation ends, nothing is settled, and Discuss the Sindrian Diktat can start it again.
+TODO: replace the [todo] placeholder text.",
+EISHoomWarEndForced,EISHoomWarEnd,$player.eis_hoom_forcedTalk,,,eis_hoom_warClose:Continue,"In the in-fleet conversation: a Continue so the last reply can be read, then the dialog closes.",
+EISHoomWarEndContact,EISHoomWarEnd,,FireBest EISHoomVisitEnd,,,"In a contact conversation (shuttle visit): back to his options.
+Ends the quest conversation with FireBest EISHoomVisitEnd: after a shuttle visit it resumes the normal music and returns to the planet interaction (EISHoomVisitEndShuttle); reached over the comm it returns to Hartley's options (EISHoomVisitEndComm).",
+EISHoomWarCloseSel,DialogOptionSelected,$option == eis_hoom_warClose,"FireAll EISHoomMusicEnd
+DismissDialog",,,"Closes the in-fleet conversation.
+Ends the quest conversation: FireAll EISHoomMusicEnd resumes the normal music if the shuttle visit started the Iron Shell track ($player.eis_hoom_music); it does nothing on the comm-only paths.",
+EISHoomPostWarTalkStart,EISHoomPostWarTalkStart,,"BeginConversation eisdarren
+$player.eis_hoom_forcedTalk = true 0
+FireBest EISHoomPostWarTalk","[todo] A day after the war ends, Hartley asks to speak with you in private.",,"Opened by EISHellOfOurOwnMakingPostWarTalk one in-game day after $global.askoniaStandoffCompleted, if Hartley is in the player fleet then. Shown once.
+TODO: replace the [todo] placeholder text.",
+EISHoomPostWarTalkText,EISHoomPostWarTalk,,FireAll EISHoomPostWarOptions,[todo] Hartley's generic response now that the war is over.,,"Shared by the shuttle visit after the war and the in-fleet conversation. Only the player options and his replies change.
+TODO: replace the [todo] placeholder text.",
+EISHoomPostWarOptSindria,EISHoomPostWarOptions,"$global.cadenBlowsUpSindria
+!$eis_hoom_saidSindria",,,"1:eis_hoom_pwSindria:""Sindria is gone.""","Caden used the planetkiller on Sindria (vanilla $global.cadenBlowsUpSindria), whatever else happened. Loops back; hidden once said in this conversation.
+Option label from the user, spelling fixed (Sindra -> Sindria).",
+EISHoomPostWarOptAchilles,EISHoomPostWarOptions,"$global.sdse_achillesWon
+!$global.sindrianDiktatCollapsed",,,"2:eis_hoom_pwAchilles:""Achilles now leads the Diktat.""","Achilles won and the Diktat survived (includes the outcome where he rules as a client of Fortuna Kato, $global.sdse_achillesWonPL). Option label from the user.",
+EISHoomPostWarOptHector,EISHoomPostWarOptions,"$global.sdse_hectorWon
+!$global.sindrianDiktatCollapsed",,,"3:eis_hoom_pwHector:""Hector is the new Supreme Executor.""","Hector won and the Diktat survived (if the planetkiller was used on a Hector win, vanilla kills Hector and collapses the Diktat).
+Option label from the user, spelling fixed (Exector -> Executor).",
+EISHoomPostWarOptFree,EISHoomPostWarOptions,$global.sindrianDiktatCollapsed,,,"4:eis_hoom_pwFree:""Askonia is free. What more could we want?""","The Sindrian Diktat collapsed (vanilla $global.sindrianDiktatCollapsed: devastation level 5, or the planetkiller on a Hector win).
+Option label from the user, capitalization fixed (what -> What).
+Exactly one of Achilles / Hector / free always applies: vanilla always names a winner, and a collapse overrides it.",
+EISHoomPwSindriaSel,DialogOptionSelected,$option == eis_hoom_pwSindria,"$eis_hoom_saidSindria = true 0
+FireAll EISHoomPostWarOptions",[todo] Hartley's response to Sindria's destruction.,,"Loops back to the options.
+TODO: replace the [todo] placeholder text.",
+EISHoomPwHectorSel,DialogOptionSelected,$option == eis_hoom_pwHector,"$global.eis_hoom_postWarStance = hector
+$global.eis_hoom_postWarResolved = true
+EISHellOfOurOwnMaking leave
+AdjustRepActivePerson -100","[todo] Hartley's response to Hector's victory. If he is in your fleet, he leaves it.",eis_hoom_pwClose:Continue,"Hartley leaves the fleet if he is in it, and loses 100 relation with the player either way (AdjustRepActivePerson -100).
+The departure and relation change are shown under his reply; Continue then ends the conversation.
+TODO: replace the [todo] placeholder text.",
+EISHoomPwCloseSel,DialogOptionSelected,$option == eis_hoom_pwClose,FireBest EISHoomPostWarEnd,,,Ends the conversation.,
+EISHoomPostWarEndForced,EISHoomPostWarEnd,$player.eis_hoom_forcedTalk,"FireAll EISHoomMusicEnd
+DismissDialog",,,"In the in-fleet conversation: closes the dialog.
+Ends the quest conversation: FireAll EISHoomMusicEnd resumes the normal music if the shuttle visit started the Iron Shell track ($player.eis_hoom_music); it does nothing on the comm-only paths.",
+EISHoomPostWarEndContact,EISHoomPostWarEnd,,FireBest EISHoomVisitEnd,,,"In a contact conversation (shuttle visit): back to his options.
+Ends the quest conversation with FireBest EISHoomVisitEnd: after a shuttle visit it resumes the normal music and returns to the planet interaction (EISHoomVisitEndShuttle); reached over the comm it returns to Hartley's options (EISHoomVisitEndComm).",
+EISHoomPwFreeSel,DialogOptionSelected,$option == eis_hoom_pwFree,"$global.eis_hoom_postWarStance = free
+$global.eis_hoom_postWarResolved = true",[todo] Hartley's response to a free Askonia.,eis_hoom_pwFreeCont:Continue,TODO: replace the [todo] placeholder text.,
+EISHoomPwFreeContSel,DialogOptionSelected,$option == eis_hoom_pwFreeCont,FireAll EISHoomWarJoinOrAgree,,,Then his offer to join (Hartley not in the fleet) or him agreeing with you (in the fleet).,
+EISHoomPwAchillesConvincedSel,DialogOptionSelected,"$option == eis_hoom_pwAchilles
+$global.eis_hoom_achillesAcceptable","$global.eis_hoom_postWarStance = achillesConvinced
+$global.eis_hoom_postWarResolved = true
+FireAll EISHoomWarJoinOrAgree","[todo] Hartley's response to Achilles' rule, now that you convinced him during the war that his victory was acceptable.",,"The player convinced Hartley during the war (story point option, $global.eis_hoom_achillesAcceptable): a different response, then his offer to join or him agreeing with you.
+TODO: replace the [todo] placeholder text.",
+EISHoomPwAchillesSel,DialogOptionSelected,$option == eis_hoom_pwAchilles,FireAll EISHoomPostWarAchillesOptions,[todo] Hartley's response to Achilles' rule.,,"Not convinced during the war.
+TODO: replace the [todo] placeholder text.",
+EISHoomPwAchOptRight,EISHoomPostWarAchillesOptions,,SetStoryOption eis_hoom_pwAchRight 1 eis_hoomRightChoice general,,"1:eis_hoom_pwAchRight:""He was the right choice. Andradism is dead. Askonia has a future.""","1 story point, 100% bonus XP (eis_hoomRightChoice = 1 in settings.json).
+Option label from the user.",
+EISHoomPwAchOptBelieve,EISHoomPostWarAchillesOptions,$player.sdr_pledgedSupportAchilles,"EIS_AddOptionConfirmation eis_hoom_pwAchBelieve ""This will have consequences..."" ""Confirm"" ""Never mind""",,"2:eis_hoom_pwAchBelieve:""I believe in him.""",Only if the player pledged support to Achilles (vanilla $player.sdr_pledgedSupportAchilles). Option label from the user.,
+EISHoomPwAchOptRegret,EISHoomPostWarAchillesOptions,!$player.sdr_pledgedSupportAchilles,,,"3:eis_hoom_pwAchRegret:""I didn't want it to play out this way.""",Only if the player did not pledge support to Achilles. Option label from the user.,
+EISHoomPwAchRightSel,DialogOptionSelected,$option == eis_hoom_pwAchRight,"$global.eis_hoom_postWarStance = achillesRightChoice
+$global.eis_hoom_postWarResolved = true
+FireAll EISHoomWarJoinOrAgree",,,"Story point spent: his offer to join (or, in the fleet, him agreeing with you).",
+EISHoomPwAchBelieveSel,DialogOptionSelected,$option == eis_hoom_pwAchBelieve,"$global.eis_hoom_postWarStance = achillesBelieve
+$global.eis_hoom_postWarResolved = true
+EISHellOfOurOwnMaking leave
+FireBest EISHoomWarEnd","[todo] Hartley's response to your belief in Achilles. If he is in your fleet, he leaves it.",,"Confirmed: Hartley leaves the fleet if he is in it.
+TODO: replace the [todo] placeholder text.",
+EISHoomPwAchRegretSel,DialogOptionSelected,$option == eis_hoom_pwAchRegret,"$global.eis_hoom_postWarStance = achillesRegret
+$global.eis_hoom_postWarResolved = true
+FireBest EISHoomWarEnd","[todo] Hartley is angry, but he stays.",,"Hartley is angry but does not leave.
+TODO: replace the [todo] placeholder text.",
+EISHoomReconsiderSel,DialogOptionSelected,$option == eis_hoom_reconsider,EISShowOfficerSkills eisdarren,"You bring up Hartley's previous offer, and reconsider his request to join your fleet.","eis_hoom_joinAccept:Accept
+eis_hoom_joinDecline:Decline","Hell of Our Own Making: ""I have reconsidered your offer."" (EISHoomReconsiderPrint). Brings up the same Accept / Decline as the intel handover (EISHoomIntelAndradasSel): Accept recruits him (EISHoomJoinAcceptSel), Decline turns him down again (EISHoomJoinDeclineSel) and the option stays available.
+Text from the author.
+EISShowOfficerSkills eisdarren prints his skill panel under the text (scripts run after the text), as Charlotte's hire offer does.",
+EISHoomDcNoLoyaltySel,DialogOptionSelected,$option == eis_hoom_dcNoLoyalty,FireAll EISHoomOfferOptions,"""Then you're in the perfect position, if we are in agreement. The Hegemony isn't going to ask about your prior loyalties once Sindria falls.""",,"Diktat commission answer: back to the offer. Option label from the author (batch 2).
+Text from the author (batch 3). Grammar pass: no changes.",
+EISHoomDcBillsSel,DialogOptionSelected,$option == eis_hoom_dcBills,FireAll EISHoomOfferOptions,"""There's plenty of ways for a spacer to earn some credits, as I'm sure you're aware."" Hartley gives you a stern look. ""So are you willing to bite the Lion's hand? Or let it keep feeding you?""",,"Diktat commission answer: back to the offer. Option label from the author (batch 2).
+Text from the author (batch 3). Grammar pass: no changes.",
+EISHoomDcVisionSel,DialogOptionSelected,$option == eis_hoom_dcVision,"$global.eis_hoom_closed = true
+AdjustRepActivePerson -50
+PlayCustomMusic music_ironshell_market_hostile","""Then we have nothing further to discuss."" Hartley shakes his head, concealing his anger through a veil of professionalism.
+
+You are escorted out of the station by the local security detail.",eis_hoom_dcLeave:Continue,"Diktat commission answer: -50 relation with Hartley and the questline is closed for good ($global.eis_hoom_closed hides Discuss the Sindrian Diktat in every phase). Option label from the author (batch 2).
+Text from the author (batch 3). Grammar pass: no changes.
+Requested (user): the music switches to ShellInteraction_Hostile (music_ironshell_market_hostile). The exit moved to a Continue (EISHoomDcLeaveSel) so the track plays while the reply is on screen; relation, contact and closed-flag changes still happen here.",
+EISHoomDcGlorySel,DialogOptionSelected,$option == eis_hoom_dcGlory,"$global.eis_hoom_closed = true
+AdjustRepActivePerson -100
+RemoveContact eisdarren
+unset $EISHartleyContact
+PlayCustomMusic music_ironshell_market_hostile","""Get out. You're lucky I don't kill you where you stand.""
+
+The station's security detail escorts you back to your shuttle, and you are notified that your secure channel with Commissioner Darren Hartley has been denied, and further funding revoked.",eis_hoom_dcLeave:Continue,"Diktat commission answer: -100 relation with Hartley, the questline is closed for good ($global.eis_hoom_closed) and Hartley is lost as a contact: vanilla RemoveContact ends his contact intel, and unsetting $EISHartleyContact hides the Iron Shell options that need it (set by EISHartleyVanguardReward). Option label from the author (batch 2).
+Text from the author (batch 3). Grammar pass: no changes.
+Requested (user): the music switches to ShellInteraction_Hostile (music_ironshell_market_hostile). The exit moved to a Continue (EISHoomDcLeaveSel) so the track plays while the reply is on screen; relation, contact and closed-flag changes still happen here.",
+EISHoomIntelNotDecrypted,EISHoomIntelCheck,!$global.sd7s_decryptedAndradaFiles,"SetEnabled eis_hoom_intelAndradas false
+SetTooltip eis_hoom_intelAndradas ""You need to decrypt the ANDRADA files first.""",,,"Greys out ""It seems to have to do with Andrada"" until the ANDRADA files are decrypted. $global.sd7s_decryptedAndradaFiles is set by vanilla The Seven Sons when the files are cracked and never unset.
+INVENTED: tooltip text ""You need to decrypt the ANDRADA files first.""",
+EISHoomDiscussHighlightRep,eis_VNSectorDiscussionOptions,"$isPerson
+$id == eisdarren
+EISVibeCheck 75 100",EIS_DynamicPaginatedOptions setColor eis_hoom_discuss highlight,,,"Requested (user): highlight the option when it can be used. EIS_DynamicPaginatedOptions setColor only colours the option if a print row added it in the same menu, so the conditions here need not repeat the print row's.
+Discuss the Sindrian Diktat at Cooperative (75+) relation: the reverse of EISHoomDisableRep, which greys it out below 75.",
+EISHoomDiscussHighlightAccepted,eis_VNSectorDiscussionOptions,"$isPerson
+$id == eisdarren
+$global.eis_hoom_accepted",EIS_DynamicPaginatedOptions setColor eis_hoom_discuss highlight,,,"Requested (user): highlight the option when it can be used. EIS_DynamicPaginatedOptions setColor only colours the option if a print row added it in the same menu, so the conditions here need not repeat the print row's.
+Discuss the Sindrian Diktat (war and post-war visits) after the quest was accepted: EISHoomDisableRep never greys it out then, whatever the relation. A second row because rules have no OR.",
+EISHoomReportHighlight,eis_VNSectorDiscussionOptions,"$isPerson
+$id == eisdarren
+EISHellOfOurOwnMaking sdtuReached DELIVER_NEWS
+$global.sd7s_decryptedAndradaFiles",EIS_DynamicPaginatedOptions setColor eis_hoom_report highlight,,,"Requested (user): highlight the option when it can be used. EIS_DynamicPaginatedOptions setColor only colours the option if a print row added it in the same menu, so the conditions here need not repeat the print row's.
+Report mission progress once the ANDRADA files are found (The Usurpers at DELIVER_NEWS or later) and decrypted ($global.sd7s_decryptedAndradaFiles, requested by the user), when the full intel handover is possible (EISHoomProgOptIntel, EISHoomIntelNotDecrypted). Not highlighted before.",
+EISHoomMusicEnd,EISHoomMusicEnd,$player.eis_hoom_music,"ResumeNormalMusic
+unset $player.eis_hoom_music",,,"Fired by every exit of the Hell of Our Own Making conversations. Only acts after a shuttle visit started the Iron Shell music ($player.eis_hoom_music, set by the EISHoomShuttleSel rows).",
+EISHoomVisitEndShuttle,EISHoomVisitEnd,$player.eis_hoom_music,"FireAll EISHoomMusicEnd
+EndConversation NO_CONTINUE",,,"Requested (user): leaving the Discuss the Sindrian Diktat visit returns to the planet interaction, not to Hartley's comm options. $player.eis_hoom_music marks a shuttle visit; EndConversation NO_CONTINUE shows the planet visual and the market menu. Wins FireBest over EISHoomVisitEndComm by its condition score.",
+EISHoomVisitEndComm,EISHoomVisitEnd,,FireAll PopulateOptions,,,"The same exits reached over the comm without a shuttle visit (Report mission progress, I have reconsidered your offer) return to Hartley's options as before.",
+EISHoomDcLeaveSel,DialogOptionSelected,$option == eis_hoom_dcLeave,FireBest EISHoomVisitEnd,,,"Continue after EISHoomDcVisionSel / EISHoomDcGlorySel: resumes the normal music and returns to the planet interaction (EISHoomVisitEndShuttle), since the player is escorted out of the station.",
+EISHoomWarContSel,DialogOptionSelected,$option == eis_hoom_warCont,"ShowPersonVisual
+FireBest EISHoomWarSuss",,,Continue after the civil-war shuttle arrival. Shows Hartley's portrait again after the station illustration (requested by the user).,
+EISHoomPwContSel,DialogOptionSelected,$option == eis_hoom_pwCont,"ShowPersonVisual
+FireBest EISHoomPostWarTalk",,,Continue after the post-war shuttle arrival. Shows Hartley's portrait again after the station illustration (requested by the user).,

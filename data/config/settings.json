@@ -11,6 +11,10 @@
       # story point bonus XP fractions for SetStoryOption (third parameter)
       "eis_hireExtractedOperative":1,
       "eis_charlotteXIVOfficer":0,
+      "eis_hoomAcheronConnections":0,
+      "eis_hoomAcheronManage":0,
+      "eis_hoomNotPhilip":1,
+      "eis_hoomRightChoice":1,
   },
 	"graphics":{
 		"characters":{
